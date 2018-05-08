@@ -191,6 +191,7 @@
 		</style>
 	</head>
 	<body>
+		<jsp:include page="menuBar.html"/>
 		<div id="main">
             <span id="userTxt"><b>사용자 회원가입</b></span>
             <b id="id">아이디</b>
@@ -252,6 +253,28 @@
         </div>
 	</body>
 	<script>
-	
+		$("#join").click(function() {
+			$.ajax({
+				type : "post",
+				url : "/userJoin",
+				DATA : {
+					id : $("#userId").html(),
+					pw : $("#userPw").html(),
+					name : $("#userName").html(),
+					gender : $("#userGender").html(),
+					year : $("#userBirthYear").html(),
+					month : $("#userBirthMonth").html(),
+					day : $("#userBirthday").html(),
+					email : $("#userEmail").html()
+				},
+				DataType : "json",
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		})
 	</script>
 </html>
