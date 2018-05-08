@@ -33,7 +33,7 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dual(request, response);
 	}
-	private void dual(HttpServletRequest request, HttpServletResponse response) {
+	private void dual(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String uri = request.getRequestURI();
 		String context = request.getContextPath();
 		String subAddr = uri.substring(context.length());
@@ -52,6 +52,11 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.login(request, response);
 				break;
+			case "/userJoin":
+				System.out.println("사용자 회원가입 요청");
+				infoService = new InfoService();
+				infoService.userJoin(request, response);
+				break;	
 		}
 		
 	}

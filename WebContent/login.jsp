@@ -43,7 +43,7 @@
 	            width: 200px;
 	            height: 30px;
 	        }
-	        input#login{
+	        button#login{
 	            position: absolute;
 	            left: 220px;
 	            top: 50px;
@@ -92,19 +92,23 @@
 		</style>
 	</head>
 	<body>
+		<jsp:include page="menuBar.html"/>
 		<div>
             <span id="logSpan1"><b>로그인</b>하고 <b>공간 대여</b> 하세요!</span>
             <input id="userId" type="text" placeholder="아이디"/>
             <input id="userPw" type="password" placeholder="비밀번호"/>
-            <input id="login" type="submit" value="로그인"/>
+            <!-- <input id="login" type="submit" value="로그인"/> -->
+            <button id="login">로그인</button>
             <span id="logChkTxt">아이디 또는 비밀번호를 다시 확인하세요.</span>
-            <button id="userJoin">사용자 회원가입</button>
+            <button id="userJoin" onclick="join()">사용자 회원가입</button>
             <button id="regJoin">등록자 회원가입</button>
             <hr/>
             <span id="logSpan2">등록자로 회원가입하시면, 장소 등록이 가능합니다.</span>
         </div>
 	</body>
 	<script>
-	
+		function join() {
+			location.href="userJoin.jsp";
+		}
 	</script>
 </html>

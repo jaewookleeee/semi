@@ -117,93 +117,100 @@
             color: white;
             text-align: center;
         }
+        /* div#searchDiv{
+        	position: relative;
+			margin-top: 150px;
+        } */
     </style>
 </head>
 
 <body>
-    <input id="input_search" type="text" placeholder="상호명을 입력해주세요." /><button class="search_btn">장소검색</button><br>
-    <div class="category">카페</div>
-    <div class="category">식당</div>
-    <div class="category">주점</div>
-    <div class="category">스튜디오</div>
-    <div class="category">연습실</div>
-    <div class="category">공연장</div>
-    <br/>
-    <div id="loc">
-        <div id="div_main">
-            <div id="text_div">지역 선택</div>
-            <div onclick="menu()" id="loc_btn">▼</div>
-        </div>
-        <div id="div_loc">
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-        </div>
-    </div>
-    <br/>
-
-    <div style="width: 900px; display: inline-block; position: absolute; top:20%; left: 22%; z-index:1;">
-        <div class="place">
-            <div style=" width: 100%; height: 250px; background-color: black;"></div>
-            <div style="text-align: left;">
-                <table>
-                    <tr>
-                        <td colspan="2" class="place_name">
-                            상호명
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_info">카테고리</td>
-                        <td class="td_info">지역_구분</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">한 줄 소개</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="td_info">시간당 요금</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="place">
-            <div style=" width: 100%; height: 250px; background-color: black;"></div>
-            <div style="text-align: left;">
-                <table>
-                    <tr>
-                        <td colspan="2" class="place_name">
-                            상호명
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td_info">카테고리</td>
-                        <td class="td_info">지역_구분</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">한 줄 소개</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="td_info">시간당 요금</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <button class="search_btn">이전 목록</button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="search_btn">다음 목록</button>
-    </div>
+	<jsp:include page="menuBar.html"/>
+	<!-- <div id="searchDiv"> -->
+	    <input id="input_search" type="text" placeholder="상호명을 입력해주세요." /><button class="search_btn">장소검색</button><br>
+	    <div class="category">카페</div>
+	    <div class="category">식당</div>
+	    <div class="category">주점</div>
+	    <div class="category">스튜디오</div>
+	    <div class="category">연습실</div>
+	    <div class="category">공연장</div>
+	    <br/>
+	    <div id="loc">
+	        <div id="div_main">
+	            <div id="text_div">지역 선택</div>
+	            <div onclick="menu()" id="loc_btn">▼</div>
+	        </div>
+	        <div id="div_loc">
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	            <div class="locati">지역 이름</div>
+	        </div>
+	    </div>
+	    <br/>
+	
+	    <div style="width: 900px; display: inline-block; position: absolute; top:100px; left: 22%; z-index:1;">
+	        <div class="place">
+	            <div style=" width: 100%; height: 250px; background-color: black;"></div>
+	            <div style="text-align: left;">
+	                <table>
+	                    <tr>
+	                        <td colspan="2" class="place_name">
+	                            상호명
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="td_info">카테고리</td>
+	                        <td class="td_info">지역_구분</td>
+	                    </tr>
+	                    <tr>
+	                        <td colspan="2">한 줄 소개</td>
+	                    </tr>
+	                    <tr>
+	                        <td colspan="2" class="td_info">시간당 요금</td>
+	                    </tr>
+	                </table>
+	            </div>
+	        </div>
+	        <div class="place">
+	            <div style=" width: 100%; height: 250px; background-color: black;"></div>
+	            <div style="text-align: left;">
+	                <table>
+	                    <tr>
+	                        <td colspan="2" class="place_name">
+	                            상호명
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td class="td_info">카테고리</td>
+	                        <td class="td_info">지역_구분</td>
+	                    </tr>
+	                    <tr>
+	                        <td colspan="2">한 줄 소개</td>
+	                    </tr>
+	                    <tr>
+	                        <td colspan="2" class="td_info">시간당 요금</td>
+	                    </tr>
+	                </table>
+	            </div>
+	        </div>
+	        <button class="search_btn">이전 목록</button>
+	        &nbsp;&nbsp;&nbsp;&nbsp;
+	        <button class="search_btn">다음 목록</button>
+	    </div>
+    <!-- </div> -->
 </body>
 <script>
     function menu() {

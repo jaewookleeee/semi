@@ -1,19 +1,19 @@
 package com.semi.dto;
 
-import oracle.sql.DATE;
+import java.sql.Date;
 
 public class DTO {
 	//게시판
 	private int board_no;
 	private String board_title;
 	private String board_content;
-	private DATE board_date;
+	private Date board_date;
 	private String board_category;
 
 	//회원정보
 	private String info_id;
 	private String info_pw;
-	private DATE info_birth;
+	private Date info_birth;
 	private String info_email;
 	private String info_gender;
 	private String info_name;
@@ -29,24 +29,24 @@ public class DTO {
 	private String place_loc;
 	private String place_guide;
 	private String place_attention;
-	private DATE place_date;
+	private Date place_date;
 	private String place_category;
 	private String place_photo;
-	private DATE place_start;
-	private DATE place_end;
+	private Date place_start;
+	private Date place_end;
 	private long place_price;
 	
 	//예약
 	private int book_no;
-	private DATE book_date;
-	private DATE book_start;
-	private DATE book_end;
+	private Date book_date;
+	private Date book_start;
+	private Date book_end;
 	private long book_price;
 	private int book_custom;
 	
 	//답글
 	private int reply_no;
-	private DATE reply_date;
+	private Date reply_date;
 	private String reply_content;
 	
 	//찜하기
@@ -55,19 +55,17 @@ public class DTO {
 	//후기
 	private int review_no;
 	private String review_content;
-	private DATE review_date;
+	private Date review_date;
 	
 	//QA
 	private int qa_no;
 	private String qa_content;
-	private DATE qa_date;
+	private Date qa_date;
 	
 	//QA답글
 	private int qareply_no;
 	private String qareply_content;
-	private DATE qareply_date;
-	
-	//getter, setter
+	private Date qareply_date;
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -86,10 +84,10 @@ public class DTO {
 	public void setBoard_content(String board_content) {
 		this.board_content = board_content;
 	}
-	public DATE getBoard_date() {
+	public Date getBoard_date() {
 		return board_date;
 	}
-	public void setBoard_date(DATE board_date) {
+	public void setBoard_date(Date board_date) {
 		this.board_date = board_date;
 	}
 	public String getBoard_category() {
@@ -110,10 +108,10 @@ public class DTO {
 	public void setInfo_pw(String info_pw) {
 		this.info_pw = info_pw;
 	}
-	public DATE getInfo_birth() {
+	public Date getInfo_birth() {
 		return info_birth;
 	}
-	public void setInfo_birth(DATE info_birth) {
+	public void setInfo_birth(Date info_birth) {
 		this.info_birth = info_birth;
 	}
 	public String getInfo_email() {
@@ -194,10 +192,10 @@ public class DTO {
 	public void setPlace_attention(String place_attention) {
 		this.place_attention = place_attention;
 	}
-	public DATE getPlace_date() {
+	public Date getPlace_date() {
 		return place_date;
 	}
-	public void setPlace_date(DATE place_date) {
+	public void setPlace_date(Date place_date) {
 		this.place_date = place_date;
 	}
 	public String getPlace_category() {
@@ -212,16 +210,16 @@ public class DTO {
 	public void setPlace_photo(String place_photo) {
 		this.place_photo = place_photo;
 	}
-	public DATE getPlace_start() {
+	public Date getPlace_start() {
 		return place_start;
 	}
-	public void setPlace_start(DATE place_start) {
+	public void setPlace_start(Date place_start) {
 		this.place_start = place_start;
 	}
-	public DATE getPlace_end() {
+	public Date getPlace_end() {
 		return place_end;
 	}
-	public void setPlace_end(DATE place_end) {
+	public void setPlace_end(Date place_end) {
 		this.place_end = place_end;
 	}
 	public long getPlace_price() {
@@ -236,22 +234,22 @@ public class DTO {
 	public void setBook_no(int book_no) {
 		this.book_no = book_no;
 	}
-	public DATE getBook_date() {
+	public Date getBook_date() {
 		return book_date;
 	}
-	public void setBook_date(DATE book_date) {
+	public void setBook_date(Date book_date) {
 		this.book_date = book_date;
 	}
-	public DATE getBook_start() {
+	public Date getBook_start() {
 		return book_start;
 	}
-	public void setBook_start(DATE book_start) {
+	public void setBook_start(Date book_start) {
 		this.book_start = book_start;
 	}
-	public DATE getBook_end() {
+	public Date getBook_end() {
 		return book_end;
 	}
-	public void setBook_end(DATE book_end) {
+	public void setBook_end(Date book_end) {
 		this.book_end = book_end;
 	}
 	public long getBook_price() {
@@ -272,10 +270,10 @@ public class DTO {
 	public void setReply_no(int reply_no) {
 		this.reply_no = reply_no;
 	}
-	public DATE getReply_date() {
+	public Date getReply_date() {
 		return reply_date;
 	}
-	public void setReply_date(DATE reply_date) {
+	public void setReply_date(Date reply_date) {
 		this.reply_date = reply_date;
 	}
 	public String getReply_content() {
@@ -302,10 +300,10 @@ public class DTO {
 	public void setReview_content(String review_content) {
 		this.review_content = review_content;
 	}
-	public DATE getReview_date() {
+	public Date getReview_date() {
 		return review_date;
 	}
-	public void setReview_date(DATE review_date) {
+	public void setReview_date(Date review_date) {
 		this.review_date = review_date;
 	}
 	public int getQa_no() {
@@ -320,10 +318,10 @@ public class DTO {
 	public void setQa_content(String qa_content) {
 		this.qa_content = qa_content;
 	}
-	public DATE getQa_date() {
+	public Date getQa_date() {
 		return qa_date;
 	}
-	public void setQa_date(DATE qa_date) {
+	public void setQa_date(Date qa_date) {
 		this.qa_date = qa_date;
 	}
 	public int getQareply_no() {
@@ -338,12 +336,14 @@ public class DTO {
 	public void setQareply_content(String qareply_content) {
 		this.qareply_content = qareply_content;
 	}
-	public DATE getQareply_date() {
+	public Date getQareply_date() {
 		return qareply_date;
 	}
-	public void setQareply_date(DATE qareply_date) {
+	public void setQareply_date(Date qareply_date) {
 		this.qareply_date = qareply_date;
 	}
+	
+	//getter, setter
 	
 	
 	
