@@ -7,6 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.service.BoardService;
+import com.semi.service.BookService;
+import com.semi.service.InfoService;
+import com.semi.service.PlaceService;
+import com.semi.service.QaService;
+import com.semi.service.ReviewService;
+
 
 @WebServlet({ "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
@@ -32,9 +39,18 @@ public class Controller extends HttpServlet {
 		String subAddr = uri.substring(context.length());
 		System.out.println(subAddr);
 		
+		InfoService infoService = null;
+		PlaceService placeService = null;
+		BoardService boardService = null;
+		BookService bookService = null;
+		QaService qaService = null;
+		ReviewService reviewService = null;
+		
 		switch (subAddr) {
 			case "/login":
-				
+				System.out.println("로그인 요청");
+				infoService = new InfoService();
+				infoService.login(request, response);
 				break;
 		}
 		

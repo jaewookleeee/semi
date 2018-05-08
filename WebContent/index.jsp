@@ -11,7 +11,7 @@
 		</style>
 	</head>
 	<body>
-
+		<h1><a href="userJoin.jsp">회원가입 테스트</a></h1>
 	</body>
 	<script>
 	
