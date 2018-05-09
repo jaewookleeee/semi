@@ -18,6 +18,7 @@
             border-right: 2px solid white;
             border-bottom: 3px solid black;
             margin-right: 10px;
+            margin-top: 50px;
             text-align: center;
         }
 
@@ -60,7 +61,6 @@
 
         #div_loc {
             width: 100%;
-            height: 200px;
             background-color: white;
             display: none;
             margin-top: 1px;
@@ -92,7 +92,7 @@
         }
 
         .place {
-            margin: 20px 5px;
+            margin: 20px 10px;
             display: inline-block;
             width: 400px;
             background-color: #FAFAFA;
@@ -122,9 +122,9 @@
 </head>
 
 <body>
-	<jsp:include page="menuBar.jsp"/>
-	<!-- <div id="searchDiv"> -->
-	   <input id="input_search" type="text" placeholder="상호명을 입력해주세요." /><button id="main_btn" class="search_btn">장소검색</button><br>
+<jsp:include page="menuBar.jsp"/>
+<div id="div_search" style="position: absolute; top:0px; left: 0px;">
+    <input id="input_search" type="text" placeholder="상호명을 입력해주세요." /><button id="main_btn" class="search_btn">장소검색</button><br>
     <div class="category">카페</div>
     <div class="category">식당</div>
     <div class="category">주점</div>
@@ -138,29 +138,38 @@
             <div id="loc_btn">▼</div>
         </div>
         <div id="div_loc">
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
-            <div class="locati">지역 이름</div>
+            <div class="locati">강남구</div>
+            <div class="locati">강동구</div>
+            <div class="locati">강북구</div>
+            <div class="locati">강서구</div>
+            <div class="locati">관악구</div>
+            <div class="locati">관진구</div>
+            <div class="locati">구로구</div>
+            <div class="locati">금천구</div>
+            <div class="locati">노원구</div>
+            <div class="locati">도봉구</div>
+            <div class="locati">동대문구</div>
+            <div class="locati">동작구</div>
+            <div class="locati">마포구</div>
+            <div class="locati">서대문구</div>
+            <div class="locati">서초구</div>
+            <div class="locati">성동구</div>
+            <div class="locati">성북구</div>
+            <div class="locati">송파구</div>
+            <div class="locati">양천구</div>
+            <div class="locati">영등포구</div>
+            <div class="locati">용산구</div>
+            <div class="locati">은평구</div>
+            <div class="locati">종로구</div>
+            <div class="locati">중구</div>
+            <div class="locati">중랑구</div>
         </div>
     </div>
     <br/>
-
-    <div id="listBox" style="width: 900px; display: inline-block; position: absolute; top:20%; left: 22%; z-index:1;"></div>
+</div>
+    <div id="listBox" style="width: 900px; display: inline-block; position: absolute; top:180px; left: 0px; z-index:1;"></div>
     
-    <div style="position: absolute; top:78%; left: 44%; z-index:2;">
+    <div id="dvi_btn" style="position: absolute; top:620px; left: 0px; z-index:2;">
     <button id="before" class="search_btn">이전 목록</button>
         &nbsp;&nbsp;&nbsp;&nbsp;
      <button id="after" class="search_btn">다음 목록</button>
@@ -173,12 +182,15 @@ var loc="none";
 var start=1;
 var end=2;
 
+$("#listBox").css("left",window.innerWidth/2-450);
+$("#dvi_btn").css("left",window.innerWidth/2-97);
+$("#div_search").css("left",window.innerWidth/2-325);
+
 $(document).ready(function() {
 	placeSearch("none","none","none",start,end);
 });
 
 function placeSearch(keyword,category,area,start,end){
-	console.log("아작스 실행");
 	var obj = {};
 	obj.error = function(err) {
 		console.log(err)
@@ -202,23 +214,29 @@ function placeSearch(keyword,category,area,start,end){
 };
 
 function placeList(list){
-	$("#listBox").empty();
+	$("div.place").remove();
 	if(list.length!=0){
 	var newLine="";
 	list.forEach(function(item, i) {
 		newLine +="<div class='place'>";
-		newLine +="<div style='width: 100%; height: 250px; background-color: black;'></div>";
+		newLine +="<input type='hidden' value='"+item.place_no+"'/>";
+		newLine +="<div style='width: 100%; height: 250px; background-color: black;'>"
+		newLine +="<img width='100%' height='100%' src='"+item.place_photo+"'/>";
+		newLine +="</div>";
 		newLine += "<div style='text-align: left;'>";
 		newLine += "<table>";
 		newLine += "<tr><td colspan='2' class='place_name'>"+item.place_name+"</td></tr>"
 		newLine +="<tr><td class='td_info'>"+item.place_category+"</td><td class='td_info'>"+item.place_loc+"</td></tr>";
 		newLine +="<tr><td colspan='2'>"+item.place_info+"</td></tr>";
-		newLine +="<tr><td colspan='2' class='td_info'>"+"시간당 요금"+"</td></tr>";
+		newLine +="<tr><td colspan='2' class='td_info'>"+item.place_price+"</td></tr>";
 		newLine +="</table>";
 		newLine +="</div>";
 		newLine +="</div>";
 	});
 $("#listBox").append(newLine);
+$("div.place").click(function(){
+	location.href="./placeDetail?place_no="+$(this).children("input[type='hidden']").val();
+});
 	}else{
 		$("#listBox").html("<br/><br/><br/><br/><br/><h3>해당 검색 결과가 없습니다.</h3>");
 	}
@@ -293,6 +311,12 @@ $("#listBox").append(newLine);
 		end=end+2;
 		placeSearch(keyword,category,loc,start,end);
     })
+    
+    $(window).resize(function (){
+    	$("#listBox").css("left",window.innerWidth/2-450);
+    	$("#dvi_btn").css("left",window.innerWidth/2-97);
+    	$("#div_search").css("left",window.innerWidth/2-325);
+    });
 </script>
 
 </html>

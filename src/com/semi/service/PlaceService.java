@@ -25,7 +25,6 @@ public class PlaceService {
 		ArrayList<DTO> list;
 		list=dao.search(start,end,keyword,category,loc);
 		
-		
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
