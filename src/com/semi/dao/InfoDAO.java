@@ -9,8 +9,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import org.apache.taglibs.standard.lang.jstl.BooleanLiteral;
-
 import com.semi.dto.DTO;
 
 public class InfoDAO {
@@ -44,7 +42,8 @@ public class InfoDAO {
 	//사용자 회원가입
 	public int userJoin(DTO dto) {
 		int success = 0;
-		String sql = "INSERT INTO info VALUES(?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO info(info_id, info_pw, info_birth, info_email, info_gender, info_name, info_div)"+ 
+						"VALUES(?, ?, ?, ?, ?, ?, ?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getInfo_id());
@@ -53,7 +52,7 @@ public class InfoDAO {
 			ps.setString(4, dto.getInfo_email());
 			ps.setString(5, dto.getInfo_gender());
 			ps.setString(6, dto.getInfo_name());
-			ps.setString(7,"사용자");
+			ps.setString(7,dto.getInfo_div());
 			
 			success = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -82,6 +81,33 @@ public class InfoDAO {
 			resClose();
 		}
 		return result;
+	}
+
+	//등록자 회원가입
+	public int regJoin(DTO dto) {
+		int success = 0;
+		String sql = "INSERT INTO info(info_id, info_pw, info_birth, info_email, info_gender, info_name, info_div, info_num, info_phone)"+ 
+							"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getInfo_id());
+			ps.setString(2, dto.getInfo_pw());
+			ps.setDate(3, dto.getInfo_birth());
+			ps.setString(4, dto.getInfo_email());
+			ps.setString(5, dto.getInfo_gender());
+			ps.setString(6, dto.getInfo_name());
+			ps.setString(7,dto.getInfo_div());
+			ps.setString(8, dto.getInfo_num());
+			ps.setString(9, dto.getInfo_phone());
+			
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			resClose();
+		}
+		return success;
 	}
 
 }

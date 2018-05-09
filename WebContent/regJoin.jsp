@@ -8,15 +8,15 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 			div#main{
-            position: absolute;
-            border: 1.5px solid #A4A4A4;
-            width: 310px;
-            height: 540px;
-            left: 40%;
-            top: 200px;
-            text-align: center;
+	            position: absolute;
+	            border: 1.5px solid #A4A4A4;
+	            width: 310px;
+	            height: 660px;
+	            left: 40%;
+	            top: 200px;
+	            text-align: center;
 	        }
-	        span#usertxt{
+	        span#regtxt{
 	            position: absolute;
 	            left: 75px;
 	            top: 10px;
@@ -64,7 +64,19 @@
 	            top: 410px;
 	            font-size: 13px;            
 	        }
-	        input#userId{
+	        b#num{
+	            position: absolute;
+	            left: 15px;
+	            top: 470px;
+	            font-size: 13px;  
+	        }
+	        b#phone{
+	            position: absolute;
+	            left: 15px;
+	            top: 530px;
+	            font-size: 13px;  
+	        }
+	        input#regId{
 	            position: absolute;
 	            left: 15px;
 	            top: 75px;
@@ -83,7 +95,7 @@
 	            border-style: none;
 	            font-size: 10px;
 	        }
-	        input#userPw{
+	        input#regPw{
 	            position: absolute;
 	            left: 15px;
 	            top: 135px;
@@ -91,7 +103,7 @@
 	            height: 25px;
 	            font-size: 10px;
 	        }
-	        input#userPwChk{
+	        input#regPwChk{
 	            position: absolute;
 	            left: 15px;
 	            top: 195px;
@@ -99,7 +111,7 @@
 	            height: 25px;
 	            font-size: 10px;            
 	        }
-	        input#userName{
+	        input#regName{
 	            position: absolute;
 	            left: 15px;
 	            top: 255px;
@@ -110,9 +122,10 @@
 	        span#gender{
 	        	position: absolute;
 	        	left: 15px;
-	        	top: 315px;
+	        	top:315px;
 	        }
-/* 	        span#genM{
+	        
+	        /* span#genM{
 	            position: absolute;
 	            left: 15px;
 	            top: 315px;
@@ -135,7 +148,7 @@
 	        input#woman{
 	            display: none;
 	        } */
-	        /* input#userBirth{
+	        /* input#regBirth{
 	            position: absolute;
 	            left: 15px;
 	            top: 375px;
@@ -143,22 +156,22 @@
 	            height: 25px;
 	            font-size: 13px;
 	        } */
-	        select#userBirthYear{
+	        select#regBirthYear{
 	        	position: absolute;
 	        	left: 15px;
 	        	top: 375px;
 	        }
-	        select#userBirthMonth{
+	        select#regBirthMonth{
 	        	position: absolute;
 	        	left: 70px;
 	        	top: 375px;
 	        }
-	        select#userBirthDay{
+	        select#regBirthDay{
 	        	position: absolute;
 	        	left: 110px;
 	        	top: 375px;
 	        }
-	        input#userEmail{
+	        input#regEmail{
 	            position: absolute;
 	            left: 15px;
 	            top: 435px;
@@ -166,10 +179,26 @@
 	            height: 25px;
 	            font-size: 10px;            
 	        }
+	        input#regNum{
+	            position: absolute;
+	            left: 15px;
+	            top: 495px;
+	            width: 200px;
+	            height: 25px;
+	            font-size: 10px; 
+	        }
+	        input#regPhone{
+	            position: absolute;
+	            left: 15px;
+	            top: 555px;
+	            width: 200px;
+	            height: 25px;
+	            font-size: 10px; 
+	        }
 	        button#cancel{
 	            position: absolute;
 	            left: 180px;
-	            top: 495px;
+	            top: 615px;
 	            width: 50px;
 	            height: 25px;    
 	            color: white;
@@ -180,7 +209,7 @@
 	        button#join{
 	            position: absolute;
 	            left: 240px;
-	            top: 495px;
+	            top: 615px;
 	            width: 50px;
 	            height: 25px;
 	            font-size: 10px;
@@ -191,24 +220,23 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="menuBar.jsp"/>
 		<div id="main">
-            <span id="userTxt"><b>사용자 회원가입</b></span>
+            <span id="regTxt"><b>등록자 회원가입</b></span>
             <b id="id">아이디</b>
-            <input id="userId" name="userId" type="text" placeholder=" 아이디를 입력하세요."/>
+            <input id="regId" type="text" placeholder=" 아이디를 입력하세요."/>
             <!--<input id="idChk" type="button" value="중복 확인"/>-->
-            <button id="idChk" name="idChk">중복 확인</button>
+            <button id="idChk">중복 확인</button>
             <b id="pw">비밀번호</b>
-            <input id="userPw" name="userPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input id="regPw" type="password" placeholder="비밀번호를 입력하세요."/>
             <b id="pwChk">비밀번호 확인</b>
-            <input id="userPwChk" name="userPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input id="regPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
             <b id="name">이름</b>
-            <input id="userName" name="userName" type="text" placeholder="이름을 입력하세요."/>
+            <input id="regName" type="text" placeholder="이름을 입력하세요."/>
             <b id="Gender">성별</b>
             <span id="gender">
-            	<input id="man" type="radio" name="userGender" value="남" checked/>남자
+            	<input id="man" type="radio" name="regGender" value="남" checked/>남자
             	&nbsp;&nbsp;&nbsp;&nbsp;
-            	<input id="woman" type="radio" name="userGender" value="여"/>여자
+            	<input id="woman" type="radio" name="regGender" value="여"/>여자
             </span>
             <!-- <span id="genM">
                 <input id="man" type="radio" name="userGenger" value="남자"/>
@@ -218,10 +246,10 @@
             <span id="genW">
                 <input id="woman" type="radio" name="userGenger" value="여자"/>
                 <label id="womanLb" for="woman">여자</label>
-            </span>    -->             
+            </span>       -->          
             <b id="birth">생년월일</b>
-            <!-- <input id="userBirth" type="date" value="2018-05-07"/> -->
-            <select name="userBirthYear" id="userBirthYear">
+            <!-- <input id="regBirth" type="date" value="2018-05-07"/> -->
+            <select name="regBirthYear" id="regBirthYear">
             	<option value="년도" selected>년도</option>
             	<option value="1991" >1991</option>
             	<option value="1992" >1992</option>
@@ -230,7 +258,7 @@
             	<option value="1995" >1995</option>
             </select>
             
-            <select name="userBirthMonth" id="userBirthMonth">
+            <select name="regBirthMonth" id="regBirthMonth">
             	<option value="월" selected>월</option>
             	<option value="1" >1</option>
             	<option value="2" >2</option>
@@ -239,7 +267,7 @@
             	<option value="5" >5</option>
             </select>
             
-            <select name="userBirthDay" id="userBirthDay">
+            <select name="regBirthDay" id="regBirthDay">
             	<option value="일" selected>일</option>
             	<option value="1" >1</option>
             	<option value="2" >2</option>
@@ -247,9 +275,13 @@
             	<option value="4" >4</option>
             	<option value="5" >5</option>
             </select>
-            
             <b id="email">이메일</b>
-            <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
+            <input id="regEmail" type="email" placeholder="이메일을 입력하세요."/>
+            <b id="num">주민등록번호</b>
+            <input id="regNum" type="text" placeholder="주민등록번호를 입력하세요."/>
+            <b id="phone">휴대폰 번호</b>
+            <input id="regPhone" type="tel" placeholder="휴대폰번호를 입력하세요."/>
+            
             <button id="cancel">취소</button>
             <button id="join">완료</button>
         </div>
@@ -258,16 +290,18 @@
 		$("#join").click(function() {
 			$.ajax({
 				type : "post",
-				url : "./userJoin",
+				url : "./regJoin",
 				data : {
-					id : $("#userId").val(),
-					pw : $("#userPw").val(),
-					name : $("#userName").val(),
-					gender : $("input[name='userGender']").val(),
-					year : $("#userBirthYear").val(),
-					month : $("#userBirthMonth").val(),
-					day : $("#userBirthDay").val(),
-					email : $("#userEmail").val()
+					id : $("#regId").val(),
+					pw : $("#regPw").val(),
+					name : $("#regName").val(),
+					gender : $("input[name='regGender']").val(),
+					year : $("#regBirthYear").val(),
+					month : $("#regBirthMonth").val(),
+					day : $("#regBirthDay").val(),
+					email : $("#regEmail").val(),
+					num : $("#regNum").val(),
+					phone : $("#regPhone").val()
 				},
 				dataType : "json",
 				success : function(data) {
@@ -278,5 +312,19 @@
 				}
 			});
 		});
+		 /* $("#genM").click(function(){
+	         $("#genM").css("background-color", "#FA5882");
+	         $("#manLb").css("color", "white");
+	         
+	         $("#genW").css("background-color", "white");
+	         $("#womanLb").css("color", "black");
+	     });
+	     $("#genW").click(function(){
+	         $("#genW").css("background-color", "#FA5882");
+	         $("#womanLb").css("color", "white");
+	         
+	         $("#genM").css("background-color", "white");
+	         $("#manLb").css("color", "black");
+	     });         */
 	</script>
 </html>
