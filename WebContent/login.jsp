@@ -92,7 +92,7 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="menuBar.html"/>
+		<jsp:include page="menuBar.jsp"/>
 		<div>
             <span id="logSpan1"><b>로그인</b>하고 <b>공간 대여</b> 하세요!</span>
             <input id="userId" type="text" placeholder="아이디"/>
@@ -110,5 +110,26 @@
 		function join() {
 			location.href="userJoin.jsp";
 		}
+		$("#login").click(function () {
+			$.ajax({
+				type : "post",
+				url : "./login",
+				data : {
+					id : $("#userId").val(),
+					pw : $("#userPw").val()
+				},
+				dataType : "json",
+				success : function (data) {
+					console.log(data);
+					if(data.result == true){
+						alert("로그인 성공");
+						location.href="index.jsp";
+					}
+				},
+				error : function (error) {
+					console.log(error);
+				}
+			});
+		});
 	</script>
 </html>

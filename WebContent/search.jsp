@@ -125,7 +125,7 @@
 </head>
 
 <body>
-	<jsp:include page="menuBar.html"/>
+	<jsp:include page="menuBar.jsp"/>
 	<!-- <div id="searchDiv"> -->
 	    <input id="input_search" type="text" placeholder="상호명을 입력해주세요." /><button class="search_btn">장소검색</button><br>
 	    <div class="category">카페</div>
