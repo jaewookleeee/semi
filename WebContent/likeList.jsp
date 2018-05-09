@@ -48,9 +48,15 @@
                 border: 0;
                 font-size: 12pt;
             }
+            #menuBar{
+            	height: 20px;
+            }
         </style>
     </head>
     <body>
+    	<div id="menuBar">
+    		<jsp:include page="/menuBar.jsp" flush="false"/>
+    	</div>
     	<h1>찜한 내역 확인</h1>
         <table>
             <tr>

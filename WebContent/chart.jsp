@@ -77,9 +77,15 @@
                 padding: 0 10px;
                 font-weight: 600;
             }
+            #menuBar{
+            	height: 20px;
+            }
         </style>
     </head>
     <body>
+    	<div id="menuBar">
+    		<jsp:include page="/menuBar.jsp" flush="false"/>
+    	</div>
        <h1>통계</h1>
         <br/>
         <select class="date" id="date1"></select>
