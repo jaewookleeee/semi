@@ -1,15 +1,14 @@
 package com.semi.service;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.semi.dao.InfoDAO;
@@ -18,27 +17,30 @@ import com.semi.dto.DTO;
 public class InfoService {
 
 	//로그인
-	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		InfoDAO dao = new InfoDAO();
+		public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			InfoDAO dao = new InfoDAO();
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			System.out.println(id+", "+pw);
 		
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		System.out.println(id+", "+pw);
-	
-		
-		boolean result = dao.login(id, pw);
-		
-		if(result == true) {
-			request.getSession().setAttribute("loginId", id);
+			
+			String div = dao.login(id, pw);
+			boolean result = false;
+			if(div != null) {
+				request.getSession().setAttribute("loginId", id);
+				request.getSession().setAttribute("loginDiv", div);
+				result = true;
+				System.out.println(request.getSession().getAttribute("loginId")+"/"+request.getSession().getAttribute("loginDiv")+"/"+result);
+			}
+			
+			Gson json = new Gson();
+			HashMap<String, Boolean> map = new HashMap<>();
+			map.put("result", result);
+			String obj = json.toJson(map);
+			System.out.println("로그인 체크 : "+obj);
+			response.getWriter().println(obj);
 		}
-		
-		Gson json = new Gson();
-		HashMap<String, Boolean> map = new HashMap<>();
-		map.put("result", result);
-		String obj = json.toJson(map);
-		System.out.println("로그인 체크 : "+obj);
-		response.getWriter().println(obj);
-	}
 
 	//사용자 회원가입
 	public void userJoin(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -146,7 +148,16 @@ public class InfoService {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
-		
+	}
+
+	//로그아웃
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//세션 추출
+		HttpSession session = request.getSession();
+		//loginId 속성값 삭제
+		session.removeAttribute("loginId");
+		//main.jsp 페이지 요청(index 인데 세션 검사 작동 확인을 위해 main으로감)
+		response.sendRedirect("index.jsp");
 	}
 
 	

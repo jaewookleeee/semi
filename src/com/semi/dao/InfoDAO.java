@@ -65,23 +65,25 @@ public class InfoDAO {
 	}
 
 	//로그인
-	public boolean login(String id, String pw) {
-		boolean result = false;
-		String sql = "SELECT info_id FROM info WHERE info_id=? AND info_pw=?";
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, id);
-			ps.setString(2, pw);
-			rs = ps.executeQuery();
-			result = rs.next();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}finally {
-			resClose();
+		public String login(String id, String pw) {
+			String result = null;
+			String sql = "SELECT info_id, info_div FROM info WHERE info_id=? AND info_pw=?";
+			try {
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setString(2, pw);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					result = rs.getString("info_div");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}finally {
+				resClose();
+			}
+			return result;
 		}
-		return result;
-	}
 
 	//등록자 회원가입
 	public int regJoin(DTO dto) {
