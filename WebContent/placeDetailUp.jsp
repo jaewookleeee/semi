@@ -44,7 +44,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="menuBar.html"/>
+<jsp:include page="menuBar.jsp"/>
 	<div id="all">
         <img id="main" src="#"/><br/>
         <img class="sub" src="#"/>
@@ -56,29 +56,12 @@
             <div class="info" id="detail">상세정보</div>
             <div class="info" id="qa">QA</div>
             <div class="info" id="reply">이용후기</div>
-        </div>  
+        </div>
+        <div id=content>
+        </div>
 	</div>
 </body>
 <script>
-	$(".sub").click(function(){
-	    $("#main").attr("src",this.src);
-	});
-	$("#detail").click(function(){
-		console.log("hello");
-	    $(this).css("background-color","deeppink");
-	    $("#qa").css("background-color","white");
-	    $("#reply").css("background-color","white");
-	    $("#allinfo").after("<jsp:include page='placeDetail.jsp' flush='false'/>");
-	});  
-		$("#qa").click(function(){    
-		     $(this).css("background-color","deeppink");
-		     $("#detail").css("background-color","white");
-		     $("#reply").css("background-color","white");    
-		});
-		$("#reply").click(function(){
-		     $(this).css("background-color","deeppink");
-		     $("#qa").css("background-color","white");
-		     $("#detail").css("background-color","white");    
-		}); 
+	
 </script>
 </html>

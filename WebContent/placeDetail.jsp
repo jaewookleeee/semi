@@ -118,6 +118,12 @@
         </div>
 </body>
 <script>
-	
+	$("#like").click(function(){
+	    if($(this).html()=="찜 하기"){
+	        $(this).html("찜 취소")
+	    }else if($(this).html()=="찜 취소"){
+	        $(this).html("찜 하기")
+	    }
+	});
 </script>
 </html>
