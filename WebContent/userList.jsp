@@ -68,9 +68,7 @@
 				error : function(error) {
 					console.log(error);
 				}
-				
 			});
-			
 		});
 	</script>
 </html>
