@@ -41,22 +41,16 @@
                 top: 10px;
                 left: 920px;
             }
-            input[type='button']{
+            button{
                 background-color: #212121;
                 color: white;
                 padding: 2px 7px;
                 border: 0;
                 font-size: 12pt;
             }
-            div{
-            	height: 25px;
-            }
         </style>
     </head>
     <body>
-    	<div>
-    		<jsp:include page="menuBar.jsp" flush="false"/>
-    	</div>
     	<h1>예약 내역 확인</h1>
         <br/>
             <table>
@@ -72,9 +66,9 @@
                 <th style="padding: 5px 25px">금액</th>
             </tr>
         </table>
-        <input type="button" id="pre" value="이전 목록"/>
-        <input type="button" id="next" value="다음 목록"/>
-        <input type="button" id="cancle" value="예약 취소"/>
+        <button id="pre">이전 목록</button>
+        <button id="next">다음 목록</button>
+        <button id="cancle">예약 취소</button>
     </body>
     <script>
         /*javascript area*/

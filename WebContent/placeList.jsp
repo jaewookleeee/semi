@@ -44,26 +44,21 @@
                 left: 822px;
                 background-color: #212121;
             }
-            input[type='button']{
+            button{
                 color: white;
                 padding: 2px 7px;
                 border: 0;
                 font-size: 12pt;
             }
-            td>input[type='button']{
+            td>button{
                 background-color: lightpink;
+                border: 0;
                 width: 100%;
                 height: 100%;
-            }
-            div{
-            	height: 25px;
             }
         </style>
     </head>
     <body>
-    	<div>
-    		<jsp:include page="menuBar.jsp" flush="false"/>
-    	</div>
     	<h1>예약 내역 확인</h1>
         <br/>
             <table>
@@ -74,21 +69,17 @@
                 <th style="padding: 5px 50px">등록 일시</th>
                 <th>별점 평균</th>
                 <th>수정</th>
-            </tr><!--
-            <tr>
-                <td>1</td>
-                <td>kh정보교육원</td>
-                <td>ksw6169</td>
-                <td>2018-03-29 15:12</td>
-                <td>4.5</td>
-                <td><input type="button" value="수정"/></td>
-            </tr>-->
+                <th>삭제</th>
+            </tr>
+            </tr>
         </table>
-        <input type="button" id="pre" value="이전 목록"/>
-        <input type="button" id="next" value="다음 목록"/>
-        <input type="button" id="chart" value="통계"/>
+        <button id="pre">이전 목록</button>
+        <button id="next">다음 목록</button>
+        <button id="chart">통계</button>
     </body>
     <script>
-        /*javascript area*/
+        $("#chart").click(function(){
+            location.href="./chart.jsp";
+        });
     </script>
 </html>
