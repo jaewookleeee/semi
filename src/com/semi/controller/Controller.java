@@ -57,6 +57,10 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.userJoin(request, response);
 				break;	
+			case"/placeSearch":
+				System.out.println("장소 검색");
+				placeService=new PlaceService();
+				placeService.search(request, response);
 		}
 		
 	}

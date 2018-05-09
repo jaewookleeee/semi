@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>리스트</title>
@@ -117,103 +118,113 @@
             color: white;
             text-align: center;
         }
-        /* div#searchDiv{
-        	position: relative;
-			margin-top: 150px;
-        } */
     </style>
 </head>
 
 <body>
 	<jsp:include page="menuBar.jsp"/>
 	<!-- <div id="searchDiv"> -->
-	    <input id="input_search" type="text" placeholder="상호명을 입력해주세요." /><button class="search_btn">장소검색</button><br>
-	    <div class="category">카페</div>
-	    <div class="category">식당</div>
-	    <div class="category">주점</div>
-	    <div class="category">스튜디오</div>
-	    <div class="category">연습실</div>
-	    <div class="category">공연장</div>
-	    <br/>
-	    <div id="loc">
-	        <div id="div_main">
-	            <div id="text_div">지역 선택</div>
-	            <div onclick="menu()" id="loc_btn">▼</div>
-	        </div>
-	        <div id="div_loc">
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	            <div class="locati">지역 이름</div>
-	        </div>
-	    </div>
-	    <br/>
-	
-	    <div style="width: 900px; display: inline-block; position: absolute; top:100px; left: 22%; z-index:1;">
-	        <div class="place">
-	            <div style=" width: 100%; height: 250px; background-color: black;"></div>
-	            <div style="text-align: left;">
-	                <table>
-	                    <tr>
-	                        <td colspan="2" class="place_name">
-	                            상호명
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td class="td_info">카테고리</td>
-	                        <td class="td_info">지역_구분</td>
-	                    </tr>
-	                    <tr>
-	                        <td colspan="2">한 줄 소개</td>
-	                    </tr>
-	                    <tr>
-	                        <td colspan="2" class="td_info">시간당 요금</td>
-	                    </tr>
-	                </table>
-	            </div>
-	        </div>
-	        <div class="place">
-	            <div style=" width: 100%; height: 250px; background-color: black;"></div>
-	            <div style="text-align: left;">
-	                <table>
-	                    <tr>
-	                        <td colspan="2" class="place_name">
-	                            상호명
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td class="td_info">카테고리</td>
-	                        <td class="td_info">지역_구분</td>
-	                    </tr>
-	                    <tr>
-	                        <td colspan="2">한 줄 소개</td>
-	                    </tr>
-	                    <tr>
-	                        <td colspan="2" class="td_info">시간당 요금</td>
-	                    </tr>
-	                </table>
-	            </div>
-	        </div>
-	        <button class="search_btn">이전 목록</button>
-	        &nbsp;&nbsp;&nbsp;&nbsp;
-	        <button class="search_btn">다음 목록</button>
-	    </div>
-    <!-- </div> -->
+	   <input id="input_search" type="text" placeholder="상호명을 입력해주세요." /><button id="main_btn" class="search_btn">장소검색</button><br>
+    <div class="category">카페</div>
+    <div class="category">식당</div>
+    <div class="category">주점</div>
+    <div class="category">스튜디오</div>
+    <div class="category">연습실</div>
+    <div class="category">공연장</div>
+    <br/>
+    <div id="loc">
+        <div id="div_main">
+            <div id="text_div">지역 선택</div>
+            <div id="loc_btn">▼</div>
+        </div>
+        <div id="div_loc">
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+            <div class="locati">지역 이름</div>
+        </div>
+    </div>
+    <br/>
+
+    <div id="listBox" style="width: 900px; display: inline-block; position: absolute; top:20%; left: 22%; z-index:1;"></div>
+    
+    <div style="position: absolute; top:78%; left: 44%; z-index:2;">
+    <button id="before" class="search_btn">이전 목록</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+     <button id="after" class="search_btn">다음 목록</button>
+     </div>
 </body>
 <script>
-    function menu() {
+var category="none";
+var keyword="none";
+var loc="none";
+var start=1;
+var end=2;
+
+$(document).ready(function() {
+	placeSearch("none","none","none",start,end);
+});
+
+function placeSearch(keyword,category,area,start,end){
+	console.log("아작스 실행");
+	var obj = {};
+	obj.error = function(err) {
+		console.log(err)
+	};
+	obj.type = "POST";
+	obj.dataType = "JSON";
+	
+	obj.url = "./placeSearch";
+	obj.data={
+		keyword:keyword,
+		category:category,
+		area:area,
+		start:start,
+		end:end
+	};
+	obj.success = function(data) {
+		console.log(data);
+		placeList(data.list);
+	}
+	$.ajax(obj);
+};
+
+function placeList(list){
+	$("#listBox").empty();
+	if(list.length!=0){
+	var newLine="";
+	list.forEach(function(item, i) {
+		newLine +="<div class='place'>";
+		newLine +="<div style='width: 100%; height: 250px; background-color: black;'></div>";
+		newLine += "<div style='text-align: left;'>";
+		newLine += "<table>";
+		newLine += "<tr><td colspan='2' class='place_name'>"+item.place_name+"</td></tr>"
+		newLine +="<tr><td class='td_info'>"+item.place_category+"</td><td class='td_info'>"+item.place_loc+"</td></tr>";
+		newLine +="<tr><td colspan='2'>"+item.place_info+"</td></tr>";
+		newLine +="<tr><td colspan='2' class='td_info'>"+"시간당 요금"+"</td></tr>";
+		newLine +="</table>";
+		newLine +="</div>";
+		newLine +="</div>";
+	});
+$("#listBox").append(newLine);
+	}else{
+		$("#listBox").html("<br/><br/><br/><br/><br/><h3>해당 검색 결과가 없습니다.</h3>");
+	}
+};
+
+    $("#loc_btn").click(function() {
         var so = $("#div_loc").css("display");
         if (so == "none") {
             $("#div_loc").css("display", "inline-block");
@@ -222,7 +233,8 @@
             $("#div_loc").css("display", "none");
             $("#loc_btn").text("▼");
         }
-    }
+    });
+    
     $("div.category").click(function() {
         if ($(this).css("background-color") != "rgb(255, 255, 255)") {
             $(this).css("background-color", "white");
@@ -233,7 +245,7 @@
             $(this).css("color", "white");
             $(this).css("background-color", "#FE2E64");
         }
-    })
+    });
     $("div.locati").click(function() {
         if ($(this).css("background-color") != "rgb(255, 255, 255)") {
             $(this).css("background-color", "white");
@@ -244,6 +256,42 @@
             $(this).css("color", "white");
             $(this).css("background-color", "#FE2E64");
         }
+    });
+    $("#main_btn").click(function(){
+    	category="none";
+    	keyword="none";
+    	loc="none";
+    	start=1;
+    	end=2;
+    	
+        if($("#input_search").val()!=""){
+            keyword=$("#input_search").val();
+        }
+        $("div.category").each(function(index,item){
+            if($(this).css("background-color") != "rgb(255, 255, 255)"){
+                category=$(this).text();
+            }
+        });
+        $("div.locati").each(function(index,item){
+        	if($(this).css("background-color") != "rgb(255, 255, 255)"){
+                loc=$(this).text();
+            }
+        });
+        placeSearch(keyword,category,loc,start,end);
+    });
+    
+    $("#before").click(function(){
+    	if(start>=3){
+    		start=start-2;
+    		end=end-2;
+    	}
+    	placeSearch(keyword,category,loc,start,end);
+    });
+    
+    $("#after").click(function(){
+    	start=start+2;
+		end=end+2;
+		placeSearch(keyword,category,loc,start,end);
     })
 </script>
 
