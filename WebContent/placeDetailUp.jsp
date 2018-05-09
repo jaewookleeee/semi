@@ -56,9 +56,6 @@
             <div class="info" id="detail">상세정보</div>
             <div class="info" id="qa">QA</div>
             <div class="info" id="reply">이용후기</div>
-        </div>
-        <div id=content>
-        </div>
 	</div>
 </body>
 <script>
