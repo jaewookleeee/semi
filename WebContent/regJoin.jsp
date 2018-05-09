@@ -287,25 +287,98 @@
         </div>
 	</body>
 	<script>
+		$("#cancel").click(function() {
+			location.href="index.jsp";
+		});
+		
+		var chk = false;//아이디 중복값 체크
+	
 		$("#join").click(function() {
+			var regPw = $("#regPw").val();
+			var regPwChk = $("#regPwChk").val();
+			//console.log(userPw, userPwChk);	
+			if($("#regId").val()==""){
+				alert("아이디를 입력하세요.");
+				$("#regId").focus();
+			}else if($("#regPw").val()==""){
+				//비밀번호 입력 확인
+				alert("비밀번호 입력하세요.");				
+				$("#regPw").focus();//포커스 이동
+			}else if($("#userPwChk").val()==""){
+				alert("비밀번호 확인 해주세요");				
+				$("#regPwChk").focus();//포커스 이동	
+			}else if(regPw != regPwChk){
+				alert("비밀번호 재입력");
+				$("#regPwChk").focus();//포커스 이동	
+			} else if($("#regName").val()==""){
+				alert("이름을 입력해주세요.");
+				$("#regName").focus();//포커스 이동	
+			}else if($("#regBirthYear").val()=="년도"){
+				alert("년도를 선택해주세요.");
+				$("#regBirthYear").focus();
+			}else if($("#regBirthMonth").val()=="월"){
+				alert("월을 선택해주세요.");
+				$("#regBirthMonth").focus();
+			}else if($("#regBirthDay").val()=="일"){
+				alert("일을 선택해주세요.");
+				$("#regBirthDay").focus();
+			}else if($("#regEmail").val==""){
+				alert("이메일을 입력해주세요.");
+				$("#regEmail").focus();
+			}else if($("#regNum").val==""){
+				alert("주민등록번호를 입력해주세요.");
+				$("#regNum").focus();
+			}else if($("#regPhone").val==""){
+				alert("휴대폰 번호를 입력해주세요.");
+				$("#regPhone").focus();
+			}else if(chk==false){
+				alert("아이디 중복확인 하세요.");
+				$("#regId").focus();
+			}else{
+				$.ajax({
+					type : "post",
+					url : "./regJoin",
+					data : {
+						id : $("#regId").val(),
+						pw : $("#regPw").val(),
+						name : $("#regName").val(),
+						gender : $("input[name='regGender']").val(),
+						year : $("#regBirthYear").val(),
+						month : $("#regBirthMonth").val(),
+						day : $("#regBirthDay").val(),
+						email : $("#regEmail").val(),
+						num : $("#regNum").val(),
+						phone : $("#regPhone").val()
+					},
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			}
+
+		});
+		
+		//중복체크
+		$("#idChk").click(function() {
 			$.ajax({
 				type : "post",
-				url : "./regJoin",
-				data : {
-					id : $("#regId").val(),
-					pw : $("#regPw").val(),
-					name : $("#regName").val(),
-					gender : $("input[name='regGender']").val(),
-					year : $("#regBirthYear").val(),
-					month : $("#regBirthMonth").val(),
-					day : $("#regBirthDay").val(),
-					email : $("#regEmail").val(),
-					num : $("#regNum").val(),
-					phone : $("#regPhone").val()
-				},
+				url : "./overlay",
+				data : { id : $("#userId").val() },
 				dataType : "json",
 				success : function(data) {
 					console.log(data);
+					if(data.result == true){
+						alert("중복된 아이디 입니다.");
+						$("#userId").focus();
+					}else{
+						alert("사용 가능한 아이디 입니다.");
+						$("#userPw").focus();
+						chk = true;
+					}
 				},
 				error : function(error) {
 					console.log(error);

@@ -50,7 +50,7 @@
                             <li class="submenu_item"><a href="#">찜한내역확인</a></li>
                             <li class="submenu_item"><a href="#">등록내역확인</a></li>
                             <li class="submenu_item"><a href="#">등록자전환</a></li>
-                            <li class="submenu_item"><a href="#">회원관리</a></li>
+                            <li class="submenu_item"><a href="userList.jsp">회원관리</a></li>
                         </ul>
                     </span>
                 </li>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -118,11 +119,10 @@ public class InfoService {
 		SimpleDateFormat format = new SimpleDateFormat("YYYY/MM/DD");
 
 		try {
-			System.out.println(format.parse(birth).getTime());
+			//System.out.println(format.parse(birth).getTime());
 			date = new Date(format.parse(birth).getTime());
-			System.out.println(date);
+			//System.out.println(date);
 			//date = (Date)format.parse(birth);
-			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -177,6 +177,28 @@ public class InfoService {
 		response.getWriter().println(obj);
 	}
 
-	
-	
+	//회원 리스트 출력
+	public void userList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		InfoDAO dao = new InfoDAO();
+		ArrayList<DTO> userList = dao.userList();
+		
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+		
+		Gson json = new Gson();
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("userList", userList);
+		if(loginId != null && loginDiv.equals("관리자")) {
+			map.put("login", true);
+		}else{
+			map.put("login", false);
+		}
+		
+		String obj = json.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println(obj);
+		
+		
+	}
 }

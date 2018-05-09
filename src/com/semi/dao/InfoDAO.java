@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -130,6 +131,33 @@ public class InfoDAO {
 			resClose();
 		}
 		return result;
+	}
+
+	public ArrayList<DTO> userList() {
+		ArrayList<DTO> userList = new ArrayList<>();
+		String sql = "SELECT info_id, info_name, info_gender, info_email, info_div, info_num, info_phone FROM info ORDER BY info_id ASC";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				DTO dto = new DTO();
+				dto.setInfo_id(rs.getString("info_id"));
+				dto.setInfo_name(rs.getString("info_name"));
+				dto.setInfo_gender(rs.getString("info_gender"));
+				dto.setInfo_email(rs.getString("info_email"));
+				dto.setInfo_div(rs.getString("info_div"));
+				dto.setInfo_num(rs.getString("info_num"));
+				dto.setInfo_phone(rs.getString("info_phone"));
+				userList.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			resClose();
+		}
+		return userList;
 	}
 
 }

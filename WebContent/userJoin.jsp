@@ -255,32 +255,83 @@
         </div>
 	</body>
 	<script>
+		$("#cancel").click(function() {
+			location.href="index.jsp";
+		});
+	
+		var chk = false;//아이디 중복값 체크
+		
+		//회원가입
 		$("#join").click(function() {
-			$.ajax({
-				type : "post",
-				url : "./userJoin",
-				data : {
-					id : $("#userId").val(),
-					pw : $("#userPw").val(),
-					name : $("#userName").val(),
-					gender : $("input[name='userGender']").val(),
-					year : $("#userBirthYear").val(),
-					month : $("#userBirthMonth").val(),
-					day : $("#userBirthDay").val(),
-					email : $("#userEmail").val()
-				},
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
+			var userPw = $("#userPw").val();
+			var userPwChk = $("#userPwChk").val();
+			//console.log(userPw, userPwChk);	
+			if($("#userId").val()==""){
+				alert("아이디를 입력하세요.");
+				$("#userId").focus();
+			}else if($("#userPw").val()==""){
+				//비밀번호 입력 확인
+				alert("비밀번호 입력하세요.");				
+				$("#userPw").focus();//포커스 이동
+			}else if($("#userPwChk").val()==""){
+				alert("비밀번호 확인 해주세요");				
+				$("#userPwChk").focus();//포커스 이동	
+			}else if(userPw != userPwChk){
+				alert("비밀번호 재입력");
+				$("#userPwChk").focus();//포커스 이동	
+			} else if($("#userName").val()==""){
+				alert("이름을 입력해주세요.");
+				$("#userName").focus();//포커스 이동	
+			}else if($("#userBirthYear").val()=="년도"){
+				alert("년도를 선택해주세요.");
+				$("#userBirthYear").focus();
+			}else if($("#userBirthMonth").val()=="월"){
+				alert("월을 선택해주세요.");
+				$("#userBirthMonth").focus();
+			}else if($("#userBirthDay").val()=="일"){
+				alert("일을 선택해주세요.");
+				$("#userBirthDay").focus();
+			}else if($("#userEmail").val==""){
+				alert("이메일을 입력해주세요.");
+				$("#userEmail").focus();
+			}else if(chk==false){
+				alert("아이디 중복확인 하세요.");
+				$("#userId").focus();
+			}else{
+				$.ajax({
+					type : "post",
+					url : "./userJoin",
+					data : {
+						id : $("#userId").val(),
+						pw : $("#userPw").val(),
+						name : $("#userName").val(),
+						gender : $("input[name='userGender']").val(),
+						year : $("#userBirthYear").val(),
+						month : $("#userBirthMonth").val(),
+						day : $("#userBirthDay").val(),
+						email : $("#userEmail").val()
+					},
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+
 		});
 		
-		
-		var chk = false;//아이디 중복값 체크
+		//중복체크
 		$("#idChk").click(function() {
 			$.ajax({
 				type : "post",
@@ -297,7 +348,6 @@
 						$("#userPw").focus();
 						chk = true;
 					}
-					
 				},
 				error : function(error) {
 					console.log(error);

@@ -48,10 +48,10 @@ public class Controller extends HttpServlet {
 		
 		switch (subAddr) {
 			case "/overlay":
-			System.out.println("중복체크 요청");
-			infoService = new InfoService();
-			infoService.overlay(request, response);
-			break;
+				System.out.println("중복체크 요청");
+				infoService = new InfoService();
+				infoService.overlay(request, response);
+				break;
 			case "/login":
 				System.out.println("로그인 요청");
 				infoService = new InfoService();
@@ -72,6 +72,15 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.regJoin(request, response);
 				break;	
+			case "/userList":
+				System.out.println("회원 리스트 요청");
+				infoService = new InfoService();
+				infoService.userList(request, response);
+				break;
+			case"/placeSearch":
+				System.out.println("장소 검색");
+				placeService=new PlaceService();
+				placeService.search(request, response);
 		}
 		
 	}

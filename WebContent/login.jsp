@@ -99,7 +99,7 @@
             <input id="userPw" type="password" placeholder="비밀번호"/>
             <!-- <input id="login" type="submit" value="로그인"/> -->
             <button id="login">로그인</button>
-            <span id="logChkTxt">아이디 또는 비밀번호를 다시 확인하세요.</span>
+            <span id="logChkTxt"></span>
             <button id="userJoin" onclick="uJoin()">사용자 회원가입</button>
             <button id="regJoin" onclick="rJoin()" >등록자 회원가입</button>
             <hr/>
@@ -127,6 +127,8 @@
 					if(data.result == true){
 						alert("로그인 성공");
 						location.href="index.jsp";
+					}else{
+						$("#logChkTxt").html("아이디 또는 비밀번호를 다시 확인하세요.");
 					}
 				},
 				error : function (error) {
