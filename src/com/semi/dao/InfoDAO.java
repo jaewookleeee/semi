@@ -9,6 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.apache.taglibs.standard.lang.jstl.BooleanLiteral;
+
 import com.semi.dto.DTO;
 
 public class InfoDAO {
@@ -61,6 +63,25 @@ public class InfoDAO {
 			resClose();
 		}
 		return success;
+	}
+
+	//로그인
+	public boolean login(String id, String pw) {
+		boolean result = false;
+		String sql = "SELECT info_id FROM info WHERE info_id=? AND info_pw=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, pw);
+			rs = ps.executeQuery();
+			result = rs.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			resClose();
+		}
+		return result;
 	}
 
 }

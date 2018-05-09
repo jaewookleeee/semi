@@ -191,7 +191,7 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="menuBar.html"/>
+		<jsp:include page="menuBar.jsp"/>
 		<div id="main">
             <span id="userTxt"><b>사용자 회원가입</b></span>
             <b id="id">아이디</b>

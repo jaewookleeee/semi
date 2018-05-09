@@ -52,7 +52,7 @@
 	</head>
 <body>
 <div>
-<jsp:include page="menuBar.html"/>
+<jsp:include page="menuBar.jsp"/>
 </div>
 <form action="/placeWrite">
 	<div id="all">

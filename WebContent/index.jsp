@@ -11,7 +11,7 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="menuBar.html"/>
+		<jsp:include page="menuBar.jsp"/>
 	</body>
 	<script>
 	</script>
