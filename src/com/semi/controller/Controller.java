@@ -57,6 +57,11 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.userJoin(request, response);
 				break;	
+			case "/regJoin":
+				System.out.println("등록자 회원가입 요청");
+				infoService = new InfoService();
+				infoService.regJoin(request, response);
+				break;	
 		}
 		
 	}
