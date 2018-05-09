@@ -278,5 +278,31 @@
 				}
 			});
 		});
+		
+		
+		var chk = false;//아이디 중복값 체크
+		$("#idChk").click(function() {
+			$.ajax({
+				type : "post",
+				url : "./overlay",
+				data : { id : $("#userId").val() },
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					if(data.result == true){
+						alert("중복된 아이디 입니다.");
+						$("#userId").focus();
+					}else{
+						alert("사용 가능한 아이디 입니다.");
+						$("#userPw").focus();
+						chk = true;
+					}
+					
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
 	</script>
 </html>

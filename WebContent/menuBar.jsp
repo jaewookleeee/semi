@@ -41,7 +41,7 @@
 	<body>
         <span class="menu">
             <ul>
-                <li class="menu_item"><a class="logo" href="#">WAKE UP PLACE</a></li>
+                <li class="menu_item"><a class="logo" href="index.jsp">WAKE UP PLACE</a></li>
                 <li class="menu_item" id="myPage"><a href="login.jsp">마이페이지</a>
                     <span class="submenu">
                         <ul>

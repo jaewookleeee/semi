@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.taglibs.standard.lang.jstl.BooleanLiteral;
+
 import com.google.gson.Gson;
 import com.semi.dao.InfoDAO;
 import com.semi.dto.DTO;
@@ -153,11 +155,26 @@ public class InfoService {
 	//로그아웃
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//세션 추출
-		HttpSession session = request.getSession();
+		//HttpSession session = request.getSession();
 		//loginId 속성값 삭제
-		session.removeAttribute("loginId");
+		//session.removeAttribute("loginId");
 		//main.jsp 페이지 요청(index 인데 세션 검사 작동 확인을 위해 main으로감)
-		response.sendRedirect("index.jsp");
+		//response.sendRedirect("index.jsp");
+	}
+
+	//아이디 중복 체크
+	public void overlay(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String id = request.getParameter("id");
+		
+		InfoDAO dao = new InfoDAO();
+		boolean result = dao.overlay(id);
+		
+		Gson json = new Gson();
+		HashMap<String, Boolean> map = new HashMap<>();
+		map.put("result", result);
+		String obj = json.toJson(map);
+		System.out.println(obj);
+		response.getWriter().println(obj);
 	}
 
 	

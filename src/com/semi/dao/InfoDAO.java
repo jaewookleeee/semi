@@ -112,4 +112,24 @@ public class InfoDAO {
 		return success;
 	}
 
+	//아이디 중복체크
+	public boolean overlay(String id) {
+		boolean result = false;
+		String sql = "SELECT info_id FROM info WHERE info_id=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			resClose();
+		}
+		return result;
+	}
+
 }
