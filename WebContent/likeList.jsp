@@ -41,22 +41,16 @@
                 top: 10px;
                 left: 600px;
             }
-            input[type='button']{
+            button{
                 background-color: #212121;
                 color: white;
                 padding: 2px 7px;
                 border: 0;
                 font-size: 12pt;
             }
-             div{
-            	height: 25px;
-            }
         </style>
     </head>
     <body>
-    	<div>
-    		<jsp:include page="menuBar.jsp" flush="false"/>
-    	</div>
     	<h1>찜한 내역 확인</h1>
         <table>
             <tr>
@@ -65,9 +59,9 @@
                 <th style="padding: 5px 150px">상호명</th>
             </tr>
         </table>
-        <input type="button" id="pre" value="이전 목록"/>
-        <input type="button" id="next" value="다음 목록"/>
-        <input type="button" id="cancle" value="찜 취소"/>
+        <button id="pre">이전 목록</button>
+        <button id="next">다음 목록</button>
+        <button id="cancle">찜 취소</button>
     </body>
     <script>
         /*javascript area*/
