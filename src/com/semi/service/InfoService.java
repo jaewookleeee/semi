@@ -229,9 +229,6 @@ public class InfoService {
 			
 		}
 		
-		
-		
-		
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<>();
 			

@@ -57,7 +57,7 @@
                 <li class="menu_item"><a href="#">문의사항</a></li>
                 <li class="menu_item"><a href="#">공지사항</a></li>
                 <li class="menu_item"><a href="search.jsp">장소검색</a></li>
-                <li class="menu_item"><a href="#">장소등록</a></li>
+                <li class="menu_item"><a href="placeWrite.jsp">장소등록</a></li>
             </ul>
         </span>
     </body>

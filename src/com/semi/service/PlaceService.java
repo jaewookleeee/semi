@@ -1,9 +1,7 @@
 package com.semi.service;
 
-
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,16 +10,18 @@ import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 
+
 import java.util.HashMap;
 
 
 import com.google.gson.Gson;
 
+
+
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
 public class PlaceService {
-
 
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
@@ -32,7 +32,7 @@ public class PlaceService {
 		PlaceDAO dao = new PlaceDAO();
 		
 		HttpSession session = request.getSession();
-		String loginid = (String) session.getAttribute("loginid");
+		String loginid = (String) session.getAttribute("loginId");
 		
 		String placename = request.getParameter("place_name");
 		String categoly = request.getParameter("categoly");
@@ -103,4 +103,5 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
+
 }
