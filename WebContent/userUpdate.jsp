@@ -8,17 +8,17 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 			div#main{
-            position: absolute;
-            border: 1.5px solid #A4A4A4;
-            width: 310px;
-            height: 540px;
-            left: 40%;
-            top: 200px;
-            text-align: center;
-	        }
-	        span#usertxt{
 	            position: absolute;
-	            left: 75px;
+	            border: 1.5px solid #A4A4A4;
+	            width: 310px;
+	            height: 600px;
+	            left: 40%;
+	            top: 200px;
+	            text-align: center;
+       		}
+	        span#userTxt{
+	            position: absolute;
+	            left: 89px;
 	            top: 10px;
 	            font-size: 20px;     
 	        }
@@ -34,34 +34,40 @@
 	            top: 110px;
 	            font-size: 13px;    
 	        }
-	        b#pwChk{
+	        b#newPw{
 	            position: absolute;
 	            left: 15px;
 	            top: 170px;
 	            font-size: 13px;                
 	        }
-	        b#name{
+	        b#newPwChk{
 	            position: absolute;
 	            left: 15px;
 	            top: 230px;
-	            font-size: 13px; 
+	            font-size: 13px;   
+	        }
+	        b#name{
+	            position: absolute;
+	            left: 15px;
+	            top: 290px;
+	            font-size: 13px;   
 	        }
 	        b#Gender{
 	            position: absolute;
 	            left: 15px;
-	            top: 290px;
+	            top: 350px;
 	            font-size: 13px;    
 	        }   
 	        b#birth{
 	            position: absolute;
 	            left: 15px;
-	            top: 350px;
+	            top: 410px;
 	            font-size: 13px;
 	        }
 	        b#email{
 	            position: absolute;
 	            left: 15px;
-	            top: 410px;
+	            top: 470px;
 	            font-size: 13px;            
 	        }
 	        input#userId{
@@ -72,17 +78,6 @@
 	            height: 25px;
 	            font-size: 10px;
 	        }
-	        button#idChk{
-	            position: absolute;
-	            left: 220px;
-	            top: 75px;
-	            width: 69px;
-	            height: 25px;
-	            color: white;
-	            background-color: black;
-	            border-style: none;
-	            font-size: 10px;
-	        }
 	        input#userPw{
 	            position: absolute;
 	            left: 15px;
@@ -91,7 +86,7 @@
 	            height: 25px;
 	            font-size: 10px;
 	        }
-	        input#userPwChk{
+	        input#userNewPw{
 	            position: absolute;
 	            left: 15px;
 	            top: 195px;
@@ -99,23 +94,32 @@
 	            height: 25px;
 	            font-size: 10px;            
 	        }
-	        input#userName{
+	        input#userNewPwChk{
 	            position: absolute;
 	            left: 15px;
 	            top: 255px;
 	            width: 200px;
 	            height: 25px;
-	            font-size: 10px;    
+	            font-size: 10px;            
+	        }
+	        input#userName{
+	            position: absolute;
+	            left: 15px;
+	            top: 315px;
+	            width: 200px;
+	            height: 25px;
+	            font-size: 10px;
 	        }
 	        span#gender{
 	        	position: absolute;
 	        	left: 15px;
-	        	top: 315px;
+	        	top: 375px;
 	        }
-/* 	        span#genM{
+	        
+	        /* span#genM{
 	            position: absolute;
 	            left: 15px;
-	            top: 315px;
+	            top: 375px;
 	            border: 1px solid black;
 	            width: 95px;
 	            font-size: 15px;
@@ -127,7 +131,7 @@
 	        span#genW{
 	            position: absolute;
 	            left: 118;
-	            top: 315px;
+	            top: 375px;
 	            border: 1px solid black;
 	            width: 95px;
 	            font-size: 15px;
@@ -138,7 +142,7 @@
 	        /* input#userBirth{
 	            position: absolute;
 	            left: 15px;
-	            top: 375px;
+	            top: 435px;
 	            width: 200px;
 	            height: 25px;
 	            font-size: 13px;
@@ -146,22 +150,24 @@
 	        select#userBirthYear{
 	        	position: absolute;
 	        	left: 15px;
-	        	top: 375px;
+	        	top: 435px;
+	        	z-index: 1;
+	    
 	        }
 	        select#userBirthMonth{
 	        	position: absolute;
 	        	left: 70px;
-	        	top: 375px;
+	        	top: 435px;
 	        }
 	        select#userBirthDay{
 	        	position: absolute;
 	        	left: 110px;
-	        	top: 375px;
+	        	top: 435px;
 	        }
 	        input#userEmail{
 	            position: absolute;
 	            left: 15px;
-	            top: 435px;
+	            top: 495px;
 	            width: 200px;
 	            height: 25px;
 	            font-size: 10px;            
@@ -169,7 +175,7 @@
 	        button#cancel{
 	            position: absolute;
 	            left: 180px;
-	            top: 495px;
+	            top: 555px;
 	            width: 50px;
 	            height: 25px;    
 	            color: white;
@@ -180,7 +186,7 @@
 	        button#join{
 	            position: absolute;
 	            left: 240px;
-	            top: 495px;
+	            top: 555px;
 	            width: 50px;
 	            height: 25px;
 	            font-size: 10px;
@@ -191,25 +197,20 @@
 		</style>
 	</head>
 	<body>
-		<jsp:include page="menuBar.jsp"/>
 		<div id="main">
-            <span id="userTxt"><b>사용자 회원가입</b></span>
+            <span id="userTxt"><b>회원정보 수정</b></span>
             <b id="id">아이디</b>
-            <input id="userId" name="userId" type="text" placeholder=" 아이디를 입력하세요."/>
-            <!--<input id="idChk" type="button" value="중복 확인"/>-->
-            <button id="idChk" name="idChk">중복 확인</button>
-            <b id="pw">비밀번호</b>
-            <input id="userPw" name="userPw" type="password" placeholder="비밀번호를 입력하세요."/>
-            <b id="pwChk">비밀번호 확인</b>
-            <input id="userPwChk" name="userPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input id="userId" type="text" value="${sessionScope.loginId }" readonly/>
+            
+            <b id="pw">현재 비밀번호</b>
+            <input id="userPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <b id="newPw">새 비밀번호</b>
+            <input id="userNewPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <b id="newPwChk">새 비밀번호 확인</b>
+            <input id="userNewPwChk" type="password" placeholder="비밀번호를 입력하세요."/> 
             <b id="name">이름</b>
-            <input id="userName" name="userName" type="text" placeholder="이름을 입력하세요."/>
+            <input id="userName" type="text" value="${sessionScope.loginId }"/>
             <b id="Gender">성별</b>
-            <span id="gender">
-            	<input id="man" type="radio" name="userGender" value="남" checked/>남자
-            	&nbsp;&nbsp;&nbsp;&nbsp;
-            	<input id="woman" type="radio" name="userGender" value="여"/>여자
-            </span>
             <!-- <span id="genM">
                 <input id="man" type="radio" name="userGenger" value="남자"/>
                 <label id="manLb" for="man">남자</label>
@@ -218,7 +219,14 @@
             <span id="genW">
                 <input id="woman" type="radio" name="userGenger" value="여자"/>
                 <label id="womanLb" for="woman">여자</label>
-            </span>    -->             
+            </span>  -->  
+            
+            <span id="gender">
+            	<input id="man" type="radio" name="userGender" value="남" checked/>남자
+            	&nbsp;&nbsp;&nbsp;&nbsp;
+            	<input id="woman" type="radio" name="userGender" value="여"/>여자
+            </span>
+                         
             <b id="birth">생년월일</b>
             <!-- <input id="userBirth" type="date" value="2018-05-07"/> -->
             <select name="userBirthYear" id="userBirthYear">
@@ -256,7 +264,6 @@
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
             </select>
-            
             <b id="email">이메일</b>
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
             <button id="cancel">취소</button>
@@ -264,104 +271,6 @@
         </div>
 	</body>
 	<script>
-		$("#cancel").click(function() {
-			location.href="index.jsp";
-		});
 	
-		var chk = false;//아이디 중복값 체크
-		
-		//회원가입
-		$("#join").click(function() {
-			var userPw = $("#userPw").val();
-			var userPwChk = $("#userPwChk").val();
-			//console.log(userPw, userPwChk);	
-			if($("#userId").val()==""){
-				alert("아이디를 입력하세요.");
-				$("#userId").focus();
-			}else if($("#userPw").val()==""){
-				//비밀번호 입력 확인
-				alert("비밀번호 입력하세요.");				
-				$("#userPw").focus();//포커스 이동
-			}else if($("#userPwChk").val()==""){
-				alert("비밀번호 확인 해주세요");				
-				$("#userPwChk").focus();//포커스 이동	
-			}else if(userPw != userPwChk){
-				alert("비밀번호 재입력");
-				$("#userPwChk").focus();//포커스 이동	
-			} else if($("#userName").val()==""){
-				alert("이름을 입력해주세요.");
-				$("#userName").focus();//포커스 이동	
-			}else if($("#userBirthYear").val()=="년도"){
-				alert("년도를 선택해주세요.");
-				$("#userBirthYear").focus();
-			}else if($("#userBirthMonth").val()=="월"){
-				alert("월을 선택해주세요.");
-				$("#userBirthMonth").focus();
-			}else if($("#userBirthDay").val()=="일"){
-				alert("일을 선택해주세요.");
-				$("#userBirthDay").focus();
-			}else if($("#userEmail").val==""){
-				alert("이메일을 입력해주세요.");
-				$("#userEmail").focus();
-			}else if(chk==false){
-				alert("아이디 중복확인 하세요.");
-				$("#userId").focus();
-			}else{
-				$.ajax({
-					type : "post",
-					url : "./userJoin",
-					data : {
-						id : $("#userId").val(),
-						pw : $("#userPw").val(),
-						name : $("#userName").val(),
-						gender : $("input[name='userGender']").val(),
-						year : $("#userBirthYear").val(),
-						month : $("#userBirthMonth").val(),
-						day : $("#userBirthDay").val(),
-						email : $("#userEmail").val()
-					},
-					dataType : "json",
-					success : function(data) {
-						console.log(data);
-					},
-					error : function(error) {
-						console.log(error);
-					}
-				});
-			}
-			
-			
-			
-			
-			
-			
-			
-			
-
-		});
-		
-		//중복체크
-		$("#idChk").click(function() {
-			$.ajax({
-				type : "post",
-				url : "./overlay",
-				data : { id : $("#userId").val() },
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					if(data.result == true){
-						alert("중복된 아이디 입니다.");
-						$("#userId").focus();
-					}else{
-						alert("사용 가능한 아이디 입니다.");
-						$("#userPw").focus();
-						chk = true;
-					}
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
-		});
 	</script>
 </html>

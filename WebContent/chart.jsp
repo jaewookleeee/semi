@@ -41,7 +41,7 @@
                 top: 10px;
                 left: 870px;
             }
-            input[type='button']{
+            button{
                 background-color: #212121;
                 color: white;
                 padding: 2px 7px;
@@ -77,21 +77,21 @@
                 padding: 0 10px;
                 font-weight: 600;
             }
-            div{
-            	height: 25px;
+            #menuBar{
+            	height: 20px;
             }
         </style>
     </head>
     <body>
-    	<div>
-    		<jsp:include page="menuBar.jsp" flush="false"/>
+    	<div id="menuBar">
+    		<jsp:include page="/menuBar.jsp" flush="false"/>
     	</div>
        <h1>통계</h1>
         <br/>
         <select class="date" id="date1"></select>
         <div class="date" id="date3">~</div>
         <select class="date" id="date2"></select>
-        <input type="button" id="search" value="검색"/>
+        <button id="search">검색</button>
         <br/>
         <br/>
         <table id="table1">
@@ -112,8 +112,8 @@
                 <th>예약인원</th>
             </tr>
         </table>
-        <input type="button" id="pre" value="이전 목록"/>
-        <input type="button" id="next" value="다음 목록"/>
+        <button id="pre">이전 목록</button>
+        <button id="next">다음 목록</button>
     </body>
     <script>
         /*javascript area*/

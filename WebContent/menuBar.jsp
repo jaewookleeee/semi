@@ -41,16 +41,16 @@
 	<body>
         <span class="menu">
             <ul>
-                <li class="menu_item"><a class="logo" href="#">WAKE UP PLACE</a></li>
+                <li class="menu_item"><a class="logo" href="index.jsp">WAKE UP PLACE</a></li>
                 <li class="menu_item" id="myPage"><a href="login.jsp">마이페이지</a>
                     <span class="submenu">
                         <ul>
-                            <li class="submenu_item"><a href="#">회원정보수정</a></li>
+                            <li class="submenu_item"><a href="updateChk.jsp">회원정보수정</a></li>
                             <li class="submenu_item"><a href="#">예약내역확인</a></li>
                             <li class="submenu_item"><a href="#">찜한내역확인</a></li>
                             <li class="submenu_item"><a href="#">등록내역확인</a></li>
                             <li class="submenu_item"><a href="#">등록자전환</a></li>
-                            <li class="submenu_item"><a href="#">회원관리</a></li>
+                            <li class="submenu_item"><a href="userListChk.jsp">회원관리</a></li>
                         </ul>
                     </span>
                 </li>

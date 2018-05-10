@@ -15,7 +15,7 @@ import com.semi.service.QaService;
 import com.semi.service.ReviewService;
 
 
-@WebServlet({ "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
+@WebServlet({ "/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel", "/placeDetail", "/like", "/likeDel",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardList", "/boardSearch",
@@ -47,21 +47,54 @@ public class Controller extends HttpServlet {
 		ReviewService reviewService = null;
 		
 		switch (subAddr) {
+			case "/overlay":
+				System.out.println("중복체크 요청");
+				infoService = new InfoService();
+				infoService.overlay(request, response);
+				break;
 			case "/login":
 				System.out.println("로그인 요청");
 				infoService = new InfoService();
 				infoService.login(request, response);
 				break;
+			case "/logout":
+				System.out.println("로그아웃 요청");
+				infoService = new InfoService();
+				infoService.logout(request, response);
+				break;	
 			case "/userJoin":
 				System.out.println("사용자 회원가입 요청");
 				infoService = new InfoService();
 				infoService.userJoin(request, response);
+<<<<<<< HEAD
 				break;
 			case "/placeWrite":
 				System.out.println("장소 등록 요청");
 				placeService = new PlaceService();
 				placeService.Write(request,response);
 				break;
+=======
+				break;	
+			case "/regJoin":
+				System.out.println("등록자 회원가입 요청");
+				infoService = new InfoService();
+				infoService.regJoin(request, response);
+				break;	
+			case "/userUpdate":
+				System.out.println("사용자 정보수정 요청");
+				infoService = new InfoService();
+				infoService.userUpdate(request, response);
+				break;
+			case "/userList":
+				System.out.println("회원 리스트 요청");
+				infoService = new InfoService();
+				infoService.userList(request, response);
+				break;
+			case"/placeSearch":
+				System.out.println("장소 검색");
+				placeService=new PlaceService();
+				placeService.search(request, response);
+>>>>>>> 2d4a6e1d3006e566172be96894695f41d14f9c9f
 		}
 		
 	}
