@@ -1,9 +1,8 @@
 package com.semi.service;
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD*/
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,22 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
-=======
-import java.io.IOException;
-import java.util.ArrayList;
+/*=======*/
+/*import java.io.IOException;*/
+/*import java.util.ArrayList;*/
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+/*import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;*/
 
 import com.google.gson.Gson;
->>>>>>> 2d4a6e1d3006e566172be96894695f41d14f9c9f
+/*>>>>>>> 2d4a6e1d3006e566172be96894695f41d14f9c9f*/
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
 public class PlaceService {
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD*/
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		DTO dto = new DTO();
@@ -88,7 +87,7 @@ public class PlaceService {
 		ArrayList<String> photo*/
 	}
 
-=======
+/*=======*/
 	public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String keyword=request.getParameter("keyword");
 		String category=request.getParameter("category");
@@ -108,5 +107,5 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
->>>>>>> 2d4a6e1d3006e566172be96894695f41d14f9c9f
+/*>>>>>>> 2d4a6e1d3006e566172be96894695f41d14f9c9f*/
 }
