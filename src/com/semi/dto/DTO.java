@@ -32,9 +32,10 @@ public class DTO {
 	private Date place_date;
 	private String place_category;
 	private String place_photo;
-	private Date place_start;
-	private Date place_end;
+	private String place_start;
+	private String place_end;
 	private long place_price;
+	private String place_phone;
 	
 	//예약
 	private int book_no;
@@ -156,6 +157,12 @@ public class DTO {
 	public void setPlace_no(int place_no) {
 		this.place_no = place_no;
 	}
+	public String getPlace_phone() {
+		return place_phone;
+	}
+	public void setPlace_phone(String place_phone) {
+		this.place_phone = place_phone;
+	}
 	public String getPlace_name() {
 		return place_name;
 	}
@@ -210,16 +217,16 @@ public class DTO {
 	public void setPlace_photo(String place_photo) {
 		this.place_photo = place_photo;
 	}
-	public Date getPlace_start() {
+	public String getPlace_start() {
 		return place_start;
 	}
-	public void setPlace_start(Date place_start) {
+	public void setPlace_start(String place_start) {
 		this.place_start = place_start;
 	}
-	public Date getPlace_end() {
+	public String getPlace_end() {
 		return place_end;
 	}
-	public void setPlace_end(Date place_end) {
+	public void setPlace_end(String place_end) {
 		this.place_end = place_end;
 	}
 	public long getPlace_price() {

@@ -10,48 +10,33 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		
 		<style>
-			#all{
-	                position: absolute;
-	                top:100px;
-	                left:500px;
-	            }
-	            
-	        #main{
-	            padding: 5px;
-	            width: 580px;
-	            height: 200px;
-	            position: relative;
-	            left: 10px
-	        }
+			div{ background-color: white; }
+            
+			#all{ position: relative; width: 1200px; height: 1200px; top:50px; left:175px; }
+	        #main{ position: relative; width: 700px; height: 300px; margin-left: 250px; }
+            #area{ position: relative; width: 1125px; top: 70px; margin-left: 37.5px; }
+            
+            .sub_div { position: relative; width: 300px; margin-left: 460px; }
+	        .sub{ position: relative; width: 50px;height: 50px; margin-top: 10px; margin-right: 5px; }
+	        .info{ position: relative; float: left; text-align: center; top: 30px; left: 37.5px; width: 375px; height: 30px; line-height: 30px; border: 1px solid #7E7E7E; }
 	        
-	        .sub{
-	            width: 100px;
-	            position: relative;
-	            left: 40px
-	        }
-	        
-	        div{
-	            background-color: white;
-	        }
-	        
-	        .info{
-	            float: left;
-	            padding: 0px 50px;
-	            text-align: center;
-	            width: 100px;
-	            border: 1px solid black;
-	        }
+	        #detail{background-color : #FF376C;}
 		</style>
 		
 	</head>
 	<body>
+	<div>
+	<jsp:include page="menuBar.jsp"/>
+	</div>
 		<div id="all">
-        	<img id="main" src="#"/><br/>
-        	<img class="sub" src="#"/>
-        	<img class="sub" src="#"/>
-        	<img class="sub" src="#"/>
-	        <img class="sub" src="#"/>
-	        <img class="sub" src="#"/>
+	        <img id="main" src="#"/><br/>
+			<div class="sub_div">
+	        	<img class="sub" src="#"/>
+	        	<img class="sub" src="#"/>
+	        	<img class="sub" src="#"/>
+		        <img class="sub" src="#"/>
+		        <img class="sub" src="#"/>
+		    </div>
 	        <div id="allinfo">
 	            <div class="info" id="detail">상세정보</div>
 	            <div class="info" id="qa">QA</div>

@@ -56,7 +56,12 @@ public class Controller extends HttpServlet {
 				System.out.println("사용자 회원가입 요청");
 				infoService = new InfoService();
 				infoService.userJoin(request, response);
-				break;	
+				break;
+			case "/placeWrite":
+				System.out.println("장소 등록 요청");
+				placeService = new PlaceService();
+				placeService.Write(request,response);
+				break;
 		}
 		
 	}

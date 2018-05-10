@@ -8,116 +8,80 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
-            .cate{
-                float: left;
-                padding: 0px 50px;
-                text-align: center;
-                width: 140px;
-                border: 1px solid black;
-            }
-            #date{
-                position: absolute;
-                left: 25px;
-                width: 125px;
-                background-color: black;
-                color: white;
-            }
-            #starttime{
-                position: absolute;
-                left: 155px;
-                background-color: black;
-                color: white;
-                width: 100px;
-                height: 23px;
-            }
-            #endtime{
-                position: absolute;
-                left: 260px;
-                background-color: black;
-                color: white;
-                width: 100px;
-                height: 23px;
-            }
-            #cash{
-                position: absolute;
-                left: 420px;
-                background-color: black;
-                color: white;
-                width: 80px;
-                height: 23px;
-            }
-            #timeadd{
-                background-color: black;
-                color: white;
-                width: 20px;
-                height: 20px;
-                position: absolute;
-                left: 0px;
-                border: 0;
-            }
-            #people{
-                position: absolute;
-                left: 365px;
-                background-color: black;
-                color: white;
-                width: 50px;
-                height: 23px;
-            }
-            #book{
-                position: absolute;
-                left: 505px;
-                border: 0;
-                background-color: deeppink;
-            }
-            #like{
-                position: absolute;
-                left: 580px;
-                border: 0;
-                background-color: deeppink;
-            }
-            #address{
-                width: 500px
-            }
-            textarea{
-                width: 600px;
-                height: 150px;
-            }
+            .regist { position: relative; width: 1200px; }  
+            .sec_content { position: relative; }
+            
+            .div_info { position: relative; margin-top: 50px; width: 1100px; height: 190px; }
+            .title { position: relative; float: left; width: 150px; height: 30px; font-size: 30px; }          
+            .intro { position: relative; float: left; margin-top: 50px; width: 1080px; height: 30px; line-height: 30px; border: 1px solid #7E7E7E; }
+            .cate{ position: relative; float: left; margin-top: 10px; width: 270px; height: 30px; line-height: 30px; text-align: center; border: 1px solid #7E7E7E; }
+            .sel_btn { position: relative; float: left; margin-top: 10px; margin-right: 5px; width: 162px; height: 30px; background-color: #262626; color: white; border: 0; }
+            .btn { position: relative; float: left; margin-top: 10px; margin-right: 5px; width: 120px; height: 30px; background-color: #F04768; color: white; border: 0; }
+            
+            .div_locate { position: relative; margin-top: 50px; width: 1100px; height: 420px; }
+            .address { position: relative; margin-top: 50px; width: 1100px; height: 30px; border: 1px solid #7E7E7E; }
+            .place { position: relative; margin-top: 10px; width: 400px; height: 300px; border: 1px solid #7E7E7E; }
+            
+            .div_guide {position: relative; margin-top: 50px; width: 1100px; }
+            .div_attention { position: relative; margin-top: 50px; width: 1100px; }
+            .content { position: relative; margin-top: 50px; width: 1100px; height: 200px; border: 1px solid #7E7E7E; }
 		</style>
 </head>
 <body>
-<div>
-        <h3>상호명</h3>
-        <p>한줄소개</p>
-        <div>
-        <div class="cate">은평구 응암동</div>
-        <div class="cate">02-374-5151</div>
-        <div class="cate">hsp2041@naver.com</div>
-        </div><br/><br/>
-        <button id="timeadd">+</button>
-        <input id="date" type="date"/>
-        <select id="starttime">
-        <option>시작시간</option>
-        </select>
-        <select id="endtime">
-        <option>끝시간</option>
-        </select>
-        <select id="people">
-        <option>인원</option>
-        </select>
-        <input id="cash" type="text" value="요금" readonly=""/>
-        
-        <button id="book">예약하기</button>
-        <button id="like">찜 하기</button><br/>
-        <h3>위치</h3>
-        <input id="address" type="text" value="상세주소" readonly=""/><br/>
-        <a>위치 api</a>
-        <h3>시설안내</h3>
-        <textarea readonly="">내용</textarea>
-        <h3>주의사항</h3>
-        <textarea readonly="">내용</textarea>
+<div class="regist">
+            <div class="sec_content">
+                <div class="div_info">
+                    <div class="title"><strong>상호명</strong></div>
+                    
+                    <div class="intro">한 줄 소개</div>
+                    
+                    <div class="cate">카테고리</div>
+                    <div class="cate">은평구 응암동</div>
+                    <div class="cate">02-374-5151</div>
+                    <div class="cate">hsp2041@naver.com</div>
+                    
+                    <input class="sel_btn" id="date" type="date"/>
+                    <select class="sel_btn" id="starttime"><option>시작시간</option></select>
+                    <select class="sel_btn" id="endtime"><option>끝시간</option></select>
+                    <select class="sel_btn" id="people"><option>인원</option></select>
+                    <input class="sel_btn" id="cash" type="text" value="요금" readonly/>
+                    <button class="btn" id="book">예약하기</button>
+                    <button class="btn" id="like">찜하기</button><br/>
+                </div>
+                
+                <div class="div_locate">
+                    <div class="title"><strong>위치</strong></div>
+                    <input class="address" type="text" placeholder=" 상세 주소" readonly/><br/>
+                    <div class="place">위치 api</div><br/><br/><br/><br/>
+                </div>
+                    
+                <div class="div_guide">
+                    <div class="title"><strong>시설안내</strong></div>
+                    <textarea class="content" readonly></textarea>
+                </div>
+                
+                <div class="div_attention">
+                    <div class="title"><strong>주의사항</strong></div>
+                    <textarea class="content" readonly></textarea>
+                </div>
+                <br/><br/>
+            </div>
         </div>
 </body>
 <script>
-	
+var innerTag='<tr><td><input class="date" type="date"/><select class="starttime">'+
+				'<option>시작시간</option></select><select class="endtime"><option>끝시간</option></select>'+
+				'<select class="people"><option>인원</option></select>'+
+				'<input class="cash" type="text" value="요금" readonly=""/></td></tr>';
+    $(".timeadd").click(function(){
+        $("#add").append(innerTag);
+    });
+    $("#like").click(function(){
+        if($(this).html()=="찜 하기"){
+            $(this).html("찜 취소")
+        }else if($(this).html()=="찜 취소"){
+            $(this).html("찜 하기")
+        }
+    });
 </script>
 </html>
