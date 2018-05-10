@@ -91,6 +91,12 @@ public class Controller extends HttpServlet {
 				System.out.println("장소 검색");
 				placeService=new PlaceService();
 				placeService.search(request, response);
+				break;
+			case "/bookList":
+				System.out.println("예약 리스트 요청");
+				infoService = new InfoService();
+				infoService.bookList(request, response);
+				break;
 
 		}
 		

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.taglibs.standard.lang.jstl.BooleanLiteral;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.semi.dao.InfoDAO;
 import com.semi.dto.DTO;
 
@@ -255,4 +256,34 @@ public class InfoService {
 		
 		
 	}
+	
+	//예약내역확인
+		public void bookList(HttpServletRequest request, HttpServletResponse response) 
+				throws IOException {
+			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
+			System.out.println(id);
+			if(id == null) {//loginId의 값이 null 이라면(비로그인 상태라면)
+				Gson json = new Gson(); //json을 준비
+				HashMap<String, String> map = new HashMap<String, String>(); //key와 value 둘다 String 타입의 HashMap 준비
+				map.put("msg", "권한이 없는 서비스입니다."); // map에 보낼 값 넣기
+				
+				String obj = json.toJson(map); // map 변환
+				
+				response.setContentType("test/html; charset=UTF-8"); //한글도 같이 보내니까 한글 깨짐 방지
+				response.getWriter().println(obj); //response로 보냄
+			}else { //로그인 상태라면
+				int start = Integer.parseInt(request.getParameter("sNum")); //paging할 시작 번호 추출
+				int end = Integer.parseInt(request.getParameter("eNum")); // paging할 마지막 번호 추출
+				System.out.println(start+"/"+end); // 들어온 값 맞는 지 확인
+				InfoDAO dao = new InfoDAO();  //InfoDAO 호출
+				
+				ArrayList<DTO> list = dao.bookList(id, start, end); //bookList 실행
+				Gson json = new GsonBuilder().setDateFormat("yyyy-MM-dd").create(); //json객체 생성과 Date 타입 형태 정의
+				HashMap<String, Object> map = new HashMap<String, Object>(); //담을 맵 객체화
+				map.put("list", list); // map에 값 넣기
+				String obj = json.toJson(map); // map의 값을 json으로 변환
+				response.setContentType("text/html; charset=UTF-8");  //한글깨짐방지
+				response.getWriter().println(obj); //response로 값 보냄
+			}
+		}
 }

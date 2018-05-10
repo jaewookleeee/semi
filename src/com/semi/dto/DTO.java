@@ -40,8 +40,8 @@ public class DTO {
 	//예약
 	private int book_no;
 	private Date book_date;
-	private Date book_start;
-	private Date book_end;
+	private String book_start;
+	private String book_end;
 	private long book_price;
 	private int book_custom;
 	
@@ -247,16 +247,16 @@ public class DTO {
 	public void setBook_date(Date book_date) {
 		this.book_date = book_date;
 	}
-	public Date getBook_start() {
+	public String getBook_start() {
 		return book_start;
 	}
-	public void setBook_start(Date book_start) {
+	public void setBook_start(String book_start) {
 		this.book_start = book_start;
 	}
-	public Date getBook_end() {
+	public String getBook_end() {
 		return book_end;
 	}
-	public void setBook_end(Date book_end) {
+	public void setBook_end(String book_end) {
 		this.book_end = book_end;
 	}
 	public long getBook_price() {
