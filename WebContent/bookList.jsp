@@ -27,19 +27,19 @@
                 color: white;
             }
             #pre{
-                position: relative;
-                top: 10px;
+                position: absolute;
+                top: 340px;
                 left: 500px;
             }
             #next{
-                position: relative;
-                top: 10px;
-                left: 505px;
+                position: absolute;
+                top: 340px;
+                left: 600px;
             }
             #cancle{
-                position: relative;
-                top: 10px;
-                left: 895px;
+                position: absolute;
+                top: 340px;
+                left: 1080px;
             }
             button{
                 background-color: #212121;
@@ -51,6 +51,9 @@
             #menuBar{
             	height: 20px;
             }
+            input[type="checkbox"]{
+            	height: 14px;
+            }
         </style>
     </head>
     <body>
@@ -61,8 +64,8 @@
         <br/>
         <table id="listTable">
             <tr>
-                <th id="allckh" style="padding: 5px 10px"><input type="checkbox"/></th>
-                <th style="padding: 5px 10px">번호</th>
+                <th><input type="checkbox" id="allckh"/></th>
+                <th>번호</th>
                 <th style="padding: 5px 150px">상호명</th>
                 <th style="padding: 5px 30px">대표자 ID</th>
                 <th >예약일</th>
@@ -81,8 +84,8 @@
     	var msg = ""; //비로그인시 오는 값 담을 변수
     	var sNum = 1; //페이징 시작 값
     	var eNum = 5; //페이징 마지막 값
-        var obj = {}; //ajax 실행시 보낼 오브젝트 초기화
-
+        
+    	var obj = {}; //ajax 실행시 보낼 오브젝트 초기화
     	obj.error=function(e){console.log(e)}; //ajax 에러날 경우의 함수
     	obj.type="POST"; //ajax로 보낼 타입
     	obj.dataType="JSON"; //ajax 실행 후 받을 값 형태
@@ -90,7 +93,7 @@
     	//페이지 로드하자마자 실행
     	$(document).ready(function(){
     		//console.log($("#listTable").children().html());
-    		tableTh = $("#listTable").children().html(); //페이지를 로드하고나서 바로 테이블 자식요소(껍데기) 담음
+    		tableTh = $("#listTable").children().html(); //페이지를 로드하고나서 바로 테이블 자식요소(th태그) 담음
     		obj.url = "bookList"; //ajax bookList로 요청
     		obj.data={ //같이 보낼 데이터
     				"sNum":sNum,
@@ -171,6 +174,34 @@
     		ajaxCall(obj);
     	});
     	
+    	//삭제 버튼
+    	$("#cancle").click(function(){
+    		//DB에서 값을 지우고, 다시 리스트를 불러온다
+    	});
+    	
+    	//전체 체크or해제
+    	$("#allckh").click(function(){
+    		if($("#allckh").prop("checked")){// th에 있는 체크박스에 체크가 되어있으면
+    			$("input[type='checkbox']").prop("checked", true);
+    			console.log($("[name='delchk']:checked").length);
+    		}else{
+    			$("input[type='checkbox']").prop("checked", false);
+    			console.log($("[name='delchk']:checked").length);
+    		}
+    	});
+    	
+    	//체크에 따라 th의 checkbox checked 여부
+    	$(document).on("click", "input[name='delchk']", function(){
+    		var total = $("input[name='delchk']").length;
+    		var chk = $("input[name='delchk']:checked").length;
+    		if(chk == total){
+    			$("#allckh").prop("checked", true);
+    		}else{
+    			$("#allckh").prop("checked", false);
+    		}
+    		
+    	});
+    	
     	//list에서 값을 뽑아 테이블에 넣는 함수
     	function listPrint(list){
     		var content = ""; //자식요소로 넣을 변수 초기화
@@ -179,7 +210,7 @@
     			//console.log(item);
     			//console.log(item.book_no);
     			content += "<tr>";
-    			content += "<td><input type='checkbox' value'="+item.book_no+"'/></td>";
+    			content += "<td><input type='checkbox' name='delchk' value'="+item.book_no+"'/></td>";
     			content += "<td>"+item.book_no+"</td>";
     			content += "<td>"+item.place_name+"</td>";
     			content += "<td>"+item.info_id+"</td>";
