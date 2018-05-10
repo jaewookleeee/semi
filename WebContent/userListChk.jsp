@@ -7,13 +7,15 @@
 	
 	if(loginId == ""){
 		alert("관리자 권한");
-		location.href="index.jsp";
+		history.back();
 	}else if(loginId != null && loginDiv == "사용자"){
 		alert("관리자 권한");
-		location.href="index.jsp";
+		//location.href="index.jsp";
+		history.back();
 	}else if(loginId != null && loginDiv == "등록자"){
 		alert("관리자 권한");
-		location.href="index.jsp";
+		//location.href="index.jsp";
+		history.back();
 	}else if(loginId != null && loginDiv == "관리자"){
 		location.href="userList.jsp";
 	}

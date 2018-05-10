@@ -7,6 +7,7 @@
 	
 	if(loginId == ""){
 		alert("로그인이 필요한 서비스입니다.");
+		history.back();
 	}else if(loginId != null && loginDiv == "사용자"){
 		location.href="userUpdate.jsp";
 	}else if(loginId != null && loginDiv == "등록자"){

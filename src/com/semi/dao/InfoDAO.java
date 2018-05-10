@@ -163,7 +163,8 @@ public class InfoDAO {
 	//사용자 회원정보 수정
 	public int userUpdate(DTO dto) {
 		int success = 0;
-		String sql = "UPDATE info SET info_pw=?, info_birth=?, info_email=?, info_gender=?, info_name=? WHERE info_id=?";
+		String sql = "UPDATE info SET info_pw=?, info_birth=TO_DATE(?,'YYYY-MM-DD'), info_email=?, info_gender=?, info_name=?"+
+				 " WHERE info_id=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getInfo_pw());
@@ -182,6 +183,26 @@ public class InfoDAO {
 		}
 		return success;
 	}
+
+	//회원수정 현재비밀번호 체크
+	public String pwChk(String id) {
+		String result = null;
+		String sql = "SELECT info_pw FROM info WHERE info_id=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result = rs.getString("info_pw");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return result;
+	}
+
+	
 	
 	
 }
