@@ -72,6 +72,11 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.regJoin(request, response);
 				break;	
+			case "/userUpdate":
+				System.out.println("사용자 정보수정 요청");
+				infoService = new InfoService();
+				infoService.userUpdate(request, response);
+				break;
 			case "/userList":
 				System.out.println("회원 리스트 요청");
 				infoService = new InfoService();

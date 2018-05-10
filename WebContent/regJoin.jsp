@@ -119,13 +119,13 @@
 	            height: 25px;
 	            font-size: 10px;    
 	        }
-	        span#gender{
+	         span#gender{
 	        	position: absolute;
 	        	left: 15px;
 	        	top:315px;
-	        }
+	        } 
 	        
-	        /* span#genM{
+	         /* span#genM{
 	            position: absolute;
 	            left: 15px;
 	            top: 315px;
@@ -147,15 +147,15 @@
 	        }
 	        input#woman{
 	            display: none;
-	        } */
-	        /* input#regBirth{
+	        }  */
+	         input#regBirth{
 	            position: absolute;
 	            left: 15px;
 	            top: 375px;
 	            width: 200px;
 	            height: 25px;
 	            font-size: 13px;
-	        } */
+	        } 
 	        select#regBirthYear{
 	        	position: absolute;
 	        	left: 15px;
@@ -238,7 +238,7 @@
             	&nbsp;&nbsp;&nbsp;&nbsp;
             	<input id="woman" type="radio" name="regGender" value="여"/>여자
             </span>
-            <!-- <span id="genM">
+            <!--  <span id="genM">
                 <input id="man" type="radio" name="userGenger" value="남자"/>
                 <label id="manLb" for="man">남자</label>
             </span>
@@ -246,7 +246,7 @@
             <span id="genW">
                 <input id="woman" type="radio" name="userGenger" value="여자"/>
                 <label id="womanLb" for="woman">여자</label>
-            </span>       -->          
+            </span>              --> 
             <b id="birth">생년월일</b>
             <!-- <input id="regBirth" type="date" value="2018-05-07"/> -->
             <select name="regBirthYear" id="regBirthYear">
@@ -385,7 +385,7 @@
 				}
 			});
 		});
-		 /* $("#genM").click(function(){
+		  $("#genM").click(function(){
 	         $("#genM").css("background-color", "#FA5882");
 	         $("#manLb").css("color", "white");
 	         
@@ -398,6 +398,6 @@
 	         
 	         $("#genM").css("background-color", "white");
 	         $("#manLb").css("color", "black");
-	     });         */
+	     });         
 	</script>
 </html>

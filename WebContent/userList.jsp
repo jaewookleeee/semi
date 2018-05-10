@@ -49,8 +49,8 @@
 				success : function(data) {
 					console.log(data);
 					if(data.login == false){
-						alert("로그인 하세요");
-						location.href="index.jsp";
+						alert("권한 없음");
+						//location.href="index.jsp";
 					}else{
 						if(data.userList != null){//BoardService 에서 받은 list 값이 true 면은
 							//방법1

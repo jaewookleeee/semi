@@ -44,7 +44,7 @@ public class InfoDAO {
 	public int userJoin(DTO dto) {
 		int success = 0;
 		String sql = "INSERT INTO info(info_id, info_pw, info_birth, info_email, info_gender, info_name, info_div)"+ 
-						"VALUES(?, ?, ?, ?, ?, ?, ?)";
+						"VALUES(?, ?, TO_DATE(?,'YYYY-MM-DD'), ?, ?, ?, ?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getInfo_id());
@@ -90,7 +90,7 @@ public class InfoDAO {
 	public int regJoin(DTO dto) {
 		int success = 0;
 		String sql = "INSERT INTO info(info_id, info_pw, info_birth, info_email, info_gender, info_name, info_div, info_num, info_phone)"+ 
-							"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							"VALUES(?, ?, TO_DATE(?,'YYYY-MM-DD'), ?, ?, ?, ?, ?, ?)";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dto.getInfo_id());
@@ -160,4 +160,28 @@ public class InfoDAO {
 		return userList;
 	}
 
+	//사용자 회원정보 수정
+	public int userUpdate(DTO dto) {
+		int success = 0;
+		String sql = "UPDATE info SET info_pw=?, info_birth=?, info_email=?, info_gender=?, info_name=? WHERE info_id=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getInfo_pw());
+			ps.setDate(2, dto.getInfo_birth());
+			ps.setString(3, dto.getInfo_email());
+			ps.setString(4, dto.getInfo_gender());
+			ps.setString(5, dto.getInfo_name());
+			ps.setString(6, dto.getInfo_id());
+			
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+	
+	
 }

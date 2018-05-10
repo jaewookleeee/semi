@@ -1,6 +1,7 @@
 package com.semi.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,21 +62,10 @@ public class InfoService {
 		String day = request.getParameter("day");
 		String email = request.getParameter("email");
 		
-		String birth = year+"/"+month+"/"+day;
-		Date date = null;
-		SimpleDateFormat format = new SimpleDateFormat("YYYY/MM/DD");
-
-		try {
-			System.out.println(format.parse(birth).getTime());
-			date = new Date(format.parse(birth).getTime());
-			System.out.println(date);
-			//date = (Date)format.parse(birth);
-			
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		//Date date = Date.valueOf(birth);
-		System.out.println(id+pw+name+gender+email+date);
+		String birth = year+"-"+month+"-"+day;
+		
+		Date date = Date.valueOf(birth);
+		System.out.println(id+", "+pw+", "+name+", "+gender+", "+email+", "+date);
 		
 		dto.setInfo_id(id);
 		dto.setInfo_pw(pw);
@@ -114,19 +104,9 @@ public class InfoService {
 		String num = request.getParameter("num");
 		String phone = request.getParameter("phone");
 		
-		String birth = year+"/"+month+"/"+day;
-		Date date = null;
-		SimpleDateFormat format = new SimpleDateFormat("YYYY/MM/DD");
+		String birth = year+"-"+month+"-"+day;
 
-		try {
-			//System.out.println(format.parse(birth).getTime());
-			date = new Date(format.parse(birth).getTime());
-			//System.out.println(date);
-			//date = (Date)format.parse(birth);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		//Date date = Date.valueOf(birth);
+		Date date = Date.valueOf(birth);
 		System.out.println(id+", "+pw+", "+name+", "+gender+", "+email+", "+date+", "+num+", "+phone);
 		
 		dto.setInfo_id(id);
@@ -186,16 +166,56 @@ public class InfoService {
 		String loginDiv = (String) request.getSession().getAttribute("loginDiv");
 		
 		Gson json = new Gson();
-		
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("userList", userList);
+		
 		if(loginId != null && loginDiv.equals("관리자")) {
 			map.put("login", true);
 		}else{
 			map.put("login", false);
 		}
 		
+		map.put("userList", userList);
+		
 		String obj = json.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println(obj);
+		
+		
+	}
+	
+	//사용자 회원정보 수정
+	public void userUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException   {
+		request.setCharacterEncoding("UTF-8");
+
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+		
+		InfoDAO dao = new InfoDAO();
+		DTO dto = new DTO();
+		
+		int success = dao.userUpdate(dto);
+		
+		Gson json = new Gson();
+		HashMap<String, Object> map = new HashMap<>();
+			
+		if(loginId != null && loginDiv.equals("사용자")) {
+			map.put("login",true);
+			System.out.println(loginId+", "+loginDiv);
+		}else {
+			map.put("login",false);
+		}
+		
+		if(loginId != null && loginDiv.equals("등록자")) {
+			map.put("login",true);
+			System.out.println(loginId+", "+loginDiv);
+		}else {
+			map.put("login",false);
+		}
+		
+		map.put("success", success);
+		
+		String obj = json.toJson(map);
+		System.out.println(obj);
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 		
