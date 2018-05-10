@@ -131,8 +131,8 @@ public class PlaceDAO {
 	}
 
 	public long write(DTO dto) {
-		String sql="INSERT INTO place(place_no,info_id,place_name,place_intro,place_home"+
-	"place_loc,place_guid,place_attention,place_date,place_category)"+"VALUES(place_seq.NEXTVAL,?,?,?,?,?,?,?,SYSDATE,?,?)";
+		String sql="INSERT INTO place(place_no, info_id, place_name, place_intro, place_home,"+
+	"place_loc, place_guid, place_attention, place_date, place_category, place_tel)"+" VALUES(place_seq.NEXTVAL,?,?,?,?,?,?,?,SYSDATE,?,?)";
 		long success=0;
 		try {
 			ps=conn.prepareStatement(sql);
