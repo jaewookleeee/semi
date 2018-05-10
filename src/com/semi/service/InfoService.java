@@ -71,7 +71,7 @@ public class InfoService {
 		dto.setInfo_pw(pw);
 		dto.setInfo_name(name);
 		dto.setInfo_gender(gender);
-		dto.setInfo_birth(date);
+		dto.setInfo_birth(date);   
 		dto.setInfo_email(email);
 		dto.setInfo_div("사용자");
 		int success = dao.userJoin(dto);
@@ -190,27 +190,64 @@ public class InfoService {
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		String loginDiv = (String) request.getSession().getAttribute("loginDiv");
 		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String newPw = request.getParameter("newPw");
+		String newPwChk = request.getParameter("newPwChk");
+		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		String year = request.getParameter("year");
+		String month = request.getParameter("month");
+		String day = request.getParameter("day");
+		String email = request.getParameter("email");
+		
+		String birth = year+"-"+month+"-"+day;
+		Date date = Date.valueOf(birth);
+		
+		System.out.println(id+", "+pw+", "+newPw+", "+newPwChk+", "+name+", "+
+				gender+", "+date+", "+email);
+
 		InfoDAO dao = new InfoDAO();
 		DTO dto = new DTO();
 		
-		int success = dao.userUpdate(dto);
+		String chk = dao.pwChk(id);
+		
+		
+		int success = 0;
+		if(pw.equals(chk)) {
+			System.out.println("현재 비밀번호 맞음");
+			dto.setInfo_id(id);
+			dto.setInfo_pw(newPw);
+			dto.setInfo_name(name);
+			dto.setInfo_gender(gender);
+			dto.setInfo_birth(date);
+			dto.setInfo_email(email);
+
+			success = dao.userUpdate(dto);
+		}else {
+			System.out.println("현재 비밀번호 틀림");
+			
+		}
+		
+		
+		
 		
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<>();
 			
-		if(loginId != null && loginDiv.equals("사용자")) {
+		if(loginId != null && loginDiv.equals("사용자") || loginDiv.equals("등록자")) {
 			map.put("login",true);
 			System.out.println(loginId+", "+loginDiv);
 		}else {
 			map.put("login",false);
 		}
 		
-		if(loginId != null && loginDiv.equals("등록자")) {
+		/*if(loginId != null && loginDiv.equals("등록자")) {
 			map.put("login",true);
 			System.out.println(loginId+", "+loginDiv);
 		}else {
 			map.put("login",false);
-		}
+		}*/
 		
 		map.put("success", success);
 		

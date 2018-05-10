@@ -148,14 +148,14 @@
 	        input#woman{
 	            display: none;
 	        }  */
-	         input#regBirth{
+	         /* input#regBirth{
 	            position: absolute;
 	            left: 15px;
 	            top: 375px;
 	            width: 200px;
 	            height: 25px;
 	            font-size: 13px;
-	        } 
+	        }  */
 	        select#regBirthYear{
 	        	position: absolute;
 	        	left: 15px;

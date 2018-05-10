@@ -183,7 +183,7 @@
 	            border-style: none;
 	            font-size: 10px;
 	        }
-	        button#join{
+	        button#save{
 	            position: absolute;
 	            left: 240px;
 	            top: 555px;
@@ -204,12 +204,14 @@
             
             <b id="pw">현재 비밀번호</b>
             <input id="userPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            
             <b id="newPw">새 비밀번호</b>
             <input id="userNewPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            
             <b id="newPwChk">새 비밀번호 확인</b>
             <input id="userNewPwChk" type="password" placeholder="비밀번호를 입력하세요."/> 
             <b id="name">이름</b>
-            <input id="userName" type="text" value="${sessionScope.loginId }"/>
+            <input id="userName" type="text" value=""/>
             <b id="Gender">성별</b>
             <!-- <span id="genM">
                 <input id="man" type="radio" name="userGenger" value="남자"/>
@@ -267,10 +269,50 @@
             <b id="email">이메일</b>
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
             <button id="cancel">취소</button>
-            <button id="join">완료</button>
+            <button id="save">저장</button>
         </div>
 	</body>
 	<script>
-	
+		$("#save").click(function() {
+			var newPw = $("#userNewPw").val();
+			var newPwChk = $("#userNewPwChk").val();
+			var pw = $("#userPw").val();
+			if(pw != pw){
+				alert("현재 비밀번호가 맞지 않습");
+			}
+			
+			if(newPw != newPwChk){
+				alert("비밀번호가 맞지 않습니다.");
+				$("#userNewPwChk").focus();
+			}
+			$.ajax({
+				type : "post",
+				url : "./userUpdate",
+				data : {
+					id : $("#userId").val(),
+					pw : $("#userPw").val(),
+					newPw : $("#userNewPw").val(),
+					newPwChk : $("#userNewPwChk").val(),
+					name : $("#userName").val(),
+					gender : $("input[name='userGender']").val(),
+					year : $("#userBirthYear").val(),
+					month : $("#userBirthMonth").val(),
+					day : $("#userBirthDay").val(),
+					email : $("#userEmail").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					
+					
+					if(data.success >0){
+						alert("수정 성공");
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
 	</script>
 </html>
