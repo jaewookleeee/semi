@@ -176,17 +176,36 @@
     	
     	//삭제 버튼
     	$("#cancle").click(function(){
-    		//DB에서 값을 지우고, 다시 리스트를 불러온다
+    		//DB에서 값을 지우고, 다시 페이지를 불러온다
+    		//console.log("cancle 클릭");
+    		obj.url="./bookDel";
+    		var checked = []; //체크된 값 담을 변수 초기화
+    		$("input[name='delchk']:checked").each(function(){
+    			//반복분을 통해서 담는다.
+    			checked.push($(this).val());
+    		});
+    		//console.log(checked);
+    		obj.data={
+    				"delList":checked
+    		};
+    		obj.success = function(data){
+    			console.log(data);
+    			if(data.success){
+    				alert("모두 삭제 성공");
+    				location.href="./bookList.jsp";
+    			}else{
+    				alert("모두 삭제 실패");
+    			}
+    		}
+    		ajaxCall(obj);
     	});
     	
     	//전체 체크or해제
     	$("#allckh").click(function(){
     		if($("#allckh").prop("checked")){// th에 있는 체크박스에 체크가 되어있으면
     			$("input[type='checkbox']").prop("checked", true);
-    			console.log($("[name='delchk']:checked").length);
     		}else{
     			$("input[type='checkbox']").prop("checked", false);
-    			console.log($("[name='delchk']:checked").length);
     		}
     	});
     	
@@ -210,7 +229,7 @@
     			//console.log(item);
     			//console.log(item.book_no);
     			content += "<tr>";
-    			content += "<td><input type='checkbox' name='delchk' value'="+item.book_no+"'/></td>";
+    			content += "<td><input type='checkbox' name='delchk' value='"+item.book_no+"'/></td>";
     			content += "<td>"+item.book_no+"</td>";
     			content += "<td>"+item.place_name+"</td>";
     			content += "<td>"+item.info_id+"</td>";

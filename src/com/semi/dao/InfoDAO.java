@@ -203,42 +203,41 @@ public class InfoDAO {
 	}
 
 	//예약내역 확인 리스트
-			public ArrayList<DTO> bookList(String id, int start, int end) {
-				//반환할 값을 담을 ArrayList 준비
-				ArrayList<DTO> list = new ArrayList<DTO>(); 
-				//쿼리문 준비
-				String sql = "SELECT book_no, place_name, info_id, book_date, book_start, book_end, book_custom, book_price "+
-						"FROM (SELECT ROW_NUMBER() OVER(ORDER BY book_date DESC) AS rnum, book_no, place_name, place.info_id, "+
-						"to_char(book_date, 'YYYY-MM-DD') as book_date, to_char(book_start, 'HH24:MI') as book_start, "+
-						"to_char(book_end, 'HH24:MI') as book_end, book_custom, book_price " +
-						"FROM place ,book WHERE place.place_no = book.place_no AND book.info_id = ?)"+
-						"WHERE rnum BETWEEN ? AND ?";
-				try {
-					ps = conn.prepareStatement(sql);
-					ps.setString(1, id); 
-					ps.setInt(2, start); 
-					ps.setInt(3, end);
-					rs = ps.executeQuery();
-					while(rs.next()) { //rs에 값이 있다면 반복
-						DTO dto = new DTO();
-						dto.setBook_no(rs.getInt("book_no"));
-						dto.setPlace_name(rs.getString("place_name"));
-						dto.setInfo_id(rs.getString("info_id"));
-						dto.setBook_date(rs.getDate("book_date"));
-						dto.setBook_start(rs.getString("book_start"));
-						dto.setBook_end(rs.getString("book_end"));
-						dto.setBook_custom(rs.getInt("book_custom"));
-						dto.setBook_price(rs.getInt("book_price"));
-						list.add(dto);
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-					return null;
-				}finally {
-					resClose();
-				}
-				return list;
+	public ArrayList<DTO> bookList(String id, int start, int end) {
+		//반환할 값을 담을 ArrayList 준비
+		ArrayList<DTO> list = new ArrayList<DTO>(); 
+		//쿼리문 준비
+		String sql = "SELECT book_no, place_name, info_id, book_date, book_start, book_end, book_custom, book_price "+
+				"FROM (SELECT ROW_NUMBER() OVER(ORDER BY book_date DESC) AS rnum, book_no, place_name, place.info_id, "+
+				"to_char(book_date, 'YYYY-MM-DD') as book_date, to_char(book_start, 'HH24:MI') as book_start, "+
+				"to_char(book_end, 'HH24:MI') as book_end, book_custom, book_price " +
+				"FROM place ,book WHERE place.place_no = book.place_no AND book.info_id = ?)"+
+				"WHERE rnum BETWEEN ? AND ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id); 
+			ps.setInt(2, start); 
+			ps.setInt(3, end);
+			rs = ps.executeQuery();
+			while(rs.next()) { //rs에 값이 있다면 반복
+				DTO dto = new DTO();
+				dto.setBook_no(rs.getInt("book_no"));
+				dto.setPlace_name(rs.getString("place_name"));
+				dto.setInfo_id(rs.getString("info_id"));
+				dto.setBook_date(rs.getDate("book_date"));
+				dto.setBook_start(rs.getString("book_start"));
+				dto.setBook_end(rs.getString("book_end"));
+				dto.setBook_custom(rs.getInt("book_custom"));
+				dto.setBook_price(rs.getInt("book_price"));
+				list.add(dto);
 			}
-	
-	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			resClose();
+		}
+		return list;
+	}
+		
 }

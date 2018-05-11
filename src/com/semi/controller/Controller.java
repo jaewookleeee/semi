@@ -97,6 +97,11 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.bookList(request, response);
 				break;
+			case "/bookDel":
+				System.out.println("예약 삭제 요청");
+				bookService = new BookService();
+				bookService.delete(request, response);
+				break;
 
 		}
 		
