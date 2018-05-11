@@ -69,13 +69,6 @@
         </div>
 </body>
 <script>
-var innerTag='<tr><td><input class="date" type="date"/><select class="starttime">'+
-				'<option>시작시간</option></select><select class="endtime"><option>끝시간</option></select>'+
-				'<select class="people"><option>인원</option></select>'+
-				'<input class="cash" type="text" value="요금" readonly=""/></td></tr>';
-    $(".timeadd").click(function(){
-        $("#add").append(innerTag);
-    });
     $("#like").click(function(){
         if($(this).html()=="찜 하기"){
             $(this).html("찜 취소")

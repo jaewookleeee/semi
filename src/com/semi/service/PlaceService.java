@@ -1,6 +1,6 @@
 package com.semi.service;
 
-/*<<<<<<< HEAD*/
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,24 +10,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
-/*=======*/
-/*import java.io.IOException;*/
-/*import java.util.ArrayList;*/
+
 import java.util.HashMap;
 
-/*import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;*/
-
 import com.google.gson.Gson;
-/*>>>>>>> 2d4a6e1d3006e566172be96894695f41d14f9c9f*/
+
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
 public class PlaceService {
 
-/*<<<<<<< HEAD*/
+
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+		String savePath = null;
+	      String root = request.getSession().getServletContext().getRealPath("/");
+	      savePath = root + "upload";
+	      System.out.println("사진 저장 경로 : " + savePath);
+	      
+	      File dir = new File(savePath);
+	      // upload 폴더 없으면 만들어 준다.
+	      if (!dir.exists()) {
+	         dir.mkdir();
+	      }
+	      
+		MultipartRequest multi = new MultipartRequest(request, savePath, 1024 * 1024 * 10, "UTF-8");
 		DTO dto = new DTO();
 		
 		request.setCharacterEncoding("UTF-8");
@@ -35,21 +41,22 @@ public class PlaceService {
 		PlaceDAO dao = new PlaceDAO();
 		
 		HttpSession session = request.getSession();
-		String loginid = (String) session.getAttribute("loginid");
+		String loginid = (String) session.getAttribute("loginId");
+		//System.out.println(multi.getParameter("place_name"));
+		String placename = multi.getParameter("place_name");
+		String categoly = multi.getParameter("categoly");
+		String placephone=multi.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");
+		String start = multi.getParameter("start");
+		String end = multi.getParameter("end");
+		//System.out.println(multi.getParameter("cash"));
+		long cash = Integer.parseInt(multi.getParameter("cash"));
+		String address ="("+multi.getParameter("postnumber")+")"+request.getParameter("addr")+request.getParameter("detailAddr");
+		String detailinfo = multi.getParameter("fac_info");
+		String info = multi.getParameter("info");
+		String homepage= multi.getParameter("homepage");
+		String subcontent= multi.getParameter("sub_content");
 		
-		String placename = request.getParameter("place_name");
-		String categoly = request.getParameter("categoly");
-		String placephone=request.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");
-		String start = request.getParameter("start");
-		String end = request.getParameter("end");
-		int cash = Integer.parseInt(request.getParameter("cash"));
-		String address ="("+request.getParameter("postnumber")+")"+request.getParameter("addr")+request.getParameter("detailAddr");
-		String detailinfo = request.getParameter("fac_info");
-		String info = request.getParameter("info");
-		String homepage= request.getParameter("homepage");
-		String subcontent= request.getParameter("sub_content");
-		
-		System.out.println(placename+"/"+categoly+"/"+placephone+"/"+start+"/"
+		System.out.println(placename+"/"+loginid+"/"+categoly+"/"+placephone+"/"+start+"/"
 		+end+"/"+cash+"/"+address+"/"+detailinfo+"/"+info+"/"+homepage+"/"+subcontent);
 		
 		dto.setInfo_id(loginid);
@@ -66,28 +73,35 @@ public class PlaceService {
 		dto.setPlace_attention(subcontent);
 		long success = dao.write(dto);
 		
-		String page = "placeWrite.jsp";
-		if(success>0) {
-			page = "placeDetail?place_no="+success;
-		}
-		response.sendRedirect(page);
-		/*String root = request.getSession().getServletContext().getRealPath("/");
-		String savePath = root+"upload";
-		System.out.println(savePath);
-		
-		//upload 폴더 없으면 만들어 준다
-		File dir = new File(savePath);
-		if(!dir.exists()) {//파일이 없으면 생성
-			dir.mkdir();
-		}
-		//MultipartRequest(request,저장경로,용량,인코딩,중복정책(생략)) 로 반환
-		MultipartRequest multi = new MultipartRequest(request, savePath,1024*1024*10,"UTF-8");
-		
-		
-		ArrayList<String> photo*/
+
+	      ArrayList<DTO> list = new ArrayList<>();
+	      for (int i = 1; i <= 5; i++) {
+			DTO dto2 = new DTO();
+		    String oriFileName = multi.getFilesystemName("photo"+i);
+		    if (oriFileName != null) {
+		       // 확장자 추출
+		       String ext = oriFileName.substring(oriFileName.indexOf("."));
+		       // 새파일명 만들기(새파일명+확장자)
+		       String newFileName = "식당이름_"+i+ ext;
+		       // 파일명 변경
+		       File oldFile = new File(savePath + "/" + oriFileName);
+		       File newFile = new File(savePath + "/" + newFileName);
+		       oldFile.renameTo(newFile);
+		       // 변경된 파일명 DTO에 추가
+		       dto2.setPlace_photo(newFileName);
+		       list.add(dto2);
+		    }
+		    
+		 }
+		 dao.photowrite(list,success);
+
+	         String page = "placeWrite.jsp";
+	 		if(success>0) {
+	 			page = "placeDetail?place_no="+success;
+	 		}
+	 		response.sendRedirect(page);
 	}
 
-/*=======*/
 	public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String keyword=request.getParameter("keyword");
 		String category=request.getParameter("category");
@@ -107,5 +121,4 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
-/*>>>>>>> 2d4a6e1d3006e566172be96894695f41d14f9c9f*/
 }

@@ -33,7 +33,7 @@
 <div>
 	<jsp:include page="menuBar.jsp"/>
 </div>
-<form action="placeWrite">
+<form action="./placeWrite" method="post" enctype="multipart/form-data">
            <div class="writeForm">
                <div class="sec_title"><strong>장소등록</strong></div>
                <div class="div_title"><strong>필수정보</strong></div>
