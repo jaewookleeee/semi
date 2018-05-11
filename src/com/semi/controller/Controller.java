@@ -17,7 +17,7 @@ import com.semi.service.ReviewService;
 
 @WebServlet({"/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
-	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel", "/placeDetail", "/like", "/likeDel",
+	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/like", "/likeDel",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch",
@@ -119,12 +119,13 @@ public class Controller extends HttpServlet {
 				bookService = new BookService();
 				bookService.delete(request, response);
 				break;
-			case "/placeDetail":
-				System.out.println("상세보기 요청");
+			case "/placephotoDetail":
+				System.out.println("포토상세보기 요청");
 				System.out.println(request.getParameter("place_no"));
 				placeService=new PlaceService();
 				placeService.detailphoto(request,response);
 				break;
+
 			case "/boardWrite":
 				System.out.println("boardWrite");
 				boardService = new BoardService();
@@ -159,7 +160,8 @@ public class Controller extends HttpServlet {
 				System.out.println("찜 삭제 요청");
 				placeService = new PlaceService();
 				placeService.likeDel(request, response);
-				break;
+				break;	
+			
 
 		}
 		

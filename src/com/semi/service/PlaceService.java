@@ -21,7 +21,9 @@ import com.semi.dto.DTO;
 
 public class PlaceService {
 
+
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
 		String savePath = null;
 	      String root = request.getSession().getServletContext().getRealPath("/");
 	      savePath = root + "upload/";
@@ -124,7 +126,6 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
-
 
 	public void detailphoto(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String number = request.getParameter("place_no");

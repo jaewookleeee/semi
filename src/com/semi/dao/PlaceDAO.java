@@ -186,11 +186,10 @@ public class PlaceDAO {
 					ps.executeUpdate();
 				} catch (SQLException e) {
 					e.printStackTrace();
-				}
 
 			}
-		}resClose();
-		
+			}resClose();
+		}
 	}
 
 	public int likeDel(String[] like_id) {

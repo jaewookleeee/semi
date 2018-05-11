@@ -28,8 +28,7 @@
 	<div>
 	<jsp:include page="menuBar.jsp"/>
 	</div>
-		<div id="all">
-		<input type="hidden" /> 
+		<div id="all"> 
 	        <img id="main"/><br/>
 			<div class="sub_div">
 	        	<img id="sub1" class="sub" />
@@ -80,16 +79,20 @@
 			
 			$("#area").load(page, function(res, stat) { $("#area").html(res); });
 		});
+
 		$(document).ready(function(){
-			console.log(${place_no});
 			$.ajax({
 					type:"post",
-					url:"./placeDetail",
+					url:"./placephotoDetail",
 					dataType:"JSON",
 					data:{
 						place_no:${place_no}
 					},
+<<<<<<< HEAD
 					success : function(data){
+=======
+					success :function(data){
+>>>>>>> 521da35fb0e422e79b31a9ccd17d59ec270ffb47
 						console.log(data);
 						$("#main").attr("src",'./upload/'+data.list[0].place_photo);
 						for(var i=0;i<data.list.length;i++){
