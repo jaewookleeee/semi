@@ -286,4 +286,76 @@ public class InfoService {
 				response.getWriter().println(obj); //response로 값 보냄
 			}
 		}
+
+		//회원탈퇴
+		public void del(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			InfoDAO dao = new InfoDAO();
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			
+			String chk = dao.pwChk(id);
+			int success = 0;
+			
+			if(chk.equals(pw)) {
+				success = dao.del(id);
+				request.getSession().removeAttribute("loginId");
+				System.out.println(request.getSession().getAttribute("loginId"));
+			}
+			
+			Gson json = new Gson();
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("success", success);
+			String obj = json.toJson(map);
+			System.out.println(obj);
+			response.getWriter().println(obj);
+		}
+
+		//등록자 회원정보 수정
+		public void regUpdate(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+			request.setCharacterEncoding("UTF-8");
+			
+			String loginId = (String) request.getSession().getAttribute("loginId");
+			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			String newPw = request.getParameter("newPw");
+			String newPwChk = request.getParameter("newPwChk");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			String year = request.getParameter("year");
+			String month = request.getParameter("month");
+			String day = request.getParameter("day");
+			String email = request.getParameter("email");
+			String num = request.getParameter("num");
+			String phone = request.getParameter("phone");
+			
+			String birth = year+"-"+month+"-"+day;
+			Date date = Date.valueOf(birth);
+			
+			System.out.println(id+", "+pw+", "+newPw+", "+newPwChk+", "+name+", "+
+					gender+", "+date+", "+email+", "+num+", "+phone);
+
+			InfoDAO dao = new InfoDAO();
+			DTO dto = new DTO();
+			
+			String chk = dao.pwChk(id);
+			
+			int success = 0;
+			if(pw.equals(chk)) {
+				System.out.println("현재 비밀번호 맞음");
+				dto.setInfo_id(id);
+				dto.setInfo_pw(newPw);
+				dto.setInfo_name(name);
+				dto.setInfo_gender(gender);
+				dto.setInfo_birth(date);
+				dto.setInfo_email(email);
+				dto.setInfo_num(num);
+				dto.setInfo_phone(phone);
+				success = dao.regUpdate(dto);
+			}else {
+				System.out.println("현재 비밀번호 틀림");
+			}
+		}
 }

@@ -259,6 +259,7 @@
             
             <b id="email">이메일</b>
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
+            
             <button id="cancel">취소</button>
             <button id="join">완료</button>
         </div>

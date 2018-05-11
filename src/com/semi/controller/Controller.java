@@ -15,7 +15,7 @@ import com.semi.service.QaService;
 import com.semi.service.ReviewService;
 
 
-@WebServlet({ "/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
+@WebServlet({"/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel", "/placeDetail", "/like", "/likeDel",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardList", "/boardSearch",
@@ -82,10 +82,20 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.userUpdate(request, response);
 				break;
+			case "/regUpdate":
+				System.out.println("등록자 정보수정 요청");
+				infoService = new InfoService();
+				infoService.regUpdate(request, response);
+				break;
 			case "/userList":
 				System.out.println("회원 리스트 요청");
 				infoService = new InfoService();
 				infoService.userList(request, response);
+				break;
+			case "/del":
+				System.out.println("회원탈퇴 요청");
+				infoService = new InfoService();
+				infoService.del(request, response);
 				break;
 			case"/placeSearch":
 				System.out.println("장소 검색");
