@@ -218,9 +218,15 @@
 			$.ajax(param);
 		}
 		
-		$("#delete").click(function(){
-			location.href="./boardDel?board_no=${board.board_no}";
+		$("#delete").click(function(){			
+			if("${board.info_id}" == "${loginId}"){
+				console.log("OK");
+				location.href="./boardDel?board_no=${board.board_no}";				
+			}else{
+				alert("글을 삭제할 권한이 없는 아이디 입니다.");
+			}
 		});
+		
 		var msg="${msg}";
 		
 		if(msg!=""){

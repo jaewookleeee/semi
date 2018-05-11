@@ -119,4 +119,25 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
+
+	public void likeDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//받아온 값 받음
+		String[] like_id = request.getParameterValues("delList[]");
+		System.out.println(like_id.length);
+		//doa로 넘겨줌
+		PlaceDAO dao = new  PlaceDAO();
+		int delCnt = dao.likeDel(like_id);
+		boolean success = false;
+		
+		//지운갯수와 넘어온 갯수가 같으면
+		if(delCnt == like_id.length) {
+			success = true;
+		}
+		
+		Gson json = new Gson();
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("success", success);
+		String obj = json.toJson(map);
+		response.getWriter().println(obj);	
+	}
 }
