@@ -121,9 +121,10 @@ public class Controller extends HttpServlet {
 				break;
 			case "/placeDetail":
 				System.out.println("상세보기 요청");
+				System.out.println(request.getParameter("place_no"));
 				placeService=new PlaceService();
 				placeService.detailphoto(request,response);
-
+				break;
 			case "/boardWrite":
 				System.out.println("boardWrite");
 				boardService = new BoardService();

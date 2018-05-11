@@ -16,6 +16,10 @@
 	            top: 80px;
 	            text-align: center;
 	        }
+	        table{
+	        	position: absolute;
+	        	top: 150px;
+	        }
 	        table, th, td{
 	            text-align: center;
 	            font-size: 13px;
@@ -29,7 +33,9 @@
 	<body>
 		<jsp:include page="menuBar.jsp"/>
 		<div id="listDiv">
-            <h3>유저 리스트</h3>
+          	<h3>유저 리스트</h3>
+          	<input type="text" placeholder="검색"/>
+          	<button id="searchBtn">검색</button>
             <table id="userListTable">
                 <tr>
                     <th>아이디</th>

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +22,7 @@ import com.semi.dto.DTO;
 
 public class PlaceService {
 
-	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String savePath = null;
 	      String root = request.getSession().getServletContext().getRealPath("/");
 	      savePath = root + "upload/";
@@ -97,10 +99,12 @@ public class PlaceService {
 
 	         String page = "placeWrite.jsp";
 	 		if(success>0) {
-	 			page = "placeDetail?place_no="+success;
+	 			request.setAttribute("place_no", success);
+	 			page = "placeDetailUp.jsp";
 	 		}
-	 		response.sendRedirect(page);
-	}
+	 		RequestDispatcher dis = request.getRequestDispatcher(page);
+	 		dis.forward(request, response);
+	 	}
 
 	public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String keyword=request.getParameter("keyword");
