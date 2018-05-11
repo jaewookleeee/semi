@@ -52,7 +52,7 @@
                             <li class="submenu_item"><a href="updateChk.jsp">회원정보수정</a></li>
                             <li class="submenu_item"><a href="bookList.jsp">예약내역확인</a></li>
                             <li class="submenu_item"><a href="likeList.jsp">찜한내역확인</a></li>
-                            <li class="submenu_item"><a href="#">등록내역확인</a></li>
+                            <li class="submenu_item"><a href="placeList.jsp">등록내역확인</a></li>
                             <li class="submenu_item"><a href="regChange.jsp">등록자전환</a></li>
                             <li class="submenu_item"><a href="userListChk.jsp">회원관리</a></li>
                         </ul>
