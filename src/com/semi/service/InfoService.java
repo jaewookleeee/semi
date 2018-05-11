@@ -155,13 +155,16 @@ public class InfoService {
 		response.getWriter().println(obj);
 	}
 
-	//회원 리스트 출력
+	//회원 리스트, 검색 출력
 	public void userList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		InfoDAO dao = new InfoDAO();
-		ArrayList<DTO> userList = dao.userList();
-		
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+		
+		String idSearch = request.getParameter("idSearch");
+		System.out.println("service : "+idSearch);
+		
+		InfoDAO dao = new InfoDAO();
+		ArrayList<DTO> userList = dao.userList(idSearch, 1, 5);
 		
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<>();
@@ -447,4 +450,6 @@ public class InfoService {
 				response.getWriter().println(obj);
 			}
 		}
+
+	
 }

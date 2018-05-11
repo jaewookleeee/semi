@@ -94,10 +94,11 @@ public class Controller extends HttpServlet {
 				infoService.regChange(request, response);
 				break;
 			case "/userList":
-				System.out.println("회원 리스트 요청");
+				System.out.println("회원 리스트, 검색 요청");
 				infoService = new InfoService();
 				infoService.userList(request, response);
 				break;
+				
 			case "/del":
 				System.out.println("회원탈퇴 요청");
 				infoService = new InfoService();

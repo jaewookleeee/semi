@@ -89,7 +89,7 @@
 					data:{
 						place_no:${place_no}
 					},
-					success:function(data){
+					success : function(data){
 						console.log(data);
 						$("#main").attr("src",'./upload/'+data.list[0].place_photo);
 						for(var i=0;i<data.list.length;i++){
