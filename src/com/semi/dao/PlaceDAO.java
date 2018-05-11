@@ -191,4 +191,22 @@ public class PlaceDAO {
 		}resClose();
 		
 	}
+
+	public int likeDel(String[] like_id) {
+		int delCnt=0;
+		String sql = "DELETE FROM likeTb WHERE like_no=?";
+		try {
+			for(int i=0; i<like_id.length;i++) {
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, Integer.parseInt(like_id[i]));
+				delCnt += ps.executeUpdate();
+				ps.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return delCnt;
+	}
 }
