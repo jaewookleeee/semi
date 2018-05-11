@@ -186,7 +186,12 @@ public class PlaceDAO {
 					ps.executeUpdate();
 				} catch (SQLException e) {
 					e.printStackTrace();
+<<<<<<< HEAD
 				} 
+=======
+				}
+
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 			}
 		}resClose();
 		
@@ -201,6 +206,10 @@ public class PlaceDAO {
 				ps.setInt(1, Integer.parseInt(like_id[i]));
 				delCnt += ps.executeUpdate();
 				ps.close();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

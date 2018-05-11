@@ -29,14 +29,19 @@
 	<jsp:include page="menuBar.jsp"/>
 	</div>
 		<div id="all">
+<<<<<<< HEAD
 		<input type="hidden" value=${result}/> 
 	        <img id="main" src='./upload/"+item.place_photo+"'/>/><br/>
+=======
+		<input type="hidden" /> 
+	        <img id="main"/><br/>
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 			<div class="sub_div">
-	        	<img class="sub" src='./upload/"+item.place_photo+"'/>/>
-	        	<img class="sub" src='./upload/"+item.place_photo+"'/>/>
-	        	<img class="sub" src='./upload/"+item.place_photo+"'/>/>
-		        <img class="sub" src='./upload/"+item.place_photo+"'/>/>
-		        <img class="sub" src='./upload/"+item.place_photo+"'/>/>
+	        	<img id="sub1" class="sub" />
+	        	<img id="sub2" class="sub" />
+	        	<img id="sub3" class="sub" />
+		        <img id="sub4" class="sub" />
+		        <img id="sub5" class="sub" />
 		    </div>
 	        <div id="allinfo">
 	            <div class="info" id="detail">상세정보</div>
@@ -80,7 +85,11 @@
 			
 			$("#area").load(page, function(res, stat) { $("#area").html(res); });
 		});
+<<<<<<< HEAD
 		/* $(document).ready(function(){
+=======
+		$(document).ready(function(){
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 			console.log(${place_no});
 			$.ajax({
 					type:"post",
@@ -91,12 +100,20 @@
 					},
 					success:function(data){
 						console.log(data);
-						//$("#main").attr("src",'./upload/'+data.list);
+						$("#main").attr("src",'./upload/'+data.list[0].place_photo);
+						for(var i=0;i<data.list.length;i++){
+						$("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
+						}
 					},
 					error:function(e){
 						console.log(e);
 					}
+<<<<<<< HEAD
 				});
 		}); */
+=======
+				});		
+		});
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 	</script>
 </html>

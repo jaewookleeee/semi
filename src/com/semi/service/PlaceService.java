@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,12 +15,20 @@ import com.oreilly.servlet.MultipartRequest;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
 public class PlaceService {
 
+<<<<<<< HEAD
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
+=======
+	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 		String savePath = null;
 	      String root = request.getSession().getServletContext().getRealPath("/");
 	      savePath = root + "upload/";
@@ -95,10 +105,12 @@ public class PlaceService {
 
 	         String page = "placeWrite.jsp";
 	 		if(success>0) {
-	 			page = "placeDetail?place_no="+success;
+	 			request.setAttribute("place_no", success);
+	 			page = "placeDetailUp.jsp";
 	 		}
-	 		response.sendRedirect(page);
-	}
+	 		RequestDispatcher dis = request.getRequestDispatcher(page);
+	 		dis.forward(request, response);
+	 	}
 
 	public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String keyword=request.getParameter("keyword");
@@ -120,6 +132,10 @@ public class PlaceService {
 		response.getWriter().println(obj);
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 	public void detailphoto(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String number = request.getParameter("place_no");
 		System.out.println(number);
@@ -132,6 +148,10 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 	public void likeDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//받아온 값 받음
 		String[] like_id = request.getParameterValues("delList[]");

@@ -88,6 +88,11 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.regUpdate(request, response);
 				break;
+			case "/regChange":
+				System.out.println("등록자 전환 요청");
+				infoService = new InfoService();
+				infoService.regChange(request, response);
+				break;
 			case "/userList":
 				System.out.println("회원 리스트 요청");
 				infoService = new InfoService();
@@ -115,8 +120,13 @@ public class Controller extends HttpServlet {
 				break;
 			case "/placeDetail":
 				System.out.println("상세보기 요청");
+				System.out.println(request.getParameter("place_no"));
 				placeService=new PlaceService();
 				placeService.detailphoto(request,response);
+<<<<<<< HEAD
+=======
+				break;
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 			case "/boardWrite":
 				System.out.println("boardWrite");
 				boardService = new BoardService();
@@ -152,6 +162,10 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.likeDel(request, response);
 				break;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 		}
 		
 	}
