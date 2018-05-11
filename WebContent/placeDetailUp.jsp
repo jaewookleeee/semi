@@ -28,14 +28,8 @@
 	<div>
 	<jsp:include page="menuBar.jsp"/>
 	</div>
-		<div id="all">
-<<<<<<< HEAD
-		<input type="hidden" value=${result}/> 
-	        <img id="main" src='./upload/"+item.place_photo+"'/>/><br/>
-=======
-		<input type="hidden" /> 
+		<div id="all"> 
 	        <img id="main"/><br/>
->>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 			<div class="sub_div">
 	        	<img id="sub1" class="sub" />
 	        	<img id="sub2" class="sub" />
@@ -85,20 +79,16 @@
 			
 			$("#area").load(page, function(res, stat) { $("#area").html(res); });
 		});
-<<<<<<< HEAD
-		/* $(document).ready(function(){
-=======
+
 		$(document).ready(function(){
->>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
-			console.log(${place_no});
 			$.ajax({
 					type:"post",
-					url:"./placeDetail",
+					url:"./placephotoDetail",
 					dataType:"JSON",
 					data:{
 						place_no:${place_no}
 					},
-					success:function(data){
+					success :function(data){
 						console.log(data);
 						$("#main").attr("src",'./upload/'+data.list[0].place_photo);
 						for(var i=0;i<data.list.length;i++){
@@ -108,12 +98,7 @@
 					error:function(e){
 						console.log(e);
 					}
-<<<<<<< HEAD
-				});
-		}); */
-=======
 				});		
 		});
->>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 	</script>
 </html>

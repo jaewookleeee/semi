@@ -76,5 +76,6 @@
             $(this).html("찜 하기")
         }
     });
+    
 </script>
 </html>

@@ -15,20 +15,15 @@ import com.oreilly.servlet.MultipartRequest;
 import java.util.HashMap;
 
 import com.google.gson.Gson;
-<<<<<<< HEAD
-=======
 
->>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
 public class PlaceService {
 
-<<<<<<< HEAD
-	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
-=======
+
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
->>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
+
 		String savePath = null;
 	      String root = request.getSession().getServletContext().getRealPath("/");
 	      savePath = root + "upload/";
@@ -132,10 +127,6 @@ public class PlaceService {
 		response.getWriter().println(obj);
 	}
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 	public void detailphoto(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String number = request.getParameter("place_no");
 		System.out.println(number);
@@ -148,10 +139,7 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 27368acd36fdd1059fbf8311c49a00806c62eb91
 	public void likeDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//받아온 값 받음
 		String[] like_id = request.getParameterValues("delList[]");
