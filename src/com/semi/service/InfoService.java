@@ -374,4 +374,49 @@ public class InfoService {
 			response.getWriter().println(obj);
 			
 		}
+
+		//등록자로 전환
+		public void regChange(HttpServletRequest request, HttpServletResponse response) throws IOException {
+/*			String loginId = (String) request.getSession().getAttribute("loginId");
+			String loginDiv = (String) request.getSession().getAttribute("loginDiv");*/
+			
+			InfoDAO dao = new InfoDAO();
+			DTO dto = new DTO();
+			
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			String name = request.getParameter("name");
+			String gender = request.getParameter("gender");
+			String year = request.getParameter("year");
+			String month = request.getParameter("month");
+			String day = request.getParameter("day");
+			String email = request.getParameter("email");
+			String num = request.getParameter("num");
+			String phone = request.getParameter("phone");
+			
+			String birth = year+"-"+month+"-"+day;
+			Date date = Date.valueOf(birth);
+			
+			System.out.println(id+", "+pw+", "+name+", "+
+					gender+", "+date+", "+email+", "+num+", "+phone);
+			
+			dto.setInfo_id(id);
+			dto.setInfo_pw(pw);
+			dto.setInfo_name(name);
+			dto.setInfo_gender(gender);
+			dto.setInfo_birth(date);
+			dto.setInfo_email(email);
+			dto.setInfo_num(num);
+			dto.setInfo_phone(phone);
+			
+			int success = dao.regChange(num, phone, id);
+			
+			Gson json = new Gson();
+			HashMap<String, Integer> map = new HashMap<>();
+			map.put("success", success);
+			String obj = json.toJson(map);
+			System.out.println(obj);
+			response.getWriter().println(obj);
+			
+		}
 }
