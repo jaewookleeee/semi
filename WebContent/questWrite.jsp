@@ -48,17 +48,22 @@
 				color: white;
 				border: 0;
 			}
+			div{
+				height: 60px;
+			}
 		</style>
 	</head>
 	<body>
-	<form action="./boardWrite" method="post">
+	<div>
+	<jsp:include page="/menuBar.jsp" flush="false"/>
+	</div>
 		<h2>문의 사항</h2><br/>
 		<table>
 			<tr>
 				<th>제목</th>
 				<td id="subject">
-					<input type="text" name="board_title"/>
-					<input type="hidden" name="quest" value="문의사항"/>
+					<input type="text" name="board_title" id="board_title" onKeyup="len_chk()"/>
+					<input type="hidden" name="quest" id="quest" value="문의사항"/>
 				</td>
 			</tr>
 			<tr>
@@ -66,18 +71,85 @@
 			</tr>
 			<tr>
 				<td colspan="2" id="contentTxt">
-					<textarea name="board_content"></textarea>
+					<textarea id="board_content" name="board_content" onKeyup="len_chk()"></textarea>
 				</td>
 			</tr>
 		</table>
 		<br/>
 		<button id="write">등록</button>
-		</form>
+
 	</body>
 	<script>
 		/*java script area*/
 		/* $("#write").click(function(){
 			location.href="./boardWrite";
-		}); */
+		}); */			
+		
+		//로그인 체크
+		var loginId = "${sessionScope.loginId}";
+		console.log(loginId);
+		if(loginId == ""){
+			alert("로그인이 필요한 서비스 입니다.");
+			location.href="login.jsp";
+		}
+		
+		//ajax
+		var obj={};
+		var idx;
+		obj.type="POST";
+		obj.dataType="JSON";
+		obj.error=function(e){console.log(e)};
+		
+		//글쓰기
+		$("#write").click(function(){
+			if($("#board_title").val() == ""){
+				alert("제목을 입력해 주세요.");
+				$("#board_title").focus();
+			}else if($("#board_content").val() == ""){
+				alert("내용을 입력해 주세요.");
+				$("#board_content").focus();
+			}else{
+				obj.url="./boardWrite";
+				obj.data={					
+						"board_title":$("#board_title").val(),
+						"board_content":$("#board_content").val(),
+						"board_category":$("#quest").val()
+				};
+				obj.success=function(data){
+					console.log(data);
+					//성공/실패 : 상세보기 페이지
+					
+					if(data.result >0){
+						location.href="boardDetail?board_no="+data.result;
+					}else{
+						alert("글쓰기 실패");
+					}
+				};
+				ajaxCall(obj);
+			}
+		}); 
+	    
+		function len_chk(){  
+			  var frm = document.getElementById("board_content");
+			  var title = document.getElementById("board_title");
+			  console.log(frm.value.length);
+			  console.log(title.value.length);
+			  if(frm.value.length > 300){  
+			       alert("내용 글자수는 300자로 제한됩니다.!");  
+			       frm.value = frm.value.substring(0,300);  
+			       frm.focus();  
+			       if(title.value.length > 50){
+			    	   alert("제목 글자수는 50자로 제한됩니다!");
+			    	   title.value = title.value.substring(0,50);  
+			    	   title.focus(); 			    	   
+			       }
+			  }
+			}
+
+
+		function ajaxCall(param){
+			console.log(param);
+			$.ajax(param);
+		}
 	</script>
 </html>
