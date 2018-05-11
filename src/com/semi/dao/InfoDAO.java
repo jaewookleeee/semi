@@ -283,6 +283,25 @@ public class InfoDAO {
 				return success;
 			}
 
+			//등록자 전환
+			public int regChange(String num, String phone, String id) {
+				int success = 0;
+				String sql = "UPDATE info SET num=?, phone=? WHERE id=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, num);
+					ps.setString(2, phone);
+					ps.setString(3, id);
+					success = ps.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return 0;
+				}finally {
+					resClose();
+				}
+				return success;
+			}
+			
 			//찜 목록
 			public ArrayList<DTO> likeList(String id, int start, int end) {
 				//반환할 값을 담을 ArrayList 준비

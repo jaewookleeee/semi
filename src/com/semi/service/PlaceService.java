@@ -54,7 +54,7 @@ public class PlaceService {
 		String info = multi.getParameter("info");
 		String homepage= multi.getParameter("homepage");
 		String subcontent= multi.getParameter("sub_content");
-		
+
 		System.out.println(placename+"/"+loginid+"/"+categoly+"/"+placephone+"/"+start+"/"
 		+end+"/"+cash+"/"+address+"/"+detailinfo+"/"+info+"/"+homepage+"/"+subcontent);
 		
@@ -134,6 +134,7 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
+
 	public void likeDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//받아온 값 받음
 		String[] like_id = request.getParameterValues("delList[]");
