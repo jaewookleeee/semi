@@ -207,7 +207,7 @@ public class InfoDAO {
 		//반환할 값을 담을 ArrayList 준비
 		ArrayList<DTO> list = new ArrayList<DTO>(); 
 		//쿼리문 준비
-		String sql = "SELECT book_no, place_name, info_id, book_date, book_start, book_end, book_custom, book_price "+
+		String sql = "SELECT rnum, book_no, place_name, info_id, book_date, book_start, book_end, book_custom, book_price "+
 				"FROM (SELECT ROW_NUMBER() OVER(ORDER BY book_date DESC) AS rnum, book_no, place_name, place.info_id, "+
 				"to_char(book_date, 'YYYY-MM-DD') as book_date, to_char(book_start, 'HH24:MI') as book_start, "+
 				"to_char(book_end, 'HH24:MI') as book_end, book_custom, book_price " +
@@ -221,6 +221,7 @@ public class InfoDAO {
 			rs = ps.executeQuery();
 			while(rs.next()) { //rs에 값이 있다면 반복
 				DTO dto = new DTO();
+				dto.setRnum(rs.getInt("rnum"));
 				dto.setBook_no(rs.getInt("book_no"));
 				dto.setPlace_name(rs.getString("place_name"));
 				dto.setInfo_id(rs.getString("info_id"));
@@ -299,5 +300,37 @@ public class InfoDAO {
 					resClose();
 				}
 				return success;
+			}
+			
+			//찜 목록
+			public ArrayList<DTO> likeList(String id, int start, int end) {
+				//반환할 값을 담을 ArrayList 준비
+				ArrayList<DTO> list = new ArrayList<DTO>();
+				//쿼리문 준비
+				String sql = "SELECT rnum, like_no, place_name " + 
+						"FROM (SELECT ROW_NUMBER() OVER(ORDER BY like_no DESC) AS rnum, like_no, place_name " + 
+						"FROM likeTb, place WHERE likeTb.place_no = place.place_no AND likeTb.info_id=?) " + 
+						"WHERE rnum BETWEEN ? AND ?";
+				
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ps.setInt(2, start);
+					ps.setInt(3, end);
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						DTO dto = new DTO();
+						dto.setRnum(rs.getInt("rnum"));
+						dto.setLike_no(rs.getInt("like_no"));
+						dto.setPlace_name(rs.getString("place_name"));
+						list.add(dto);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return list;
 			}
 }

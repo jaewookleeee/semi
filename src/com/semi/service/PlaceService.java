@@ -14,10 +14,12 @@ import java.util.HashMap;
 
 import com.google.gson.Gson;
 
+
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
 public class PlaceService {
+
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String savePath = null;
 	      String root = request.getSession().getServletContext().getRealPath("/");
@@ -39,7 +41,7 @@ public class PlaceService {
 		
 		HttpSession session = request.getSession();
 		String loginid = (String) session.getAttribute("loginId");
-		
+
 		//System.out.println(multi.getParameter("place_name"));
 		String placename = multi.getParameter("place_name");
 		String categoly = multi.getParameter("categoly");
@@ -53,7 +55,7 @@ public class PlaceService {
 		String info = multi.getParameter("info");
 		String homepage= multi.getParameter("homepage");
 		String subcontent= multi.getParameter("sub_content");
-		
+
 		System.out.println(placename+"/"+loginid+"/"+categoly+"/"+placephone+"/"+start+"/"
 		+end+"/"+cash+"/"+address+"/"+detailinfo+"/"+info+"/"+homepage+"/"+subcontent);
 		
@@ -118,5 +120,39 @@ public class PlaceService {
 		String obj = json.toJson(map);
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
+	}
+
+
+	public void detailphoto(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String number = request.getParameter("place_no");
+		System.out.println(number);
+		PlaceDAO dao = new PlaceDAO();
+		ArrayList<DTO> list= dao.detailphoto(number);
+		Gson json = new Gson();
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		String obj = json.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println(obj);
+	}
+	public void likeDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//받아온 값 받음
+		String[] like_id = request.getParameterValues("delList[]");
+		System.out.println(like_id.length);
+		//doa로 넘겨줌
+		PlaceDAO dao = new  PlaceDAO();
+		int delCnt = dao.likeDel(like_id);
+		boolean success = false;
+		
+		//지운갯수와 넘어온 갯수가 같으면
+		if(delCnt == like_id.length) {
+			success = true;
+		}
+		
+		Gson json = new Gson();
+		HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+		map.put("success", success);
+		String obj = json.toJson(map);
+		response.getWriter().println(obj);	
 	}
 }

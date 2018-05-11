@@ -27,19 +27,19 @@
                 color: white;
             }
             #pre{
-                position: relative;
-                top: 10px;
+                position: absolute;
+                top: 340px;
                 left: 510px;
             }
             #next{
-                position: relative;
-                top: 10px;
-                left: 520px;
+                position: absolute;
+                top: 340px;
+                left: 620px;
             }
             #cancle{
-                position: relative;
-                top: 10px;
-                left: 600px;
+                position: absolute;
+                top: 340px;
+                left: 783px;
             }
             button{
                 background-color: #212121;
@@ -51,6 +51,9 @@
             #menuBar{
             	height: 20px;
             }
+            input[type="checkbox"]{
+            	height: 14px;
+            }
         </style>
     </head>
     <body>
@@ -58,9 +61,9 @@
     		<jsp:include page="/menuBar.jsp" flush="false"/>
     	</div>
     	<h1>찜한 내역 확인</h1>
-        <table>
+        <table id="listTable">
             <tr>
-                <th id="allckh"><input type="checkbox"/></th>
+                <th><input type="checkbox" id="allckh"/></th>
                 <th>번호</th>
                 <th style="padding: 5px 150px">상호명</th>
             </tr>
@@ -70,6 +73,165 @@
         <button id="cancle">찜 취소</button>
     </body>
     <script>
-        /*javascript area*/
+	    var tableTh = ""; //테이블 껍데기 담는 변수
+		var msg = ""; //비로그인시 오는 값 담을 변수
+		var sNum = 1; //페이징 시작 값
+		var eNum = 5; //페이징 마지막 값
+		
+    	var obj = {}; //ajax 실행시 보낼 오브젝트 초기화
+    	obj.error=function(e){console.log(e)}; //ajax 에러날 경우의 함수
+    	obj.type="POST"; //ajax로 보낼 타입
+    	obj.dataType="JSON"; //ajax 실행 후 받을 값 형태
+    	
+    	$(document).ready(function(){
+    		//console.log($("#listTable").children().html());
+    		tableTh = $("#listTable").children().html(); //페이지를 로드하고나서 바로 테이블 자식요소(th태그) 담음
+    		obj.url = "./likeList"; //ajax likeList로 요청
+    		obj.data={ //같이 보낼 데이터
+    				"sNum":sNum,
+    				"eNum":eNum
+    		};
+    		obj.success=function(data){ //성공시의 함수
+    			//console.log(data);
+    			//ajax로 받은 값이 msg라는 이름으로 null이 아니게 들어왔다면
+    			if(data.msg != null){ 
+    				msg = data.msg;//그 값을 msg변수에 담고
+    				alert(msg); //alert을 띄운다.
+    				location.href="./login.jsp" //그리고 login.jsp로 보냄
+    			}else{ //아니라면 리스트 출력
+    				listPrint(data.list);
+    			}
+    		};
+    		ajaxCall(obj); //아작스 보내는 함수 호출
+    	});
+    	
+    	//이전 목록 버튼
+    	$("#pre").click(function(){
+    		sNum -= 5; //페이징 시작 값 변수에서 -5를 하고 넣음
+    		eNum -= 5; //페이징 끝 값 변수에서 -5를 하고 넣음
+    		obj.url = "./likeList"; //bookList로 컨트롤러에 요청
+    		obj.data={
+    				"sNum":sNum,
+    				"eNum":eNum
+    		};
+    		obj.success=function(data){
+    			//console.log(data.list.length);
+    			if(data.msg != null){
+    				msg = data.msg;
+    				alert(msg);
+    				location.href="./login.jsp"
+    			}else{
+    				if(data.list.length == 0){ //list로 넘어온값이 크기가 0이면
+    					alert("첫번째 목록입니다.") //alert을 띄우고
+    					//초기값으로 되돌린다.
+    					sNum = 1; 
+    					eNum = 5; 
+    				}else{
+    					$("#listTable").empty(); //테이블 안에 있는 것을 비우고
+    		    		$("#listTable").append(tableTh); //테이블 자식요소를 넣음
+    					listPrint(data.list); //리스트를 뽑는 함수호출
+    				}
+    			}
+    		};
+    		ajaxCall(obj);
+    	});
+    	
+    	//다음 목록 버튼
+    	$("#next").click(function(){
+    		sNum += 5; //페이징 시작 값변수에서 +5해줌
+    		eNum += 5; //페이징 끝 값 변수에서 +5 해줌
+    		obj.url = "./likeList";
+    		obj.data={
+    				"sNum":sNum,
+    				"eNum":eNum
+    		};
+    		obj.success=function(data){
+    			if(data.msg != null){
+    				msg = data.msg;
+    				alert(msg);
+    				location.href="./login.jsp"
+    			}else{
+    				if(data.list.length == 0){//list로 넘어온값이 크기가 0이면
+    					alert("마지막 목록입니다.")//alert 을 띄우고
+    					//+5했던것을 다시 되돌린다.
+    					sNum -= 5; 
+    					eNum -= 5;
+    				}else{
+    					$("#listTable").empty(); //테이블 안에 있는 것을 비우고
+    		    		$("#listTable").append(tableTh); //테이블 자식요소를 넣음
+    					listPrint(data.list); //리스트를 뽑는 함수호출
+    				}
+    			}
+    		};
+    		ajaxCall(obj);
+    	});
+    	
+    	//삭제 버튼
+    	$("#cancle").click(function(){
+    		//DB에서 값을 지우고, 다시 페이지를 불러온다
+    		//console.log("cancle 클릭");
+    		obj.url="./likeDel";
+    		var checked = []; //체크된 값 담을 변수 초기화
+    		$("input[name='delchk']:checked").each(function(){
+    			//반복분을 통해서 담는다.
+    			checked.push($(this).val());
+    		});
+    		//console.log(checked);
+    		obj.data={
+    				"delList":checked
+    		};
+    		obj.success = function(data){
+    			console.log(data);
+    			if(data.success){
+    				location.href="./likeList.jsp";
+    			}else{
+    				alert("모두 삭제 실패");
+    				location.href="./likeList.jsp";
+    			}
+    		}
+    		ajaxCall(obj);
+    	});
+    	
+    	//전체 체크or해제
+    	$("#allckh").click(function(){
+    		if($("#allckh").prop("checked")){// th에 있는 체크박스에 체크가 되어있으면
+    			$("input[type='checkbox']").prop("checked", true);
+    		}else{
+    			$("input[type='checkbox']").prop("checked", false);
+    		}
+    	});
+    	
+    	//체크에 따라 th의 checkbox checked 여부
+    	$(document).on("click", "input[name='delchk']", function(){
+    		var total = $("input[name='delchk']").length;
+    		var chk = $("input[name='delchk']:checked").length;
+    		if(chk == total){
+    			$("#allckh").prop("checked", true);
+    		}else{
+    			$("#allckh").prop("checked", false);
+    		}
+    		
+    	});
+    	
+    	//list에서 값을 뽑아 테이블에 넣는 함수
+    	function listPrint(list){
+    		var content = ""; //자식요소로 넣을 변수 초기화
+    		//like_no, place_name
+    		list.forEach(function (item, idx){
+    			//console.log(item);
+    			//console.log(item.book_no);
+    			content += "<tr>";
+    			content += "<td><input type='checkbox' name='delchk' value='"+item.like_no+"'/></td>";
+    			content += "<td>"+item.rnum+"</td>";
+    			content += "<td>"+item.place_name+"</td>";
+    			content += "</tr>";
+    		});
+    		$("#listTable").append(content);
+    	}
+    	
+    	//ajax로 보내는 함수
+    	function ajaxCall(param){
+    		$.ajax(param)
+    	}
     </script>
 </html>

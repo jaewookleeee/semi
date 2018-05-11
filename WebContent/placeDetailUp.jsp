@@ -29,13 +29,14 @@
 	<jsp:include page="menuBar.jsp"/>
 	</div>
 		<div id="all">
-	        <img id="main" src="#"/><br/>
+		<input type="hidden" value=/> 
+	        <img id="main" src='./upload/"+item.place_photo+"'/>/><br/>
 			<div class="sub_div">
-	        	<img class="sub" src="#"/>
-	        	<img class="sub" src="#"/>
-	        	<img class="sub" src="#"/>
-		        <img class="sub" src="#"/>
-		        <img class="sub" src="#"/>
+	        	<img class="sub" src='./upload/"+item.place_photo+"'/>/>
+	        	<img class="sub" src='./upload/"+item.place_photo+"'/>/>
+	        	<img class="sub" src='./upload/"+item.place_photo+"'/>/>
+		        <img class="sub" src='./upload/"+item.place_photo+"'/>/>
+		        <img class="sub" src='./upload/"+item.place_photo+"'/>/>
 		    </div>
 	        <div id="allinfo">
 	            <div class="info" id="detail">상세정보</div>
@@ -78,6 +79,20 @@
 			}
 			
 			$("#area").load(page, function(res, stat) { $("#area").html(res); });
+		});
+		$(document).ready(function(){
+			$.ajax({
+					type:"post",
+					url:"./placeDetail",
+					dataType:"JSON",
+					success:function(data){
+						console.log(data);
+						//$("#main").attr("src",'./upload/'+data.list);
+					},
+					error:function(e){
+						console.log(e);
+					}
+				});			
 		});
 	</script>
 </html>

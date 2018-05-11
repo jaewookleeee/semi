@@ -191,4 +191,43 @@ public class PlaceDAO {
 		}resClose();
 		
 	}
+
+	public int likeDel(String[] like_id) {
+		int delCnt=0;
+		String sql = "DELETE FROM likeTb WHERE like_no=?";
+		try {
+			for(int i=0; i<like_id.length;i++) {
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, Integer.parseInt(like_id[i]));
+				delCnt += ps.executeUpdate();
+				ps.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return delCnt;
+	}
+
+	public ArrayList<DTO> detailphoto(String number) {
+		
+		ArrayList<DTO> list=new ArrayList<>();
+		String sql="SELECT * FROM photo WHERE place_no = ?";
+		try {
+			ps  = conn.prepareStatement(sql);
+			ps.setInt(1, Integer.parseInt(number));
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				DTO dto = new DTO();
+				dto.setPlace_photo(rs.getString("place_photo"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return list;
+	}
 }
