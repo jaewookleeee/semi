@@ -135,12 +135,9 @@ public class InfoService {
 
 	//로그아웃
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		//세션 추출
-		//HttpSession session = request.getSession();
-		//loginId 속성값 삭제
-		//session.removeAttribute("loginId");
-		//main.jsp 페이지 요청(index 인데 세션 검사 작동 확인을 위해 main으로감)
-		//response.sendRedirect("index.jsp");
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginId");
+		response.sendRedirect("index.jsp");
 	}
 
 	//아이디 중복 체크
