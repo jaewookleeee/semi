@@ -14,10 +14,19 @@ import java.util.HashMap;
 
 import com.google.gson.Gson;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7ee9ac7249ec6178013a32da187f04c55b12ca1a
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
 public class PlaceService {
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 7ee9ac7249ec6178013a32da187f04c55b12ca1a
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String savePath = null;
 	      String root = request.getSession().getServletContext().getRealPath("/");
@@ -39,7 +48,11 @@ public class PlaceService {
 		
 		HttpSession session = request.getSession();
 		String loginid = (String) session.getAttribute("loginId");
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> 7ee9ac7249ec6178013a32da187f04c55b12ca1a
 		//System.out.println(multi.getParameter("place_name"));
 		String placename = multi.getParameter("place_name");
 		String categoly = multi.getParameter("categoly");
@@ -53,6 +66,10 @@ public class PlaceService {
 		String info = multi.getParameter("info");
 		String homepage= multi.getParameter("homepage");
 		String subcontent= multi.getParameter("sub_content");
+<<<<<<< HEAD
+
+=======
+>>>>>>> 7ee9ac7249ec6178013a32da187f04c55b12ca1a
 		
 		System.out.println(placename+"/"+loginid+"/"+categoly+"/"+placephone+"/"+start+"/"
 		+end+"/"+cash+"/"+address+"/"+detailinfo+"/"+info+"/"+homepage+"/"+subcontent);
@@ -120,6 +137,19 @@ public class PlaceService {
 		response.getWriter().println(obj);
 	}
 
+<<<<<<< HEAD
+	public void detailphoto(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String number = request.getParameter("place_no");
+		System.out.println(number);
+		PlaceDAO dao = new PlaceDAO();
+		ArrayList<DTO> list= dao.detailphoto(number);
+		Gson json = new Gson();
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("list", list);
+		String obj = json.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println(obj);
+=======
 	public void likeDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//받아온 값 받음
 		String[] like_id = request.getParameterValues("delList[]");
@@ -139,5 +169,6 @@ public class PlaceService {
 		map.put("success", success);
 		String obj = json.toJson(map);
 		response.getWriter().println(obj);	
+>>>>>>> 7ee9ac7249ec6178013a32da187f04c55b12ca1a
 	}
 }

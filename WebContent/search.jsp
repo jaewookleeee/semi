@@ -30,6 +30,10 @@ body {
 	height: 30px;
 }
 
+.search_btn:hover {
+	cursor: pointer;
+}
+
 .category {
 	background-color: white;
 	width: 100px;
@@ -38,6 +42,10 @@ body {
 	text-align: center;
 	display: inline-block;
 	border: 1px solid black;
+}
+
+.category:hover {
+	cursor: pointer;
 }
 
 #loc {
@@ -76,6 +84,10 @@ body {
 	display: inline-block;
 }
 
+.locati:hover {
+	cursor: pointer;
+}
+
 #loc_btn {
 	color: black;
 	display: inline;
@@ -83,6 +95,10 @@ body {
 	background-color: white;
 	height: 100%;
 	padding: 5px 3px;
+}
+
+#loc_btn:hover {
+	cursor: pointer;
 }
 
 #text_div {
@@ -96,6 +112,10 @@ body {
 	display: inline-block;
 	width: 400px;
 	background-color: #FAFAFA;
+}
+
+.place:hover {
+	cursor: pointer;
 }
 
 table {
