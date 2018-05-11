@@ -15,7 +15,7 @@ import com.semi.service.QaService;
 import com.semi.service.ReviewService;
 
 
-@WebServlet({ "/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
+@WebServlet({"/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel", "/placeDetail", "/like", "/likeDel",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardList", "/boardSearch",
@@ -72,10 +72,6 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.Write(request,response);
 				break;
-<<<<<<< HEAD
-
-=======
->>>>>>> 5f9a11028a5e02c5a1b2cf42cc3f30528c5ce138
 			case "/regJoin":
 				System.out.println("등록자 회원가입 요청");
 				infoService = new InfoService();
@@ -86,10 +82,20 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.userUpdate(request, response);
 				break;
+			case "/regUpdate":
+				System.out.println("등록자 정보수정 요청");
+				infoService = new InfoService();
+				infoService.regUpdate(request, response);
+				break;
 			case "/userList":
 				System.out.println("회원 리스트 요청");
 				infoService = new InfoService();
 				infoService.userList(request, response);
+				break;
+			case "/del":
+				System.out.println("회원탈퇴 요청");
+				infoService = new InfoService();
+				infoService.del(request, response);
 				break;
 			case"/placeSearch":
 				System.out.println("장소 검색");

@@ -239,5 +239,46 @@ public class InfoDAO {
 		}
 		return list;
 	}
-		
+
+			//회원 탈퇴
+			public int del(String id) {
+				int success = 0;
+				String sql = "DELETE FROM info WHERE info_id=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, id);
+					success = ps.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return 0;
+				}finally {
+					resClose();//자원반납
+				}
+				return success;
+			}
+
+			//등록자 회원정보 수정
+			public int regUpdate(DTO dto) {
+				int success = 0;
+				String sql = "UPDATE info SET info_pw=?, info_birth=TO_DATE(?,'YYYY-MM-DD'), info_email=?, info_gender=?, info_name=?"+
+						 ", info_num=?, info_phone=? WHERE info_id=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, dto.getInfo_pw());
+					ps.setDate(2, dto.getInfo_birth());
+					ps.setString(3, dto.getInfo_email());
+					ps.setString(4, dto.getInfo_gender());
+					ps.setString(5, dto.getInfo_name());
+					ps.setString(6, dto.getInfo_num());
+					ps.setString(7, dto.getInfo_phone());
+					ps.setString(8, dto.getInfo_id());
+					success = ps.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return 0;
+				}finally {
+					resClose();
+				}
+				return success;
+			}
 }
