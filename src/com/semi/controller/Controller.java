@@ -66,14 +66,16 @@ public class Controller extends HttpServlet {
 				System.out.println("사용자 회원가입 요청");
 				infoService = new InfoService();
 				infoService.userJoin(request, response);
-/*<<<<<<< HEAD*/
 				break;
 			case "/placeWrite":
 				System.out.println("장소 등록 요청");
 				placeService = new PlaceService();
 				placeService.Write(request,response);
 				break;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5f9a11028a5e02c5a1b2cf42cc3f30528c5ce138
 			case "/regJoin":
 				System.out.println("등록자 회원가입 요청");
 				infoService = new InfoService();
@@ -93,7 +95,18 @@ public class Controller extends HttpServlet {
 				System.out.println("장소 검색");
 				placeService=new PlaceService();
 				placeService.search(request, response);
-/*>>>>>>> 2d4a6e1d3006e566172be96894695f41d14f9c9f*/
+				break;
+			case "/bookList":
+				System.out.println("예약 리스트 요청");
+				infoService = new InfoService();
+				infoService.bookList(request, response);
+				break;
+			case "/bookDel":
+				System.out.println("예약 삭제 요청");
+				bookService = new BookService();
+				bookService.delete(request, response);
+				break;
+
 		}
 		
 	}
