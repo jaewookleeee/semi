@@ -226,6 +226,7 @@
 		</style>
 	</head>
 	<body>
+		<jsp:include page="menuBar.jsp"/>
 		<div id="main">
             <span id="regTxt"><b>회원정보 수정</b></span>
             <b id="id">아이디</b>
@@ -260,11 +261,6 @@
             <!-- <input id="regBirth" type="date" value="2018-05-07"/> -->
             <select name="regBirthYear" id="regBirthYear">
             	<option value="년도" selected>년도</option>
-            	<!-- <option value="1991" >1991</option>
-            	<option value="1992" >1992</option>
-            	<option value="1993" >1993</option>
-            	<option value="1994" >1994</option>
-            	<option value="1995" >1995</option> -->
             	<%for(int i=1950; i<2019; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
@@ -272,11 +268,6 @@
             
             <select name="regBirthMonth" id="regBirthMonth">
             	<option value="월" selected>월</option>
-            	<!-- <option value="1" >1</option>
-            	<option value="2" >2</option>
-            	<option value="3" >3</option>
-            	<option value="4" >4</option>
-            	<option value="5" >5</option> -->
             	<%for(int i=1; i<13; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
@@ -284,15 +275,11 @@
             
             <select name="regBirthDay" id="regBirthDay">
             	<option value="일" selected>일</option>
-            	<!-- <option value="1" >1</option>
-            	<option value="2" >2</option>
-            	<option value="3" >3</option>
-            	<option value="4" >4</option>
-            	<option value="5" >5</option> -->
             	<%for(int i=1; i<32; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
             </select>
+            
             <b id="email">이메일</b>
             <input id="regEmail" type="email" placeholder="이메일을 입력하세요."/>
             <b id="num">주민등록번호</b>

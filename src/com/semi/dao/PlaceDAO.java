@@ -187,7 +187,6 @@ public class PlaceDAO {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-
 			}
 		}resClose();
 		

@@ -88,6 +88,11 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.regUpdate(request, response);
 				break;
+			case "/regChange":
+				System.out.println("등록자 전환 요청");
+				infoService = new InfoService();
+				infoService.regChange(request, response);
+				break;
 			case "/userList":
 				System.out.println("회원 리스트 요청");
 				infoService = new InfoService();
@@ -152,7 +157,6 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.likeDel(request, response);
 				break;
-
 		}
 		
 	}

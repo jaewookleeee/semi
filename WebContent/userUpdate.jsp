@@ -200,6 +200,7 @@
 		</style>
 	</head>
 	<body>
+		<jsp:include page="menuBar.jsp"/>
 		<div id="main">
             <span id="userTxt"><b>회원정보 수정</b></span>
             <b id="id">아이디</b>
