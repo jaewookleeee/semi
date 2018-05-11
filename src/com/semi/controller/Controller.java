@@ -33,7 +33,8 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dual(request, response);
 	}
-	private void dual(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void dual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String uri = request.getRequestURI();
 		String context = request.getContextPath();
 		String subAddr = uri.substring(context.length());
@@ -113,7 +114,31 @@ public class Controller extends HttpServlet {
 				bookService = new BookService();
 				bookService.delete(request, response);
 				break;
-
+			case "/boardWrite":
+				System.out.println("boardWrite");
+				boardService = new BoardService();
+				boardService.write(request, response);
+				break;
+			case "/boardUpdate":
+				System.out.println("boardUpdate");
+				boardService = new BoardService();
+				boardService.update(request,response);
+				break;
+			case "/boardDel":
+				System.out.println("boardDel");
+				boardService = new BoardService();
+				boardService.delete(request,response);
+				break;
+			case "/boardDetail":
+				System.out.println("boardDetail");
+				boardService = new BoardService();
+				boardService.detail(request, response);
+				break;
+			case "/boardList":
+				System.out.println("boardList");
+				boardService = new BoardService();
+				boardService.search(request, response);
+				break;
 		}
 		
 	}
