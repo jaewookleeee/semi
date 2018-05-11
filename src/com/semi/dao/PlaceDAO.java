@@ -161,12 +161,10 @@ public class PlaceDAO {
 						
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}finally {
 					//resClose();
 				}
-				
 				return success;
 	}
 
@@ -189,9 +187,8 @@ public class PlaceDAO {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				
 			}
-		}
-		resClose();
+		}resClose();
+		
 	}
 }
