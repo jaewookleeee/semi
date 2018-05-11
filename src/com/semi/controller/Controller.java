@@ -73,7 +73,10 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.Write(request,response);
 				break;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 7ee9ac7249ec6178013a32da187f04c55b12ca1a
 			case "/regJoin":
 				System.out.println("등록자 회원가입 요청");
 				infoService = new InfoService();
@@ -114,6 +117,12 @@ public class Controller extends HttpServlet {
 				bookService = new BookService();
 				bookService.delete(request, response);
 				break;
+<<<<<<< HEAD
+			case "/placeDetail":
+				System.out.println("상세보기 요청");
+				placeService=new PlaceService();
+				placeService.detailphoto(request,response);
+=======
 			case "/boardWrite":
 				System.out.println("boardWrite");
 				boardService = new BoardService();
@@ -150,6 +159,7 @@ public class Controller extends HttpServlet {
 				placeService.likeDel(request, response);
 				break;
 				
+>>>>>>> 7ee9ac7249ec6178013a32da187f04c55b12ca1a
 		}
 		
 	}
