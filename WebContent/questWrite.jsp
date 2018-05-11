@@ -138,12 +138,12 @@
 			       alert("내용 글자수는 300자로 제한됩니다.!");  
 			       frm.value = frm.value.substring(0,300);  
 			       frm.focus();  
-			       if(title.value.length > 50){
-			    	   alert("제목 글자수는 50자로 제한됩니다!");
-			    	   title.value = title.value.substring(0,50);  
-			    	   title.focus(); 			    	   
-			       }
 			  }
+			  if(title.value.length > 50){
+		    	   alert("제목 글자수는 50자로 제한됩니다!");
+		    	   title.value = title.value.substring(0,50);  
+		    	   title.focus(); 			    	   
+		       }
 			}
 
 

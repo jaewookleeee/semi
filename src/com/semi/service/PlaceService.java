@@ -16,7 +16,6 @@ import java.util.HashMap;
 
 import com.google.gson.Gson;
 
-
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
@@ -139,6 +138,7 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
+
 	public void likeDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//받아온 값 받음
 		String[] like_id = request.getParameterValues("delList[]");

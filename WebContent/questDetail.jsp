@@ -142,12 +142,7 @@
 		/*java script area*/
 		
 		//로그인 체크
-		var loginId = "${sessionScope.loginId}";
-		console.log(loginId);
-		if(loginId == ""){
-			alert("로그인이 필요한 서비스 입니다.");
-			location.href="login.jsp";
-		}
+		
 		
 		//ajax
 		var obj={};
@@ -155,7 +150,7 @@
 		obj.type="POST";
 		obj.dataType="JSON";
 		obj.error=function(e){console.log(e)};
-	
+		var loginId = "${sessionScope.loginId}";
 
 		$("#answerWrite").click(function(){
 			location.href="./boardReplyWrite?board_no=${board.board_no}";
@@ -176,9 +171,13 @@
 					$("#updateOk").css("display","block");
 					$("#cancel").css("display","block"); 
 					
-				}else{
+				}else if(loginId == ""){					
+					console.log(loginId);
+						alert("로그인이 필요한 서비스 입니다.");
+						location.href="login.jsp";
+				} else{
 					alert("글을 수정할 권한이 없는 아이디 입니다.");
-				} 
+				}
 		});
 		
 		$("#cancel").click(function(){
@@ -222,6 +221,10 @@
 			if("${board.info_id}" == "${loginId}"){
 				console.log("OK");
 				location.href="./boardDel?board_no=${board.board_no}";				
+			}else if(loginId == ""){					
+				console.log(loginId);
+				alert("로그인이 필요한 서비스 입니다.");
+				location.href="login.jsp";
 			}else{
 				alert("글을 삭제할 권한이 없는 아이디 입니다.");
 			}

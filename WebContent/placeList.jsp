@@ -77,7 +77,6 @@
                 <th>수정</th>
                 <th>삭제</th>
             </tr>
-            </tr>
         </table>
         <button id="pre">이전 목록</button>
         <button id="next">다음 목록</button>
