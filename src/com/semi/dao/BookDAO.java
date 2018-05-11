@@ -37,4 +37,23 @@ public class BookDAO {
 		}
 	}
 
+	public int delete(String[] delList) {
+		int delCnt=0;
+		String sql = "DELETE FROM book WHERE book_no=?";
+		try {
+			for(int i=0; i<delList.length;i++) {
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, Integer.parseInt(delList[i]));
+				delCnt += ps.executeUpdate();
+				ps.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return delCnt;
+	}
+
 }

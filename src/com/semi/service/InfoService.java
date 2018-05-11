@@ -135,12 +135,9 @@ public class InfoService {
 
 	//로그아웃
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		//세션 추출
-		//HttpSession session = request.getSession();
-		//loginId 속성값 삭제
-		//session.removeAttribute("loginId");
-		//main.jsp 페이지 요청(index 인데 세션 검사 작동 확인을 위해 main으로감)
-		//response.sendRedirect("index.jsp");
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginId");
+		response.sendRedirect("index.jsp");
 	}
 
 	//아이디 중복 체크
@@ -257,7 +254,7 @@ public class InfoService {
 		
 	}
 	
-	//예약내역확인
+		//예약내역확인
 		public void bookList(HttpServletRequest request, HttpServletResponse response) 
 				throws IOException {
 			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
@@ -312,7 +309,7 @@ public class InfoService {
 		}
 
 		//등록자 회원정보 수정
-		public void regUpdate(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		public void regUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			request.setCharacterEncoding("UTF-8");
 			
 			String loginId = (String) request.getSession().getAttribute("loginId");
@@ -357,5 +354,24 @@ public class InfoService {
 			}else {
 				System.out.println("현재 비밀번호 틀림");
 			}
+			
+			
+			Gson json = new Gson();
+			HashMap<String, Object> map = new HashMap<>();
+				
+			if(loginId != null && loginDiv.equals("사용자") || loginDiv.equals("등록자")) {
+				map.put("login",true);
+				System.out.println(loginId+", "+loginDiv);
+			}else {
+				map.put("login",false);
+			}
+
+			map.put("success", success);
+			
+			String obj = json.toJson(map);
+			System.out.println(obj);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().println(obj);
+			
 		}
 }
