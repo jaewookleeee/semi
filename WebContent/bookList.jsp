@@ -191,10 +191,10 @@
     		obj.success = function(data){
     			console.log(data);
     			if(data.success){
-    				alert("모두 삭제 성공");
     				location.href="./bookList.jsp";
     			}else{
     				alert("모두 삭제 실패");
+    				location.href="./bookList.jsp";
     			}
     		}
     		ajaxCall(obj);
@@ -230,7 +230,7 @@
     			//console.log(item.book_no);
     			content += "<tr>";
     			content += "<td><input type='checkbox' name='delchk' value='"+item.book_no+"'/></td>";
-    			content += "<td>"+item.book_no+"</td>";
+    			content += "<td>"+item.rnum+"</td>";
     			content += "<td>"+item.place_name+"</td>";
     			content += "<td>"+item.info_id+"</td>";
     			content += "<td>"+item.book_date+"</td>";

@@ -98,7 +98,7 @@
 	            height: 25px;
 	            font-size: 10px;
 	        }
-	        input#newPw{
+	        input#regNewPw{
 	            position: absolute;
 	            left: 15px;
 	            top: 195px;
@@ -106,7 +106,7 @@
 	            height: 25px;
 	            font-size: 10px;            
 	        }
-	        input#newPwChk{
+	        input#regNewPwChk{
 	            position: absolute;
 	            left: 15px;
 	            top: 255px;
@@ -209,7 +209,7 @@
 	            border-style: none;
 	            font-size: 10px;
 	        }
-	        button#join{
+	        button#save{
 	            position: absolute;
 	            left: 240px;
 	            top: 675px;
@@ -220,6 +220,9 @@
 	            background-color: black;
 	            border-style: none;            
 	        }
+	        button#del{ position: absolute; left: 15px; top: 675px; width: 60px; height: 25px; font-size: 10px;
+	        	color: white; background-color: black; border-style: none;
+	        }
 		</style>
 	</head>
 	<body>
@@ -229,12 +232,15 @@
             <input id="regId" type="text" readonly value="${sessionScope.loginId }"/>
             <b id="pw">현재 비밀번호</b>
             <input id="regPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            
             <b id="newPw">새 비밀번호</b>
-            <input id="newPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input id="regNewPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            
             <b id="newPwChk">새 비밀번호 확인</b>
-            <input id="newPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input id="regNewPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
+            
             <b id="name">이름</b>
-            <input id="regName" type="text" readonly/>
+            <input id="regName" type="text"/>
             <b id="Gender">성별</b>
             <span id="gender">
             	<input id="man" type="radio" name="regGender" value="남" checked/>남자
@@ -294,11 +300,58 @@
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone" type="tel" placeholder="휴대폰번호를 입력하세요."/>
             
+            <button id="del">탈퇴하기</button>
             <button id="cancel">취소</button>
-            <button id="join">완료</button>
+            <button id="save">저장</button>
         </div>
 	</body>
 	<script>
+		$("#cancel").click(function() {
+			location.href="index.jsp";
+		});
 	
+		$("#del").click(function() {
+			location.href="del.jsp";
+		});
+		
+		$("#save").click(function() {
+			var newPw = $("#regNewPw").val();
+			var newPwChk = $("#regNewPwChk").val();
+			var pw = $("#regPw").val();
+			if(pw != pw){
+				alert("현재 비밀번호가 맞지 않습");
+			}
+			
+			if(newPw != newPwChk){
+				alert("비밀번호가 맞지 않습니다.");
+				$("#regPwChk").focus();
+			}
+			$.ajax({
+				type : "post",
+				url : "./regUpdate",
+				data : {
+					id : $("#regId").val(),
+					pw : $("#regPw").val(),
+					newPw : $("#regNewPw").val(),
+					newPwChk : $("#regNewPwChk").val(),
+					name : $("#regName").val(),
+					gender : $("input[name='regGender']").val(),
+					year : $("#regBirthYear").val(),
+					month : $("#regBirthMonth").val(),
+					day : $("#regBirthDay").val(),
+					email : $("#regEmail").val(),
+					num : $("#regNum").val(),
+					phone : $("#regPhone").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					alert("수정 성공");
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
 	</script>
 </html>

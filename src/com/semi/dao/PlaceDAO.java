@@ -132,7 +132,7 @@ public class PlaceDAO {
 
 	public long write(DTO dto) {
 	String sql="INSERT INTO place(place_no,info_id,place_name,place_intro,place_home,"+
-			"place_loc,place_guid,place_attention,place_date,place_category,place_phone)"+" VALUES(place_seq.NEXTVAL,?,?,?,?,?,?,?,SYSDATE,?,?)";
+			"place_loc,place_guid,place_attention,place_date,place_category,place_tel)"+" VALUES(place_seq.NEXTVAL,?,?,?,?,?,?,?,SYSDATE,?,?)";
 				long success=0;
 				try {
 					ps=conn.prepareStatement(sql,new String[] {"place_no"});
@@ -161,18 +161,17 @@ public class PlaceDAO {
 						
 					}
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}finally {
-					resClose();
+					//resClose();
 				}
-				
 				return success;
 	}
 
 	public void photowrite(ArrayList<DTO> list, long success) {
 		DTO dto;
 		String sql;
+		//String savepath="D:/04_semi_project/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/04_semiProject/upload/";
 		for(int i=0;i<list.size();i++) {
 			dto=list.get(i);
 			String fileName = dto.getPlace_photo();
@@ -186,14 +185,34 @@ public class PlaceDAO {
 					ps.setString(2, fileName);
 					ps.executeUpdate();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+<<<<<<< HEAD
 				
 
+=======
 			}
-		}
+		}resClose();
 		
+	}
+
+	public int likeDel(String[] like_id) {
+		int delCnt=0;
+		String sql = "DELETE FROM likeTb WHERE like_no=?";
+		try {
+			for(int i=0; i<like_id.length;i++) {
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, Integer.parseInt(like_id[i]));
+				delCnt += ps.executeUpdate();
+				ps.close();
+>>>>>>> 7ee9ac7249ec6178013a32da187f04c55b12ca1a
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return delCnt;
 	}
 
 	public ArrayList<DTO> detailphoto(String number) {

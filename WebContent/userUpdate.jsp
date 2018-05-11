@@ -194,6 +194,9 @@
 	            background-color: black;
 	            border-style: none;            
 	        }
+	        button#del{ position: absolute; left: 15px; top: 555px; width: 60px; height: 25px; font-size: 10px;
+	        	color: white; background-color: black; border-style: none;
+	        }
 		</style>
 	</head>
 	<body>
@@ -268,11 +271,16 @@
             </select>
             <b id="email">이메일</b>
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
+            <button id="del">탈퇴하기</button>
             <button id="cancel">취소</button>
             <button id="save">저장</button>
         </div>
 	</body>
 	<script>
+		$("#del").click(function() {
+			location.href="del.jsp";
+		});
+	
 		$("#save").click(function() {
 			var newPw = $("#userNewPw").val();
 			var newPwChk = $("#userNewPwChk").val();

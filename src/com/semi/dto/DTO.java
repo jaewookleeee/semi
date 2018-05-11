@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class DTO {
 	//게시판
+	private int rnum;
 	private int board_no;
 	private String board_title;
 	private String board_content;
@@ -67,6 +68,13 @@ public class DTO {
 	private int qareply_no;
 	private String qareply_content;
 	private Date qareply_date;
+	
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public int getBoard_no() {
 		return board_no;
 	}
