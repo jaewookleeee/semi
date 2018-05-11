@@ -31,7 +31,7 @@
             .menu { position: absolute; z-index: 1; width: 100%; height: 50px; top: 0px; left: -20px; }
             .logo { position: relative; top: 2px; margin-right: 50px; font-family: 'odibeeSans', sans-serif; font-size: 22px; color: #FF376C; }   
             .menu_item { position: relative; padding: 0px; line-height: 10px; left: 0px; margin-right: 40px; font-family: 'Nanum Square', sans-serif; font-size: 14px; }
-            .log { position: absolute; padding: 0px; width: 60px; height: 20px; line-height: 20px; margin-top: -5px; margin-left: 900px; font-family: 'Nanum Square', sans-serif; font-size: 14px; background-color: #FA5882; color: white; text-align: center; }
+            .log { position: absolute; padding: 0px; width: 60px; height: 20px; line-height: 20px; margin-top: -5px; margin-left: 1125px; font-family: 'Nanum Square', sans-serif; font-size: 14px; background-color: #FA5882; color: white; text-align: center; }
             
             .submenu { position: absolute; display: none; width: 700px; height: 50px; top: 20px; left: -50px; background-color: white; }
             .submenu_item { position: relative; display: inline; width: 80px; height: 20px; left: 5px; margin: 3px 30px 10px 0px; line-height: 50px; font-family: 'Nanum Square', sans-serif; font-size: 14px; float:left; }
@@ -61,7 +61,7 @@
                 <li class="menu_item"><a href="#">문의사항</a></li>
                 <li class="menu_item"><a href="#">공지사항</a></li>
                 <li class="menu_item"><a href="search.jsp">장소검색</a></li>
-                <li class="menu_item"><a href="#">장소등록</a></li>
+                <li class="menu_item"><a href="placeWrite.jsp">장소등록</a></li>
                 <a href="login.jsp"><li class="log" id="login_btn">로그인</li></a>
                 <a href="logout"><li class="log" id="logout">로그아웃</li></a>
             </ul>

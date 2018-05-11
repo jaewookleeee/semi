@@ -1,9 +1,6 @@
 package com.semi.service;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 5f9a11028a5e02c5a1b2cf42cc3f30528c5ce138
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,36 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
-<<<<<<< HEAD
+
 
 import java.util.HashMap;
 
 import com.google.gson.Gson;
 
-=======
 
-
-import java.util.HashMap;
-
-
-import com.google.gson.Gson;
-
-
-
->>>>>>> 5f9a11028a5e02c5a1b2cf42cc3f30528c5ce138
 import com.semi.dao.PlaceDAO;
 import com.semi.dto.DTO;
 
 public class PlaceService {
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 5f9a11028a5e02c5a1b2cf42cc3f30528c5ce138
 	public void Write(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String savePath = null;
 	      String root = request.getSession().getServletContext().getRealPath("/");
-	      savePath = root + "upload";
+	      savePath = root + "upload/";
 	      System.out.println("사진 저장 경로 : " + savePath);
 	      
 	      File dir = new File(savePath);
@@ -60,22 +44,21 @@ public class PlaceService {
 		
 		HttpSession session = request.getSession();
 		String loginid = (String) session.getAttribute("loginId");
-<<<<<<< HEAD
+
 		//System.out.println(multi.getParameter("place_name"));
 		String placename = multi.getParameter("place_name");
 		String categoly = multi.getParameter("categoly");
-		String placephone=multi.getParameter("phone1")+request.getParameter("phone2")+request.getParameter("phone3");
+		String placephone=multi.getParameter("phone1")+multi.getParameter("phone2")+multi.getParameter("phone3");
 		String start = multi.getParameter("start");
 		String end = multi.getParameter("end");
 		//System.out.println(multi.getParameter("cash"));
 		long cash = Integer.parseInt(multi.getParameter("cash"));
-		String address ="("+multi.getParameter("postnumber")+")"+request.getParameter("addr")+request.getParameter("detailAddr");
+		String address ="("+multi.getParameter("postnumber")+")"+multi.getParameter("addr")+multi.getParameter("detailAddr");
 		String detailinfo = multi.getParameter("fac_info");
 		String info = multi.getParameter("info");
 		String homepage= multi.getParameter("homepage");
 		String subcontent= multi.getParameter("sub_content");
-=======
->>>>>>> 5f9a11028a5e02c5a1b2cf42cc3f30528c5ce138
+
 		
 		System.out.println(placename+"/"+loginid+"/"+categoly+"/"+placephone+"/"+start+"/"
 		+end+"/"+cash+"/"+address+"/"+detailinfo+"/"+info+"/"+homepage+"/"+subcontent);
@@ -103,7 +86,7 @@ public class PlaceService {
 		       // 확장자 추출
 		       String ext = oriFileName.substring(oriFileName.indexOf("."));
 		       // 새파일명 만들기(새파일명+확장자)
-		       String newFileName = "식당이름_"+i+ ext;
+		       String newFileName = success+"_"+i+ ext;
 		       // 파일명 변경
 		       File oldFile = new File(savePath + "/" + oriFileName);
 		       File newFile = new File(savePath + "/" + newFileName);
@@ -142,8 +125,5 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 5f9a11028a5e02c5a1b2cf42cc3f30528c5ce138
 }

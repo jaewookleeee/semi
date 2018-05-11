@@ -72,10 +72,7 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.Write(request,response);
 				break;
-<<<<<<< HEAD
 
-=======
->>>>>>> 5f9a11028a5e02c5a1b2cf42cc3f30528c5ce138
 			case "/regJoin":
 				System.out.println("등록자 회원가입 요청");
 				infoService = new InfoService();
