@@ -139,6 +139,17 @@ public class Controller extends HttpServlet {
 				boardService = new BoardService();
 				boardService.search(request, response);
 				break;
+			case "/likeList":
+				System.out.println("찜 목록 요청");
+				infoService = new InfoService();
+				infoService.likeList(request, response);
+				break;
+			case "/likeDel":
+				System.out.println("찜 삭제 요청");
+				placeService = new PlaceService();
+				placeService.likeDel(request, response);
+				break;
+				
 		}
 		
 	}
