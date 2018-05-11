@@ -58,6 +58,7 @@ public class DTO {
 	private int review_no;
 	private String review_content;
 	private Date review_date;
+	private double review_score;
 	
 	//QA
 	private int qa_no;
@@ -356,6 +357,12 @@ public class DTO {
 	}
 	public void setQareply_date(Date qareply_date) {
 		this.qareply_date = qareply_date;
+	}
+	public double getReview_score() {
+		return review_score;
+	}
+	public void setReview_score(double review_score) {
+		this.review_score = review_score;
 	}
 	
 	//getter, setter
