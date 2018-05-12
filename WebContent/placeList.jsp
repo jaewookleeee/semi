@@ -124,6 +124,69 @@
             location.href="./chart.jsp";
         });
         
+      //이전 목록 버튼
+    	$("#pre").click(function(){
+    		sNum -= 5; //페이징 시작 값 변수에서 -5를 하고 넣음
+    		eNum -= 5; //페이징 끝 값 변수에서 -5를 하고 넣음
+    		obj.url = "placeList"; //placeList로 컨트롤러에 요청
+    		obj.data={
+    				"sNum":sNum,
+    				"eNum":eNum
+    		};
+    		obj.success=function(data){
+    			//console.log(data.list.length);
+    			if(data.msg != null){
+    				msg = data.msg;
+    				alert(msg);
+    				location.href="./login.jsp"
+    			}else{
+    				if(data.list.length == 0){ //list로 넘어온값이 크기가 0이면
+    					alert("첫번째 목록입니다.") //alert을 띄우고
+    					//초기값으로 되돌린다.
+    					sNum = 1; 
+    					eNum = 5; 
+    				}else{
+    					$("#listTable").empty(); //테이블 안에 있는 것을 비우고
+    		    		$("#listTable").append(tableTh); //테이블 자식요소를 넣음
+    					listPrint(data.list); //리스트를 뽑는 함수호출
+    					score_in(data.review_score);//별점평균 넣는 함수 호출
+    				}
+    			}
+    		};
+    		ajaxCall(obj);
+    	});
+    	
+    	//다음 목록 버튼
+    	$("#next").click(function(){
+    		sNum += 5; //페이징 시작 값변수에서 +5해줌
+    		eNum += 5; //페이징 끝 값 변수에서 +5 해줌
+    		obj.url = "placeList";
+    		obj.data={
+    				"sNum":sNum,
+    				"eNum":eNum
+    		};
+    		obj.success=function(data){
+    			if(data.msg != null){
+    				msg = data.msg;
+    				alert(msg);
+    				location.href="./login.jsp"
+    			}else{
+    				if(data.list.length == 0){//list로 넘어온값이 크기가 0이면
+    					alert("마지막 목록입니다.")//alert 을 띄우고
+    					//+5했던것을 다시 되돌린다.
+    					sNum -= 5; 
+    					eNum -= 5;
+    				}else{
+    					$("#listTable").empty(); //테이블 안에 있는 것을 비우고
+    		    		$("#listTable").append(tableTh); //테이블 자식요소를 넣음
+    					listPrint(data.list); //리스트를 뽑는 함수호출
+    					score_in(data.review_score);//별점평균 넣는 함수 호출
+    				}
+    			}
+    		};
+    		ajaxCall(obj);
+    	});
+        
     	//list에서 값을 뽑아 테이블에 넣는 함수
     	function listPrint(list){
     		var content = ""; //자식요소로 넣을 변수 초기화
@@ -144,7 +207,7 @@
     		$("#listTable").append(content);
     	}
     	
-    	//별점 넣는 함수
+    	//별점 평균 넣는 메서드
     	function score_in(review_score){
     		review_score.forEach(function (item, idx){
     			$(".review_score")[idx].append(item);
