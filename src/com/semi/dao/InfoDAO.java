@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -332,5 +333,64 @@ public class InfoDAO {
 					resClose();
 				}
 				return list;
+			}
+
+			public ArrayList<DTO> placeList(String id, int start, int end) {
+				//반환할 값을 담을 ArrayList 준비
+				ArrayList<DTO> list = new ArrayList<DTO>();
+				ArrayList<Integer> place = new ArrayList<Integer>();
+				//쿼리문 준비
+				String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY place_date) AS rnum, "+
+						"place_no, place_name, info_id, to_char(place_date, 'YYYY-MM-DD hh24:mi:ss') as place_date "+
+						"FROM place WHERE info_id=?) " + 
+						"WHERE rnum BETWEEN ? AND ?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, id); 
+					ps.setInt(2, start); 
+					ps.setInt(3, end);
+					rs = ps.executeQuery();
+					while(rs.next()) { //rs에 값이 있다면 반복
+						DTO dto = new DTO();
+						dto.setRnum(rs.getInt("rnum"));
+						dto.setPlace_no(rs.getInt("place_no"));
+						place.add(rs.getInt("place_no"));
+						dto.setPlace_name(rs.getString("place_name"));
+						dto.setPlace_date(Timestamp.valueOf(rs.getString("place_date")));
+						//System.out.println(rs.getString("place_date"));
+						dto.setInfo_id(rs.getString("info_id"));
+						//double scoreAvg =  scoreAvg(place_no);
+						//dto.setReview_score(scoreAvg);
+						list.add(dto);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return list;
+			}
+
+			public double scoreAvg(int place_no) {
+				double scoreAvg = 0;
+				String sql = "SELECT AVG(review_score) as scoreAvg FROM review WHERE place_no=?";
+				try {
+					Context ctx = new InitialContext();
+					DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
+					conn = ds.getConnection();
+					ps = conn.prepareStatement(sql);
+					ps.setInt(1, place_no);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						scoreAvg = rs.getDouble("scoreAvg");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					return scoreAvg;
+				}finally {
+					resClose();
+				}
+				return scoreAvg;
 			}
 }
