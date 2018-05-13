@@ -1,6 +1,7 @@
 package com.semi.dto;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class DTO {
 	//게시판
@@ -30,7 +31,7 @@ public class DTO {
 	private String place_loc;
 	private String place_guide;
 	private String place_attention;
-	private Date place_date;
+	private Timestamp place_date;
 	private String place_category;
 	private String place_photo;
 	private String place_start;
@@ -208,10 +209,10 @@ public class DTO {
 	public void setPlace_attention(String place_attention) {
 		this.place_attention = place_attention;
 	}
-	public Date getPlace_date() {
+	public Timestamp getPlace_date() {
 		return place_date;
 	}
-	public void setPlace_date(Date place_date) {
+	public void setPlace_date(Timestamp place_date) {
 		this.place_date = place_date;
 	}
 	public String getPlace_category() {

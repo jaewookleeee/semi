@@ -161,7 +161,11 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.likeDel(request, response);
 				break;	
-			
+			case "/placeList":
+				System.out.println("등록내역확인 요청");
+				infoService = new InfoService();
+				infoService.placeList(request, response);
+				break;
 
 		}
 		
