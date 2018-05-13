@@ -88,7 +88,9 @@
 			$.ajax({
 				type : "post",
 				url : "./userList",
-				data : {idSearch : $("#searchBtn")},
+				data : {
+					idSearch : $("#search").val()
+				},
 				dataType : "json",
 				success : function(data) {
 					console.log(data);

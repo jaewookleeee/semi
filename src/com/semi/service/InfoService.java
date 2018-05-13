@@ -21,7 +21,7 @@ import com.semi.dto.DTO;
 
 public class InfoService {
 
-	//로그인
+		//로그인
 		public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			InfoDAO dao = new InfoDAO();
 			
@@ -158,7 +158,7 @@ public class InfoService {
 	//회원 리스트, 검색 출력
 	public void userList(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String loginId = (String) request.getSession().getAttribute("loginId");
-		String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+		//String loginDiv = (String) request.getSession().getAttribute("loginDiv");
 		
 		String idSearch = request.getParameter("idSearch");
 		System.out.println("service : "+idSearch);
@@ -169,7 +169,7 @@ public class InfoService {
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<>();
 		
-		if(loginId != null && loginDiv.equals("관리자")) {
+		if(loginId != null) {
 			map.put("login", true);
 		}else{
 			map.put("login", false);

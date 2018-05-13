@@ -135,13 +135,14 @@ public class InfoDAO {
 
 	public ArrayList<DTO> userList(String idSearch, int start, int end) {
 		ArrayList<DTO> userList = new ArrayList<>();
+		String Search = "%"+idSearch+"%";
 		/*String sql = "SELECT info_id, info_name, info_gender, info_email, info_div, info_num, info_phone FROM info ORDER BY info_id ASC";*/
 		String sql = "SELECT ROW_NUMBER() OVER(ORDER BY info_id ASC) AS rNum, info_id, info_name, info_gender, info_email, info_div, info_num, info_phone FROM " + 
 				"(SELECT ROW_NUMBER() OVER(ORDER BY info_id ASC) AS rNum, info_id, info_name, info_gender, info_email, info_div, info_num, info_phone FROM info WHERE info_id LIKE ?) WHERE rNum BETWEEN ? AND ?";
 		System.out.println("DAO : "+idSearch);
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, "%"+idSearch+"%");
+			ps.setString(1, Search);
 			ps.setInt(2, start);
 			ps.setInt(3, end);
 			
