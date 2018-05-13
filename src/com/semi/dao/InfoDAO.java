@@ -342,11 +342,11 @@ public class InfoDAO {
 				return list;
 			}
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 			public void userSearch(String id) {
 				
 				
-=======
+=======*/
 			public ArrayList<DTO> placeList(String id, int start, int end) {
 				//반환할 값을 담을 ArrayList 준비
 				ArrayList<DTO> list = new ArrayList<DTO>();
@@ -404,6 +404,6 @@ public class InfoDAO {
 					resClose();
 				}
 				return scoreAvg;
->>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90
+/*>>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90*/
 			}
 }

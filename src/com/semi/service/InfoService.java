@@ -451,9 +451,9 @@ public class InfoService {
 			}
 		}
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 	
-=======
+=======*/
 		public void placeList(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
 			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
@@ -493,5 +493,5 @@ public class InfoService {
 				response.getWriter().println(obj);
 			}
 		}
->>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90
+/*>>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90*/
 }
