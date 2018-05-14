@@ -261,7 +261,7 @@ function placeList(list){
 	});
 $("#listBox").append(newLine);
 $("div.place").click(function(){
-	location.href="./placeDetail?place_no="+$(this).children("input[type='hidden']").val();
+	location.href="./placeDetailUp?place_no="+$(this).children("input[type='hidden']").val();
 });
 	}else{
 		$("#listBox").html("<br/><br/><br/><br/><br/><h3>해당 검색 결과가 더 이상 존재하지 않습니다.</h3>");

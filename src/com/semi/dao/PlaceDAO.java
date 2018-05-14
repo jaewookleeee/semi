@@ -188,8 +188,8 @@ public class PlaceDAO {
 					e.printStackTrace();
 
 			}
-			}resClose();
-		}
+			}
+		}resClose();
 	}
 
 	public int likeDel(String[] like_id) {

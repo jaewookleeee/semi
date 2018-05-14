@@ -28,6 +28,8 @@
 	<div>
 	<jsp:include page="menuBar.jsp"/>
 	</div>
+	<c:set var="place_no" value="${place_no}" scope="page"/>
+	<input type="hidden" value="place_no"/>
 		<div id="all"> 
 	        <img id="main"/><br/>
 			<div class="sub_div">
@@ -77,16 +79,18 @@
 		    	$("#qa").css("background-color","white");
 			}
 			
-			$("#area").load(page, function(res, stat) { $("#area").html(res); });
+			$("#area").load(page,function(res, stat) { $("#area").html(res)});
 		});
 
 		$(document).ready(function(){
+			var p_no="${place_no}";			
+			console.log(p_no);
 			$.ajax({
 					type:"post",
 					url:"./placephotoDetail",
 					dataType:"JSON",
 					data:{
-						place_no:${place_no}
+						place_no:p_no
 					},
 					success :function(data){
 						console.log(data);
