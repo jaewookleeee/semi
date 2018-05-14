@@ -116,7 +116,6 @@ public class Controller extends HttpServlet {
 				infoService.del(request, response);
 				break;
 				
-				
 			case"/placeSearch":
 				System.out.println("장소 검색");
 				placeService=new PlaceService();
