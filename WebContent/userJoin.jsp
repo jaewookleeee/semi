@@ -7,111 +7,28 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
-			div#main{
-            position: absolute;
-            border: 1.5px solid #A4A4A4;
-            width: 310px;
-            height: 540px;
-            left: 40%;
-            top: 200px;
-            text-align: center;
-	        }
-	        span#usertxt{
-	            position: absolute;
-	            left: 75px;
-	            top: 10px;
-	            font-size: 20px;     
-	        }
-	        b#id{
-	            position: absolute;
-	            left: 15px;
-	            top: 50px;
-	            font-size: 13px;
-	        }
-	        b#pw{
-	            position: absolute;
-	            left: 15px;
-	            top: 110px;
-	            font-size: 13px;    
-	        }
-	        b#pwChk{
-	            position: absolute;
-	            left: 15px;
-	            top: 170px;
-	            font-size: 13px;                
-	        }
-	        b#name{
-	            position: absolute;
-	            left: 15px;
-	            top: 230px;
-	            font-size: 13px; 
-	        }
-	        b#Gender{
-	            position: absolute;
-	            left: 15px;
-	            top: 290px;
-	            font-size: 13px;    
-	        }   
-	        b#birth{
-	            position: absolute;
-	            left: 15px;
-	            top: 350px;
-	            font-size: 13px;
-	        }
-	        b#email{
-	            position: absolute;
-	            left: 15px;
-	            top: 410px;
-	            font-size: 13px;            
-	        }
-	        input#userId{
-	            position: absolute;
-	            left: 15px;
-	            top: 75px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
-	        button#idChk{
-	            position: absolute;
-	            left: 220px;
-	            top: 75px;
-	            width: 69px;
-	            height: 25px;
-	            color: white;
-	            background-color: black;
-	            border-style: none;
-	            font-size: 10px;
-	        }
-	        input#userPw{
-	            position: absolute;
-	            left: 15px;
-	            top: 135px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
+			div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 310px; height: 540px; left: 40%;
+				top: 200px; text-align: center; }
+	        span#usertxt{ position: absolute; left: 75px;
+	            top: 10px; font-size: 20px; }
+	        b#id{ position: absolute; left: 15px; top: 50px; font-size: 13px; }
+	        b#pw{ position: absolute; left: 15px; top: 110px; font-size: 13px; }
+	        b#pwChk{ position: absolute; left: 15px; top: 170px; font-size: 13px; }
+	        b#name{ position: absolute; left: 15px; top: 230px; font-size: 13px;  }
+	        b#Gender{ position: absolute; left: 15px; top: 290px; font-size: 13px; }   
+	        b#birth{ position: absolute; left: 15px; top: 350px; font-size: 13px; }
+	        b#email{ position: absolute; left: 15px; top: 410px; font-size: 13px; }
+	        input#userId{ position: absolute; left: 15px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
+	        button#idChk{ position: absolute; left: 220px; top: 75px; width: 69px;
+	            height: 25px; color: white; background-color: black; border-style: none; font-size: 10px; }
+	        input#userPw{ position: absolute; left: 15px; top: 135px;
+	            width: 200px; height: 25px; font-size: 10px; }
 	        input#userPwChk{
-	            position: absolute;
-	            left: 15px;
-	            top: 195px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
-	        input#userName{
-	            position: absolute;
-	            left: 15px;
-	            top: 255px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;    
-	        }
-	        span#gender{
-	        	position: absolute;
-	        	left: 15px;
-	        	top: 315px;
-	        }
+	            position: absolute; left: 15px; top: 195px;
+	            width: 200px; height: 25px; font-size: 10px;  }
+	        input#userName{ position: absolute; left: 15px; top: 255px;
+ 				width: 200px; height: 25px; font-size: 10px;     }
+	        span#gender{ position: absolute; left: 15px; top: 315px; }
 /* 	        span#genM{
 	            position: absolute;
 	            left: 15px;
@@ -273,6 +190,14 @@
 		
 		//회원가입
 		$("#join").click(function() {
+		/* 	var regexp = /[0-9a-zA-Z]/; // 숫자,영문,특수문자
+
+			var userIdTxt = $("#userId").val();
+			for(var i=0; i<userIdTxt.length; i++){
+				if(userIdTxt.charAt(i)!="" && regexp.test(userIdTxt.charAt(i)) == false){
+					alert("영어, 숫자 가능");
+				}
+			} */
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
 			//console.log(userPw, userPwChk);	
@@ -324,25 +249,24 @@
 					dataType : "json",
 					success : function(data) {
 						console.log(data);
+						if(data.success > 0){
+							alert("회원 가입 성공");
+							location.href="index.jsp";
+						}else{
+							alert("회원가입 실패");
+						}
 					},
 					error : function(error) {
 						console.log(error);
 					}
 				});
 			}
-			
-			
-			
-			
-			
-			
-			
-			
 
 		});
 		
 		//중복체크
 		$("#idChk").click(function() {
+			
 			$.ajax({
 				type : "post",
 				url : "./overlay",
@@ -350,7 +274,11 @@
 				dataType : "json",
 				success : function(data) {
 					console.log(data);
-					if(data.result == true){
+					
+					if(userIdTxt==""){
+						alert("아이디 입력를 입력하세요.");
+						$("#userId").focus();
+					}else if(data.result == true){
 						alert("중복된 아이디 입니다.");
 						$("#userId").focus();
 					}else{
@@ -358,6 +286,7 @@
 						$("#userPw").focus();
 						chk = true;
 					}
+					
 				},
 				error : function(error) {
 					console.log(error);
