@@ -171,7 +171,7 @@ public class Controller extends HttpServlet {
 	 			RequestDispatcher dis = request.getRequestDispatcher(page);
 	 			dis.forward(request, response);
 				break;
-			case "/infoPlaceList":
+			case "/placeList":
 				System.out.println("등록내역확인 요청");
 				infoService = new InfoService();
 				infoService.placeList(request, response);
@@ -180,6 +180,11 @@ public class Controller extends HttpServlet {
 				System.out.println("등록 장소 삭제 요청");
 				placeService = new PlaceService();
 				placeService.delete(request, response);
+				break;
+			case "/total":
+				System.out.println("통계 페이지 요청");
+				infoService = new InfoService();
+				infoService.total(request, response);
 				break;
 		}
 		
