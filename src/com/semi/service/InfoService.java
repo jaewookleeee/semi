@@ -528,7 +528,11 @@ public class InfoService {
 			System.out.println(obj);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
+<<<<<<< HEAD
 		}
+=======
+			}
+>>>>>>> 85fdbda043353e68f99342f8eb93075185319cf8
 
 		public void total(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출

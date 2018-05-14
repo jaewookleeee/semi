@@ -20,7 +20,7 @@ import com.semi.service.ReviewService;
 @WebServlet({"/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/like", "/likeDel",
-	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardList", "/boardSearch",
+	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeDetailUp"
@@ -159,10 +159,30 @@ public class Controller extends HttpServlet {
 				boardService = new BoardService();
 				boardService.detail(request, response);
 				break;
+			case "/boardDetailView":
+				System.out.println("boardDetailView");
+				request.getSession().setAttribute("board_no", request.getParameter("board_no"));
+				response.sendRedirect("questDetail.jsp");
+				break;
 			case "/boardList":
 				System.out.println("boardList");
 				boardService = new BoardService();
 				boardService.search(request, response);
+				break;
+			case "/boardReplyWrite":
+				System.out.println("boardReplyWrite");
+				boardService = new BoardService();
+				boardService.replyWrite(request, response);
+				break;
+			case "/boardReplyUdate":
+				System.out.println("boardReplyUdate");
+				boardService = new BoardService();
+				boardService.replyUpdate(request,response);
+				break;
+			case "/boardReplyDel":
+				System.out.println("boardReplyDel");
+				boardService = new BoardService();
+				boardService.replyDelete(request,response);
 				break;
 			case "/likeList":
 				System.out.println("찜 목록 요청");
