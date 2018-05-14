@@ -202,11 +202,8 @@ public class Controller extends HttpServlet {
 	 			RequestDispatcher dis = request.getRequestDispatcher(page);
 	 			dis.forward(request, response);
 				break;
-<<<<<<< HEAD
-			case "/infoPlaceList":
-=======
+		
 			case "/placeList":
->>>>>>> a5b4c3fcacffd891d7771e84643910a0870ca161
 				System.out.println("등록내역확인 요청");
 				infoService = new InfoService();
 				infoService.placeList(request, response);
@@ -216,14 +213,12 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.delete(request, response);
 				break;
-<<<<<<< HEAD
-=======
+
 			case "/total":
 				System.out.println("통계 페이지 요청");
 				infoService = new InfoService();
 				infoService.total(request, response);
 				break;
->>>>>>> a5b4c3fcacffd891d7771e84643910a0870ca161
 		}
 		
 	}

@@ -9,8 +9,8 @@
 		alert("로그인이 필요한 서비스입니다.");
 		history.back();
 	}else if(loginId != null && loginDiv == "사용자"){
-		location.href="userUpdate.jsp";
+		location.href="userDetail.jsp";
 	}else if(loginId != null && loginDiv == "등록자"){
-		location.href="regUpdate.jsp";
+		location.href="regDetail.jsp";
 	}
 </script>

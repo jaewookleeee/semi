@@ -220,9 +220,6 @@
 	            background-color: black;
 	            border-style: none;            
 	        }
-	        button#del{ position: absolute; left: 15px; top: 675px; width: 60px; height: 25px; font-size: 10px;
-	        	color: white; background-color: black; border-style: none;
-	        }
 		</style>
 	</head>
 	<body>
@@ -248,15 +245,7 @@
             	&nbsp;&nbsp;&nbsp;&nbsp;
             	<input id="woman" type="radio" name="regGender" value="여"/>여자
             </span>
-            <!-- <span id="genM">
-                <input id="man" type="radio" name="userGenger" value="남자"/>
-                <label id="manLb" for="man">남자</label>
-            </span>
-            
-            <span id="genW">
-                <input id="woman" type="radio" name="userGenger" value="여자"/>
-                <label id="womanLb" for="woman">여자</label>
-            </span>          -->       
+
             <b id="birth">생년월일</b>
             <!-- <input id="regBirth" type="date" value="2018-05-07"/> -->
             <select name="regBirthYear" id="regBirthYear">
@@ -287,7 +276,6 @@
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone" type="tel" placeholder="휴대폰번호를 입력하세요."/>
             
-            <button id="del">탈퇴하기</button>
             <button id="cancel">취소</button>
             <button id="save">수정</button>
         </div>
@@ -295,10 +283,6 @@
 	<script>
 		$("#cancel").click(function() {
 			location.href="index.jsp";
-		});
-	
-		$("#del").click(function() {
-			location.href="del.jsp";
 		});
 		
 		$("#save").click(function() {
@@ -334,6 +318,7 @@
 				success : function(data) {
 					console.log(data);
 					alert("수정 성공");
+					location.href="regDetail.jsp";
 				},
 				error : function(error) {
 					console.log(error);
