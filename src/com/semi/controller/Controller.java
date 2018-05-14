@@ -1,6 +1,8 @@
 package com.semi.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +23,7 @@ import com.semi.service.ReviewService;
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch",
-	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
+	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeDetailUp"
 })
 
 public class Controller extends HttpServlet {
@@ -133,10 +135,10 @@ public class Controller extends HttpServlet {
 			case "/placephotoDetail":
 				System.out.println("포토상세보기 요청");
 				System.out.println(request.getParameter("place_no"));
+
 				placeService=new PlaceService();
 				placeService.detailphoto(request,response);
 				break;
-
 			case "/boardWrite":
 				System.out.println("boardWrite");
 				boardService = new BoardService();
@@ -172,12 +174,29 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.likeDel(request, response);
 				break;	
+			case "/placeDetailUp":
+				System.out.println("검색 후 상세보기 요청");
+				System.out.println(request.getParameter("place_no"));
+				request.setAttribute("place_no", request.getParameter("place_no"));
+	 			String page = "placeDetailUp.jsp";
+	 			RequestDispatcher dis = request.getRequestDispatcher(page);
+	 			dis.forward(request, response);
+				break;
 			case "/placeList":
 				System.out.println("등록내역확인 요청");
 				infoService = new InfoService();
 				infoService.placeList(request, response);
 				break;
-
+			case "/placeDel":
+				System.out.println("등록 장소 삭제 요청");
+				placeService = new PlaceService();
+				placeService.delete(request, response);
+				break;
+			case "/total":
+				System.out.println("통계 페이지 요청");
+				infoService = new InfoService();
+				infoService.total(request, response);
+				break;
 		}
 		
 	}

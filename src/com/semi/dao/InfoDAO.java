@@ -451,4 +451,50 @@ public class InfoDAO {
 				}
 				return dto;
 			}
+
+			//통계 페이지 
+			public ArrayList<DTO> total(String id) {
+				ArrayList<DTO> list = new ArrayList<DTO>();
+				String sql = "SELECT place_no, place_name, to_char(place_date, 'yyyy-MM-dd hh24:mm:ss') as place_date FROM place WHERE info_id=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, id);
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						DTO dto = new DTO();
+						dto.setPlace_no(rs.getInt("place_no"));
+						dto.setPlace_name(rs.getString("place_name"));
+						dto.setPlace_date(Timestamp.valueOf(rs.getString("place_date")));
+						list.add(dto);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return list;
+			}
+
+			public Integer bookCnt(int place_no) {
+				int bookCnt = 0;
+				String sql = "SELECT COUNT (*) as book_count FROM book WHERE place_no = ?";
+				try {
+					Context ctx = new InitialContext();
+					DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
+					conn = ds.getConnection();
+					ps = conn.prepareStatement(sql);
+					ps.setInt(1, place_no);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						bookCnt = rs.getInt("book_count");
+						System.out.println("place_no : "+place_no+"bookCnt:"+bookCnt);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					resClose();
+				}
+				return bookCnt;
+			}
 }

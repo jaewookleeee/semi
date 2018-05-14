@@ -186,6 +186,24 @@
     		};
     		ajaxCall(obj);
     	});
+    	
+    	//삭제 버튼
+    	$(document).on("click", "button[id='del']", function(){
+    		var del_no=$(this).val();
+    		console.log(del_no);
+    		obj.url="./placeDel"
+    		obj.data={
+    				"del_no":del_no
+    		}
+    		obj.success=function(data){
+    			console.log(data);
+    			if(data.success){
+    				alert("장소 삭제 성공");
+    				location.href="placeList.jsp";
+    			}
+    		}
+    		ajaxCall(obj);
+    	});
         
     	//list에서 값을 뽑아 테이블에 넣는 함수
     	function listPrint(list){
@@ -201,7 +219,7 @@
     			content += "<td>"+item.place_date+"</td>";
     			content += "<td class='review_score'></td>";
     			content += "<td><button value='"+item.place_no+"'>수정</button></td>";
-    			content += "<td><button value='"+item.place_no+"'>삭제</button></td>";
+    			content += "<td><button id='del' value='"+item.place_no+"'>삭제</button></td>";
     			content += "</tr>";
     		});
     		$("#listTable").append(content);

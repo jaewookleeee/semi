@@ -479,6 +479,7 @@ public class InfoService {
 				response.getWriter().println(obj);
 			}
 		}
+<<<<<<< HEAD
 
 		//회원 삭제
 		public void userDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -528,5 +529,41 @@ public class InfoService {
 			System.out.println(obj);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
+=======
+/*>>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90*/
+
+		public void total(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
+			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+			System.out.println(id);
+			System.out.println(loginDiv);
+			if(id == null || !(loginDiv.equals("등록자"))) {//loginId의 값이 null 이라면(비로그인 상태라면) 혹은 등록자가 아니라면
+				Gson json = new Gson(); //json을 준비
+				HashMap<String, String> map = new HashMap<String, String>(); //key와 value 둘다 String 타입의 HashMap 준비
+				map.put("msg", "권한이 없는 서비스입니다."); // map에 보낼 값 넣기
+				
+				String obj = json.toJson(map); // map 변환
+				
+				response.setContentType("test/html; charset=UTF-8"); //한글도 같이 보내니까 한글 깨짐 방지
+				response.getWriter().println(obj); //response로 보냄
+			}else {
+				InfoDAO dao = new InfoDAO();
+				//위에 테이블에 들어갈 리스트
+				ArrayList<DTO> list = dao.total(id);
+				ArrayList<Integer> bookCnt = new ArrayList<Integer>();//각 장소 예약자 수
+				ArrayList<Date> dates = new ArrayList<>();//셀렉트 박스에 들어갈 날짜
+				//예약자 수 
+				for(int i=0; i<list.size(); i++) {
+					bookCnt.add(dao.bookCnt(list.get(i).getPlace_no()));
+				}
+				Gson json = new Gson();
+				HashMap<String, Object> map = new HashMap<>();
+				map.put("list", list);
+				map.put("bookCnt", bookCnt);
+				String obj = json.toJson(map);
+				response.setContentType("text/html; charset=UTF-8"); 
+				response.getWriter().println(obj);
+			}
+>>>>>>> c3240e2ac10ff69f32f07d269a8445998e15b9d6
 		}
 }
