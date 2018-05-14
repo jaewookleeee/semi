@@ -48,46 +48,60 @@ public class PlaceDAO {
 
 	public ArrayList<DTO> search(int start, int end, String keyword, String category, String loc) {
 		ArrayList<DTO> list = new ArrayList<DTO>();
-		int addSQL = 3;
+		int addSQL = 1;
 
 		/*
 		 * SELECT place_no, place_name, place_intro, place_category, place_loc FROM
 		 * (SELECT ROW_NUMBER() OVER(ORDER BY place_no DESC) AS rnum, place_no,
-		 * place_name, place_intro, place_category, place_loc FROM place) WHERE (rnum
-		 * BETWEEN 1 AND 2) AND place_category = '카테고리' AND place_loc = '지역' AND
-		 * (place_name || place_intro) LIKE '%검색_키워드%';
+		 * place_name, place_intro, place_category, place_loc FROM place WHERE
+		 * place_category = '카테고리' AND place_loc = '%지역%' AND (place_name || place_intro) LIKE '%검색_키워드%'
+		 * ) WHERE (rnum BETWEEN 1 AND 2);
 		 */
 
 		String sql = "SELECT place_no, place_name, place_intro, place_category, place_loc"
-				+ " FROM (SELECT ROW_NUMBER() OVER(ORDER BY place_no DESC) AS rnum, place_no, place_name, place_intro, place_category, place_loc  FROM place)\r\n"
-				+ " WHERE (rnum BETWEEN ? AND ?)";
-		if (!category.equals("none")) {
-			sql += " AND place_category = ?";
+				+ " FROM (SELECT ROW_NUMBER() OVER(ORDER BY place_no DESC) AS rnum, place_no, place_name, place_intro, place_category, place_loc  FROM place";
+		if (!category.equals("none") || !loc.equals("none") || !keyword.equals("none")) {
+			sql += " WHERE ";
+			if (!category.equals("none")) {
+				sql += " place_category = ?";
+				addSQL++;
+			}
+			if (!loc.equals("none")) {
+				if(addSQL>1) {
+					sql+=" AND ";
+				}
+				addSQL++;
+				sql += " place_loc LIKE ?";
+			}
+			if (!keyword.equals("none")) {
+				if(addSQL>1) {
+					sql+=" AND ";
+				}
+				addSQL++;
+				sql += " (place_name || place_intro) LIKE ?";
+				// set string 시 %% 추가해야한다.
+			}
 		}
-		if (!loc.equals("none")) {
-			sql += " AND place_loc = ?";
-		}
-		if (!keyword.equals("none")) {
-			sql += " AND (place_name || place_intro) LIKE ?";
-			// set string 시 %% 추가해야한다.
-		}
+		
+		sql += ") WHERE (rnum BETWEEN ? AND ?)";
+		
+		addSQL=1;
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, start);
-			ps.setInt(2, end);
-
 			if (!category.equals("none")) {
 				ps.setString(addSQL, category);
 				addSQL++;
 			}
 			if (!loc.equals("none")) {
-				ps.setString(addSQL, loc);
+				ps.setString(addSQL,  "%" +loc+ "%");
 				addSQL++;
 			}
 			if (!keyword.equals("none")) {
 				ps.setString(addSQL, "%" + keyword + "%");
 				addSQL++;
 			}
+			ps.setInt(addSQL, start);
+			ps.setInt(addSQL+1, end);
 
 			rs = ps.executeQuery();
 

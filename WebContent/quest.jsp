@@ -106,14 +106,7 @@
 			}
 			ajaxCall(obj);
 		});
-		
-		//로그인 체크
-		var loginId = "${sessionScope.loginId}";
-		console.log(loginId);
-		if(loginId == ""){
-			alert("로그인이 필요한 서비스 입니다.");
-			location.href="login.jsp";
-		}		
+			
 		var b=0;
 		//리스트 출력
 		function listPrint(list){
