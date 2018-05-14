@@ -100,7 +100,7 @@
 	$(document).ready(function(){
 		//console.log($("#listTable").children().html());
 		tableTh = $("#listTable").children().html(); //페이지를 로드하고나서 바로 테이블 자식요소(th태그) 담음
-		obj.url = "placeList"; //ajax bookList로 요청
+		obj.url = "infoPlaceList"; //ajax bookList로 요청
 		obj.data={ //같이 보낼 데이터
 				"sNum":sNum,
 				"eNum":eNum
@@ -128,7 +128,7 @@
     	$("#pre").click(function(){
     		sNum -= 5; //페이징 시작 값 변수에서 -5를 하고 넣음
     		eNum -= 5; //페이징 끝 값 변수에서 -5를 하고 넣음
-    		obj.url = "placeList"; //placeList로 컨트롤러에 요청
+    		obj.url = "infoPlaceList"; //placeList로 컨트롤러에 요청
     		obj.data={
     				"sNum":sNum,
     				"eNum":eNum
@@ -160,7 +160,7 @@
     	$("#next").click(function(){
     		sNum += 5; //페이징 시작 값변수에서 +5해줌
     		eNum += 5; //페이징 끝 값 변수에서 +5 해줌
-    		obj.url = "placeList";
+    		obj.url = "infoPlaceList";
     		obj.data={
     				"sNum":sNum,
     				"eNum":eNum
@@ -186,6 +186,24 @@
     		};
     		ajaxCall(obj);
     	});
+    	
+    	//삭제 버튼
+    	$(document).on("click", "button[id='del']", function(){
+    		var del_no=$(this).val();
+    		console.log(del_no);
+    		obj.url="./placeDel"
+    		obj.data={
+    				"del_no":del_no
+    		}
+    		obj.success=function(data){
+    			console.log(data);
+    			if(data.success){
+    				alert("장소 삭제 성공");
+    				location.href="placeList.jsp";
+    			}
+    		}
+    		ajaxCall(obj);
+    	});
         
     	//list에서 값을 뽑아 테이블에 넣는 함수
     	function listPrint(list){
@@ -201,7 +219,7 @@
     			content += "<td>"+item.place_date+"</td>";
     			content += "<td class='review_score'></td>";
     			content += "<td><button value='"+item.place_no+"'>수정</button></td>";
-    			content += "<td><button value='"+item.place_no+"'>삭제</button></td>";
+    			content += "<td><button id='del' value='"+item.place_no+"'>삭제</button></td>";
     			content += "</tr>";
     		});
     		$("#listTable").append(content);

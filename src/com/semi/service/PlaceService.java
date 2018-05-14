@@ -160,4 +160,34 @@ public class PlaceService {
 		String obj = json.toJson(map);
 		response.getWriter().println(obj);	
 	}
+
+	public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
+		String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+		System.out.println(id);
+		System.out.println(loginDiv);
+		if(id == null || !(loginDiv.equals("등록자"))) {//loginId의 값이 null 이라면(비로그인 상태라면) 혹은 등록자가 아니라면
+			Gson json = new Gson(); //json을 준비
+			HashMap<String, String> map = new HashMap<String, String>(); //key와 value 둘다 String 타입의 HashMap 준비
+			map.put("msg", "권한이 없는 서비스입니다."); // map에 보낼 값 넣기
+			
+			String obj = json.toJson(map); // map 변환
+			
+			response.setContentType("test/html; charset=UTF-8"); //한글도 같이 보내니까 한글 깨짐 방지
+			response.getWriter().println(obj); //response로 보냄
+		}else {
+			int p_id = Integer.parseInt(request.getParameter("del_no"));
+			System.out.println(p_id);
+			boolean success = false;
+			PlaceDAO dao = new PlaceDAO();
+			if(dao.delete(p_id) == 1) {
+				success = true;
+			}
+			Gson json = new Gson();
+			HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+			map.put("success", success);
+			String obj = json.toJson(map);
+			response.getWriter().println(obj);
+		}
+	}
 }
