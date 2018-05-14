@@ -32,6 +32,8 @@
             .logo { position: relative; top: 2px; margin-right: 50px; font-family: 'odibeeSans', sans-serif; font-size: 22px; color: #FF376C; }   
             .menu_item { position: relative; padding: 0px; line-height: 10px; left: 0px; margin-right: 40px; font-family: 'Nanum Square', sans-serif; font-size: 14px; }
             .log { position: absolute; padding: 0px; width: 60px; height: 20px; line-height: 20px; margin-top: -5px; margin-left: 1125px; font-family: 'Nanum Square', sans-serif; font-size: 14px; background-color: #FA5882; color: white; text-align: center; }
+            span#login_id{position: absolute; font-size: 15px; left: 1000px; top: 10px;}
+            #login_idaTag{position: absolute; font-size: 15px; left: 1050px; top: 10px;}
             
             .submenu { position: absolute; display: none; width: 700px; height: 50px; top: 20px; left: -50px; background-color: white; }
             .submenu_item { position: relative; display: inline; width: 80px; height: 20px; left: 5px; margin: 3px 30px 10px 0px; line-height: 50px; font-family: 'Nanum Square', sans-serif; font-size: 14px; float:left; }
@@ -46,14 +48,14 @@
         <span class="menu">
             <ul>
                 <li class="menu_item"><a class="logo" href="index.jsp">WAKE UP PLACE</a></li>
-                <li class="menu_item" id="myPage"><a href="login.jsp">마이페이지</a>
+                <li class="menu_item" id="myPage"><a href="#">마이페이지</a>
                     <span class="submenu">
                         <ul>
                             <li class="submenu_item"><a href="updateChk.jsp">회원정보수정</a></li>
                             <li class="submenu_item"><a href="bookList.jsp">예약내역확인</a></li>
                             <li class="submenu_item"><a href="likeList.jsp">찜한내역확인</a></li>
                             <li class="submenu_item"><a href="placeList.jsp">등록내역확인</a></li>
-                            <li class="submenu_item"><a href="regChange.jsp">등록자전환</a></li>
+                            <li class="submenu_item"><a href="regChangeChk.jsp">등록자전환</a></li>
                             <li class="submenu_item"><a href="userListChk.jsp">회원관리</a></li>
                         </ul>
                     </span>
@@ -64,7 +66,8 @@
                 <li class="menu_item"><a href="divChk.jsp">장소등록</a></li>
             	
                 <a href="login.jsp"><li class="log" id="login_btn">로그인</li></a>
-                <a href="logout"><li class="log" id="logout">로그아웃</li></a>
+                <a href="./logout"><li class="log" id="logout">로그아웃</li></a>
+                <span id="login_id"></span><a id="login_idaTag" href="#"></a>
                 
             </ul>
         </span>
@@ -76,12 +79,17 @@
 	    	if(loginId != "") {
 	        	$("#login").css("visibility", "hidden");
 	        	$("#logout").css("visibility", "visible");
-	    	} else {
+	        	$("#login_id").text("ㅎㅇ");
+	        	$("#login_idaTag").text(loginId+" 님");
+	        	
+	        	
+	        	
+	    	}else {
 	        	$("#logout").css("visibility", "hidden");
 	        	$("#login").css("visibility", "visible");
 	    	} 
 		});
-		
-		
+	    
+
     </script>
 </html>

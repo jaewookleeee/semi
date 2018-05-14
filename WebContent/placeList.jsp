@@ -100,7 +100,7 @@
 	$(document).ready(function(){
 		//console.log($("#listTable").children().html());
 		tableTh = $("#listTable").children().html(); //페이지를 로드하고나서 바로 테이블 자식요소(th태그) 담음
-		obj.url = "infoPlaceList"; //ajax bookList로 요청
+		obj.url = "placeList"; //ajax bookList로 요청
 		obj.data={ //같이 보낼 데이터
 				"sNum":sNum,
 				"eNum":eNum
@@ -128,7 +128,7 @@
     	$("#pre").click(function(){
     		sNum -= 5; //페이징 시작 값 변수에서 -5를 하고 넣음
     		eNum -= 5; //페이징 끝 값 변수에서 -5를 하고 넣음
-    		obj.url = "infoPlaceList"; //placeList로 컨트롤러에 요청
+    		obj.url = "placeList"; //placeList로 컨트롤러에 요청
     		obj.data={
     				"sNum":sNum,
     				"eNum":eNum
@@ -160,7 +160,7 @@
     	$("#next").click(function(){
     		sNum += 5; //페이징 시작 값변수에서 +5해줌
     		eNum += 5; //페이징 끝 값 변수에서 +5 해줌
-    		obj.url = "infoPlaceList";
+    		obj.url = "placeList";
     		obj.data={
     				"sNum":sNum,
     				"eNum":eNum
