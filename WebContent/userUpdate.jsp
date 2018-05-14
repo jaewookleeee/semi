@@ -272,15 +272,15 @@
             </select>
             <b id="email">이메일</b>
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
-            <button id="del">탈퇴하기</button>
+            <!-- <button id="del">탈퇴하기</button> -->
             <button id="cancel">취소</button>
             <button id="save">수정</button>
         </div>
 	</body>
 	<script>
-		$("#del").click(function() {
+		/* $("#del").click(function() {
 			location.href="del.jsp";
-		});
+		}); */
 	
 		$("#save").click(function() {
 			var newPw = $("#userNewPw").val();
@@ -312,10 +312,10 @@
 				dataType : "json",
 				success : function(data) {
 					console.log(data);
-					
-					
+
 					if(data.success >0){
 						alert("수정 성공");
+						location.href="userDetail.jsp";
 					}
 				},
 				error : function(error) {

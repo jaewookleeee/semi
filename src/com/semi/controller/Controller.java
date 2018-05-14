@@ -49,6 +49,7 @@ public class Controller extends HttpServlet {
 		QaService qaService = null;
 		ReviewService reviewService = null;
 		
+		
 		switch (subAddr) {
 			case "/overlay":
 				System.out.println("중복체크 요청");
@@ -115,7 +116,6 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.del(request, response);
 				break;
-				
 				
 			case"/placeSearch":
 				System.out.println("장소 검색");
@@ -202,6 +202,7 @@ public class Controller extends HttpServlet {
 	 			RequestDispatcher dis = request.getRequestDispatcher(page);
 	 			dis.forward(request, response);
 				break;
+		
 			case "/placeList":
 				System.out.println("등록내역확인 요청");
 				infoService = new InfoService();
@@ -212,6 +213,7 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.delete(request, response);
 				break;
+
 			case "/total":
 				System.out.println("통계 페이지 요청");
 				infoService = new InfoService();

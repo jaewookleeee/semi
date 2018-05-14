@@ -266,6 +266,7 @@
 		
 		//중복체크
 		$("#idChk").click(function() {
+			var userIdTxt = $("#userId").val();
 			
 			$.ajax({
 				type : "post",

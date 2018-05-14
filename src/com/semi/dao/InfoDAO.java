@@ -428,7 +428,7 @@ public class InfoDAO {
 			//회원정보
 			public DTO userInfo(String loginId) {
 				DTO dto = null;
-				String sql = "SELECT info_id, info_name, info_birth, info_gender, info_email, info_div FROM info WHERE info_id=?";
+				String sql = "SELECT * FROM info WHERE info_id=?";
 				try {
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, loginId);
@@ -442,6 +442,8 @@ public class InfoDAO {
 						dto.setInfo_gender(rs.getString("info_gender"));
 						dto.setInfo_email(rs.getString("info_email"));
 						dto.setInfo_div(rs.getString("info_div"));
+						dto.setInfo_num(rs.getString("info_num"));
+						dto.setInfo_phone(rs.getString("info_phone"));
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
