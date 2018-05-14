@@ -215,7 +215,7 @@
             <b id="newPwChk">새 비밀번호 확인</b>
             <input id="userNewPwChk" type="password" placeholder="비밀번호를 입력하세요."/> 
             <b id="name">이름</b>
-            <input id="userName" type="text" value=""/>
+            <input id="userName" type="text" placeholder="이름을 입력하세요."/>
             <b id="Gender">성별</b>
             <!-- <span id="genM">
                 <input id="man" type="radio" name="userGenger" value="남자"/>
@@ -274,7 +274,7 @@
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
             <button id="del">탈퇴하기</button>
             <button id="cancel">취소</button>
-            <button id="save">저장</button>
+            <button id="save">수정</button>
         </div>
 	</body>
 	<script>

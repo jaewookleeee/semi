@@ -241,7 +241,7 @@
             <input id="regNewPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
             
             <b id="name">이름</b>
-            <input id="regName" type="text"/>
+            <input id="regName" type="text" placeholder="이름을 입력하세요."/>
             <b id="Gender">성별</b>
             <span id="gender">
             	<input id="man" type="radio" name="regGender" value="남" checked/>남자
@@ -289,7 +289,7 @@
             
             <button id="del">탈퇴하기</button>
             <button id="cancel">취소</button>
-            <button id="save">저장</button>
+            <button id="save">수정</button>
         </div>
 	</body>
 	<script>

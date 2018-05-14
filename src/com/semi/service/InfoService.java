@@ -1,18 +1,14 @@
 package com.semi.service;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.taglibs.standard.lang.jstl.BooleanLiteral;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -134,10 +130,12 @@ public class InfoService {
 	}
 
 	//로그아웃
-	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginId");
+		System.out.println(request.getSession().getAttribute("loginId"));
 		response.sendRedirect("index.jsp");
+		
 	}
 
 	//아이디 중복 체크
@@ -164,7 +162,7 @@ public class InfoService {
 		System.out.println("service : "+idSearch);
 		
 		InfoDAO dao = new InfoDAO();
-		ArrayList<DTO> userList = dao.userList(idSearch, 1, 5);
+		ArrayList<DTO> userList = dao.userList(idSearch, 1, 10);
 		
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<>();
@@ -178,6 +176,7 @@ public class InfoService {
 		map.put("userList", userList);
 		
 		String obj = json.toJson(map);
+		System.out.println(obj);
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 		
@@ -380,45 +379,35 @@ public class InfoService {
 
 		//등록자로 전환
 		public void regChange(HttpServletRequest request, HttpServletResponse response) throws IOException {
-/*			String loginId = (String) request.getSession().getAttribute("loginId");
-			String loginDiv = (String) request.getSession().getAttribute("loginDiv");*/
+			String loginId = (String) request.getSession().getAttribute("loginId");
 			
 			InfoDAO dao = new InfoDAO();
 			DTO dto = new DTO();
-			
-			String id = request.getParameter("id");
-			String pw = request.getParameter("pw");
-			String name = request.getParameter("name");
-			String gender = request.getParameter("gender");
-			String year = request.getParameter("year");
-			String month = request.getParameter("month");
-			String day = request.getParameter("day");
-			String email = request.getParameter("email");
+
 			String num = request.getParameter("num");
 			String phone = request.getParameter("phone");
+			System.out.println(num+phone);
 			
-			String birth = year+"-"+month+"-"+day;
-			Date date = Date.valueOf(birth);
-			
-			System.out.println(id+", "+pw+", "+name+", "+
-					gender+", "+date+", "+email+", "+num+", "+phone);
-			
-			dto.setInfo_id(id);
-			dto.setInfo_pw(pw);
-			dto.setInfo_name(name);
-			dto.setInfo_gender(gender);
-			dto.setInfo_birth(date);
-			dto.setInfo_email(email);
+			dto.setInfo_div("등록자");
 			dto.setInfo_num(num);
 			dto.setInfo_phone(phone);
 			
-			int success = dao.regChange(num, phone, id);
+			int success = dao.regChange(dto, loginId);
 			
 			Gson json = new Gson();
-			HashMap<String, Integer> map = new HashMap<>();
-			map.put("success", success);
+			HashMap<String, Object> map = new HashMap<>();
+					
+			if(success > 0) {
+				request.getSession().setAttribute("loginDiv", dto.getInfo_div());
+				System.out.println(request.getSession().getAttribute("loginDiv"));
+				map.put("loginId", loginId);
+				map.put("loginDiv", dto.getInfo_div());
+				map.put("success", success);
+			}
+			
 			String obj = json.toJson(map);
-			System.out.println(obj);
+			System.out.println(obj+dto.getInfo_div());
+			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
 		}
 		
@@ -451,9 +440,6 @@ public class InfoService {
 			}
 		}
 
-/*<<<<<<< HEAD
-	
-=======*/
 		public void placeList(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
 			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
@@ -493,5 +479,54 @@ public class InfoService {
 				response.getWriter().println(obj);
 			}
 		}
-/*>>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90*/
+
+		//회원 삭제
+		public void userDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			String loginId = (String) request.getSession().getAttribute("loginId");
+			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+			System.out.println(loginId+loginDiv);
+			
+			String userDel[] = request.getParameterValues("userDel[]");
+			System.out.println(userDel.length);
+			
+			InfoDAO dao = new InfoDAO();
+			int success = dao.userDel(userDel);
+			
+			boolean result = false;
+			if(success == userDel.length) {
+				result = true;
+			}
+			
+			Gson json = new Gson();
+			HashMap<String, Boolean> map = new HashMap<>();
+			map.put("result", result);
+			String obj = json.toJson(map);
+			System.out.println(obj);
+			response.getWriter().println(obj);
+		}
+
+		//회원정보
+		public void userInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			String loginId = (String) request.getSession().getAttribute("loginId");
+			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+			System.out.println(loginId+loginDiv);
+			
+			Gson json = new GsonBuilder().setDateFormat("yy-MM-dd").create();
+			HashMap<String, Object> map = new HashMap<>();
+			
+			if(loginId != null) {
+				map.put("login", true);
+			}else {
+				map.put("login", false);
+			}
+			
+			InfoDAO dao = new InfoDAO();
+			DTO dto = dao.userInfo(loginId);
+			map.put("userInfo", dto);
+			
+			String obj = json.toJson(map);
+			System.out.println(obj);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().println(obj);
+		}
 }
