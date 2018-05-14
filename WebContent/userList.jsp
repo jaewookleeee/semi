@@ -18,7 +18,7 @@
 	        }
 	        table{
 	        	position: absolute;
-	        	top: 150px;
+	        	top: 100px;
 	        }
 	        table, th, td{
 	            text-align: center;
@@ -28,13 +28,20 @@
 	            width: 500px;
 	            height: 20px;
 	        }
+	        
+	        input[type='text']{
+	        	border-top: none;
+	        	border-right: none;
+	        	border-left: none;
+	        	border-bottom: 1px solid black;
+	        }
 		</style>
 	</head>
 	<body>
 		<jsp:include page="menuBar.jsp"/>
 		<div id="listDiv">
           	<h3>유저 리스트</h3>
-          	<input type="text" placeholder="검색"/>
+          	<input id="search" type="text" placeholder="검색"/>
           	<button id="searchBtn">검색</button>
             <table id="userListTable">
                 <tr>
@@ -70,6 +77,23 @@
 							}
 						}
 					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		});
+		
+		$("#searchBtn").click(function() {
+			$.ajax({
+				type : "post",
+				url : "./userList",
+				data : {
+					idSearch : $("#search").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
 				},
 				error : function(error) {
 					console.log(error);

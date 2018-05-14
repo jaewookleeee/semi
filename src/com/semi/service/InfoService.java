@@ -21,7 +21,7 @@ import com.semi.dto.DTO;
 
 public class InfoService {
 
-	//로그인
+		//로그인
 		public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			InfoDAO dao = new InfoDAO();
 			
@@ -155,18 +155,21 @@ public class InfoService {
 		response.getWriter().println(obj);
 	}
 
-	//회원 리스트 출력
+	//회원 리스트, 검색 출력
 	public void userList(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		InfoDAO dao = new InfoDAO();
-		ArrayList<DTO> userList = dao.userList();
-		
 		String loginId = (String) request.getSession().getAttribute("loginId");
-		String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+		//String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+		
+		String idSearch = request.getParameter("idSearch");
+		System.out.println("service : "+idSearch);
+		
+		InfoDAO dao = new InfoDAO();
+		ArrayList<DTO> userList = dao.userList(idSearch, 1, 5);
 		
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<>();
 		
-		if(loginId != null && loginDiv.equals("관리자")) {
+		if(loginId != null) {
 			map.put("login", true);
 		}else{
 			map.put("login", false);
@@ -447,4 +450,48 @@ public class InfoService {
 				response.getWriter().println(obj);
 			}
 		}
+
+/*<<<<<<< HEAD
+	
+=======*/
+		public void placeList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
+			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
+			System.out.println(id);
+			System.out.println(loginDiv);
+			if(id == null || !(loginDiv.equals("등록자"))) {//loginId의 값이 null 이라면(비로그인 상태라면) 혹은 등록자가 아니라면
+				Gson json = new Gson(); //json을 준비
+				HashMap<String, String> map = new HashMap<String, String>(); //key와 value 둘다 String 타입의 HashMap 준비
+				map.put("msg", "권한이 없는 서비스입니다."); // map에 보낼 값 넣기
+				
+				String obj = json.toJson(map); // map 변환
+				
+				response.setContentType("test/html; charset=UTF-8"); //한글도 같이 보내니까 한글 깨짐 방지
+				response.getWriter().println(obj); //response로 보냄
+			}else {
+				int start = Integer.parseInt(request.getParameter("sNum")); //paging할 시작 번호 추출
+				int end = Integer.parseInt(request.getParameter("eNum")); // paging할 마지막 번호 추출
+				//System.out.println(start+"/"+end); // 들어온 값 맞는 지 확인
+				InfoDAO dao = new InfoDAO(); 
+				ArrayList<DTO> list = dao.placeList(id, start, end);
+				// 별점 값을 제외한 리스트 추출
+				ArrayList<Double> review_score = new ArrayList<>();
+				
+				//별점 값 
+				for(int i=0; i<list.size(); i++) {
+					//System.out.println(list.get(i).getPlace_no());
+					double score = dao.scoreAvg(list.get(i).getPlace_no());
+					//System.out.println(score);
+					review_score.add(score);
+				}
+				Gson json = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("list", list);
+				map.put("review_score", review_score);
+				String obj = json.toJson(map);
+				response.setContentType("text/html; charset=UTF-8"); 
+				response.getWriter().println(obj);
+			}
+		}
+/*>>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90*/
 }

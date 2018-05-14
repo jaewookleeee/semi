@@ -1,6 +1,8 @@
 package com.semi.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,11 +19,11 @@ import com.semi.service.ReviewService;
 
 @WebServlet({"/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
-	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel", "/placeDetail", "/like", "/likeDel",
+	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/like", "/likeDel",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch",
-	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
+	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeDetailUp"
 })
 
 public class Controller extends HttpServlet {
@@ -94,10 +96,11 @@ public class Controller extends HttpServlet {
 				infoService.regChange(request, response);
 				break;
 			case "/userList":
-				System.out.println("회원 리스트 요청");
+				System.out.println("회원 리스트, 검색 요청");
 				infoService = new InfoService();
 				infoService.userList(request, response);
 				break;
+				
 			case "/del":
 				System.out.println("회원탈퇴 요청");
 				infoService = new InfoService();
@@ -118,9 +121,10 @@ public class Controller extends HttpServlet {
 				bookService = new BookService();
 				bookService.delete(request, response);
 				break;
-			case "/placeDetail":
-				System.out.println("상세보기 요청");
+			case "/placephotoDetail":
+				System.out.println("포토상세보기 요청");
 				System.out.println(request.getParameter("place_no"));
+
 				placeService=new PlaceService();
 				placeService.detailphoto(request,response);
 				break;
@@ -158,6 +162,24 @@ public class Controller extends HttpServlet {
 				System.out.println("찜 삭제 요청");
 				placeService = new PlaceService();
 				placeService.likeDel(request, response);
+				break;	
+			case "/placeDetailUp":
+				System.out.println("검색 후 상세보기 요청");
+				System.out.println(request.getParameter("place_no"));
+				request.setAttribute("place_no", request.getParameter("place_no"));
+	 			String page = "placeDetailUp.jsp";
+	 			RequestDispatcher dis = request.getRequestDispatcher(page);
+	 			dis.forward(request, response);
+				break;
+			case "/infoPlaceList":
+				System.out.println("등록내역확인 요청");
+				infoService = new InfoService();
+				infoService.placeList(request, response);
+				break;
+			case "/placeDel":
+				System.out.println("등록 장소 삭제 요청");
+				placeService = new PlaceService();
+				placeService.delete(request, response);
 				break;
 		}
 		
