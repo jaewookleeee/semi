@@ -231,4 +231,17 @@ public class PlaceDAO {
 		}
 		return list;
 	}
+
+	public int delete(int p_id) {
+		int success = 0;
+		String sql = "DELETE FROM place WHERE place_no=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, p_id);
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return success;
+	}
 }

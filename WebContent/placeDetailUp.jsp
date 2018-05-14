@@ -92,7 +92,11 @@
 					data:{
 						place_no:p_no
 					},
+<<<<<<< HEAD
+					success : function(data){
+=======
 					success :function(data){
+>>>>>>> 521da35fb0e422e79b31a9ccd17d59ec270ffb47
 						console.log(data);
 						$("#main").attr("src",'./upload/'+data.list[0].place_photo);
 						for(var i=0;i<data.list.length;i++){
