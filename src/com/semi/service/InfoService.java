@@ -479,7 +479,6 @@ public class InfoService {
 				response.getWriter().println(obj);
 			}
 		}
-<<<<<<< HEAD
 
 		//회원 삭제
 		public void userDel(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -529,8 +528,7 @@ public class InfoService {
 			System.out.println(obj);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
-=======
-/*>>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90*/
+		}
 
 		public void total(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
@@ -564,6 +562,5 @@ public class InfoService {
 				response.setContentType("text/html; charset=UTF-8"); 
 				response.getWriter().println(obj);
 			}
->>>>>>> c3240e2ac10ff69f32f07d269a8445998e15b9d6
 		}
 }
