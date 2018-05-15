@@ -63,6 +63,7 @@ public class DTO {
 	private int qa_no;
 	private String qa_content;
 	private Date qa_date;
+	private String qa_title;
 	
 	//QA답글
 	private int qareply_no;
@@ -356,6 +357,12 @@ public class DTO {
 	}
 	public void setQareply_date(Date qareply_date) {
 		this.qareply_date = qareply_date;
+	}
+	public String getQa_title() {
+		return qa_title;
+	}
+	public void setQa_title(String qa_title) {
+		this.qa_title = qa_title;
 	}
 	
 	//getter, setter
