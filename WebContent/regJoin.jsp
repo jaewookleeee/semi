@@ -354,6 +354,8 @@
 					dataType : "json",
 					success : function(data) {
 						console.log(data);
+						alert("회원가입성공");
+						location.href="index.jsp";
 					},
 					error : function(error) {
 						console.log(error);
@@ -368,16 +370,16 @@
 			$.ajax({
 				type : "post",
 				url : "./overlay",
-				data : { id : $("#userId").val() },
+				data : { id : $("#regId").val() },
 				dataType : "json",
 				success : function(data) {
 					console.log(data);
 					if(data.result == true){
 						alert("중복된 아이디 입니다.");
-						$("#userId").focus();
+						$("#regId").focus();
 					}else{
 						alert("사용 가능한 아이디 입니다.");
-						$("#userPw").focus();
+						$("#regPw").focus();
 						chk = true;
 					}
 				},

@@ -28,6 +28,7 @@
 		</style>
 </head>
 <body>
+<h1>${place_no}</h1>
 <div class="regist">
             <div class="sec_content">
                 <div class="div_info">
@@ -64,6 +65,7 @@
                     <div class="title"><strong>주의사항</strong></div>
                     <textarea class="content" readonly></textarea>
                 </div>
+                
                 <br/><br/>
             </div>
         </div>
@@ -76,5 +78,7 @@
             $(this).html("찜 하기")
         }
     });
+    $(document).ready(function(){
+    })
 </script>
 </html>

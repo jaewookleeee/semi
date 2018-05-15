@@ -14,6 +14,8 @@
 			span#pwTxt{position: absolute; left: 15px; top: 87px;}
 			input#id{position: absolute; left: 83px; top: 50px; width: 200px; height: 30px;} 
 			input#pw{position: absolute; left: 83px; top: 87px; width: 200px; height: 30px;}
+			span#chkTxt{position: absolute; left: 83px; top: 125px; font-size: 10px;
+	            color: red;}
 			button#cancel{position: absolute; left: 15px; top: 145px; width: 270; height: 30px; 
 				background-color: #FA5882; color: white; border-style: none;}
 			button#del{position: absolute; left: 15px; top: 185px; width: 270; height: 30px; 
@@ -28,7 +30,7 @@
 			<input id="id" type="text" value="${sessionScope.loginId }" readonly="readonly"/>
 			<span id="pwTxt">비밀번호</span>
 			<input id="pw" type="password" placeholder="비밀번호"/>
-			
+			<span id="chkTxt"></span>
 			<button id="cancel">취소</button>
 			<button id="del">확인</button>
 		</div>
@@ -52,8 +54,10 @@
 					console.log(data);
 					if(data.success > 0){
 						alert("탈퇴 성공");
+						location.href="index.jsp";
 					}else{
-						alert("탈퇴 실패");
+						console.log("a");
+						$("#chkTxt").html("비밀번호를 확인해주세요.");
 					}
 				},
 				error : function(error) {
