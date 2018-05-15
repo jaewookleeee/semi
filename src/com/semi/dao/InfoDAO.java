@@ -134,16 +134,19 @@ public class InfoDAO {
 		return result;
 	}
 
+	//회원리스트, 검색
 	public ArrayList<DTO> userList(String idSearch, int start, int end) {
 		ArrayList<DTO> userList = new ArrayList<>();
-		String Search = "%"+idSearch+"%";
 		/*String sql = "SELECT info_id, info_name, info_gender, info_email, info_div, info_num, info_phone FROM info ORDER BY info_id ASC";*/
 		String sql = "SELECT ROW_NUMBER() OVER(ORDER BY info_id ASC) AS rNum, info_id, info_name, info_gender, info_email, info_div, info_num, info_phone FROM " + 
 				"(SELECT ROW_NUMBER() OVER(ORDER BY info_id ASC) AS rNum, info_id, info_name, info_gender, info_email, info_div, info_num, info_phone FROM info WHERE info_id LIKE ?) WHERE rNum BETWEEN ? AND ?";
 		System.out.println("DAO : "+idSearch);
+		if(idSearch==null) {
+			idSearch="";
+		}
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, Search);
+			ps.setString(1, "%"+idSearch+"%");
 			ps.setInt(2, start);
 			ps.setInt(3, end);
 			
@@ -292,14 +295,15 @@ public class InfoDAO {
 			}
 
 			//등록자 전환
-			public int regChange(String num, String phone, String id) {
+			public int regChange(DTO dto, String loginId) {
 				int success = 0;
-				String sql = "UPDATE info SET num=?, phone=? WHERE id=?";
+				String sql = "UPDATE info SET info_num=?, info_phone=?, info_div=? WHERE info_id=?";
 				try {
 					ps = conn.prepareStatement(sql);
-					ps.setString(1, num);
-					ps.setString(2, phone);
-					ps.setString(3, id);
+					ps.setString(1, dto.getInfo_num());
+					ps.setString(2, dto.getInfo_phone());
+					ps.setString(3, dto.getInfo_div());
+					ps.setString(4, loginId);
 					success = ps.executeUpdate();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -342,11 +346,6 @@ public class InfoDAO {
 				return list;
 			}
 
-/*<<<<<<< HEAD
-			public void userSearch(String id) {
-				
-				
-=======*/
 			public ArrayList<DTO> placeList(String id, int start, int end) {
 				//반환할 값을 담을 ArrayList 준비
 				ArrayList<DTO> list = new ArrayList<DTO>();
@@ -404,6 +403,100 @@ public class InfoDAO {
 					resClose();
 				}
 				return scoreAvg;
-/*>>>>>>> d1e748ea9ad427f9deb5bf306667f4c23eceec90*/
+			}
+
+			//회원 삭제
+			public int userDel(String[] userDel) {
+				int success = 0;
+				String sql = "DELETE FROM info WHERE info_id=?";
+				try {
+					for(int i=0; i<userDel.length; i++) {
+						ps = conn.prepareStatement(sql);
+						ps.setString(1, userDel[i]);
+						success += ps.executeUpdate();
+						ps.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return 0;
+				}finally {
+					resClose();
+				}
+				return success;
+			}
+
+			//회원정보
+			public DTO userInfo(String loginId) {
+				DTO dto = null;
+				String sql = "SELECT * FROM info WHERE info_id=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, loginId);
+					rs = ps.executeQuery();
+					
+					if(rs.next()) {
+						dto = new DTO();
+						dto.setInfo_id(rs.getString("info_id"));
+						dto.setInfo_name(rs.getString("info_name"));
+						dto.setInfo_birth(rs.getDate("info_birth"));
+						dto.setInfo_gender(rs.getString("info_gender"));
+						dto.setInfo_email(rs.getString("info_email"));
+						dto.setInfo_div(rs.getString("info_div"));
+						dto.setInfo_num(rs.getString("info_num"));
+						dto.setInfo_phone(rs.getString("info_phone"));
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return dto;
+			}
+
+			//통계 페이지 
+			public ArrayList<DTO> total(String id) {
+				ArrayList<DTO> list = new ArrayList<DTO>();
+				String sql = "SELECT place_no, place_name FROM place WHERE info_id=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, id);
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						DTO dto = new DTO();
+						dto.setPlace_no(rs.getInt("place_no"));
+						dto.setPlace_name(rs.getString("place_name"));
+						dto.setPlace_date(Timestamp.valueOf(rs.getString("place_date")));
+						list.add(dto);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return list;
+			}
+
+			//예약자 수 
+			public Integer bookCnt(int place_no) {
+				int bookCnt = 0;
+				String sql = "SELECT COUNT (*) as book_count FROM book WHERE place_no = ?";
+				try {
+					Context ctx = new InitialContext();
+					DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
+					conn = ds.getConnection();
+					ps = conn.prepareStatement(sql);
+					ps.setInt(1, place_no);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						bookCnt = rs.getInt("book_count");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					resClose();
+				}
+				return bookCnt;
 			}
 }

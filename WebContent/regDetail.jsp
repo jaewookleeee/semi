@@ -8,8 +8,8 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
         	div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 310px;
-            	height: 550px; left: 40%; top: 200px; text-align: center; }
-            span#regTxt{ position: absolute; left: 95px; top: 10px; font-size: 20px; }
+            	height: 550px; left: 40%; top: 100px; text-align: center; }
+            span#regTxt{ position: absolute; left: 120px; top: 10px; font-size: 20px;     }
 	        b#id{ position: absolute; left: 15px; top: 50px; font-size: 13px; }
 	        b#name{ position: absolute; left: 15px; top: 110px; font-size: 13px; }
 	        b#Gender{ position: absolute; left: 15px; top: 170px; font-size: 13px; }   
@@ -25,88 +25,72 @@
 	        input#regEmail{ position: absolute; left: 15px; top: 315px; width: 200px; height: 25px; font-size: 10px; }
 	        input#regNum{ position: absolute; left: 15px; top: 375px; width: 200px; height: 25px; font-size: 10px;  }
 	        input#regPhone{ position: absolute; left: 15px; top: 435px; width: 200px; height: 25px; font-size: 10px;  }
+	      	button#del{ position: absolute; left: 15px; top: 495px; width: 60px; height: 25px; font-size: 10px;
+	        	color: white; background-color: black; border-style: none;
+	        }
 	        button#cancel{ position: absolute; left: 180px; top: 495px; width: 50px; height: 25px;     color: white; 
 	        	background-color: black; nborder-style: none; font-size: 10px; border: none;}
-	        button#change{ position: absolute; left: 240px; top: 495px; width: 50px; height: 25px; font-size: 10px;
+	        button#update{ position: absolute; left: 240px; top: 495px; width: 50px; height: 25px; font-size: 10px;
 	            color: white; background-color: black; border-style: none; border: none;}	
-            	
+            
 		</style>
 	</head>
 	<body>
 		<jsp:include page="menuBar.jsp"/>
 		<div id="main">
-            <span id="regTxt"><b>등록자 전환</b></span>
+            <span id="regTxt"><b>회원정보</b></span>
             <b id="id">아이디</b>
             <input id="regId" type="text" value="${sessionScope.loginId }" readonly>
             <b id="name">이름</b>
-            <input id="regName" type="text" value="" readonly/>
+            <input id="regName" type="text" readonly/>
             <b id="Gender">성별</b>
             <input id="regGender" type="text" readonly/>
             <b id="birth">생년월일</b>
             <input id="regBirth" type="text" readonly="readonly"/>
             <b id="email">이메일</b>
-            <input id="regEmail" type="email" readonly/>
+            <input id="regEmail" type="email" readonly="readonly"/>
             <b id="num">주민등록번호</b>
-            <input id="regNum" type="text" placeholder="주민등록번호를 입력하세요."/>
+            <input id="regNum" type="text" readonly="readonly"/>
             <b id="phone">휴대폰 번호</b>
-            <input id="regPhone" type="tel" placeholder="휴대폰번호를 입력하세요."/>
+            <input id="regPhone" type="tel" readonly="readonly"/>
             
+            <button id="del">탈퇴하기</button>
             <button id="cancel">취소</button>
-            <button id="change">변경</button>
+            <button id="update">수정</button>
         </div>
 	</body>
 	<script>
-		$(document).ready(function() {
-			 $.ajax({
-				 type : "post",
-				 url : "./userInfo",
-				 dataType : "json",
-				 success : function (data) {
-					if(data.login==false){
-						alert("로그인ㄱ");
-						location.href="login.jsp";
-					}else if(data.login==true && data.userInfo != null){
-						console.log(data.userInfo);
-						$("#regName").val(data.userInfo.info_name);
-						$("#regGender").val(data.userInfo.info_gender);
-						$("#regBirth").val(data.userInfo.info_birth);
-						$("#regEmail").val(data.userInfo.info_email);
-					}
+		$(document).ready(function () {
+			$.ajax({
+				type:"post",
+				url:"./userInfo",
+				dataType:"json",
+				success : function(data){
+					console.log(data);
+					$("#regName").val(data.userInfo.info_name);
+					$("#regGender").val(data.userInfo.info_gender);
+					$("#regBirth").val(data.userInfo.info_birth);
+					$("#regEmail").val(data.userInfo.info_email);
+					$("#regNum").val(data.userInfo.info_num);
+					$("#regPhone").val(data.userInfo.info_phone);
 				},
 				error : function (error) {
 					console.log(error);
 				}
-			 });
+			});
 		});
-	
+		//탙퇴하기
+		$("#del").click(function() {
+			location.href="del.jsp";
+		});
+		//취소
 		$("#cancel").click(function() {
 			location.href="index.jsp";
 		});
-		
-		$("#change").click(function() {
-			$.ajax({
-				type : "post",
-				url : "./regChange",
-				data : {
-					num : $("#regNum").val(),
-					phone : $("#regPhone").val()
-				},
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					console.log(data.loginId);
-					console.log(data.loginDiv);
-					if(data.success > 0){
-						alert("등록자 전환 완료");
-					}else{
-						alert("등록자 전환 실패");
-						location.href="regChange.jsp";
-					}
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
+		//수정하기
+		$("#update").click(function() {
+			location.href="regUpdate.jsp";
 		});
+		
 	</script>
 </html>
