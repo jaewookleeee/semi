@@ -37,7 +37,12 @@
                 line-height: 30px;
             }
             
-            .qa_row {
+            .qa_row_header {
+                width: 1000px;
+                height: 30px;
+            }
+            
+            .qa_row_content {
                 width: 1000px;
                 height: 30px;
             }
@@ -106,63 +111,100 @@
             <div id="qa_header"><strong>Q&A</strong></div>
 
             <table>
-                <tr class="qa_row">
+                <tr class="qa_row_header">
                     <th id="no" style="background-color: #343434; color: white;">번호</th>
                     <th id="title" style="background-color: #343434; color: white;">제목</th>
                     <th id="writer" style="background-color: #343434; color: white;">작성자 ID</th>
                     <th id="write_date" style="background-color: #343434; color: white;">작성일자</th>
-                </tr>
-
-                <tr class="qa_row">
-                    <td id="no"></td>
-                    <td id="title"></td>
-                    <td id="writer"></td>
-                    <td id="write_date"></td>
+                	<input id="hide" type="hidden"/>
                 </tr>
                 
-                <tr class="qa_row">
-                    <td id="no"></td>
-                    <td id="title"></td>
-                    <td id="writer"></td>
-                    <td id="write_date"></td>
-                </tr>
-                
-                <tr class="qa_row">
-                    <td id="no"></td>
-                    <td id="title"></td>
-                    <td id="writer"></td>
-                    <td id="write_date"></td>
-                </tr>
-                
-                <tr class="qa_row">
-                    <td id="no"></td>
-                    <td id="title"></td>
-                    <td id="writer"></td>
-                    <td id="write_date"></td>
-                </tr>
-                
-                <tr class="qa_row">
-                    <td id="no"></td>
-                    <td id="title"></td>
-                    <td id="writer"></td>
-                    <td id="write_date"></td>
-                </tr>
             </table>
 
             <input id="search_area" type="text" placeholder=" 검색할 제목을 입력해주세요."/>
             <input id="search" type="button" value="검색"><br/><br/>
             
             <span class="page">
-                <input class="btn" id="beforePage" type="button" value="이전 목록"/>
-                <input class="btn" id="nextPage" type="button" value="다음 목록"/>
+                <input class="btn" type="button" id="beforePage" value="이전 목록"/>
+                <input class="btn" type="button" id="nextPage" value="다음 목록"/>
             </span>
             <input class="btn" id="qa_write" type="button" value="작성하기"/>
         </div>
 	</body>
 	<script>
-		$("#qa_write").click(function() {
-			location.href = "qaWrite.jsp";
+		var entered = 0;
+		var start_page = 1;
+		var page_max = 0;
+		
+		var obj = {};
+		obj.type = "POST";
+		obj.dataType = "JSON";
+		obj.error = function(error){console.log(error)};
+
+		// 'Q&A' 탭이 눌렸을 때,
+		$(document).ready(function() {
+			if(entered == 0) {
+				start_page = 1;
+				paging(start_page);
+				entered = 1;
+			}
+		});    		 
+
+		// '이전 목록' 버튼 클릭 시
+		$("#beforePage").click(function() {
+			if(start_page > 5) {
+				start_page -= 5;	
+				paging(start_page);
+				console.log(start_page);
+			}
+		}); 
+		
+		// '다음 목록' 버튼 클릭 시
+		$("#nextPage").click(function() {
+			if(start_page+5 < page_max) {
+				start_page += 5;
+				paging(start_page);
+				console.log(start_page);
+			}
 		});
+		
+		function paging(start_page) {
+			var msg="${param.place_no}";
+			obj.url = "./qaList";
+			
+			obj.data = {
+				start: start_page,
+				end: start_page+4,
+				place_no: msg
+			};
+			
+			obj.success = function(data) {
+				$(".qa_row_content").remove();
+				
+				for(var i=data.list.length-1; i>=0; i--) {
+					if(page_max == 0) {
+						page_max = data.list[i].qa_no;
+					}
+					var str = "<tr class='qa_row_content'>";
+					str += "<td id='no'>"+data.list[i].qa_no+"</td>";
+					str += "<td id='title'><a href='./qaDetail?qa_no="+data.list[i].qa_no+"'>"+data.list[i].qa_title+"</a></td>";
+					str += "<td id='writer'>"+data.list[i].info_id+"</td>";
+					str += "<td id='write_date'>"+data.list[i].qa_date+"</td>";
+					str += "</tr>";	
+					$("#hide").after(str);
+				}
+			}
+			ajaxCall(obj);
+		}
+		
+		// 작성하기 버튼 클릭 시, qaWrite.jsp로 이동
+		$("#qa_write").click(function() {
+			location.href = "qaWriteForm?place_no="+${param.place_no};
+		});
+		
+		function ajaxCall(param) {
+			$.ajax(param);
+		}
 	</script>
 </html>
 

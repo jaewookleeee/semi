@@ -8,7 +8,6 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <style>
             body{
-                width: 1200px;
                 max-width: none !important;
             }
             h1{
@@ -27,21 +26,21 @@
                 padding: 5px 20px;
             }
             #pre{
-                position: relative;
-                top: 10px;
-                left: 500px;
+                position: absolute;
+                top: 480px;
+                left: 700px;
                 background-color: #212121;
             }
             #next{
-                position: relative;
-                top: 10px;
-                left: 505px;
+                position: absolute;
+                top: 480px;
+                left: 805px;
                 background-color: #212121;
             }
             #chart{
-                position: relative;
-                top: 10px;
-                left: 822px;
+                position: absolute;
+                top: 480px;
+                left: 1230px;
                 background-color: #212121;
             }
             button{
@@ -70,7 +69,7 @@
     	</div>
     	<h1>등록 내역 확인</h1>
         <br/>
-            <table id="listTable">
+        <table id="listTable">
             <tr>
                 <th style="padding: 5px 10px">번호</th>
                 <th style="padding: 5px 150px">상호명</th>
@@ -89,7 +88,7 @@
 	var tableTh = ""; //테이블 껍데기 담는 변수
 	var msg = ""; //비로그인시 오는 값 담을 변수
 	var sNum = 1; //페이징 시작 값
-	var eNum = 5; //페이징 마지막 값
+	var eNum = 10; //페이징 마지막 값
 	
 	var obj = {}; //ajax 실행시 보낼 오브젝트 초기화
 	obj.error=function(e){console.log(e)}; //ajax 에러날 경우의 함수
@@ -100,7 +99,7 @@
 	$(document).ready(function(){
 		//console.log($("#listTable").children().html());
 		tableTh = $("#listTable").children().html(); //페이지를 로드하고나서 바로 테이블 자식요소(th태그) 담음
-		obj.url = "infoPlaceList"; //ajax bookList로 요청
+		obj.url = "./placeList"; //ajax bookList로 요청
 		obj.data={ //같이 보낼 데이터
 				"sNum":sNum,
 				"eNum":eNum
@@ -126,9 +125,9 @@
         
       //이전 목록 버튼
     	$("#pre").click(function(){
-    		sNum -= 5; //페이징 시작 값 변수에서 -5를 하고 넣음
-    		eNum -= 5; //페이징 끝 값 변수에서 -5를 하고 넣음
-    		obj.url = "infoPlaceList"; //placeList로 컨트롤러에 요청
+    		sNum -= 10; //페이징 시작 값 변수에서 -5를 하고 넣음
+    		eNum -= 10; //페이징 끝 값 변수에서 -5를 하고 넣음
+    		obj.url = "./placeList"; //placeList로 컨트롤러에 요청
     		obj.data={
     				"sNum":sNum,
     				"eNum":eNum
@@ -144,7 +143,7 @@
     					alert("첫번째 목록입니다.") //alert을 띄우고
     					//초기값으로 되돌린다.
     					sNum = 1; 
-    					eNum = 5; 
+    					eNum = 10; 
     				}else{
     					$("#listTable").empty(); //테이블 안에 있는 것을 비우고
     		    		$("#listTable").append(tableTh); //테이블 자식요소를 넣음
@@ -158,9 +157,9 @@
     	
     	//다음 목록 버튼
     	$("#next").click(function(){
-    		sNum += 5; //페이징 시작 값변수에서 +5해줌
-    		eNum += 5; //페이징 끝 값 변수에서 +5 해줌
-    		obj.url = "infoPlaceList";
+    		sNum += 10; //페이징 시작 값변수에서 +5해줌
+    		eNum += 10; //페이징 끝 값 변수에서 +5 해줌
+    		obj.url = "./placeList";
     		obj.data={
     				"sNum":sNum,
     				"eNum":eNum
@@ -169,7 +168,7 @@
     			if(data.msg != null){
     				msg = data.msg;
     				alert(msg);
-    				location.href="./login.jsp"
+    				location.href="./index.jsp"
     			}else{
     				if(data.list.length == 0){//list로 넘어온값이 크기가 0이면
     					alert("마지막 목록입니다.")//alert 을 띄우고

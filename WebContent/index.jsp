@@ -34,7 +34,7 @@
 	<body>
 		<jsp:include page="/menuBar.jsp" flush="false"/>
 		<div class="content">
-            <img src="main_image.png"/>
+            <img width="100%" src="main_image.png"/>
             <div class="slogan">
                 <div class="slogan_text">세상의 잠든 공간을 깨우다.</div>
                 <h2 class="slogan_logo">WAKE UP PLACE</h2>

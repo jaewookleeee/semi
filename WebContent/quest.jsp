@@ -78,13 +78,15 @@
 		var tableTh = "";
        var msg = "";
        var sNum = 1;
-       var eNum = 5;
+       var eNum = 10;
         var obj = {};
         var tableTh = $("#listTable");		
 		var obj={};
 		obj.error = function(e){console.log(e)};
 		obj.type="POST";
 		obj.dataType="JSON";
+		
+		
 		
 		function ajaxCall(param){
 			console.log(param);
@@ -115,7 +117,7 @@
 				list.forEach(function(item, board_no){
 					content+="<tr>";
 					content+="<td>"+item.rnum+"</td>";
-					content+="<td><a href='boardDetail?board_no="+item.board_no+"'>"+item.board_title+"</a></td>";
+					content+="<td><a href='boardDetailView?board_no="+item.board_no+"'>"+item.board_title+"</a></td>";
 					content+="<td>"+item.info_id+"</td>";
 					content+="<td>"+item.board_date+"</td>";
 					content+="</tr>";	
@@ -147,8 +149,8 @@
 		});
 		//이전목록 버튼
 		$("#beforeList").click(function(){
-			sNum -= 5;
-	        eNum -= 5;
+			sNum -= 10;
+	        eNum -= 10;
 			obj.url="./boardList";
 			obj.data={
 					"search":$("#search").val(),
@@ -162,7 +164,7 @@
 				if(data.list.length == 0){
 					alert("첫번째 목록 입니다.");
 					sNum = 1;
-					eNum = 5;
+					eNum = 10;
 				}else{
 					var b = data.list.length;
 					$("#listTable").empty();
@@ -175,8 +177,8 @@
 
 		//다음 목록
 		$("#afterList").click(function(){
-			sNum += 5;
-	        eNum += 5;
+			sNum += 10;
+	        eNum += 10;
 	        obj.url="./boardList";
 			obj.data={
 					"search":$("#search").val(),
@@ -189,8 +191,8 @@
 				console.log(data.list.length);
 				if(data.list.length == 0){
 					alert("마지막 목록 입니다.");
-					sNum -= 5;
-					eNum -= 5;
+					sNum -= 10;
+					eNum -= 10;
 				}else{
 					$("#listTable").empty();
 					$("#listTable").append(tableTh);
