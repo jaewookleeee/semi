@@ -53,7 +53,7 @@ public class PlaceService {
 		String end = multi.getParameter("end");
 		//System.out.println(multi.getParameter("cash"));
 		long cash = Integer.parseInt(multi.getParameter("cash"));
-		String address ="("+multi.getParameter("postnumber")+")"+multi.getParameter("addr")+multi.getParameter("detailAddr");
+		String address ="("+multi.getParameter("postnumber")+")"+"/"+multi.getParameter("addr")+"/"+multi.getParameter("detailAddr");
 		String detailinfo = multi.getParameter("fac_info");
 		String info = multi.getParameter("info");
 		String homepage= multi.getParameter("homepage");
@@ -189,5 +189,19 @@ public class PlaceService {
 			String obj = json.toJson(map);
 			response.getWriter().println(obj);
 		}
+	}
+
+	public void detail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		System.out.println("detail :"+place_no);
+		PlaceDAO dao = new PlaceDAO();
+		DTO dto = dao.detail(place_no);
+		Gson json = new Gson();
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("dto", dto);
+		String obj = json.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println(obj);
+		
 	}
 }

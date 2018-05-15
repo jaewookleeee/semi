@@ -33,7 +33,7 @@
 <div>
 	<jsp:include page="menuBar.jsp"/>
 </div>
-<form action="./placeWrite" method="post" enctype="multipart/form-data">
+<form action="./placeWrite" method="post" enctype="multipart/form-data" id="fom">
            <div class="writeForm">
                <div class="sec_title"><strong>장소등록</strong></div>
                <div class="div_title"><strong>필수정보</strong></div>
@@ -80,7 +80,7 @@
                <div class="sub_title">장소위치</div>
                <div class="div_content">
                    <input name="postnumber" class="address" id="postnumber" type="text" placeholder="우편번호"/>
-                   <button>우편번호 검색</button><br/>
+                   <input type="button" value="우편번호 검색"/><br/>
                    <input name="addr" class="address" id="addr" type="text" placeholder="주소"/><br/>
                    <input name="detailAddr" class="address" id="detailAddr" type="text" placeholder="상세 주소"/>
                </div>
@@ -104,10 +104,10 @@
                <div class="sub_title">주의사항</div>
                <div class="div_content">
                    <input name="sub_content" class="info_content" id="sub_content" type="textarea"/><br/><br/>
-                   <input class="save" type="submit" value="저장"/>
+                   <input id="save" class="save" type="button" value="저장"/>
                </div>
             </div>
-        </form>
+       </form>
 </body>
 <script>
 var form = $('form')[0];
@@ -116,69 +116,46 @@ var formData = new FormData(form);
 	for(var i=0;i<24;i++){
 		$(".time").append('<option>'+i+':00</option>');
 	}
-	$("#cash").focusin(function(){
+	/* $("#cash").focusin(function(){
 	    $(this).val("");
-	    console.log(form);
-	});
-	$(".address").focusin(function(){
+	    //console.log(form);
+	}); */
+	/* $(".address").focusin(function(){
 	    $(this).val("");
 	});
 	$(".selectinfo").focusin(function(){
 	    $(this).val("");
-	});
+	}); */
 	$("#addphone").click(function(){
 		var addphone = "<tr><td><input class='phone' type='text'/> - "+
 		"<input class='phone' type='text'/> - "+"<input class='phone' type='text'/><td></tr>";
 		$("#addphonetable").append(addphone);
 	})
-	/* $(".save").click(function () {		 
-		 $.ajax({
-			type : "post",
-			url : "./placeWrite",
-			data : formData,
-			dataTyep :"json",
-			success : function(data){
-				console.log(data);
-				if(data.result>0){
-					
-				}
-			},
-			error : function (error) {
-				console.log(error);
-			}			
-		 });
-	}); */
-			/* $.ajax({
-				type : "post",
-				url : "./login",
-				data : {
-					id : $("#userId").val(),
-					pw : $("#userPw").val()
-				},
-				dataType : "json",
-				success : function (data) {
-					console.log(data);
-					if(data.result == true){
-						alert("로그인 성공");
-						location.href="index.jsp";
-					}
-				},
-				error : function (error) {
-					console.log(error);
-				}
-			}); */
-			/* {			
-			placename:$("#placename").val(),
-			phone:$("#phone1").val()+$("#phone2").val()+$("#phone3").val(),
-			starttime:$("#starttime").val(),
-	 		endtime:$("#endtime").val(),
-	 		postnumber:$("#postnumber").val(),
-	 		addr:$("#addr").val()+$("#detailAddr").val(),
-	 		fac_info:$("#fac_info").val(),
-	 		info:$("#info").val(),
-	 		homepage:$("#homepage").val(),
-	 		info_content:$("#sub_content").val()
-		} */
-	
+	$("#save").click(function(){
+		if($("#placename").val()==""){
+			alert("상호명을 입력하세요");
+			$("#placename").focus();
+		}else if($("#photo1").val()==""){
+			alert("사진을 1장이상 입력하세요");
+			$("#photo1").focus();
+		}else if($("#phone1").val()==""||$("#phone2").val()==""||$("#phone3").val()==""){
+			alert("번호를 입력하세요");
+			$("#phone1").focus();
+		}else if($("#postnumber").val()==""||$("#addr").val()==""||$("#detailAddr").val()==""){
+			alert("주소를 확인하세요");
+			$("#detailAddr").focus();
+		}else if($("#fac_info").val()==""){
+			alert("시설안내를 확인하세요");
+			$("#fac_info").focus();
+		}else if($("#starttime").val()=="시작시간"||$("#endtime").val()=="종료시간"){
+			alert("시간을 입력하세요");
+			$("#starttime").focus();
+		}else if($("#cash").val()==""){
+			alert("가격을 입력하세요");
+			$("#cash").focus();
+		}else{
+			document.getElementById("fom").submit();
+		}
+	})
 	</script>
 </html>

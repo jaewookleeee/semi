@@ -244,4 +244,41 @@ public class PlaceDAO {
 		}
 		return success;
 	}
+
+	public DTO detail(int place_no) {
+		System.out.println("DAO-place_no : "+place_no);
+		DTO dto = new DTO();
+		String sql ="SELECT * FROM place WHERE place_no =?";
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			rs = ps.executeQuery();
+			if(rs.next()) {				
+				dto.setPlace_no(rs.getInt("place_no"));
+				dto.setPlace_name(rs.getString("place_name"));
+				dto.setPlace_info(rs.getString("place_intro"));
+				dto.setPlace_home(rs.getString("place_home"));
+				dto.setPlace_loc(rs.getString("place_loc"));
+				dto.setPlace_guide(rs.getString("place_guid"));
+				dto.setPlace_attention(rs.getString("place_attention"));
+				dto.setPlace_category(rs.getString("place_category"));
+				dto.setPlace_phone(rs.getString("place_tel"));
+				sql="SELECT*FROM placeinfo WHERE place_no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, place_no);
+				rs=ps.executeQuery();
+				if(rs.next()) {
+					dto.setPlace_start(rs.getString("place_start"));
+					dto.setPlace_end(rs.getString("place_end"));
+					dto.setPlace_price(rs.getLong("place_price"));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
+	}
 }
