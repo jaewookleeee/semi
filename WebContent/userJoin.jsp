@@ -27,84 +27,24 @@
 	            position: absolute; left: 15px; top: 195px;
 	            width: 200px; height: 25px; font-size: 10px;  }
 	        input#userName{ position: absolute; left: 15px; top: 255px;
- 				width: 200px; height: 25px; font-size: 10px;     }
+ 				width: 200px; height: 25px; font-size: 10px;     } 
 	        span#gender{ position: absolute; left: 15px; top: 315px; }
-/* 	        span#genM{
-	            position: absolute;
-	            left: 15px;
-	            top: 315px;
-	            border: 1px solid black;
-	            width: 95px;
-	            font-size: 15px;
-	            
-	        }
-	        input#man{
-	            display: none;
-	        }
-	        span#genW{
-	            position: absolute;
-	            left: 118;
-	            top: 315px;
-	            border: 1px solid black;
-	            width: 95px;
-	            font-size: 15px;
-	        }
-	        input#woman{
-	            display: none;
-	        } */
-	        /* input#userBirth{
-	            position: absolute;
-	            left: 15px;
-	            top: 375px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 13px;
-	        } */
-	        select#userBirthYear{
-	        	position: absolute;
-	        	left: 15px;
-	        	top: 375px;
-	        }
-	        select#userBirthMonth{
-	        	position: absolute;
-	        	left: 70px;
-	        	top: 375px;
-	        }
-	        select#userBirthDay{
-	        	position: absolute;
-	        	left: 110px;
-	        	top: 375px;
-	        }
-	        input#userEmail{
-	            position: absolute;
-	            left: 15px;
-	            top: 435px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
-	        button#cancel{
-	            position: absolute;
-	            left: 180px;
-	            top: 495px;
-	            width: 50px;
-	            height: 25px;    
-	            color: white;
-	            background-color: black;
-	            border-style: none;
-	            font-size: 10px;
-	        }
+			
+			label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
+			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
+			input#man{ display: none; }
+			input#woman{ display: none; }
+			
+	        select#userBirthYear{ position: absolute; left: 15px; top:375px;}
+	        select#userBirthMonth{ position: absolute; left: 70px; top: 375px; }
+	        select#userBirthDay{ position: absolute; left: 110px; top: 375px; }
+	        input#userEmail{ position: absolute; left: 15px; top: 435px;
+	            width: 200px; height: 25px; font-size: 10px;             }
+	        button#cancel{ position: absolute; left: 180px; top: 495px; width: 50px; height: 25px;    
+	            color: white; background-color: black; border-style: none; font-size: 10px; }
 	        button#join{
-	            position: absolute;
-	            left: 240px;
-	            top: 495px;
-	            width: 50px;
-	            height: 25px;
-	            font-size: 10px;
-	            color: white;
-	            background-color: black;
-	            border-style: none;            
-	        }
+	            position: absolute; left: 240px; top: 495px; width: 50px; height: 25px;
+	            font-size: 10px; color: white; background-color: black; border-style: none; }
 		</style>
 	</head>
 	<body>
@@ -123,28 +63,14 @@
             <input id="userName" name="userName" type="text" placeholder="이름을 입력하세요."/>
             <b id="Gender">성별</b>
             <span id="gender">
-            	<input id="man" type="radio" name="userGender" value="남" checked/>남자
-            	&nbsp;&nbsp;&nbsp;&nbsp;
-            	<input id="woman" type="radio" name="userGender" value="여"/>여자
+            	<label id="lbM"><input id="man" type="radio" name="userGender" value="남"/>남자</label>
+            	&nbsp;
+            	<label id="lbW"><input id="woman" type="radio" name="userGender" value="여"/>여자</label>
             </span>
-            <!-- <span id="genM">
-                <input id="man" type="radio" name="userGenger" value="남자"/>
-                <label id="manLb" for="man">남자</label>
-            </span>
-            
-            <span id="genW">
-                <input id="woman" type="radio" name="userGenger" value="여자"/>
-                <label id="womanLb" for="woman">여자</label>
-            </span>    -->             
+                      
             <b id="birth">생년월일</b>
-            <!-- <input id="userBirth" type="date" value="2018-05-07"/> -->
             <select name="userBirthYear" id="userBirthYear">
             	<option value="년도" selected>년도</option>
-            	<!-- <option value="1991" >1991</option>
-            	<option value="1992" >1992</option>
-            	<option value="1993" >1993</option>
-            	<option value="1994" >1994</option>
-            	<option value="1995" >1995</option> -->
             	<%for(int i=1950; i<2019; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
@@ -152,11 +78,6 @@
             
             <select name="userBirthMonth" id="userBirthMonth">
             	<option value="월" selected>월</option>
-            	<!-- <option value="1" >1</option>
-            	<option value="2" >2</option>
-            	<option value="3" >3</option>
-            	<option value="4" >4</option>
-            	<option value="5" >5</option> -->
             	<%for(int i=1; i<13; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
@@ -164,11 +85,6 @@
             
             <select name="userBirthDay" id="userBirthDay">
             	<option value="일" selected>일</option>
-            	<!-- <option value="1" >1</option>
-            	<option value="2" >2</option>
-            	<option value="3" >3</option>
-            	<option value="4" >4</option>
-            	<option value="5" >5</option> -->
             	<%for(int i=1; i<32; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
@@ -182,6 +98,21 @@
         </div>
 	</body>
 	<script>
+		$("#man").click(function() {
+			$("#lbM").css("background", "#FA5882");
+			$("#lbW").css("background", "white");
+			
+			$("#lbM").css("color", "white");
+			$("#lbW").css("color", "black");
+		});
+		$("#woman").click(function() {
+			$("#lbW").css("background", "#FA5882");
+			$("#lbM").css("background", "white");
+			
+			$("#lbW").css("color", "white");
+			$("#lbM").css("color", "black");
+		});
+	
 		$("#cancel").click(function() {
 			location.href="index.jsp";
 		});
@@ -190,33 +121,37 @@
 		
 		//회원가입
 		$("#join").click(function() {
-		/* 	var regexp = /[0-9a-zA-Z]/; // 숫자,영문,특수문자
-
-			var userIdTxt = $("#userId").val();
-			for(var i=0; i<userIdTxt.length; i++){
-				if(userIdTxt.charAt(i)!="" && regexp.test(userIdTxt.charAt(i)) == false){
-					alert("영어, 숫자 가능");
-				}
-			} */
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
-			//console.log(userPw, userPwChk);	
+			
+			/* if($("#userPw").val().length < 4 || $("#userPw").val().length >12){
+				alert("비밀번호 너무 짧음");
+			} */
+			
 			if($("#userId").val()==""){
 				alert("아이디를 입력하세요.");
 				$("#userId").focus();
-			}else if($("#userPw").val()==""){
-				//비밀번호 입력 확인
+			}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
+				alert("아이디는 8~16자리 입력");
+				$("#userId").focus();
+			}
+			else if($("#userPw").val()==""){
 				alert("비밀번호 입력하세요.");				
-				$("#userPw").focus();//포커스 이동
+				$("#userPw").focus();
+			}else if($("#userPw").val().length < 8 || $("#userPw").val().length >12){
+				alert("비밀번호 8~12자리 입력");
+				$("#userPw").focus();
 			}else if($("#userPwChk").val()==""){
 				alert("비밀번호 확인 해주세요");				
-				$("#userPwChk").focus();//포커스 이동	
+				$("#userPwChk").focus();
 			}else if(userPw != userPwChk){
 				alert("비밀번호 재입력");
-				$("#userPwChk").focus();//포커스 이동	
-			} else if($("#userName").val()==""){
+				$("#userPwChk").focus();
+			}else if($("#userName").val()==""){
 				alert("이름을 입력해주세요.");
-				$("#userName").focus();//포커스 이동	
+				$("#userName").focus();
+			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
+				alert("성별을 선택해주세요.");	
 			}else if($("#userBirthYear").val()=="년도"){
 				alert("년도를 선택해주세요.");
 				$("#userBirthYear").focus();
@@ -226,7 +161,7 @@
 			}else if($("#userBirthDay").val()=="일"){
 				alert("일을 선택해주세요.");
 				$("#userBirthDay").focus();
-			}else if($("#userEmail").val==""){
+			}else if($("#userEmail").val()==""){
 				alert("이메일을 입력해주세요.");
 				$("#userEmail").focus();
 			}else if(chk==false){
@@ -240,7 +175,7 @@
 						id : $("#userId").val(),
 						pw : $("#userPw").val(),
 						name : $("#userName").val(),
-						gender : $("input[name='userGender']").val(),
+						gender : $("input[name='userGender']:checked").val(),
 						year : $("#userBirthYear").val(),
 						month : $("#userBirthMonth").val(),
 						day : $("#userBirthDay").val(),
@@ -278,6 +213,9 @@
 					
 					if(userIdTxt==""){
 						alert("아이디 입력를 입력하세요.");
+						$("#userId").focus();
+					}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
+						alert("아이디는 8~16자리 입력");
 						$("#userId").focus();
 					}else if(data.result == true){
 						alert("중복된 아이디 입니다.");

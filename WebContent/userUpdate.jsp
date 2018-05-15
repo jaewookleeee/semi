@@ -13,7 +13,7 @@
 	            width: 310px;
 	            height: 600px;
 	            left: 40%;
-	            top: 200px;
+	            top: 100px;
 	            text-align: center;
        		}
 	        span#userTxt{
@@ -115,38 +115,11 @@
 	        	left: 15px;
 	        	top: 375px;
 	        }
+	        label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
+			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
+			input#man{ display: none; }
+			input#woman{ display: none; }
 	        
-	        /* span#genM{
-	            position: absolute;
-	            left: 15px;
-	            top: 375px;
-	            border: 1px solid black;
-	            width: 95px;
-	            font-size: 15px;
-	            
-	        }
-	        input#man{
-	            display: none;
-	        }
-	        span#genW{
-	            position: absolute;
-	            left: 118;
-	            top: 375px;
-	            border: 1px solid black;
-	            width: 95px;
-	            font-size: 15px;
-	        }
-	        input#woman{
-	            display: none;
-	        } */
-	        /* input#userBirth{
-	            position: absolute;
-	            left: 15px;
-	            top: 435px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 13px;
-	        } */
 	        select#userBirthYear{
 	        	position: absolute;
 	        	left: 15px;
@@ -217,31 +190,16 @@
             <b id="name">이름</b>
             <input id="userName" type="text" placeholder="이름을 입력하세요."/>
             <b id="Gender">성별</b>
-            <!-- <span id="genM">
-                <input id="man" type="radio" name="userGenger" value="남자"/>
-                <label id="manLb" for="man">남자</label>
-            </span>
-            
-            <span id="genW">
-                <input id="woman" type="radio" name="userGenger" value="여자"/>
-                <label id="womanLb" for="woman">여자</label>
-            </span>  -->  
-            
-            <span id="gender">
-            	<input id="man" type="radio" name="userGender" value="남" checked/>남자
-            	&nbsp;&nbsp;&nbsp;&nbsp;
-            	<input id="woman" type="radio" name="userGender" value="여"/>여자
+			<span id="gender">
+            	<label id="lbM"><input id="man" type="radio" name="userGender" value="남"/>남자</label>
+            	&nbsp;
+            	<label id="lbW"><input id="woman" type="radio" name="userGender" value="여"/>여자</label>
             </span>
                          
             <b id="birth">생년월일</b>
-            <!-- <input id="userBirth" type="date" value="2018-05-07"/> -->
             <select name="userBirthYear" id="userBirthYear">
             	<option value="년도" selected>년도</option>
-            	<!-- <option value="1991" >1991</option>
-            	<option value="1992" >1992</option>
-            	<option value="1993" >1993</option>
-            	<option value="1994" >1994</option>
-            	<option value="1995" >1995</option> -->
+
             	<%for(int i=1950; i<2019; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
@@ -249,11 +207,7 @@
             
             <select name="userBirthMonth" id="userBirthMonth">
             	<option value="월" selected>월</option>
-            	<!-- <option value="1" >1</option>
-            	<option value="2" >2</option>
-            	<option value="3" >3</option>
-            	<option value="4" >4</option>
-            	<option value="5" >5</option> -->
+
             	<%for(int i=1; i<13; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
@@ -261,11 +215,7 @@
             
             <select name="userBirthDay" id="userBirthDay">
             	<option value="일" selected>일</option>
-            	<!-- <option value="1" >1</option>
-            	<option value="2" >2</option>
-            	<option value="3" >3</option>
-            	<option value="4" >4</option>
-            	<option value="5" >5</option> -->
+
             	<%for(int i=1; i<32; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
@@ -278,6 +228,21 @@
         </div>
 	</body>
 	<script>
+		$("#man").click(function() {
+			$("#lbM").css("background", "#FA5882");
+			$("#lbW").css("background", "white");
+			
+			$("#lbM").css("color", "white");
+			$("#lbW").css("color", "black");
+		});
+		$("#woman").click(function() {
+			$("#lbW").css("background", "#FA5882");
+			$("#lbM").css("background", "white");
+			
+			$("#lbW").css("color", "white");
+			$("#lbM").css("color", "black");
+		});
+	
 		/* $("#del").click(function() {
 			location.href="del.jsp";
 		}); */
@@ -286,10 +251,7 @@
 			var newPw = $("#userNewPw").val();
 			var newPwChk = $("#userNewPwChk").val();
 			var pw = $("#userPw").val();
-			if(pw != pw){
-				alert("현재 비밀번호가 맞지 않습");
-			}
-			
+
 			if(newPw != newPwChk){
 				alert("비밀번호가 맞지 않습니다.");
 				$("#userNewPwChk").focus();
@@ -303,7 +265,7 @@
 					newPw : $("#userNewPw").val(),
 					newPwChk : $("#userNewPwChk").val(),
 					name : $("#userName").val(),
-					gender : $("input[name='userGender']").val(),
+					gender : $("input[name='userGender']:checked").val(),
 					year : $("#userBirthYear").val(),
 					month : $("#userBirthMonth").val(),
 					day : $("#userBirthDay").val(),
@@ -316,6 +278,8 @@
 					if(data.success >0){
 						alert("수정 성공");
 						location.href="userDetail.jsp";
+					}else{
+						alert("수정 실패");
 					}
 				},
 				error : function(error) {
