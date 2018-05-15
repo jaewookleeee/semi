@@ -19,10 +19,10 @@ import com.semi.service.ReviewService;
 
 @WebServlet({"/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
-	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/like", "/likeDel",
+	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
-	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
+	"/qaWrite", "/qaWriteForm", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
 })
 
@@ -268,6 +268,12 @@ public class Controller extends HttpServlet {
 				qaService = new QaService();
 				qaService.detail(request, response);
 				break;
+			case "/qaWriteForm":
+				System.out.println("Q&A 글쓰기 폼 요청");
+				qaService = new QaService();
+				qaService.writeForm(request, response);
+				break;
+				
 			case "/total":
 				System.out.println("통계 페이지 요청");
 				infoService = new InfoService();

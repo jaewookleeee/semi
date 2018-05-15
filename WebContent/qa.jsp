@@ -169,15 +169,13 @@
 		});
 		
 		function paging(start_page) {
-			console.log("성원 qa.jsp, place_no : "+${place_no});
-			
+			var msg="${param.place_no}";
 			obj.url = "./qaList";
 			
 			obj.data = {
 				start: start_page,
 				end: start_page+4,
-				// place_no: ${place_no}
-				place_no: ${place_no}
+				place_no: msg
 			};
 			
 			obj.success = function(data) {
@@ -201,7 +199,7 @@
 		
 		// 작성하기 버튼 클릭 시, qaWrite.jsp로 이동
 		$("#qa_write").click(function() {
-			location.href = "qaWrite.jsp";
+			location.href = "qaWriteForm?place_no="+${param.place_no};
 		});
 		
 		function ajaxCall(param) {

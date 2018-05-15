@@ -41,7 +41,7 @@
 		    </div>
 	        <div id="allinfo">
 	            <div class="info" id="detail">상세정보</div>
-	            <div class="info" id="qa">QA</div>
+	            <div class="info" id="qa">Q&A</div>
 	            <div class="info" id="reply">이용후기</div>
 	        </div>  
 	        <div id="area"></div>
@@ -62,6 +62,7 @@
 		// 1. 클릭한 div의 색상을 핑크로 변경하고, 나머지 div의 색상을 흰색으로 설정
 		// 2. 클릭한 div에 따라, 다른 페이지(placeDetail.jsp OR qa.jsp OR reply.jsp)를 가져옴
 		$(".info").click(function(e) {
+	        var p_no=${place_no};
 			var page = "";
 			$(this).css("background-color","#FF376C");
 			
@@ -79,12 +80,11 @@
 		    	$("#qa").css("background-color","white");
 			}
 			
-			$("#area").load(page,function(res, stat) { $("#area").html(res)});
+			$("#area").load(page,{place_no:p_no}, function(res, stat) { $("#area").html(res)});
 		});
 
 		$(document).ready(function(){
-			var p_no="${place_no}";			
-			console.log(p_no);
+			var p_no="${place_no}";		
 			$.ajax({
 					type:"post",
 					url:"./placephotoDetail",

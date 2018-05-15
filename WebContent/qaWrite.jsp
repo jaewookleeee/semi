@@ -62,6 +62,7 @@
             
             <form action="qaWrite" method="post">
 	            <table>
+	            	<input type="hidden" name="place_no" value="${place_no}"/>
 	                <tr>
 	                    <th id="title_header">제목</th>
 	                    <td><textArea id="title" name="qa_title"></textArea></td>

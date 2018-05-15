@@ -22,6 +22,7 @@ public class QaService {
 			request.setCharacterEncoding("UTF-8");
 			int success = 0;
 			
+			int place_no = Integer.parseInt(request.getParameter("place_no"));
 			String qa_title = request.getParameter("qa_title");
 			String qa_content = request.getParameter("qa_content");
 			String info_id = (String) request.getSession().getAttribute("loginId");
@@ -29,6 +30,7 @@ public class QaService {
 			QaDAO dao = new QaDAO();
 			DTO dto = new DTO();
 			
+			dto.setPlace_no(place_no);
 			dto.setQa_title(qa_title);
 			dto.setQa_content(qa_content);
 			dto.setInfo_id(info_id);
@@ -194,5 +196,13 @@ public class QaService {
 
 	public void search(HttpServletRequest request, HttpServletResponse response) {
 		
+	}
+
+	public void writeForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		
+		request.setAttribute("place_no", place_no);
+		RequestDispatcher dis = request.getRequestDispatcher("qaWrite.jsp");
+		dis.forward(request, response);
 	}
 }
