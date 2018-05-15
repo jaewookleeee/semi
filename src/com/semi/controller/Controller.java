@@ -283,6 +283,11 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.total(request, response);
 				break;
+			case "/totalDetail":
+				System.out.println("통계 내역 요청");
+				infoService = new InfoService();
+				infoService.totalDetail(request, response);
+				break;
 		}
 	}
 
