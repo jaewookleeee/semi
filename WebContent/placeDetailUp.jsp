@@ -4,19 +4,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
-		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-		
-		<style>
-			div{ background-color: white; }
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Insert title here</title>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      
+      <style>
+         div{ background-color: white; }
             
-			#all{ position: relative; width: 1200px; height: 1200px; top:50px; left:175px; }
-	        #main{ position: relative; width: 700px; height: 300px; margin-left: 250px; }
+         #all{ position: relative; width: 1200px; height: 1200px; top:50px; left:175px; }
+           #main{ position: relative; width: 700px; height: 300px; margin-left: 250px; }
             #area{ position: relative; width: 1125px; top: 70px; margin-left: 37.5px; }
             
             .sub_div { position: relative; width: 300px; margin-left: 460px; }
+<<<<<<< HEAD
 	        .sub{ position: relative; width: 50px;height: 50px; margin-top: 10px; margin-right: 5px; }
 	        .info{ position: relative; float: left; text-align: center; top: 30px; left: 37.5px; width: 375px; height: 30px; line-height: 30px; border: 1px solid #7E7E7E; }
 	        
@@ -83,26 +84,27 @@
 				$("#area").html(res)});
 		});
 
-		$(document).ready(function(){
-			var p_no="${place_no}";
-			$.ajax({
-					type:"post",
-					url:"./placephotoDetail",
-					dataType:"JSON",
-					data:{
-						place_no:p_no
-					},
-					success : function(data){
-						console.log(data);
-						$("#main").attr("src",'./upload/'+data.list[0].place_photo);
-						for(var i=0;i<data.list.length;i++){
-						$("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
-						}
-					},
-					error:function(e){
-						console.log(e);
-					}
-				});
-		});
-	</script>
+
+      $(document).ready(function(){
+         var p_no="${place_no}";
+         $.ajax({
+               type:"post",
+               url:"./placephotoDetail",
+               dataType:"JSON",
+               data:{
+                  place_no:p_no
+               },
+               success : function(data){
+                  console.log(data);
+                  $("#main").attr("src",'./upload/'+data.list[0].place_photo);
+                  for(var i=0;i<data.list.length;i++){
+                  $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
+                  }
+               },
+               error:function(e){
+                  console.log(e);
+               }
+            });
+      });
+   </script>
 </html>

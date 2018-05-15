@@ -33,14 +33,15 @@ public class QaDAO {
 	public int write(DTO dto) {
 		// qa_no, place_no, info_id, qa_content, qa_date, qa_title
 		// INSERT INTO qa VALUES (qa_seq.NEXTVAL, 1, 'ksw6169', '내용: 궁금합니다.', SYSDATE, 'qa 제목!!'); 
-		String sql = "INSERT INTO qa VALUES (qa_seq.NEXTVAL, 21, ?, ?, SYSDATE, ?)";
+		String sql = "INSERT INTO qa VALUES (qa_seq.NEXTVAL, ?, ?, ?, SYSDATE, ?)";
 		int success = 0; 
 		
 		try {
 			ps = conn.prepareStatement(sql, new String[] {"qa_no"});
-			ps.setString(1, dto.getInfo_id());
-			ps.setString(2, dto.getQa_content());
-			ps.setString(3, dto.getQa_title());
+			ps.setInt(1, dto.getPlace_no());
+			ps.setString(2, dto.getInfo_id());
+			ps.setString(3, dto.getQa_content());
+			ps.setString(4, dto.getQa_title());
 			
 			success= ps.executeUpdate();
 			rs = ps.getGeneratedKeys();
