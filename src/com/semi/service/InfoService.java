@@ -548,6 +548,7 @@ public class InfoService {
 			response.getWriter().println(obj);
 		}
 
+		//통계
 		public void total(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
 			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
@@ -580,6 +581,27 @@ public class InfoService {
 				response.setContentType("text/html; charset=UTF-8"); 
 				response.getWriter().println(obj);
 			}
+		}
+
+		//통계 자세히보기
+		public void totalDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			//장소번호, 시작일, 끝일, 페이징 시작번호, 페이징 끝번호 추출
+			int p_id = Integer.parseInt(request.getParameter("plcae_no"));
+			String startDate = request.getParameter("date1");
+			String endDate = request.getParameter("date2");
+			int start = Integer.parseInt(request.getParameter("sNum"));
+			int end = Integer.parseInt(request.getParameter("eNum"));
+			//System.out.println(p_id+"/"+startDate+"/"+endDate+"/"+start+"/"+end);
+			//dao에 DB요청(ArrayList<DTO>로 반환) --> totalDetail
+			InfoDAO dao = new InfoDAO();
+			ArrayList<DTO> list = dao.totalDetail(p_id, startDate, endDate, start, end);
+			//아작스로 전송
+			Gson json = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("list", list);
+			String obj = json.toJson(map);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().println(obj);
 		}
 
 		

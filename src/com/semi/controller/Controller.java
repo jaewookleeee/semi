@@ -19,11 +19,12 @@ import com.semi.service.ReviewService;
 
 @WebServlet({"/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
-	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/like", "/likeDel",
-	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
+	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel",
+	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch","/noticeDetailView",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
-	"/qaWrite", "/qaDel", "/qaUpate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch",
-	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeDetailUp"
+	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
+	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
+
 })
 
 public class Controller extends HttpServlet {
@@ -169,6 +170,11 @@ public class Controller extends HttpServlet {
 				boardService = new BoardService();
 				boardService.search(request, response);
 				break;
+			case "/noticeDetailView":
+				System.out.println("noticeDetailView");
+				request.getSession().setAttribute("board_no", request.getParameter("board_no"));
+				response.sendRedirect("noticeDetail.jsp");
+				break;
 			case "/boardReplyWrite":
 				System.out.println("boardReplyWrite");
 				boardService = new BoardService();
@@ -201,8 +207,7 @@ public class Controller extends HttpServlet {
 	 			String page = "placeDetailUp.jsp";
 	 			RequestDispatcher dis = request.getRequestDispatcher(page);
 	 			dis.forward(request, response);
-				break;
-		
+				break;		
 			case "/placeList":
 				System.out.println("등록내역확인 요청");
 				infoService = new InfoService();
@@ -213,14 +218,82 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.delete(request, response);
 				break;
-
+			case "/placeDetail":
+				System.out.println("장소 상세 보기");
+				placeService = new PlaceService();
+				placeService.detail(request, response);
+				break;
+			case "/qaWrite":
+				System.out.println("Q&A 쓰기 요청");
+				qaService = new QaService();
+				qaService.write(request, response);
+				break;
+			case "/qaDel":
+				System.out.println("Q&A 삭제 요청");
+				qaService = new QaService();
+				qaService.delete(request, response);
+				break;
+			case "/qaUpdate":
+				System.out.println("Q&A 수정 요청");
+				qaService = new QaService();
+				qaService.update(request, response);
+				break;
+			case "/qaUpdateForm":
+				System.out.println("Q&A 수정 폼 요청");
+				qaService = new QaService();
+				qaService.updateForm(request, response);
+				break;
+			case "/qaList":
+				System.out.println("Q&A 리스트 요청");
+				qaService = new QaService();
+				qaService.list(request, response);
+				break;
+			case "/qaReplyWrite":
+				System.out.println("Q&A 답변 쓰기 요청");
+				qaService = new QaService();
+				qaService.replyWrite(request, response);
+				break;
+			case "/qaReplyUpdate":
+				System.out.println("Q&A 답변 수정 요청");
+				qaService = new QaService();
+				qaService.replyUpdate(request, response);
+				break;
+			case "/qaReplyList":
+				System.out.println("Q&A 답변 리스트 요청");
+				qaService = new QaService();
+				qaService.replyList(request, response);
+				break;
+			case "/qaReplyDel":
+				System.out.println("Q&A 답변 삭제 요청");
+				qaService = new QaService();
+				qaService.replyDelete(request, response);
+				break;
+			case "/qaSearch":
+				System.out.println("Q&A 검색 요청");
+				qaService = new QaService();
+				qaService.search(request, response);
+				break;
+			case "/qaDetail":
+				System.out.println("Q&A 상세보기 요청");
+				qaService = new QaService();
+				qaService.detail(request, response);
+				break;
+			case "/qaWriteForm":
+				System.out.println("Q&A 글쓰기 폼 요청");
+				qaService = new QaService();
+				qaService.writeForm(request, response);
+				break;
 			case "/total":
 				System.out.println("통계 페이지 요청");
 				infoService = new InfoService();
 				infoService.total(request, response);
 				break;
+			case "/totalDetail":
+				System.out.println("통계 내역 요청");
+				infoService = new InfoService();
+				infoService.totalDetail(request, response);
+				break;
 		}
-		
 	}
 
 }

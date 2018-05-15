@@ -8,7 +8,6 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <style>
             body{
-                width: 1200px;
                 max-width: none !important;
             }
             h1{
@@ -29,12 +28,12 @@
             #pre{
                 position: relative;
                 top: 10px;
-                left: 500px;
+                left: 700px;
             }
             #next{
                 position: relative;
                 top: 10px;
-                left: 505px;
+                left: 705px;
             }
             #cancle{
                 position: relative;
@@ -59,19 +58,19 @@
             }
             #search{
                 position: absolute;
-                left: 780px;
+                left: 950px;
             }
             #date1{
                 position: absolute;
-            	left: 435px;
+            	left: 630px;
             }
             #date2{
                 position: absolute;
-                left: 635px;
+                left: 810px;
             }
             #date3{
                 position: absolute;
-                left: 585px;
+                left: 771px;
                 font-size: 14pt;
                 border: 1px solid gray;
                 padding: 0 10px;
@@ -89,10 +88,10 @@
        <h1>통계</h1>
         <br/>
         <!-- <select class="date" id="date1"></select> -->
-        <input type="date" id="date2"/>
+        <input type="date" id="date1"/>
         <div class="date" id="date3">~</div>
         <!--<select class="date" id="date2"></select>-->
-        <input type="date" id="date1"/>
+        <input type="date" id="date2"/>
         <button id="search">검색</button>
         <br/>
         <br/>
@@ -128,6 +127,7 @@
 		obj.type="POST"; //ajax로 보낼 타입
 		obj.dataType="JSON"; //ajax 실행 후 받을 값 형태
     
+		//페이지 로드되자마자 실행
         $(document).ready(function(){
     	   obj.url="./total";
     	   obj.success=function(data){
@@ -135,30 +135,120 @@
     		   if(data.msg != null){ 
 	   				msg = data.msg;//그 값을 msg변수에 담고
 	   				alert(msg); //alert을 띄운다.
-	   				location.href="./main.jsp" //그리고 login.jsp로 보냄
+	   				location.href="./index.jsp" //그리고 login.jsp로 보냄
    				}else{
-   					printlist(data.list);
+   					table1printlist(data.list);
    					bookCnt_in(data.bookCnt);
    				}
     		}
     	   	ajaxCall(obj);
     	});
 		
+		//검색버튼
+		$("#search").click(function(){
+			/* console.log($("#date1").val());
+			console.log($("#date2").val());
+			console.log($("input[name='chk']").val()); */
+			//검색 버튼을 누르자마자 예약자 통계 부분의 테이블의 껍데기를 변수에 담음(페이징할때 사용)
+			if($("input[name='chk']:checked").val() == null){
+				alert("장소를 선택 해 주세요");
+			}else{
+				tableTh = $("#table2").children().html();
+				obj.url="./totalDetail";
+				obj.data={
+						"date1":$("#date1").val(),
+						"date2":$("#date2").val(),
+						"plcae_no":$("input[name='chk']:checked").val(),
+						"sNum":sNum,
+	    				"eNum":eNum
+				};
+				obj.success=function(data){
+					//console.log(data);
+					table2printlist(data.list);
+				};
+				ajaxCall(obj);
+			}
+		});
 		
-		//테이블 값 넣기
-		function printlist(list){
-			var count = 1;
+		//이전 목록 버튼
+    	$("#pre").click(function(){
+    		sNum -= 5; //페이징 시작 값 변수에서 -5를 하고 넣음
+    		eNum -= 5; //페이징 끝 값 변수에서 -5를 하고 넣음
+    		obj.url = "./totalDetail"; //bookList로 컨트롤러에 요청
+    		obj.data={
+    				"date1":$("#date1").val(),
+					"date2":$("#date2").val(),
+					"plcae_no":$("input[name='chk']:checked").val(),
+					"sNum":sNum,
+    				"eNum":eNum
+    		};
+    		obj.success=function(data){
+    			//console.log(data.list.length);
+    			if(data.msg != null){
+    				msg = data.msg;
+    				alert(msg);
+    				location.href="./login.jsp"
+    			}else{
+    				if(data.list.length == 0){ //list로 넘어온값이 크기가 0이면
+    					alert("첫번째 목록입니다.") //alert을 띄우고
+    					//초기값으로 되돌린다.
+    					sNum = 1; 
+    					eNum = 10; 
+    				}else{
+    					$("#table2").empty(); //테이블 안에 있는 것을 비우고
+    		    		$("#table2").append(tableTh); //테이블 자식요소를 넣음
+    		    		table2printlist(data.list); //리스트를 뽑는 함수호출
+    				}
+    			}
+    		};
+    		ajaxCall(obj);
+    	});
+    	
+    	//다음 목록 버튼
+    	$("#next").click(function(){
+    		sNum += 5; //페이징 시작 값변수에서 +5해줌
+    		eNum += 5; //페이징 끝 값 변수에서 +5 해줌
+    		obj.url = "./totalDetail";
+    		obj.data={
+    				"date1":$("#date1").val(),
+					"date2":$("#date2").val(),
+					"plcae_no":$("input[name='chk']:checked").val(),
+					"sNum":sNum,
+    				"eNum":eNum
+    		};
+    		obj.success=function(data){
+    			if(data.msg != null){
+    				msg = data.msg;
+    				alert(msg);
+    				location.href="./index.jsp"
+    			}else{
+    				if(data.list.length == 0){//list로 넘어온값이 크기가 0이면
+    					alert("마지막 목록입니다.")//alert 을 띄우고
+    					//+5했던것을 다시 되돌린다.
+    					sNum -= 10; 
+    					eNum -= 10;
+    				}else{
+    					$("#table2").empty(); //테이블 안에 있는 것을 비우고
+    		    		$("#table2").append(tableTh); //테이블 자식요소를 넣음
+    		    		table2printlist(data.list); //리스트를 뽑는 함수호출
+    				}
+    			}
+    		};
+    		ajaxCall(obj);
+    	});
+		
+		//테이블1 값 넣기
+		function table1printlist(list){
 			var content = "";
 			list.forEach(function (item, idx){
     			//console.log(item);
     			//console.log(item.book_no);
     			content += "<tr>";
     			content += "<td><input type='radio' name='chk' value='"+item.place_no+"'/></td>"
-    			content += "<td>"+count+"</td>";
+    			content += "<td>"+idx+"</td>";
     			content += "<td>"+item.place_name+"</td>";
     			content += "<td class='bookCnt'></td>";
     			content += "</tr>";
-    			count++;
     		});
     		$("#table1").append(content);
 		}
@@ -169,6 +259,21 @@
     			$(".bookCnt")[idx].append(item);
     		});
     	}
+		
+		//테이블2 값 넣기
+		function table2printlist(list){
+			var content = "";
+			list.forEach(function (item, idx){
+    			content += "<tr>";
+    			content += "<td>"+item.rnum+"</td>"
+    			content += "<td>"+item.book_date+"</td>"
+    			content += "<td>"+item.place_name+"</td>";
+    			content += "<td>"+item.info_id+"</td>"
+    			content += "<td>"+item.book_custom+"</td>"
+    			content += "</tr>";
+    		});
+    		$("#table2").append(content);
+		}
 		
 	   	//ajax로 보내는 함수
 	  	function ajaxCall(param){

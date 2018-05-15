@@ -22,7 +22,7 @@
 		   .category_text { position: absolute; top: 150px; left: 700px; width: 450px; text-align: center; }
 		   .category_header { font-family: 'Nanum Square', sans-serif; font-size: 22px; color: white; }
 		   .category_option { position: relative; width: 130px; height: 130px; margin-top: 20px; margin-right: 20px; background-color: white; opacity: 0.1; float: left; }
-		
+		   
 		   #category_cafe { position: relative; width: 130px; height: 130px; top: 55px; margin-top: 20px; margin-right: 20px; line-height: 130px; color: white; float: left;}
 		   #category_restaurant { position: relative; width: 130px; height: 130px; top: 55px; margin-top: 20px; margin-right: 20px; line-height: 130px; color: white; float: left; }
 		   #category_pub { position: relative; width: 130px; height: 130px; top: 55px; margin-top: 20px; margin-right: 20px; line-height: 130px; color: white; float: left; }
@@ -50,12 +50,12 @@
             <span class="category_option"></span>
         </div>
         <div class="category_text">
-            <a href="#"><span id="category_cafe">카페</span></a>
-            <a href="#"><span id="category_restaurant">식당</span></a>
-            <a href="#"><span id="category_pub">주점</span></a>
-            <a href="#"><span id="category_studio">스튜디오</span></a>
-            <a href="#"><span id="category_practiceRoom">연습실</span></a>
-            <a href="#"><span id="category_theater">공연장</span></a>
+            <a href="search.jsp?category=카페"><span id="category_cafe">카페</span></a>
+            <a href="search.jsp?category=식당"><span id="category_restaurant">식당</span></a>
+            <a href="search.jsp?category=주점"><span id="category_pub">주점</span></a>
+            <a href="search.jsp?category=스튜디오"><span id="category_studio">스튜디오</span></a>
+            <a href="search.jsp?category=연습실"><span id="category_practiceRoom">연습실</span></a>
+            <a href="search.jsp?category=공연장"><span id="category_theater">공연장</span></a>
         </div>	
 	</body>
 </html>

@@ -20,7 +20,6 @@
                 margin-top: 50px;
                 font-size: 30px;
                 text-align: center;
-                
             }
             
             table {
@@ -57,21 +56,21 @@
 		</style>
 	</head>
 	<body>
+		<jsp:include page="menuBar.jsp"/>
         <div class="qa_write">
             <div id="qa_header"><strong>Q&A</strong></div>
             
-            <form action="qaWrite" method="post">
+            <form action="qaUpdate?qa_no=${dto.qa_no}" method="post">
 	            <table>
-	            	<input type="hidden" name="place_no" value="${place_no}"/>
 	                <tr>
 	                    <th id="title_header">제목</th>
-	                    <td><textArea id="title" name="qa_title"></textArea></td>
+	                    <td><textArea id="title" name="qa_title">${dto.qa_title}</textArea></td>
 	                </tr>
 	                <tr>
 	                    <th colspan="2">내용</th>
 	                </tr>
 	                <tr>
-	                    <td colspan="2"><textArea id="content" name="qa_content"></textArea></td>
+	                    <td colspan="2"><textArea id="content" name="qa_content">${dto.qa_content}</textArea></td>
 	                </tr>
 	            </table><br/>
 	            <button id="regist">등록</button>
@@ -79,20 +78,3 @@
         </div>
 	</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

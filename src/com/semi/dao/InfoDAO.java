@@ -457,7 +457,7 @@ public class InfoDAO {
 			//통계 페이지 
 			public ArrayList<DTO> total(String id) {
 				ArrayList<DTO> list = new ArrayList<DTO>();
-				String sql = "SELECT place_no, place_name, to_char(place_date, 'yyyy-MM-dd hh24:mm:ss') as place_date FROM place WHERE info_id=?";
+				String sql = "SELECT place_no, place_name FROM place WHERE info_id=?";
 				try {
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, id);
@@ -478,6 +478,7 @@ public class InfoDAO {
 				return list;
 			}
 
+			//예약자 수 
 			public Integer bookCnt(int place_no) {
 				int bookCnt = 0;
 				String sql = "SELECT COUNT (*) as book_count FROM book WHERE place_no = ?";
@@ -490,7 +491,6 @@ public class InfoDAO {
 					rs = ps.executeQuery();
 					if(rs.next()) {
 						bookCnt = rs.getInt("book_count");
-						System.out.println("place_no : "+place_no+"bookCnt:"+bookCnt);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -498,5 +498,40 @@ public class InfoDAO {
 					resClose();
 				}
 				return bookCnt;
+			}
+
+			//통계 검색버튼 누른 후 상세보기
+			public ArrayList<DTO> totalDetail(int p_id, String startDate, String endDate, int start, int end) {
+				ArrayList<DTO> list = new ArrayList<DTO>();
+				String sql = "SELECT rnum, book_date, place_name, info_id, book_custom " + 
+						"FROM (SELECT ROW_NUMBER() OVER(ORDER BY book_date) AS rnum, "+
+						"to_char(book.book_date, 'yyyy-MM-dd') as book_date, place.place_name, book.info_id, book.book_custom " + 
+						"FROM book, place WHERE place.place_no=book.place_no AND book.place_no=? "+
+						"AND book.book_date BETWEEN to_date(?, 'yyyy-MM-dd') AND to_date(?, 'yyyy-MM-dd')) " + 
+						"WHERE rnum BETWEEN ? AND ?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setInt(1, p_id);
+					ps.setString(2, startDate);
+					ps.setString(3, endDate);
+					ps.setInt(4, start);
+					ps.setInt(5, end);
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						DTO dto = new DTO();
+						dto.setRnum(rs.getInt("rnum"));
+						dto.setBook_date(rs.getDate("book_date"));
+						dto.setPlace_name(rs.getString("place_name"));
+						dto.setInfo_id(rs.getString("info_id"));
+						dto.setBook_custom(rs.getInt("book_custom"));
+						list.add(dto);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return list;
 			}
 }
