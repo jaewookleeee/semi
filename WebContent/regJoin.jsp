@@ -191,14 +191,19 @@
 			var regPwChk = $("#regPwChk").val();
 			
 			
-			
 			if($("#regId").val()==""){
 				alert("아이디를 입력하세요.");
+				$("#regId").focus();
+			}else if($("#regId").val().length < 5 || $("#regId").val().length > 16){
+				alert("아이디는 8~16자리 입력");
 				$("#regId").focus();
 			}else if($("#regPw").val()==""){
 				alert("비밀번호 입력하세요.");				
 				$("#regPw").focus();//포커스 이동
-			}else if($("#userPwChk").val()==""){
+			}else if($("#regPw").val().length < 8 || $("#regPw").val().length >12){
+				alert("비밀번호 8~12자리 입력");
+				$("#regPw").focus();
+			}else if($("#regPwChk").val()==""){
 				alert("비밀번호 확인 해주세요");				
 				$("#regPwChk").focus();//포커스 이동	
 			}else if(regPw != regPwChk){

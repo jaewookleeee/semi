@@ -106,32 +106,55 @@
 		});
 		
 		$("#change").click(function() {
-			$.ajax({
-				type : "post",
-				url : "./regChange",
-				data : {
-					num1 : $("#regNum1").val(),
-					num2 : $("#regNum2").val(),
-					phone1 : $("#regPhone1").val(),
-					phone2 : $("#regPhone2").val(),
-					phone3 : $("#regPhone3").val()
-				},
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					console.log(data.loginId);
-					console.log(data.loginDiv);
-					if(data.success > 0){
-						alert("등록자 전환 완료");
-					}else{
-						alert("등록자 전환 실패");
-						location.href="regChange.jsp";
+			if($("#regNum1").val()==""){
+				alert("주민등록번호 앞자리 입력");
+				$("#regNum1").focus();
+			}else if($("#regNum1").val().length < 6){
+				alert("주민등록번호 6자리 입력");
+				$("#regNum1").focus();
+			}else if($("#regNum2").val()==""){
+				alert("주민등록번호 뒷자리 입력");
+				$("#regNum2").focus();
+			}else if($("#regNum2").val().length < 7){
+				alert("주민등록번호 7자리 입력");
+				$("#regNum2").focus();
+			}else if($("#regPhone1").val()==""){
+				alert("휴대폰 번호 입력");
+				$("#regPhone1").focus();
+			}else if($("#regPhone2").val()==""){
+				alert("휴대폰 번호 입력");
+				$("#regPhone2").focus();
+			}else if($("#regPhone3").val()==""){
+				alert("휴대폰 번호 입력");
+				$("#regPhone3").focus();
+			}else{
+				$.ajax({
+					type : "post",
+					url : "./regChange",
+					data : {
+						num1 : $("#regNum1").val(),
+						num2 : $("#regNum2").val(),
+						phone1 : $("#regPhone1").val(),
+						phone2 : $("#regPhone2").val(),
+						phone3 : $("#regPhone3").val()
+					},
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
+						console.log(data.loginId);
+						console.log(data.loginDiv);
+						if(data.success > 0){
+							alert("등록자 전환 완료");
+						}else{
+							alert("등록자 전환 실패");
+							location.href="regChange.jsp";
+						}
+					},
+					error : function(error) {
+						console.log(error);
 					}
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
+				});
+			}
 		});
 	</script>
 </html>

@@ -222,7 +222,6 @@
             </select>
             <b id="email">이메일</b>
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
-            <!-- <button id="del">탈퇴하기</button> -->
             <button id="cancel">취소</button>
             <button id="save">수정</button>
         </div>
@@ -242,50 +241,80 @@
 			$("#lbW").css("color", "white");
 			$("#lbM").css("color", "black");
 		});
-	
-		/* $("#del").click(function() {
-			location.href="del.jsp";
-		}); */
+		
+		$("#cancel").click(function() {
+			location.href="userDetail.jsp";
+		});
 	
 		$("#save").click(function() {
 			var newPw = $("#userNewPw").val();
 			var newPwChk = $("#userNewPwChk").val();
 			var pw = $("#userPw").val();
 
-			if(newPw != newPwChk){
+			if($("#userPw").val()==""){
+				alert("현재비밀번호 입력");
+				$("#userPw").focus();
+			}else if($("#userNewPw").val()==""){
+				alert("새 비밀번호 입력");
+				$("#userNewPw").focus();
+			}else if($("#userNewPw").val().length < 8 || $("#userNewPw").val().length >12){
+				alert("비밀번호 8~12자리 입력");
+				$("#userNewPw").focus();
+			}else if($("#userNewPwChk").val()==""){
+				alert("새 비밀번호 재입력");
+				$("#userNewPwChk").focus();
+			}else if(newPw != newPwChk){
 				alert("비밀번호가 맞지 않습니다.");
 				$("#userNewPwChk").focus();
-			}
-			$.ajax({
-				type : "post",
-				url : "./userUpdate",
-				data : {
-					id : $("#userId").val(),
-					pw : $("#userPw").val(),
-					newPw : $("#userNewPw").val(),
-					newPwChk : $("#userNewPwChk").val(),
-					name : $("#userName").val(),
-					gender : $("input[name='userGender']:checked").val(),
-					year : $("#userBirthYear").val(),
-					month : $("#userBirthMonth").val(),
-					day : $("#userBirthDay").val(),
-					email : $("#userEmail").val()
-				},
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
+			}else if($("#userName").val()==""){
+				alert("이름 입력");
+				$("#userName").focus();
+			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
+				alert("성별을 선택해주세요.");	
+			}else if($("#userBirthYear").val()=="년도"){
+				alert("년도를 선택해주세요.");
+				$("#userBirthYear").focus();
+			}else if($("#userBirthMonth").val()=="월"){
+				alert("월을 선택해주세요.");
+				$("#userBirthMonth").focus();
+			}else if($("#userBirthDay").val()=="일"){
+				alert("일을 선택해주세요.");
+				$("#userBirthDay").focus();
+			}else if($("#userEmail").val()==""){
+				alert("이메일을 입력해주세요.");
+				$("#userEmail").focus();
+			}else{
+				$.ajax({
+					type : "post",
+					url : "./userUpdate",
+					data : {
+						id : $("#userId").val(),
+						pw : $("#userPw").val(),
+						newPw : $("#userNewPw").val(),
+						newPwChk : $("#userNewPwChk").val(),
+						name : $("#userName").val(),
+						gender : $("input[name='userGender']:checked").val(),
+						year : $("#userBirthYear").val(),
+						month : $("#userBirthMonth").val(),
+						day : $("#userBirthDay").val(),
+						email : $("#userEmail").val()
+					},
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
 
-					if(data.success >0){
-						alert("수정 성공");
-						location.href="userDetail.jsp";
-					}else{
-						alert("수정 실패");
+						if(data.success >0){
+							alert("수정 성공");
+							location.href="userDetail.jsp";
+						}else{
+							alert("수정 실패");
+						}
+					},
+					error : function(error) {
+						console.log(error);
 					}
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
+				});
+			}
 		});
 	</script>
 </html>
