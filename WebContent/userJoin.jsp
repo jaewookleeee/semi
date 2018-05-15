@@ -123,11 +123,7 @@
 		$("#join").click(function() {
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
-			
-			/* if($("#userPw").val().length < 4 || $("#userPw").val().length >12){
-				alert("비밀번호 너무 짧음");
-			} */
-			
+
 			if($("#userId").val()==""){
 				alert("아이디를 입력하세요.");
 				$("#userId").focus();

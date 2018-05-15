@@ -284,52 +284,91 @@
 		$("#save").click(function() {
 			var newPw = $("#regNewPw").val();
 			var newPwChk = $("#regNewPwChk").val();
-			/* var pw = $("#regPw").val();
-			console.log(pw);
-			if(pw != pw){
-				
-				alert("현재 비밀번호가 맞지 않습!");
-			} */
+			var pw = $("#regPw").val();
 			
-			
-			if(newPw != newPwChk){
-				alert("비밀번호가 맞지 않습니다.");
-				$("#regPwChk").focus();
-			}
-			$.ajax({
-				type : "post",
-				url : "./regUpdate",
-				data : {
-					id : $("#regId").val(),
-					pw : $("#regPw").val(),
-					newPw : $("#regNewPw").val(),
-					newPwChk : $("#regNewPwChk").val(),
-					name : $("#regName").val(),
-					gender : $("input[name='regGender']:checked").val(),
-					year : $("#regBirthYear").val(),
-					month : $("#regBirthMonth").val(),
-					day : $("#regBirthDay").val(),
-					email : $("#regEmail").val(),
-					num1 : $("#regNum1").val(),
-					num2 : $("#regNum2").val(),
-					phone1 : $("#regPhone1").val(),
-					phone2 : $("#regPhone2").val(),
-					phone3 : $("#regPhone3").val()
-				},
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					if(data.success >0){
-						alert("수정 성공");
-						location.href="regDetail.jsp";
-					}else{
-						alert("수정 실패");
+			if($("#regPw").val()==""){
+				alert("현재 비밀번호 입력");				
+				$("#regPw").focus();//포커스 이동
+			}else if($("#regNewPw").val()==""){
+				alert("새 비밀번호 입력");				
+				$("#regNewPw").focus();//포커스 이동	
+			}else if($("#regNewPw").val().length < 8 || $("#regNewPw").val().length >12){
+				alert("비밀번호 8~12자리 입력");
+				$("#regNewPw").focus();//포커스 이동	
+			}else if($("#regNewPwChk").val()==""){
+				alert("새 비밀번호 재입력");
+				$("#regNewPwChk").focus();
+			}else if($("#regNewPw").val() != $("#regNewPwChk").val()){
+				alert("비밀번호 재입력");
+				$("#regNewPwChk").focus();//포커스 이동	
+			}else if($("#regName").val()==""){
+				alert("이름을 입력");
+				$("#regName").focus();//포커스 이동	
+			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
+				alert("성별을 선택");	
+			}else if($("#regBirthYear").val()=="년도"){
+				alert("년도를 선택해주세요.");
+				$("#regBirthYear").focus();
+			}else if($("#regBirthMonth").val()=="월"){
+				alert("월을 선택해주세요.");
+				$("#regBirthMonth").focus();
+			}else if($("#regBirthDay").val()=="일"){
+				alert("일을 선택해주세요.");
+				$("#regBirthDay").focus();
+			}else if($("#regEmail").val()==""){
+				alert("이메일을 입력해주세요.");
+				$("#regEmail").focus();
+			}else if($("#regNum1").val()==""){
+				alert("주민등록번호 앞자리를 입력해주세요.");
+				$("#regNum1").focus();
+			}else if($("#regNum2").val()==""){
+				alert("주민등록번호 뒷자리를 입력해주세요.");
+				$("#regNum2").focus();
+			}else if($("#regPhone1").val()==""){
+				alert("휴대폰 번호를 입력해주세요.");
+				$("#regPhone1").focus();
+			}else if($("#regPhone2").val()==""){
+				alert("휴대폰 번호를 입력해주세요.");
+				$("#regPhone2").focus();
+			}else if($("#regPhone3").val()==""){
+				alert("휴대폰 번호를 입력해주세요.");
+				$("#regPhone3").focus();
+			}else {
+				$.ajax({
+					type : "post",
+					url : "./regUpdate",
+					data : {
+						id : $("#regId").val(),
+						pw : $("#regPw").val(),
+						newPw : $("#regNewPw").val(),
+						newPwChk : $("#regNewPwChk").val(),
+						name : $("#regName").val(),
+						gender : $("input[name='regGender']:checked").val(),
+						year : $("#regBirthYear").val(),
+						month : $("#regBirthMonth").val(),
+						day : $("#regBirthDay").val(),
+						email : $("#regEmail").val(),
+						num1 : $("#regNum1").val(),
+						num2 : $("#regNum2").val(),
+						phone1 : $("#regPhone1").val(),
+						phone2 : $("#regPhone2").val(),
+						phone3 : $("#regPhone3").val()
+					},
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
+						if(data.success >0){
+							alert("수정 성공");
+							location.href="regDetail.jsp";
+						}else{
+							alert("수정 실패");
+						}
+					},
+					error : function(error) {
+						console.log(error);
 					}
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
+				});
+			}
 		});
 	</script>
 </html>
