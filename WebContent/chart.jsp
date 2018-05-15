@@ -135,7 +135,7 @@
     		   if(data.msg != null){ 
 	   				msg = data.msg;//그 값을 msg변수에 담고
 	   				alert(msg); //alert을 띄운다.
-	   				location.href="./main.jsp" //그리고 login.jsp로 보냄
+	   				location.href="./index.jsp" //그리고 login.jsp로 보냄
    				}else{
    					printlist(data.list);
    					bookCnt_in(data.bookCnt);

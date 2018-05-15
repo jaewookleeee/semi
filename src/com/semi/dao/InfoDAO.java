@@ -457,7 +457,7 @@ public class InfoDAO {
 			//통계 페이지 
 			public ArrayList<DTO> total(String id) {
 				ArrayList<DTO> list = new ArrayList<DTO>();
-				String sql = "SELECT place_no, place_name, to_char(place_date, 'yyyy-MM-dd hh24:mm:ss') as place_date FROM place WHERE info_id=?";
+				String sql = "SELECT place_no, place_name FROM place WHERE info_id=?";
 				try {
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, id);
@@ -478,6 +478,7 @@ public class InfoDAO {
 				return list;
 			}
 
+			//예약자 수 
 			public Integer bookCnt(int place_no) {
 				int bookCnt = 0;
 				String sql = "SELECT COUNT (*) as book_count FROM book WHERE place_no = ?";
@@ -490,7 +491,6 @@ public class InfoDAO {
 					rs = ps.executeQuery();
 					if(rs.next()) {
 						bookCnt = rs.getInt("book_count");
-						System.out.println("place_no : "+place_no+"bookCnt:"+bookCnt);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

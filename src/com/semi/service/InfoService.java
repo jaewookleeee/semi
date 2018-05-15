@@ -529,6 +529,7 @@ public class InfoService {
 			response.getWriter().println(obj);
 		}
 
+		//통계
 		public void total(HttpServletRequest request, HttpServletResponse response) throws IOException {
 			String id = (String) request.getSession().getAttribute("loginId"); //세션의 loginId라는 속성 추출
 			String loginDiv = (String) request.getSession().getAttribute("loginDiv");
