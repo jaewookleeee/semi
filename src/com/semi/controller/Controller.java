@@ -22,8 +22,8 @@ import com.semi.service.ReviewService;
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/like", "/likeDel",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
-	"/qaWrite", "/qaDel", "/qaUpate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch",
-	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeDetailUp"
+	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
+	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
 })
 
 public class Controller extends HttpServlet {
@@ -213,14 +213,67 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.delete(request, response);
 				break;
-
+			case "/qaWrite":
+				System.out.println("Q&A 쓰기 요청");
+				qaService = new QaService();
+				qaService.write(request, response);
+				break;
+			case "/qaDel":
+				System.out.println("Q&A 삭제 요청");
+				qaService = new QaService();
+				qaService.delete(request, response);
+				break;
+			case "/qaUpdate":
+				System.out.println("Q&A 수정 요청");
+				qaService = new QaService();
+				qaService.update(request, response);
+				break;
+			case "/qaUpdateForm":
+				System.out.println("Q&A 수정 폼 요청");
+				qaService = new QaService();
+				qaService.updateForm(request, response);
+				break;
+			case "/qaList":
+				System.out.println("Q&A 리스트 요청");
+				qaService = new QaService();
+				qaService.list(request, response);
+				break;
+			case "/qaReplyWrite":
+				System.out.println("Q&A 답변 쓰기 요청");
+				qaService = new QaService();
+				qaService.replyWrite(request, response);
+				break;
+			case "/qaReplyUpdate":
+				System.out.println("Q&A 답변 수정 요청");
+				qaService = new QaService();
+				qaService.replyUpdate(request, response);
+				break;
+			case "/qaReplyList":
+				System.out.println("Q&A 답변 리스트 요청");
+				qaService = new QaService();
+				qaService.replyList(request, response);
+				break;
+			case "/qaReplyDel":
+				System.out.println("Q&A 답변 삭제 요청");
+				qaService = new QaService();
+				qaService.replyDelete(request, response);
+				break;
+			case "/qaSearch":
+				System.out.println("Q&A 검색 요청");
+				qaService = new QaService();
+				qaService.search(request, response);
+				break;
+			case "/qaDetail":
+				System.out.println("Q&A 상세보기 요청");
+				qaService = new QaService();
+				qaService.detail(request, response);
+				break;
 			case "/total":
 				System.out.println("통계 페이지 요청");
 				infoService = new InfoService();
 				infoService.total(request, response);
 				break;
 		}
-		
 	}
 
 }
