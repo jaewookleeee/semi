@@ -28,7 +28,6 @@
 	<div>
 	<jsp:include page="menuBar.jsp"/>
 	</div>
-	<c:set var="place_no" value="${place_no}" scope="page"/>
 	<input type="hidden" value="place_no"/>
 		<div id="all"> 
 	        <img id="main"/><br/>

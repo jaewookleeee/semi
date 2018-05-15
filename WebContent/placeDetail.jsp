@@ -83,21 +83,31 @@ var array_start=[];
 var array_start2=[];
 var array_end=[];
 var array_end2=[];
+var place_no="${param.place_no}";
     $("#like").click(function(){
         if($(this).html()=="찜 하기"){
+        	/* $.ajax({
+        		type:"post",
+    			url:"./placeDetail",
+    			dataType:"JSON",
+    			data:{
+    				place_no:place_no
+    				loginid:${sessionScope.loginId}
+    			}
+        	}) */
             $(this).html("찜 취소")
         }else if($(this).html()=="찜 취소"){
             $(this).html("찜 하기")
         }
     });
     $(document).ready(function(){
-    	var msg="${param.place_no}";
+    	//console.log(${sessionScope.loginId});
     	$.ajax({
 			type:"post",
 			url:"./placeDetail",
 			dataType:"JSON",
 			data:{
-				place_no:msg
+				place_no:place_no
 			},
 			success : function(data){
 				array_start=data.dto.place_start.split(" ");
@@ -137,5 +147,6 @@ var array_end2=[];
 			}
 		});
     });
+    
 </script>
 </html>

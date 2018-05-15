@@ -23,7 +23,7 @@ import com.semi.service.ReviewService;
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
-	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
+	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeDetailUp"
 })
 
 public class Controller extends HttpServlet {
@@ -216,6 +216,7 @@ public class Controller extends HttpServlet {
 				System.out.println("장소 상세 보기");
 				placeService = new PlaceService();
 				placeService.detail(request, response);
+				break;
 			case "/qaWrite":
 				System.out.println("Q&A 쓰기 요청");
 				qaService = new QaService();
