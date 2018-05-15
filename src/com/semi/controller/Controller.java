@@ -20,10 +20,10 @@ import com.semi.service.ReviewService;
 @WebServlet({"/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel",
-	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
+	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch","/noticeDetailView",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
-	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeDetailUp"
+	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
 
 })
 
@@ -169,6 +169,11 @@ public class Controller extends HttpServlet {
 				System.out.println("boardList");
 				boardService = new BoardService();
 				boardService.search(request, response);
+				break;
+			case "/noticeDetailView":
+				System.out.println("noticeDetailView");
+				request.getSession().setAttribute("board_no", request.getParameter("board_no"));
+				response.sendRedirect("noticeDetail.jsp");
 				break;
 			case "/boardReplyWrite":
 				System.out.println("boardReplyWrite");

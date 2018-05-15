@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -36,8 +33,8 @@
                 margin: 0 auto;
 			}
 			#writeBtn{
-				float: right;
-				margin-right: 105px;
+				position: absolute;
+				left: 930px;
 			}
 			button{
 				background-color: #212121;
@@ -56,10 +53,6 @@
 			#include{
 				height: 60px;
 			}
-			#questPage{
-				border: 1px solid black;
-				width: 800px;
-			}
 			#catetoryDiv{
 				float: left;
 				margin-left:100px;
@@ -68,7 +61,7 @@
 				background-color: gray;
 				display: table;
 			}
-			#quest{
+			#notice{
 				color: white;	
 				display: table-cell;
 				vertical-align: middle;
@@ -80,65 +73,62 @@
 				float: left;
     			margin-left: 300px;
 			}
+			#noticePage{
+				border: 1px solid black;
+				width: 800px;
+			}
 		</style>
 	</head>
-<body>
+	<body>
 	<div id="include">
-		<jsp:include page="/menuBar.jsp" flush="false" />
+	<jsp:include page="/menuBar.jsp" flush="false"/>
 	</div>
-	<div id="questPage"><br/>
+	<div id="noticePage"><br/>
 		<div id="catetoryDiv">
-			<p id="quest"> 문의사항</p>
+			<p id="notice"> 공지사항</p>
 		</div>
 		<br/><br/><br/>
-		<table id="listTable">
+		<table id="noticeTable">
 			<tr>
 				<th id="num">번호</th>
 				<th id="subject">제목</th>
 				<th>작성자 ID</th>
 				<th>작성일자</th>
 			</tr>
-		</table>
-		<br /> 
+		</table><br/>
 		<div id="searchDiv">
-		<input type="text" id="search" placeholder="검색할 제목을 입력해 주세요." />
-		<button id="searchBtn">검색</button>
+		<input type="text" id="search" placeholder="검색할 제목을 입력해주세요."/>
+		<button id="noticeSearch">검색</button>
 		</div>
-		<button id="writeBtn">작성하기</button>
-		<br />
-		<br />
-		<button id="beforeList">이전 목록</button>
-		<button id="afterList">다음 목록</button><br/><br/>
-	</div>
-</body>
-
-<script>
+		<button id="writeBtn">작성하기</button><br/><br/>
+		<button id="noticeBefore">이전 목록</button>
+		<button id="noticeAfter">다음 목록</button><br/><br/>
+		</div>
+	</body>
+	<script>
 		/*java script area*/
-		
 		var tableTh = "";
        var msg = "";
        var sNum = 1;
        var eNum = 10;
         var obj = {};
-        var tableTh = $("#listTable");		
+        var tableTh = $("#noticeTable");		
 		var obj={};
 		obj.error = function(e){console.log(e)};
 		obj.type="POST";
 		obj.dataType="JSON";
-		
-		
-		
+		var loginId = "${sessionScope.loginId}";
 		function ajaxCall(param){
 			console.log(param);
 			$.ajax(param);
 		}
 		
 		$(document).ready(function(){
-			tableTh = $("#listTable").children().html();
+			tableTh = $("#noticeTable").children().html();
 			obj.url="./boardList";
 			obj.data={
 					"search":$("#search").val(),
-					"cate":"문의사항",
+					"cate":"공지사항",
 					"sNum":sNum,
 		            "eNum":eNum
 			};
@@ -148,8 +138,15 @@
 			}
 			ajaxCall(obj);
 		});
+		//작성하기 버튼
+		$("#writeBtn").click(function(){
+			if(loginId == "ADMIN"){
+				location.href="noticeWrite.jsp";
+			}else{
+				alert("공지사항을 작성 할 권한이 없는 아이디 입니다.")
+			}
 			
-		var b=0;
+		});
 		//리스트 출력
 		function listPrint(list){
 			console.log(list);
@@ -157,44 +154,40 @@
 				list.forEach(function(item, board_no){
 					content+="<tr>";
 					content+="<td>"+item.rnum+"</td>";
-					content+="<td><a href='boardDetailView?board_no="+item.board_no+"'>"+item.board_title+"</a></td>";
+					content+="<td><a href='noticeDetailView?board_no="+item.board_no+"'>"+item.board_title+"</a></td>";
 					content+="<td>"+item.info_id+"</td>";
 					content+="<td>"+item.board_date+"</td>";
 					content+="</tr>";	
 				});
-				$("#listTable").append(content);			
+				$("#noticeTable").append(content);			
 		}
 		
-		//작성하기 버튼
-		$("#writeBtn").click(function(){
-			location.href="questWrite.jsp";
-		});
-		
 		//검색버튼
-		$("#searchBtn").click(function(){
+		$("#noticeSearch").click(function(){
 			obj.url="./boardList";
 			obj.data={
 					"search":$("#search").val(),
-					"cate":"문의사항",
+					"cate":"공지사항",
 					 "sNum":sNum,
 		            "eNum":eNum 
 			};
 			obj.success = function(data){
 				console.log(data.list);
-				$("#listTable").empty();
-			 	$("#listTable").append(tableTh);
+				$("#noticeTable").empty();
+			 	$("#noticeTable").append(tableTh);
 				listPrint(data.list);
 			}
 			ajaxCall(obj);
 		});
+		
 		//이전목록 버튼
-		$("#beforeList").click(function(){
+		$("#noticeBefore").click(function(){
 			sNum -= 10;
 	        eNum -= 10;
 			obj.url="./boardList";
 			obj.data={
 					"search":$("#search").val(),
-					"cate":"문의사항",
+					"cate":"공지사항",
 					"sNum":sNum,
 		            "eNum":eNum
 			};
@@ -207,22 +200,21 @@
 					eNum = 10;
 				}else{
 					var b = data.list.length;
-					$("#listTable").empty();
-					$("#listTable").append(tableTh);
+					$("#noticeTable").empty();
+					$("#noticeTable").append(tableTh);
 					listPrint(data.list);
 				}
 			}
 			ajaxCall(obj);
 		});
-
 		//다음 목록
-		$("#afterList").click(function(){
+		$("#noticeAfter").click(function(){
 			sNum += 10;
 	        eNum += 10;
 	        obj.url="./boardList";
 			obj.data={
 					"search":$("#search").val(),
-					"cate":"문의사항",
+					"cate":"공지사항",
 					"sNum":sNum,
 		            "eNum":eNum
 			};
@@ -234,8 +226,8 @@
 					sNum -= 10;
 					eNum -= 10;
 				}else{
-					$("#listTable").empty();
-					$("#listTable").append(tableTh);
+					$("#noticeTable").empty();
+					$("#noticeTable").append(tableTh);
 					listPrint(data.list);
 				}
 			}
