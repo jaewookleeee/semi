@@ -201,8 +201,7 @@ public class Controller extends HttpServlet {
 	 			String page = "placeDetailUp.jsp";
 	 			RequestDispatcher dis = request.getRequestDispatcher(page);
 	 			dis.forward(request, response);
-				break;
-		
+				break;		
 			case "/placeList":
 				System.out.println("등록내역확인 요청");
 				infoService = new InfoService();
@@ -213,6 +212,10 @@ public class Controller extends HttpServlet {
 				placeService = new PlaceService();
 				placeService.delete(request, response);
 				break;
+			case "/placeDetail":
+				System.out.println("장소 상세 보기");
+				placeService = new PlaceService();
+				placeService.detail(request, response);
 			case "/qaWrite":
 				System.out.println("Q&A 쓰기 요청");
 				qaService = new QaService();
@@ -273,7 +276,6 @@ public class Controller extends HttpServlet {
 				qaService = new QaService();
 				qaService.writeForm(request, response);
 				break;
-				
 			case "/total":
 				System.out.println("통계 페이지 요청");
 				infoService = new InfoService();
