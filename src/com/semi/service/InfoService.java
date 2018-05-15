@@ -97,10 +97,16 @@ public class InfoService {
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
 		String email = request.getParameter("email");
-		String num = request.getParameter("num");
-		String phone = request.getParameter("phone");
+		String num1 = request.getParameter("num1");
+		String num2 = request.getParameter("num2");
+		String phone1 = request.getParameter("phone1");
+		String phone2 = request.getParameter("phone2");
+		String phone3 = request.getParameter("phone3");
+		
+		String phone = phone1+phone2+phone3;
 		
 		String birth = year+"-"+month+"-"+day;
+		String num = num1+num2;
 
 		Date date = Date.valueOf(birth);
 		System.out.println(id+", "+pw+", "+name+", "+gender+", "+email+", "+date+", "+num+", "+phone);
@@ -326,8 +332,14 @@ public class InfoService {
 			String month = request.getParameter("month");
 			String day = request.getParameter("day");
 			String email = request.getParameter("email");
-			String num = request.getParameter("num");
-			String phone = request.getParameter("phone");
+			String num1 = request.getParameter("num1");
+			String num2 = request.getParameter("num2");
+			String phone1 = request.getParameter("phone1");
+			String phone2 = request.getParameter("phone2");
+			String phone3 = request.getParameter("phone3");
+			
+			String num = num1+num2;
+			String phone = phone1+phone2+phone3;
 			
 			String birth = year+"-"+month+"-"+day;
 			Date date = Date.valueOf(birth);
@@ -383,8 +395,15 @@ public class InfoService {
 			InfoDAO dao = new InfoDAO();
 			DTO dto = new DTO();
 
-			String num = request.getParameter("num");
-			String phone = request.getParameter("phone");
+			String num1 = request.getParameter("num1");
+			String num2 = request.getParameter("num2");
+			String phone1 = request.getParameter("phone1");
+			String phone2 = request.getParameter("phone2");
+			String phone3 = request.getParameter("phone3");
+			
+			String num = num1+num2;
+			String phone = phone1+phone2+phone3;
+			
 			System.out.println(num+phone);
 			
 			dto.setInfo_div("등록자");
