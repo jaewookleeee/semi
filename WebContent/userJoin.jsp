@@ -125,16 +125,6 @@
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
 			
-<<<<<<< HEAD
-/* 			var idReg = /^[A-za-z0-9]{5,16}/g;
-
-			if(!idReg.test( $("#userId").val())){
-				alert("특");
-				return;
-			} */
-			
-=======
->>>>>>> 539918034e475a39c17a715a28b21788ff16eb6d
 			if($("#userId").val()==""){
 				alert("아이디를 입력하세요.");
 				$("#userId").focus();

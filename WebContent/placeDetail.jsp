@@ -104,6 +104,10 @@ var cash=0;
 		today = yyyy+"-"+mm+"-"+dd;
 		console.log(today);
 		
+		console.log("결과 : ",$("#starttime").val() > $("#endtime").val());
+
+		
+		
 		if($("#date").val()==""){
 			alert("날짜 선택");
 		}else if($("#date").val() < today){

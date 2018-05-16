@@ -83,4 +83,30 @@ public class BookDAO {
 		return success;
 	}
 
+	//예약 정보
+	public DTO bookInfo(String loginId) {
+		DTO dto = null;
+		String sql = "SELECT info_id, book_date, book_start, book_end, book_price, book_custom FROM book WHERE info_id=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, loginId);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto = new DTO();
+				dto.setInfo_id(rs.getString("info_id"));
+				dto.setBook_date(rs.getDate("book_date"));
+				dto.setBook_start(rs.getString("book_start"));
+				dto.setBook_end(rs.getString("book_end"));
+				dto.setBook_price(rs.getLong("book_price"));
+				dto.setBook_custom(rs.getInt("book_custom"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			resClose();
+		}
+		return dto;
+	}
+
 }
