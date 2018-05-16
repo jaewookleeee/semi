@@ -28,8 +28,8 @@
 	            width: 200px; height: 25px; font-size: 10px;  }
 	        input#userName{ position: absolute; left: 15px; top: 255px;
  				width: 200px; height: 25px; font-size: 10px;     } 
+ 				
 	        span#gender{ position: absolute; left: 15px; top: 315px; }
-			
 			label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
 			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
 			input#man{ display: none; }
@@ -38,6 +38,7 @@
 	        select#userBirthYear{ position: absolute; left: 15px; top:375px;}
 	        select#userBirthMonth{ position: absolute; left: 70px; top: 375px; }
 	        select#userBirthDay{ position: absolute; left: 110px; top: 375px; }
+	        
 	        input#userEmail{ position: absolute; left: 15px; top: 435px;
 	            width: 200px; height: 25px; font-size: 10px;             }
 	        button#cancel{ position: absolute; left: 180px; top: 495px; width: 50px; height: 25px;    

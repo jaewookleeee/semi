@@ -20,78 +20,31 @@
 	        b#num{ position: absolute; left: 15px; top: 470px; font-size: 13px;   }
 	        b#phone{ position: absolute; left: 15px; top: 530px; font-size: 13px;   }
 	        input#regId{ position: absolute; left: 15px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
-	        button#idChk{
-	            position: absolute;
-	            left: 220px;
-	            top: 75px;
-	            width: 69px;
-	            height: 25px;
-	            color: white;
-	            background-color: black;
-	            border-style: none;
-	            font-size: 10px;
-	        }
-	        input#regPw{
-	            position: absolute;
-	            left: 15px;
-	            top: 135px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
-	        input#regPwChk{
-	            position: absolute;
-	            left: 15px;
-	            top: 195px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
-	        input#regName{
-	            position: absolute;
-	            left: 15px;
-	            top: 255px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;    
-	        }
+	        button#idChk{ position: absolute; left: 220px; top: 75px; width: 69px; height: 25px;
+	            color: white; background-color: black; border-style: none; font-size: 10px; }
+	        input#regPw{ position: absolute; left: 15px; top: 135px; width: 200px; height: 25px; font-size: 10px; }
+	        input#regPwChk{ position: absolute; left: 15px; top: 195px; width: 200px; height: 25px; font-size: 10px;             }
+	        input#regName{ position: absolute; left: 15px; top: 255px; width: 200px; height: 25px; font-size: 10px;     }
+	        
 	        span#gender{ position: absolute; left: 15px; top: 315px; }
 	        label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
 			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
 			input#man{ display: none; }
 			input#woman{ display: none; }
-	        select#regBirthYear{
-	        	position: absolute;
-	        	left: 15px;
-	        	top: 375px;
-	        }
-	        select#regBirthMonth{
-	        	position: absolute;
-	        	left: 70px;
-	        	top: 375px;
-	        }
-	        select#regBirthDay{
-	        	position: absolute;
-	        	left: 110px;
-	        	top: 375px;
-	        }
-	        input#regEmail{
-	            position: absolute;
-	            left: 15px;
-	            top: 435px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
+			
+	        select#regBirthYear{ position: absolute; left: 15px; top: 375px; }
+	        select#regBirthMonth{position: absolute; left: 70px; top: 375px; }
+	        select#regBirthDay{ position: absolute; left: 110px; top: 375px;  }
+	        input#regEmail{ position: absolute; left: 15px; top: 435px; width: 200px; height: 25px; font-size: 10px;             }
+	        
 	        span#regNum-{position: absolute; left: 107px; top: 495px;}
 	        input#regNum1{ position: absolute; left: 15px; top: 495px;
 	            width: 85px; height: 25px; font-size: 10px;  }
 	        input#regNum2{ position: absolute; left: 120px; top: 495px;   
-	            width: 85px; height: 25px; font-size: 10px;  }
-	            
-	            
+	            width: 85px; height: 25px; font-size: 10px;  }  
 	        span#regNum-1{position: absolute; left: 60px; top: 555px;}
 	        span#regNum-2{position: absolute; left: 115px; top: 555px;}    
+	        
 	        input#regPhone1{ position: absolute; left: 15px; top: 555px;
 	            width: 40px; height: 25px; font-size: 10px; }
 	        input#regPhone2{ position: absolute; left: 70px; top: 555px;
@@ -164,6 +117,7 @@
         </div>
 	</body>
 	<script>
+		//성별
 		$("#man").click(function() {
 			$("#lbM").css("background", "#FA5882");
 			$("#lbW").css("background", "white");
@@ -178,13 +132,14 @@
 			$("#lbW").css("color", "white");
 			$("#lbM").css("color", "black");
 		});
-	
+		
+		//취소버튼
 		$("#cancel").click(function() {
 			location.href="login.jsp";
 		});
 		
 		var chk = false;//아이디 중복값 체크
-	
+		//완료버튼(회원가입)
 		$("#join").click(function() {
 			console.log($("#regPw").val().length);
 			var regPw = $("#regPw").val();
@@ -273,12 +228,9 @@
 					}
 				});
 			}
-
 		});
 		
-		
-		
-		//중복체크
+		//id 중복확인
 		$("#idChk").click(function() {
 			var regIdTxt = $("#regId").val();
 			$.ajax({
@@ -305,19 +257,5 @@
 				}
 			});
 		});
-		  $("#genM").click(function(){
-	         $("#genM").css("background-color", "#FA5882");
-	         $("#manLb").css("color", "white");
-	         
-	         $("#genW").css("background-color", "white");
-	         $("#womanLb").css("color", "black");
-	     });
-	     $("#genW").click(function(){
-	         $("#genW").css("background-color", "#FA5882");
-	         $("#womanLb").css("color", "white");
-	         
-	         $("#genM").css("background-color", "white");
-	         $("#manLb").css("color", "black");
-	     });         
 	</script>
 </html>
