@@ -123,15 +123,21 @@
 		$("#join").click(function() {
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
+			
+/* 			var idReg = /^[A-za-z0-9]{5,16}/g;
 
+			if(!idReg.test( $("#userId").val())){
+				alert("특");
+				return;
+			} */
+			
 			if($("#userId").val()==""){
 				alert("아이디를 입력하세요.");
 				$("#userId").focus();
 			}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
 				alert("아이디는 8~16자리 입력");
 				$("#userId").focus();
-			}
-			else if($("#userPw").val()==""){
+			}else if($("#userPw").val()==""){
 				alert("비밀번호 입력하세요.");				
 				$("#userPw").focus();
 			}else if($("#userPw").val().length < 8 || $("#userPw").val().length >12){
