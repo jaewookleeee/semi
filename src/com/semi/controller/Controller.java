@@ -124,10 +124,18 @@ public class Controller extends HttpServlet {
 				placeService=new PlaceService();
 				placeService.search(request, response);
 				break;
+
 			case "/bookList":
 				System.out.println("예약 리스트 요청");
 				infoService = new InfoService();
 				infoService.bookList(request, response);
+				break;
+				
+				
+			case "/bookWrite":
+				System.out.println("예약하기 요청");
+				bookService = new BookService();
+				bookService.bookWrite(request, response);
 				break;
 			case "/bookDel":
 				System.out.println("예약 삭제 요청");
