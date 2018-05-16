@@ -49,7 +49,6 @@ public class Controller extends HttpServlet {
 		QaService qaService = null;
 		ReviewService reviewService = null;
 		
-		
 		switch (subAddr) {
 			case "/overlay":
 				System.out.println("중복체크 요청");
@@ -244,22 +243,22 @@ public class Controller extends HttpServlet {
 			case "/qaReplyWrite":
 				System.out.println("Q&A 답변 쓰기 요청");
 				qaService = new QaService();
-				qaService.replyWrite(request, response);
+				qaService.qaReplyWrite(request, response);
 				break;
 			case "/qaReplyUpdate":
 				System.out.println("Q&A 답변 수정 요청");
 				qaService = new QaService();
-				qaService.replyUpdate(request, response);
+				qaService.qaReplyUpdate(request, response);
 				break;
 			case "/qaReplyList":
 				System.out.println("Q&A 답변 리스트 요청");
 				qaService = new QaService();
-				qaService.replyList(request, response);
+				qaService.qaReplyList(request, response);
 				break;
 			case "/qaReplyDel":
 				System.out.println("Q&A 답변 삭제 요청");
 				qaService = new QaService();
-				qaService.replyDelete(request, response);
+				qaService.qaReplyDelete(request, response);
 				break;
 			case "/qaSearch":
 				System.out.println("Q&A 검색 요청");
@@ -283,5 +282,4 @@ public class Controller extends HttpServlet {
 				break;
 		}
 	}
-
 }

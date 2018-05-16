@@ -132,11 +132,11 @@ public class QaService {
 	
 		QaDAO dao = new QaDAO();
 		int place_no = dao.delete(qa_no);
-		response.sendRedirect("placeDetailUp.jsp?place_no="+place_no);
+		response.sendRedirect("placeDetailUp?place_no="+place_no);
 	}
 
-	// Q&A 답변 쓰기
-	public void replyWrite(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	// Q&A 답변 쓰기(완) -수정 완
+	public void qaReplyWrite(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -153,7 +153,7 @@ public class QaService {
 		dto.setQa_no(qa_no);
 		
 		QaDAO dao = new QaDAO();
-		int success = dao.replyWrite(dto);
+		int success = dao.qaReplyWrite(dto);
 
 		if(success > 0) {
 			Gson gson = new Gson();
@@ -167,15 +167,35 @@ public class QaService {
 			System.out.println("Q&A 답변 작성에 실패했습니다.");
 		}
 	}
-	public void replyUpdate(HttpServletRequest request, HttpServletResponse response) {
+
+	// Q&A 답변 수정(완) 
+	public void qaReplyUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		
+		int qareply_no = Integer.parseInt(request.getParameter("qareply_no"));
+		String qareply_content = request.getParameter("qareply_content");
+		
+		QaDAO dao = new QaDAO();
+		int qa_no = dao.qaReplyUpdate(qareply_no, qareply_content);
+		
+		Gson gson = new Gson();
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("qa_no", qa_no);
+		
+		String obj = gson.toJson(map);
+		response.getWriter().write(obj);
 	}
 
-	public void replyList(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	// Q&A 답변 리스트(완)
+	public void qaReplyList(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int qa_no = Integer.parseInt(request.getParameter("qa_no"));
 		
 		QaDAO dao = new QaDAO();
-		ArrayList<DTO> list = dao.replyList(qa_no);
+		ArrayList<DTO> list = dao.qaReplyList(qa_no);
 	
 		if(list != null) {
 			Gson gson = new Gson();
@@ -190,14 +210,29 @@ public class QaService {
 		}
 	}
 
-	public void replyDelete(HttpServletRequest request, HttpServletResponse response) {
+	// Q&A 답변 삭제(완)
+	public void qaReplyDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int qareply_no = Integer.parseInt(request.getParameter("qareply_no"));
 		
+		QaDAO dao = new QaDAO();
+		int qa_no = dao.qaReplyDelete(qareply_no);
+		System.out.println("qa_no:" +qa_no);
+		
+		String msg = "Q&A 삭제에 실패했습니다.";
+		if(qa_no > 0) {
+			msg = "Q&A 삭제에 성공했습니다.";
+		}
+		
+		request.setAttribute("msg", msg);
+		RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no="+qa_no);
+		dis.forward(request, response);
 	}
 
 	public void search(HttpServletRequest request, HttpServletResponse response) {
 		
 	}
 
+	// Q&A 수정 폼 요청(완)
 	public void writeForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int place_no = Integer.parseInt(request.getParameter("place_no"));
 		
