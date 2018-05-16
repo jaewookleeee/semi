@@ -70,25 +70,21 @@
                 margin-top: 50px;
             }
             
-            .qa_reply_writer {
-                height: 150px;
-            }
-            
             .reply_content {
                 width: 800px;
-                height: 150px;
                 float: left;
                 border: 0.1px solid #222222;
             }
             
             #qa_reply_write {
                 width: 100px;
-                height: 150px;
+                height: 100px;
                 float: left;
                 border: 1px solid black;
                 background-color: #222222;
                 font-size: 18px;
                 color: white;
+                margin-bottom: 100px;
             }
             
             .reply {
@@ -101,10 +97,21 @@
             
             .reply_regist_content {
                 width: 900px;
-                height: 150px;
+                height: 100px;
                 float: left;
                 border: 0.1px solid #222222;
+                margin-bottom: 100px;
             }
+            
+            .qa_reply_writer {
+            	height: 100px;
+            }
+            
+            .reply_content {
+            	height: 100px;
+            }
+            
+            
             
 		</style>
 	</head>
@@ -128,7 +135,7 @@
                 </tr>
             </table><br/>
             <div class="btn_list">
-                <input class="btn" id="list" type="button" value="목록"/>
+                <a href="./placeDetailUp?place_no=${dto.place_no}"><input class="btn" id="list" type="button" value="목록"/></a>
                 <a href="./qaUpdateForm?qa_no=${dto.qa_no}"><input class="btn" id="chg" type="button" value="수정"/></a> 
                 <a href="./qaDel?qa_no=${dto.qa_no}"><input class="btn" id="del" type="button" value="삭제"/></a> 
             </div>
@@ -146,7 +153,6 @@
                 </div>
             </div>
         </div>
-        <br/><br/><br/><br/>
 	</body>
 	<script>
 	 	var obj = {};
@@ -166,10 +172,10 @@
 			
 			obj.success = function(data) {
 				list = data.list;
-				console.log(list.length);
 				for(var i=0; i<list.length; i++) {				
-					var str = "<tr><th class='qa_reply_writer'>"+list[i].info_id+"</th><td class='reply_content'>"+list[i].qareply_content+"</td>"
-									+"<td><a href='qaReplyDel?qareply_no="+list[i].qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
+					var str = "<tr><th class='qa_reply_writer'>"+list[i].info_id+"</th><td><textarea class='reply_content' readonly='readonly'>"+list[i].qareply_content+"</textarea></td>"
+								+"<td><button class='btn' id='updatebtn"+list[i].qareply_no+"' onclick='updateInit("+list[i].qareply_no+")'>수정</button>"
+								+"<a href='qaReplyDel?qareply_no="+list[i].qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
 					$("#reply_add").append(str);
 				}
 			};
@@ -185,21 +191,39 @@
 				info_id: $("#logId").val()
 			};
 			obj.success = function(data) {
-				var str = "<tr><th class='qa_reply_writer'>"+data.dto.info_id+"</th><td class='reply_content'>"+data.dto.qareply_content+"</td>"
-								+"<td><a href='qaReplyDel?qareply_no="+data.dto.qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
+				var str = "<tr><th class='qa_reply_writer'>"+data.dto.info_id+"</th><td><textarea class='reply_content' readonly='readonly'>"+data.dto.qareply_content+"</textarea></td>"
+								+"<td><button class='btn' id='updatebtn"+data.dto.qareply_no+"' onclick='updateInit("+data.dto.qareply_no+")'>수정</button>"
+									+"<a href='qaReplyDel?qareply_no="+data.dto.qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
 				
 				$("#reply_add").append(str);
 			};
 			ajaxCall(obj);
 		});
-
-		// Q&A 답변 삭제 버튼 클릭 시,
-		function qa_reply_del(data) {
-			// console.log($(this).attr("id"));
-			console.log("length: "+$("input[type='hidden']").length);
-			
-			// console.log($("button[id=replyDel]").val());
+		
+		// Q&A 답글 수정 버튼을 눌렀을 시, textarea를 수정 가능한 상태로 만들고 완료 버튼 추가
+		function updateInit(qareply_no) {
+			$("#updatebtn"+qareply_no).parent().prev().children($('.reply_content')).attr('readonly', false);
+			$("#updatebtn"+qareply_no).next().after("<button class='btn' id='completeBtn"+qareply_no+"' onclick='replyUpdate("+qareply_no+")'>완료</button>");
+			// 수정 버튼, 삭제 버튼 삭제(다시 살려야 함)
+			$("#updatebtn"+qareply_no).next().hide();
+			$("#updatebtn"+qareply_no).hide();
 		}
+		
+		// Q&A 답글 수정 후 '완료' 버튼을 눌렀을 시, 
+		function replyUpdate(qareply_no) {
+			$("#updatebtn"+qareply_no).next().show();
+			$("#updatebtn"+qareply_no).show();
+			$("#completeBtn"+qareply_no).remove();
+			$("#updatebtn"+qareply_no).parent().prev().children($('.reply_content')).attr('readonly', true);
+		
+			obj.url = "./qaReplyUpdate";		
+			obj.data = {
+				qareply_no: qareply_no,	// 되나 확인
+				qareply_content: $("#updatebtn"+qareply_no).parent().prev().children($('.reply_content')).val(),
+			};
+			ajaxCall(obj);
+		}
+		
 		
 		function ajaxCall(param) {
 			$.ajax(param);

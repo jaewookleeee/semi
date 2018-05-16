@@ -91,17 +91,6 @@ public class QaDAO {
 		}
 		return list;
 	}
-	
-	// 자원 반납
-	public void resClose() {
-		try {
-			if(rs != null) {rs.close();}
-			if(ps != null) {ps.close();}
-			if(conn != null) {conn.close();}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	// Q&A 상세보기 (완)
 	public DTO detail(int qa_no) {
@@ -177,9 +166,8 @@ public class QaDAO {
 			return place_no;
 	}
 
-	
-	// Q&A 답변 쓰기
-	public int replyWrite(DTO dto) {
+	// Q&A 답변 쓰기(완)
+	public int qaReplyWrite(DTO dto) {
 		String sql = "INSERT INTO qareply(qareply_no, qa_no, info_id, qareply_content, qareply_date) VALUES (qa_reply_seq.NEXTVAL, ?, ?, ?, SYSDATE)";
 		int success = 0;
 		
@@ -205,7 +193,8 @@ public class QaDAO {
 		return success;
 	}
 
-	public ArrayList<DTO> replyList(int qa_no) {
+	// Q&A 답글 리스트(완)
+	public ArrayList<DTO> qaReplyList(int qa_no) {
 		ArrayList<DTO> list = new ArrayList<>();
 		
 		String sql = "SELECT info_id, qareply_no, qareply_content FROM qareply WHERE qa_no = ?";
@@ -230,5 +219,72 @@ public class QaDAO {
 			resClose();
 		}
 		return list;
+	}
+
+	// Q&A 답글 삭제(완)
+	public int qaReplyDelete(int qareply_no) {
+		int qa_no = 0;
+		String sql = "SELECT qa_no FROM qareply WHERE qareply_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, qareply_no);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				qa_no = rs.getInt("qa_no");
+			}
+			
+			sql = "DELETE FROM qareply WHERE qareply_no = ?";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, qareply_no);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			resClose();
+		}
+		return qa_no;
+	}
+
+	// Q&A 답글 수정(완)
+	public int qaReplyUpdate(int qareply_no, String qareply_content) {
+		int qa_no = 0;
+		String sql = "SELECT qa_no FROM qareply WHERE qareply_no = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, qareply_no);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				qa_no = rs.getInt("qa_no");
+			}
+			
+			sql = "UPDATE qareply SET qareply_content = ? WHERE qareply_no = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, qareply_content);
+			ps.setInt(2, qareply_no);
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			resClose();
+		}
+		return qa_no;
+	}
+
+	// 자원 반납
+	public void resClose() {
+		try {
+			if(rs != null) {rs.close();}
+			if(ps != null) {ps.close();}
+			if(conn != null) {conn.close();}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
