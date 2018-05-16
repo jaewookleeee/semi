@@ -31,7 +31,7 @@
             .menu { position: absolute; z-index: 1; width: 100%; height: 50px; top: 0px; left: -20px; }
             .logo { position: relative; top: 2px; margin-right: 50px; font-family: 'odibeeSans', sans-serif; font-size: 22px; color: #FF376C; }   
             .menu_item { position: relative; padding: 0px; line-height: 10px; left: 0px; margin-right: 40px; font-family: 'Nanum Square', sans-serif; font-size: 14px; }
-			.log { position: absolute; padding: 0px; width: 60px; height: 20px; line-height: 20px; margin-top: -5px; margin-left: 1310px; font-family: 'Nanum Square', sans-serif; font-size: 14px; background-color: #FA5882; color: white; text-align: center; } 
+			.log { position: absolute; padding: 0px; width: 60px; height: 20px; line-height: 20px; margin-top: -5px; margin-left: 94%; font-family: 'Nanum Square', sans-serif; font-size: 14px; background-color: #FA5882; color: white; text-align: center; } 
             span#login_id{position: absolute; font-size: 15px; left: 1200px; top: 10px;}
             #login_idaTag{position: absolute; font-size: 15px; left: 1250px; top: 10px;}
             
@@ -61,7 +61,7 @@
                     </span>
                 </li>
                 <li class="menu_item"><a href="quest.jsp">문의사항</a></li>
-                <li class="menu_item"><a href="#">공지사항</a></li>
+                <li class="menu_item"><a href="notice.jsp">공지사항</a></li>
                 <li class="menu_item"><a href="search.jsp">장소검색</a></li>
                 <li class="menu_item"><a href="divChk.jsp">장소등록</a></li>
             	

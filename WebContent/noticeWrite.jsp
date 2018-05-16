@@ -41,19 +41,30 @@
 				height: 450px;
 			}
 			button{
-				
-				width: 60px;
-				height: 40px;
+				position: absolute;
+				left: 970px;
+				width: 50px;
+				height: 30px;
 				background-color: #212121;
 				color: white;
 				border: 0;
 			}
-			#write{
-				float: right;
-				margin-right: 95px;
-			}
 			#include{
 				height: 60px;
+			}
+			#noticePage{
+				border: 1px solid black;
+				width: 800px;
+				padding: 10px 10px;
+			}
+			#notice{
+				color: white;	
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+				font-size: 15pt;
+				font-weight: 900;
+				
 			}
 			#catetoryDiv{
 				position: absolute;
@@ -63,30 +74,16 @@
 				background-color: gray;
 				display: table;
 			}
-			#questPage{
-				border: 1px solid black;
-				width: 800px;
-				padding: 10px 10px;
-			}
-			#quest{
-				color: white;	
-				display: table-cell;
-				vertical-align: middle;
-				text-align: center;
-				font-size: 15pt;
-				font-weight: 900;
-				
-			}
 		</style>
 	</head>
-<body>
+	<body>
 	<div id="include">
 		<jsp:include page="/menuBar.jsp" flush="false" />
 	</div>
-	<div id="questPage">
+	<div id="noticePage">
 		<br />
 		<div id="catetoryDiv">
-			<p id="quest">문의사항</p>
+			<p id="notice">공지사항</p>
 		</div>
 		<br />
 		<br />
@@ -96,7 +93,7 @@
 				<th>제목</th>
 				<td id="subject"><input type="text" name="board_title"
 					id="board_title" onKeyup="len_chk()" /> <input type="hidden"
-					name="quest" id="Catequest" value="문의사항" /></td>
+					name="notice" id="Catenotice" value="공지사항" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">내용</th>
@@ -111,13 +108,9 @@
 		<br />
 		<br />
 	</div>
-</body>
-<script>
+	</body>
+	<script>
 		/*java script area*/
-		/* $("#write").click(function(){
-			location.href="./boardWrite";
-		}); */			
-		
 		//로그인 체크
 		var loginId = "${sessionScope.loginId}";
 		console.log(loginId);
@@ -146,15 +139,14 @@
 				obj.data={					
 						"board_title":$("#board_title").val(),
 						"board_content":$("#board_content").val(),
-						"board_category":$("#Catequest").val()
+						"board_category":$("#Catenotice").val()
 				};
 				obj.success=function(data){
 					console.log(data);
 					//성공/실패 : 상세보기 페이지
 					
 					if(data.result >0){
-						console.log(data.result);
-						 location.href="./boardDetailView?board_no="+data.result; 
+						location.href="./noticeDetailView?board_no="+data.result;
 					}else{
 						alert("글쓰기 실패");
 					}

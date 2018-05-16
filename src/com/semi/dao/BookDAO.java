@@ -9,6 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.semi.dto.DTO;
+
 public class BookDAO {
 
 	Connection conn = null;
@@ -54,6 +56,31 @@ public class BookDAO {
 			resClose();
 		}
 		return delCnt;
+	}
+
+	//예약하기
+	public int bookWrite(DTO dto, String loginId) {
+		int success = 0;
+		String sql = "INSERT INTO book(book_no, place_no, info_id, book_date, book_start, book_end, book_price, book_custom) "+
+		"VALUES(book_seq.NEXTVAL, ?, ?, TO_DATE(?,'YYYY-MM-DD'), TO_DATE(?,'hh24:mi'), TO_DATE(?,'hh24:mi'), ?, ?)";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, dto.getPlace_no());
+			ps.setString(2, loginId);
+			ps.setDate(3, dto.getBook_date());
+			ps.setString(4, dto.getBook_start());
+			ps.setString(5, dto.getBook_end());
+			ps.setLong(6, dto.getBook_price());
+			ps.setInt(7, dto.getBook_custom());
+			
+			success = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			resClose();
+		}
+		return success;
 	}
 
 }

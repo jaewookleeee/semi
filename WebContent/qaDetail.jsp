@@ -163,6 +163,7 @@
 		
 		// qaDetail.jsp가 로드되면, 해당 qa에 대한 후기를 전부 가져옴
 		$(document).ready(function() {
+			
 			obj.url = "./qaReplyList";
 			
 			obj.data = {

@@ -33,12 +33,12 @@
                 <div class="div_info">
                     <div class="title"><strong id="title"></strong></div>
                     
-                    <div id="intro" class="intro"></div>
+                    <div id="intro" class="intro">없음</div>
                     
                     <div id="categoly" class="cate"></div>
                     <div id="loc_short" class="cate"></div>
                     <div id="phone" class="cate"></div>
-                    <div id="homepage" class="cate"></div>
+                    <div id="homepage" class="cate">홈페이지 없음</div>
                     
                     <input class="sel_btn" id="date" type="date"/>
                     <select class="sel_btn" id="starttime"><option>시작시간</option></select>
@@ -70,7 +70,7 @@
                 
                 <div class="div_attention">
                     <div class="title"><strong>주의사항</strong></div>
-                    <textarea id="attention" class="content" readonly></textarea>
+                    <textarea id="attention" class="content" readonly>없음</textarea>
                 </div>
                 
                 <br/><br/>
@@ -83,21 +83,124 @@ var array_start=[];
 var array_start2=[];
 var array_end=[];
 var array_end2=[];
+var starttime=[];
+var endtime=[];
+var place_no="${param.place_no}";
+var id ="${sessionScope.loginId}";
+var cash=0;	
+
+	//예약하기
+	$("#book").click(function() {
+		var today = new Date();
+		var yyyy = today.getFullYear();
+		var mm = today.getMonth()+1;
+		var dd = today.getDate();
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+		today = yyyy+"-"+mm+"-"+dd;
+		console.log(today);
+		
+		if($("#date").val()==""){
+			alert("날짜 선택");
+		}else if($("#date").val() < today){
+			alert("이전 날짜 선택안됨");
+		}else if($("#people").val()=="인원"){
+			alert("인원 선택");
+		}else if($("#starttime").val() >= $("#endtime").val()){
+			alert("예약시간 다시 설정");
+		}else{
+			$.ajax({
+	    		type:"post",
+				url:"./bookWrite",
+				dataType:"JSON",
+				data:{
+					place_no : place_no,
+					date : $("#date").val(),
+					startTime : $("#starttime").val(),
+					endTime : $("#endtime").val(),
+					custom : $("#people").val(),
+					price : $("#cash").val()
+				},
+				success : function(data){
+					console.log(data);
+					if(data.login == false){
+						alert("로그인 후 사용");
+					}else if(data.login == true){
+						if(data.success > 0){
+							alert("예약 완료");
+						}else{
+							alert("예약 실패");
+						}
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+	    	});   
+		}
+		
+	});
+
     $("#like").click(function(){
-        if($(this).html()=="찜 하기"){
-            $(this).html("찜 취소")
-        }else if($(this).html()=="찜 취소"){
-            $(this).html("찜 하기")
+    	
+    	//console.log(id);
+        if($("#like").html()=="찜하기"){
+		        $.ajax({
+		    		type:"post",
+					url:"./like",
+					dataType:"JSON",
+					data:{
+						place_no:place_no,
+						id:id
+					},
+					success : function(data){
+						//console.log(data);
+						if(data.success==true){
+							$("#like").html("찜취소");
+							alert("찜이 되었습니다");
+						}else{
+							alert("찜이 안되었습니다");
+						}				
+					},
+					error:function(e){
+						console.log(e);
+					}
+		    	})   
+        }else if($("#like").html()=="찜취소"){
+        	$.ajax({
+        		type:"post",
+    			url:"./detaillikedel",
+    			dataType:"JSON",
+    			data:{
+    				place_no:place_no,
+    				id:id
+    			},
+    			success : function(data){
+    				//console.log(data);
+    				if(data.success==true){
+    					$("#like").html("찜하기");
+    					alert("찜이 취소되었습니다");
+    				}else{
+    					alert("찜이 취소가 안되었습니다");
+    				}				
+    			},
+    			error:function(e){
+    				console.log(e);
+    			}
+        	})
         }
     });
     $(document).ready(function(){
-    	var msg="${param.place_no}";
     	$.ajax({
 			type:"post",
 			url:"./placeDetail",
 			dataType:"JSON",
 			data:{
-				place_no:msg
+				place_no:place_no
 			},
 			success : function(data){
 				array_start=data.dto.place_start.split(" ");
@@ -117,9 +220,9 @@ var array_end2=[];
 				$("#guide").val(data.dto.place_guide);
 				$("#attention").val(data.dto.place_attention);
 				$("#cash").val(data.dto.place_price);
-				$("#starttime").empty();
+				cash=data.dto.place_price;
+				 $("#starttime").empty();
 				$("#endtime").empty();
-				//$("#starttime").append("<option>"+starttime+":00</option>");
 				var sta = "";					
 				for(var i=0;i<(endtime-starttime);i++){
 					sta += "<option>"+(starttime+i)+":00</option>";
@@ -129,13 +232,61 @@ var array_end2=[];
 					en += "<option>"+(starttime+i)+":00</option>";
 				}
 				$("#starttime").append(sta);
-				//$("#endtime").append("<option>"+endtime+":00</option>");
 				$("#endtime").append(en);
 			},
 			error:function(e){
 				console.log(e);
 			}
 		});
+    	$.ajax({
+    		type:"post",
+			url:"./detaillike",
+			dataType:"JSON",
+			data:{
+				place_no:place_no,
+				id:id
+			},
+			success : function(data){
+				console.log(data);
+				if(data.success==true){
+					$("#like").html("찜취소");
+					//alert("찜을 한 페이지 입니다");					
+				}else{
+					$("#like").html("찜하기");
+					//alert("찜이 안되어있습니다");
+				}				
+			},
+			error:function(e){
+				console.log(e);
+			}
+    	});
+    	 
     });
+    $("#starttime").change(function(e){
+    	//console.log($("#endtime").val());
+		var start =$("#starttime").val();
+		starttime=start.split(":");
+		var end=$("#endtime").val();
+		var endtime=[];
+		endtime=end.split(":");
+		//console.log(endtime[0]-starttime[0]);	
+		//console.log((endtime[0]-starttime[0])*cash);
+		var cashed =(endtime[0]-starttime[0])*cash;
+		/* console.log(cashed.indexOf('7')); */
+		$("#cash").val(cashed);
+	 })
+    $("#endtime").change(function(){
+    	//console.log($("#endtime").val());
+		var start =$("#starttime").val();
+		starttime=start.split(":");
+		var end=$("#endtime").val();
+		var endtime=[];
+		endtime=end.split(":");
+		//console.log(endtime[0]-starttime[0]);	
+		//console.log((endtime[0]-starttime[0])*cash);
+		var cashed =(endtime[0]-starttime[0])*cash;
+		/* console.log(cashed.indexOf('7')); */
+		$("#cash").val(cashed);
+		})
 </script>
 </html>

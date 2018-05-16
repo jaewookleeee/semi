@@ -16,6 +16,9 @@
 				margin:0 auto;
 
 			}
+			table{
+				width:700px;
+			}
 			th{
 				width: 80px;
 				background-color: #212121;
@@ -26,11 +29,12 @@
 			}
 			body{
 				 text-align: center; 
-				 width: 1200px; 
+				 width: 900px; 
                  max-width: none !important; 
+                 margin: 0 auto;
 			}
 			#content{
-				height: 350px;
+				height: 150px;
 			}
 			button{
 				width: 55px;
@@ -41,37 +45,38 @@
 			}
 			#list{
 				position: absolute;
-				left: 805px;
+				left: 897px;
 			}
 			#update{
 				position: absolute;
-				left: 735px;
+				left: 967px;
 			}
 			#delete{
 				position: absolute;
-				left: 875px;
+				left: 1037px;
 			}
 			#updateOk{
 				position: absolute;
-				left: 875px;
+				left: 1037px;
 				display: none; 
 			}
 			#cancel{
 				position: absolute;
-				left: 805px;
+				left: 967px;
 				 display: none;
 			}
-			#answer{
-				position: absolute;
-				left: 290px;
-			}
+			
 			.anserContent{
 				width: 520px;
 				height: 100px;
 			}
 			#answerWrite{
+				background-color: lightgray;
+				color:black;
+				font-size: 12pt;
 				width: 80px;
 				height: 100px;
+				font-weight: bold;
 			}
 			input{
 				width:100%;
@@ -83,6 +88,11 @@
 				height: 100%;
 				text-align:center;
 				border: 0px;
+				padding-left:5;
+				padding-right:50;
+				padding-bottom:50;
+				padding-top:50;
+				word-break:break-all;
 			}
 			#replyContent{
 				width: 450px;
@@ -97,14 +107,58 @@
 			#replyUpdateOk{
 				display: none;
 			}
+			#answerTitle{
+				position: absolute;
+				left: 393px;
+				width: 80px;
+				height: 50px;
+				background-color: gray;
+				display: table;
+			}
 
+			#questPage{
+				border: 1px solid black;
+				width: 800px;
+			}
+			#catetoryDiv{
+				position: absolute;
+				left: 393px;
+				width: 120px;
+				height: 50px;
+				background-color: gray;
+				display: table;
+			}
+			.answerBtn{
+				background-color: lightgray;
+				
+			}
+			.replyInfo{
+				background-color: lightgray;
+				color:black;
+				font-size: 12pt;
+			}
+			#answerTxt{
+				width:100%
+			}
+			#categoryP{
+				color: white;	
+				display: table-cell;
+				vertical-align: middle;
+				text-align: center;
+				font-size: 15pt;
+				font-weight: 900;
+			}
 		</style>
 	</head>
 	<body>
 	<div id="include">
 	<jsp:include page="/menuBar.jsp" flush="false"/>
 	</div>
-		<h2>문의 사항</h2><br/>
+	<div id="questPage"><br/>
+		<div id="catetoryDiv">
+			<p id="categoryP"> 문의사항</p>
+		</div>
+		<br/><br/><br/>
 		<table>
 			<tr>
 				<th>제목</th>
@@ -113,11 +167,15 @@
 					<input type="hidden" id="board_no" />
 				</td>
 			</tr>
+			
 			<tr>
 				<th>작성일자</th>
 				<td id="board_date"></td>
 				<th>작성자 ID</th>
 				<td id="info_id"></td>
+			</tr>
+			<tr>
+				<th colspan="4">내용</th>
 			</tr>
 			<tr>
 				<td colspan="4" id="content">
@@ -133,7 +191,10 @@
 		<button id="delete">삭제</button>
 		
 		<br/><br/>
-		<h2 id="answer">답변</h2><br/><br/><br/>
+		<div id = "answerTitle">
+			<p id="categoryP">답변</p>
+		</div>
+		<br/><br/><br/>
 		
 		<div id="answerDiv">
 			
@@ -148,11 +209,12 @@
 		<table>
 			<tr>
 				<td class="anserContent">
-					<textarea id="answerTxt" onKeyup="len_chk()"></textarea>
+					<textarea id="answerTxt" onKeyup="len_chk()" placeholder="답변을 입력해주세요 (최대 300자)"></textarea>
 				</td>
-				<th><button id="answerWrite">등록</button></th>
+				<th class="answerBtn"><button id="answerWrite">등록</button></th>
 			</tr>
 		</table><br/>
+		</div>
 	</body>
 	<script>
 		/*java script area*/		
@@ -171,8 +233,9 @@
 			location.href="./boardReplyWrite?board_no=${board.board_no}";
 		}); */
 		$(document).ready(function(){
+			
 			tableTh = $("#answerDiv").children().html();
-			obj.url="./boardDetail?board_no=${board.board_no}";
+			obj.url="./boardDetail?board_no=${board_no}";
 			obj.data={
 					"board_no":$("#board_no").val(),
 					"board_title":$("#board_title").val(),
@@ -188,9 +251,21 @@
 				$("#board_content").val(data.dto.board_content);
 				//$("#answerDiv").append(tableTh);
 				replyPrint(data.list);
+				
+				 if($("#info_id").text() != "${loginId}" ){
+					  $("#update").css("display","none");
+					  $("#delete").css("display","none");
+					  $("#list").css("left","1030px");
+					  $("#replyBtn").remove();
+				  }
+				 if("${loginId}" == "ADMIN"){
+					 $("#update").css("display","block");
+					  $("#delete").css("display","block");
+				 }
 			};
 			ajaxCall(obj);
 		});
+		
 		
 		$("#list").click(function() {
 			location.href="quest.jsp";
@@ -257,7 +332,7 @@
 		
 		//문의사항 삭제
 		$("#delete").click(function(){			
-			if($("#info_id").text() == "${loginId}"){
+			if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
 				location.href="./boardDel?board_no="+$("#board_no").val();;				
 			}else if(loginId == ""){					
@@ -310,7 +385,7 @@
 		//문의사항 답글쓰기
 		$("#answerWrite").click(function(){
 			console.log("click");
-			 if($("#info_id").text() == "${loginId}"){
+			 if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				 
 			 if($("#answerTxt").val() == ""){
 				alert("내용을 입력해 주세요.");
@@ -343,14 +418,14 @@
 			console.log(list);
 			var content = "";
 				list.forEach(function(item, board_no){
-					/* if(item.info_id == "ADMIN"){
+					 if(item.info_id == "ADMIN"){
 						item.info_id = "관리자";
-					} */
+					} 
 					content+="<table>"
 					content+="<tr>";
-					content+="<th id='replyInfo"+item.reply_no+"'><input type='hidden' id='reply_no' value='"+item.reply_no+"'/>"+item.info_id+"</th>";
+					content+="<th id='replyInfo"+item.reply_no+"' class='replyInfo'><input type='hidden' id='reply_no' value='"+item.reply_no+"'/>"+item.info_id+"</th>";
 					content+="<td id='replyContent'><textarea id='reply' onKeyup='len_chk()' name="+item.reply_no+"  readonly>"+item.reply_content+"</textarea></td>";
-					content+="<td id='replyBtn'><button  value='"+item.reply_no+
+					content+="<td id='replyBtn'><button id='replyUpdate'  value='"+item.reply_no+
 					"' name='"+item.reply_no+"' onclick='replyUp.call(this)'>수정</button><br/><br/><button  name='"+item.reply_no+
 					"' onclick='replyDel.call(this)'  value='"+item.reply_no+"'>삭제</button><button id='replyUpdateOk'  value='"+item.reply_no+
 					"' class='"+item.reply_no+"' onclick='replyUpok.call(this)'>완료</button></td>";
@@ -392,7 +467,7 @@
 			console.log(updateOk);
 			
 			 if($("textarea[name='"+updateOk+"']").val() == ""){
-				alert("답글을 입력해 주세요.");
+				alert("댓글을 입력해 주세요.");
 				$("textarea[name='"+updateOk+"']").focus();
 			}else{
 				obj.url="./boardReplyUdate?reply_no="+$(this).val();
@@ -405,10 +480,10 @@
 					console.log(data);
 					//성공/실패 : 상세보기 페이지
 					if(data.success == 1){
-						alert("답글 수정 완료");
+						alert("댓글 수정 완료");
 						location.href="questDetail.jsp";
 					}else{
-						alert("답글 수정 실패");
+						alert("댓글 수정 실패");
 					}
 				};
 				ajaxCall(obj);
@@ -428,10 +503,10 @@
 					console.log(data.success);
 					//성공/실패 : 상세보기 페이지
 					if(data.success > 0){
-						alert("답글 삭제 완료");
+						alert("댓글 삭제 완료");
 						location.href="questDetail.jsp";
 					}else{
-						alert("답글 삭제 실패");
+						alert("댓글 삭제 실패");
 					}
 				};
 				ajaxCall(obj);

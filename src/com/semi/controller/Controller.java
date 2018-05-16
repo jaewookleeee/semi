@@ -19,12 +19,14 @@ import com.semi.service.ReviewService;
 
 @WebServlet({"/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
-	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel",
+	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel","/detaillikedel","/detaillike",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
-	"/qaWrite", "/qaWriteForm", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
+	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
+
 })
+
 
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -121,10 +123,18 @@ public class Controller extends HttpServlet {
 				placeService=new PlaceService();
 				placeService.search(request, response);
 				break;
+
 			case "/bookList":
 				System.out.println("예약 리스트 요청");
 				infoService = new InfoService();
 				infoService.bookList(request, response);
+				break;
+				
+				
+			case "/bookWrite":
+				System.out.println("예약하기 요청");
+				bookService = new BookService();
+				bookService.bookWrite(request, response);
 				break;
 			case "/bookDel":
 				System.out.println("예약 삭제 요청");
@@ -167,6 +177,11 @@ public class Controller extends HttpServlet {
 				System.out.println("boardList");
 				boardService = new BoardService();
 				boardService.search(request, response);
+				break;
+			case "/noticeDetailView":
+				System.out.println("noticeDetailView");
+				request.getSession().setAttribute("board_no", request.getParameter("board_no"));
+				response.sendRedirect("noticeDetail.jsp");
 				break;
 			case "/boardReplyWrite":
 				System.out.println("boardReplyWrite");
@@ -215,6 +230,7 @@ public class Controller extends HttpServlet {
 				System.out.println("장소 상세 보기");
 				placeService = new PlaceService();
 				placeService.detail(request, response);
+				break;
 			case "/qaWrite":
 				System.out.println("Q&A 쓰기 요청");
 				qaService = new QaService();
@@ -279,6 +295,26 @@ public class Controller extends HttpServlet {
 				System.out.println("통계 페이지 요청");
 				infoService = new InfoService();
 				infoService.total(request, response);
+				break;
+			case "/like":
+				System.out.println("찜하기 요청");
+				placeService = new PlaceService();
+				placeService.like(request, response);
+				break;
+			case "/detaillikedel":
+				System.out.println("상세보기 에서 찜취소 요청");
+				placeService = new PlaceService();
+				placeService.detaillikedel(request, response);
+				break;
+			case "/detaillike":
+				System.out.println("찝상태 확인");
+				placeService = new PlaceService();
+				placeService.detaillike(request, response);
+				break;
+			case "/totalDetail":
+				System.out.println("통계 내역 요청");
+				infoService = new InfoService();
+				infoService.totalDetail(request, response);
 				break;
 		}
 	}
