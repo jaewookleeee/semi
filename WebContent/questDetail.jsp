@@ -251,9 +251,17 @@
 				$("#board_content").val(data.dto.board_content);
 				//$("#answerDiv").append(tableTh);
 				replyPrint(data.list);
-				if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
-					console.log("login Id");
-				}
+				
+				 if($("#info_id").text() != "${loginId}" ){
+					  $("#update").css("display","none");
+					  $("#delete").css("display","none");
+					  $("#list").css("left","1030px");
+					  $("#replyBtn").remove();
+				  }
+				 if("${loginId}" == "ADMIN"){
+					 $("#update").css("display","block");
+					  $("#delete").css("display","block");
+				 }
 			};
 			ajaxCall(obj);
 		});
@@ -417,7 +425,7 @@
 					content+="<tr>";
 					content+="<th id='replyInfo"+item.reply_no+"' class='replyInfo'><input type='hidden' id='reply_no' value='"+item.reply_no+"'/>"+item.info_id+"</th>";
 					content+="<td id='replyContent'><textarea id='reply' onKeyup='len_chk()' name="+item.reply_no+"  readonly>"+item.reply_content+"</textarea></td>";
-					content+="<td id='replyBtn'><button  value='"+item.reply_no+
+					content+="<td id='replyBtn'><button id='replyUpdate'  value='"+item.reply_no+
 					"' name='"+item.reply_no+"' onclick='replyUp.call(this)'>수정</button><br/><br/><button  name='"+item.reply_no+
 					"' onclick='replyDel.call(this)'  value='"+item.reply_no+"'>삭제</button><button id='replyUpdateOk'  value='"+item.reply_no+
 					"' class='"+item.reply_no+"' onclick='replyUpok.call(this)'>완료</button></td>";
