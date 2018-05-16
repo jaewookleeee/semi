@@ -153,7 +153,8 @@
 					//성공/실패 : 상세보기 페이지
 					
 					if(data.result >0){
-						location.href="./boardDetailView?board_no="+data.result;
+						console.log(data.result);
+						 location.href="./boardDetailView?board_no="+data.result; 
 					}else{
 						alert("글쓰기 실패");
 					}

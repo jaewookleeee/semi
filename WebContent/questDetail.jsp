@@ -235,7 +235,7 @@
 		$(document).ready(function(){
 			
 			tableTh = $("#answerDiv").children().html();
-			obj.url="./boardDetail?board_no=${board.board_no}";
+			obj.url="./boardDetail?board_no=${board_no}";
 			obj.data={
 					"board_no":$("#board_no").val(),
 					"board_title":$("#board_title").val(),
@@ -251,6 +251,9 @@
 				$("#board_content").val(data.dto.board_content);
 				//$("#answerDiv").append(tableTh);
 				replyPrint(data.list);
+				if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
+					console.log("login Id");
+				}
 			};
 			ajaxCall(obj);
 		});
@@ -321,7 +324,7 @@
 		
 		//문의사항 삭제
 		$("#delete").click(function(){			
-			if($("#info_id").text() == "${loginId}"){
+			if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
 				location.href="./boardDel?board_no="+$("#board_no").val();;				
 			}else if(loginId == ""){					
@@ -374,7 +377,7 @@
 		//문의사항 답글쓰기
 		$("#answerWrite").click(function(){
 			console.log("click");
-			 if($("#info_id").text() == "${loginId}"){
+			 if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				 
 			 if($("#answerTxt").val() == ""){
 				alert("내용을 입력해 주세요.");
