@@ -214,7 +214,7 @@ public class PlaceService {
 		System.out.println(id);
 		Gson json = new Gson();//json을 준비
 		boolean success = false;
-		if(id==null) {
+		if(id=="") {
 			HashMap<String, Boolean> map = new HashMap<String, Boolean>();
 			map.put("success", success); // map에 보낼 값 넣기			
 			String obj = json.toJson(map); // map 변환			

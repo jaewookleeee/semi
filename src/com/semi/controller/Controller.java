@@ -171,6 +171,11 @@ public class Controller extends HttpServlet {
 				boardService = new BoardService();
 				boardService.search(request, response);
 				break;
+			case "/noticeDetailView":
+				System.out.println("noticeDetailView");
+				request.getSession().setAttribute("board_no", request.getParameter("board_no"));
+				response.sendRedirect("noticeDetail.jsp");
+				break;
 			case "/boardReplyWrite":
 				System.out.println("boardReplyWrite");
 				boardService = new BoardService();
@@ -298,6 +303,12 @@ public class Controller extends HttpServlet {
 				System.out.println("찝상태 확인");
 				placeService = new PlaceService();
 				placeService.detaillike(request, response);
+				break;
+			case "/totalDetail":
+				System.out.println("통계 내역 요청");
+				infoService = new InfoService();
+				infoService.totalDetail(request, response);
+				break;
 		}
 	}
 

@@ -61,7 +61,7 @@
                     </span>
                 </li>
                 <li class="menu_item"><a href="quest.jsp">문의사항</a></li>
-                <li class="menu_item"><a href="#">공지사항</a></li>
+                <li class="menu_item"><a href="notice.jsp">공지사항</a></li>
                 <li class="menu_item"><a href="search.jsp">장소검색</a></li>
                 <li class="menu_item"><a href="divChk.jsp">장소등록</a></li>
             	

@@ -86,34 +86,33 @@ var array_end2=[];
 var starttime=[];
 var endtime=[];
 var place_no="${param.place_no}";
-var id = "${sessionScope.loginId}";
+var id ="${sessionScope.loginId}";
 var cash=0;	
     $("#like").click(function(){
     	
     	//console.log(id);
         if($("#like").html()=="찜하기"){
-        	  $.ajax({
-    		type:"post",
-			url:"./like",
-			dataType:"JSON",
-			data:{
-				place_no:place_no,
-				id:id
-			},
-			success : function(data){
-				//console.log(data);
-				if(data.success==true){
-					$("#like").html("찜취소");
-					alert("찜이 되었습니다");
-				}else{
-					alert("찜이 안되었습니다");
-				}				
-			},
-			error:function(e){
-				console.log(e);
-			}
-    	})
-            
+		        $.ajax({
+		    		type:"post",
+					url:"./like",
+					dataType:"JSON",
+					data:{
+						place_no:place_no,
+						id:id
+					},
+					success : function(data){
+						//console.log(data);
+						if(data.success==true){
+							$("#like").html("찜취소");
+							alert("찜이 되었습니다");
+						}else{
+							alert("찜이 안되었습니다");
+						}				
+					},
+					error:function(e){
+						console.log(e);
+					}
+		    	})   
         }else if($("#like").html()=="찜취소"){
         	$.ajax({
         		type:"post",

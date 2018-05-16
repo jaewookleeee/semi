@@ -13,7 +13,7 @@
 	            width: 310px;
 	            height: 720px;
 	            left: 40%;
-	            top: 200px;
+	            top: 100px;
 	            text-align: center;
 	        }
 	        span#regTxt{
@@ -127,37 +127,10 @@
 	        	left: 15px;
 	        	top:375px;
 	        } 
-	        /* span#genM{
-	            position: absolute;
-	            left: 15px;
-	            top: 375px;
-	            border: 1px solid black;
-	            width: 95px;
-	            font-size: 15px;
-	            
-	        }
-	        input#man{
-	            display: none;
-	        }
-	        span#genW{
-	            position: absolute;
-	            left: 118;
-	            top: 375px;
-	            border: 1px solid black;
-	            width: 95px;
-	            font-size: 15px;
-	        }
-	        input#woman{
-	            display: none;
-	        } */
-	        /* input#regBirth{
-	            position: absolute;
-	            left: 15px;
-	            top: 435px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 13px;
-	        } */
+	        label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
+			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
+			input#man{ display: none; }
+			input#woman{ display: none; }
 	        
 	        select#regBirthYear{
 	        	position: absolute;
@@ -182,22 +155,23 @@
 	            height: 25px;
 	            font-size: 10px;            
 	        }
-	        input#regNum{
-	            position: absolute;
-	            left: 15px;
-	            top: 555px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px; 
-	        }
-	        input#regPhone{
-	            position: absolute;
-	            left: 15px;
-	            top: 615px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px; 
-	        }
+	        
+	        span#regNum-{position: absolute; left: 107px; top: 555px;}
+	        input#regNum1{ position: absolute; left: 15px; top: 555px;
+	            width: 85px; height: 25px; font-size: 10px;  }
+	        input#regNum2{ position: absolute; left: 120px; top: 555px;   
+	            width: 85px; height: 25px; font-size: 10px;  }
+	            
+	        span#regNum-1{position: absolute; left: 60px; top: 615px;}
+	        span#regNum-2{position: absolute; left: 115px; top: 615px;}    
+	        input#regPhone1{ position: absolute; left: 15px; top: 615px;
+	            width: 40px; height: 25px; font-size: 10px; }
+	        input#regPhone2{ position: absolute; left: 70px; top: 615px;
+	            width: 40px; height: 25px; font-size: 10px; }
+			input#regPhone3{ position: absolute; left: 125px; top: 615px;
+	            width: 40px; height: 25px; font-size: 10px; }	
+	        
+	        
 	        button#cancel{
 	            position: absolute;
 	            left: 180px;
@@ -240,10 +214,10 @@
             <b id="name">이름</b>
             <input id="regName" type="text" placeholder="이름을 입력하세요."/>
             <b id="Gender">성별</b>
-            <span id="gender">
-            	<input id="man" type="radio" name="regGender" value="남" checked/>남자
-            	&nbsp;&nbsp;&nbsp;&nbsp;
-            	<input id="woman" type="radio" name="regGender" value="여"/>여자
+          	<span id="gender">
+            	<label id="lbM"><input id="man" type="radio" name="regGender" value="남"/>남자</label>
+            	&nbsp;
+            	<label id="lbW"><input id="woman" type="radio" name="regGender" value="여"/>여자</label>
             </span>
 
             <b id="birth">생년월일</b>
@@ -272,15 +246,37 @@
             <b id="email">이메일</b>
             <input id="regEmail" type="email" placeholder="이메일을 입력하세요."/>
             <b id="num">주민등록번호</b>
-            <input id="regNum" type="text" placeholder="주민등록번호를 입력하세요."/>
+            <input id="regNum1" type="text" placeholder=""/>
+            <span id="regNum-">-</span>
+            <input id="regNum2" type="text" placeholder=""/>
             <b id="phone">휴대폰 번호</b>
-            <input id="regPhone" type="tel" placeholder="휴대폰번호를 입력하세요."/>
+            <input id="regPhone1" type="text"/>
+            <span id="regNum-1">-</span>
+            <input id="regPhone2" type="text"/>
+            <span id="regNum-2">-</span>
+            <input id="regPhone3" type="text"/>
             
             <button id="cancel">취소</button>
             <button id="save">수정</button>
         </div>
 	</body>
 	<script>
+		$("#man").click(function() {
+			$("#lbM").css("background", "#FA5882");
+			$("#lbW").css("background", "white");
+			
+			$("#lbM").css("color", "white");
+			$("#lbW").css("color", "black");
+		});
+		$("#woman").click(function() {
+			$("#lbW").css("background", "#FA5882");
+			$("#lbM").css("background", "white");
+			
+			$("#lbW").css("color", "white");
+			$("#lbM").css("color", "black");
+		});	
+	
+	
 		$("#cancel").click(function() {
 			location.href="index.jsp";
 		});
@@ -289,41 +285,90 @@
 			var newPw = $("#regNewPw").val();
 			var newPwChk = $("#regNewPwChk").val();
 			var pw = $("#regPw").val();
-			if(pw != pw){
-				alert("현재 비밀번호가 맞지 않습");
-			}
 			
-			if(newPw != newPwChk){
-				alert("비밀번호가 맞지 않습니다.");
-				$("#regPwChk").focus();
+			if($("#regPw").val()==""){
+				alert("현재 비밀번호 입력");				
+				$("#regPw").focus();//포커스 이동
+			}else if($("#regNewPw").val()==""){
+				alert("새 비밀번호 입력");				
+				$("#regNewPw").focus();//포커스 이동	
+			}else if($("#regNewPw").val().length < 8 || $("#regNewPw").val().length >12){
+				alert("비밀번호 8~12자리 입력");
+				$("#regNewPw").focus();//포커스 이동	
+			}else if($("#regNewPwChk").val()==""){
+				alert("새 비밀번호 재입력");
+				$("#regNewPwChk").focus();
+			}else if($("#regNewPw").val() != $("#regNewPwChk").val()){
+				alert("비밀번호 재입력");
+				$("#regNewPwChk").focus();//포커스 이동	
+			}else if($("#regName").val()==""){
+				alert("이름을 입력");
+				$("#regName").focus();//포커스 이동	
+			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
+				alert("성별을 선택");	
+			}else if($("#regBirthYear").val()=="년도"){
+				alert("년도를 선택해주세요.");
+				$("#regBirthYear").focus();
+			}else if($("#regBirthMonth").val()=="월"){
+				alert("월을 선택해주세요.");
+				$("#regBirthMonth").focus();
+			}else if($("#regBirthDay").val()=="일"){
+				alert("일을 선택해주세요.");
+				$("#regBirthDay").focus();
+			}else if($("#regEmail").val()==""){
+				alert("이메일을 입력해주세요.");
+				$("#regEmail").focus();
+			}else if($("#regNum1").val()==""){
+				alert("주민등록번호 앞자리를 입력해주세요.");
+				$("#regNum1").focus();
+			}else if($("#regNum2").val()==""){
+				alert("주민등록번호 뒷자리를 입력해주세요.");
+				$("#regNum2").focus();
+			}else if($("#regPhone1").val()==""){
+				alert("휴대폰 번호를 입력해주세요.");
+				$("#regPhone1").focus();
+			}else if($("#regPhone2").val()==""){
+				alert("휴대폰 번호를 입력해주세요.");
+				$("#regPhone2").focus();
+			}else if($("#regPhone3").val()==""){
+				alert("휴대폰 번호를 입력해주세요.");
+				$("#regPhone3").focus();
+			}else {
+				$.ajax({
+					type : "post",
+					url : "./regUpdate",
+					data : {
+						id : $("#regId").val(),
+						pw : $("#regPw").val(),
+						newPw : $("#regNewPw").val(),
+						newPwChk : $("#regNewPwChk").val(),
+						name : $("#regName").val(),
+						gender : $("input[name='regGender']:checked").val(),
+						year : $("#regBirthYear").val(),
+						month : $("#regBirthMonth").val(),
+						day : $("#regBirthDay").val(),
+						email : $("#regEmail").val(),
+						num1 : $("#regNum1").val(),
+						num2 : $("#regNum2").val(),
+						phone1 : $("#regPhone1").val(),
+						phone2 : $("#regPhone2").val(),
+						phone3 : $("#regPhone3").val()
+					},
+					dataType : "json",
+					success : function(data) {
+						console.log(data);
+						if(data.success >0){
+							alert("수정 성공");
+							location.href="regDetail.jsp";
+						}else{
+							alert("수정 실패");
+						}
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
 			}
-			$.ajax({
-				type : "post",
-				url : "./regUpdate",
-				data : {
-					id : $("#regId").val(),
-					pw : $("#regPw").val(),
-					newPw : $("#regNewPw").val(),
-					newPwChk : $("#regNewPwChk").val(),
-					name : $("#regName").val(),
-					gender : $("input[name='regGender']").val(),
-					year : $("#regBirthYear").val(),
-					month : $("#regBirthMonth").val(),
-					day : $("#regBirthDay").val(),
-					email : $("#regEmail").val(),
-					num : $("#regNum").val(),
-					phone : $("#regPhone").val()
-				},
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					alert("수정 성공");
-					location.href="regDetail.jsp";
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
 		});
 	</script>
 </html>
