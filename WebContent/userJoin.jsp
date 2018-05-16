@@ -119,9 +119,7 @@
 		});
 	
 		var chk = false;//아이디 중복값 체크
-		
-		
-		
+
 		//회원가입
 		$("#join").click(function() {
 			var userPw = $("#userPw").val();
@@ -224,7 +222,6 @@
 						$("#userPw").focus();
 						chk = true;
 					}
-					
 				},
 				error : function(error) {
 					console.log(error);
