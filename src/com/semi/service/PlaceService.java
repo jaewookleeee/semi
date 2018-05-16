@@ -53,7 +53,7 @@ public class PlaceService {
 		String end = multi.getParameter("end");
 		// System.out.println(multi.getParameter("cash"));
 		long cash = Integer.parseInt(multi.getParameter("cash"));
-		String address ="("+multi.getParameter("postnumber")+")"+"/"+multi.getParameter("addr")+"/"+multi.getParameter("detailAddr");
+		String address =multi.getParameter("postnumber")+"/"+multi.getParameter("addr")+"/"+multi.getParameter("detailAddr");
 		String detailinfo = multi.getParameter("fac_info");
 		String info = multi.getParameter("info");
 
@@ -204,5 +204,71 @@ public class PlaceService {
 		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().println(obj);
 		
+	}
+
+	public void like(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		String id = request.getParameter("id");
+		PlaceDAO dao = new PlaceDAO();
+		System.out.println(place_no);
+		System.out.println(id);
+		Gson json = new Gson();//json을 준비
+		boolean success = false;
+		if(id==null) {
+			HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+			map.put("success", success); // map에 보낼 값 넣기			
+			String obj = json.toJson(map); // map 변환			
+			response.setContentType("test/html; charset=UTF-8"); //한글도 같이 보내니까 한글 깨짐 방지
+			response.getWriter().println(obj);
+		}else {			
+			if(dao.like(place_no,id)==1) {
+				success = true;				
+			}
+			HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+			map.put("success", success); // map에 보낼 값 넣기			
+			String obj = json.toJson(map); // map 변환			
+			response.setContentType("test/html; charset=UTF-8"); //한글도 같이 보내니까 한글 깨짐 방지
+			response.getWriter().println(obj);
+		}
+		
+	}
+
+	public void detaillikedel(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		String id = request.getParameter("id");
+		PlaceDAO dao = new PlaceDAO();
+		System.out.println(place_no);
+		System.out.println(id);
+		Gson json = new Gson();
+		boolean success = false;
+		if(id==null) {
+			HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+			map.put("success", success); // map에 보낼 값 넣기			
+			String obj = json.toJson(map); // map 변환			
+			response.setContentType("test/html; charset=UTF-8"); //한글도 같이 보내니까 한글 깨짐 방지
+			response.getWriter().println(obj);
+		}else {
+			if(dao.detaillikedel(place_no,id)==1) {
+				success = true;				
+			}
+			HashMap<String, Boolean> map = new HashMap<String, Boolean>();
+			map.put("success", success); // map에 보낼 값 넣기			
+			String obj = json.toJson(map); // map 변환			
+			response.setContentType("test/html; charset=UTF-8"); //한글도 같이 보내니까 한글 깨짐 방지
+			response.getWriter().println(obj);
+		}
+	}
+
+	public void detaillike(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		String id = request.getParameter("id");
+		PlaceDAO dao = new PlaceDAO();
+		boolean success = dao.detaillike(place_no,id);
+		Gson json = new Gson();
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("success", success);
+		String obj = json.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println(obj);
 	}
 }
