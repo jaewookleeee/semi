@@ -19,13 +19,14 @@ import com.semi.service.ReviewService;
 
 @WebServlet({"/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
-	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel",
-	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch","/noticeDetailView",
+	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel","/detaillikedel","/detaillike",
+	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
 
 })
+
 
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -287,6 +288,21 @@ public class Controller extends HttpServlet {
 				System.out.println("통계 페이지 요청");
 				infoService = new InfoService();
 				infoService.total(request, response);
+				break;
+			case "/like":
+				System.out.println("찜하기 요청");
+				placeService = new PlaceService();
+				placeService.like(request, response);
+				break;
+			case "/detaillikedel":
+				System.out.println("상세보기 에서 찜취소 요청");
+				placeService = new PlaceService();
+				placeService.detaillikedel(request, response);
+				break;
+			case "/detaillike":
+				System.out.println("찝상태 확인");
+				placeService = new PlaceService();
+				placeService.detaillike(request, response);
 				break;
 			case "/totalDetail":
 				System.out.println("통계 내역 요청");
