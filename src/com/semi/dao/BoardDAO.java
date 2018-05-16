@@ -65,6 +65,7 @@ public class BoardDAO {
 				dto.setBoard_content(rs.getString("board_content"));
 				dto.setBoard_date(rs.getDate("board_date"));
 				dto.setBoard_category(rs.getString("board_category"));
+				System.out.println(dto.getBoard_no()+"/"+dto.getBoard_date());
 				list.add(dto);
 			}
 		} catch (SQLException e) {

@@ -31,7 +31,7 @@
 
             #location_divAll { border: 1px solid black; width: 400px; height: auto; display: inline-block; background-color: black; position: relative; z-index: 2; }
             #location_title { width: 100%; height: 20px; text-align: center; color: white; padding: 0px; }
-            #location_main { width: 100%; background-color: white; display: none; margin-top: 1px; text-align: center; }
+            #location_main { width: 100%; height:0px; background-color: white; display: none; margin-top: 1px; text-align: center; }
             #location_button { color: black; display: inline; float: right; background-color: white; height: 100%; padding: 5px 3px; }
             #location_text { margin-top: 5px; padding-top: 3px; display: inline-block; }
             .location_div { background-color: white; width: 70px; margin: 2px 2px; border: 1px solid black; padding: 10px 5px; display: inline-block; }
@@ -40,10 +40,10 @@
             .place_name { border: 0px solid black; font-size: 20; font-weight: 600; }
             .place_td { background-color: #FE2E64; color: white; text-align: center; }
 
-            .place_div:hover { cursor: pointer; background-color:rgba(200, 200, 200, 0.5);}
+            .place_div:hover { cursor: pointer; background-color:rgba(200, 200, 200, 0.5); box-shadow: 5px 5px 5px #888888;}
             .button_css:hover {cursor: pointer;}
-            .category_div:hover {cursor: pointer;}
-            .location_div:hover { cursor: pointer; }
+            .category_div:hover {cursor: pointer; box-shadow: 3px 3px 1px #888888;}
+            .location_div:hover { cursor: pointer; box-shadow: 3px 3px 1px #888888; }
             #location_button:hover { cursor: pointer; }
             #location_text:hover{ cursor: default; }
             #search_listBox:hover{ cursor: default; }
@@ -161,6 +161,7 @@
         	$("#search_listBox").css("height","355px");
         	$("#search_footer").css("top","580px");
             $("#location_main").css("display", "none");
+            $("#location_main").css("height", "0px");
             $("#location_button").text("▼");
             if (list.length != 0) {
                 $("div.place_div").remove();
@@ -199,15 +200,27 @@
             var so = $("#location_main").css("display");
             if (so == "none") {
                 $("#location_main").css("display", "inline-block");
+                $("#location_main").animate({"height": "329px"}, "slow");
                 $("#location_button").text("▲");
             } else {
                 $("#location_main").css("display", "none");
+                $("#location_main").css("height", "0px");
                 $("#location_button").text("▼");
             }
         });
 
-        $("div.category_div").click(function() {
-            if ($(this).css("background-color") != "rgb(255, 255, 255)") {
+        $("div.category_div").on("mouseover",function(){
+        	if ($(this).css("background-color") != "rgb(254, 46, 100)"){
+        	$(this).css("background-color", "rgba(255, 102, 102, 0.4)");
+        	}
+        });
+        $("div.category_div").on("mouseout",function(){
+        	if ($(this).css("background-color") != "rgb(254, 46, 100)"){
+        	$(this).css("background-color", "white");
+        	}
+        });
+        $("div.category_div").on("click",function() {
+            if ($(this).css("background-color") == "rgb(254, 46, 100)") {
                 $(this).css("background-color", "white");
                 $(this).css("color", "black");
                 category = "none";
@@ -226,7 +239,7 @@
             }
         });
         $("div.location_div").click(function() {
-            if ($(this).css("background-color") != "rgb(255, 255, 255)") {
+            if ($(this).css("background-color") == "rgb(254, 46, 100)") {
                 $(this).css("background-color", "white");
                 $(this).css("color", "black");
                 loc = "none";
@@ -244,6 +257,17 @@
                 placeSearch(keyword, category, loc, start, end);
             }
         });
+        $("div.location_div").on("mouseover",function(){
+        	if ($(this).css("background-color") != "rgb(254, 46, 100)"){
+        	$(this).css("background-color", "rgba(255, 102, 102, 0.4)");
+        	}
+        });
+        $("div.location_div").on("mouseout",function(){
+        	if ($(this).css("background-color") != "rgb(254, 46, 100)"){
+        	$(this).css("background-color", "white");
+        	}
+        });
+        
         $("#main_btn").click(function() {
             category = "none";
             keyword = "none";
