@@ -141,7 +141,7 @@ public class BoardDAO {
 	//문의사항 글쓰기
 	public int write(DTO dto, String title, String content, String category) {
 		String sql = "INSERT INTO board(board_no, info_id, board_title, board_content,board_category) "
-				+ "VALUES(seq_boardno.NEXTVAL, ?, ? ,?,?)";
+				+ "VALUES(seq_boardno.NEXTVAL, ?, ? ,?, ?)";
 		int result = 0;
 		try {
 			ps = conn.prepareStatement(sql, new String[] {"board_no"});

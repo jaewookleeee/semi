@@ -24,7 +24,7 @@
 	      	input#regBirth{ position: absolute; left: 15px; top: 255px; width: 200px; height: 25px; font-size: 10px; }
 	        input#regEmail{ position: absolute; left: 15px; top: 315px; width: 200px; height: 25px; font-size: 10px; }
 	        input#regNum{ position: absolute; left: 15px; top: 375px; width: 200px; height: 25px; font-size: 10px;  }
-	        input#regPhone{ position: absolute; left: 15px; top: 435px; width: 200px; height: 25px; font-size: 10px;  }
+	        input#regPhone{ position: absolute; left: 15px; top: 435px; width: 200px; height: 25px; font-size: 10px; }
 	      	button#del{ position: absolute; left: 15px; top: 495px; width: 60px; height: 25px; font-size: 10px;
 	        	color: white; background-color: black; border-style: none;
 	        }

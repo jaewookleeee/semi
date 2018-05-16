@@ -143,7 +143,7 @@
 	            top: 495px;
 	            width: 200px;
 	            height: 25px;
-	            font-size: 10px;            
+	            font-size: 10px;    
 	        }
 	        button#cancel{
 	            position: absolute;
