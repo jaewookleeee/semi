@@ -152,6 +152,8 @@
 			//검색 버튼을 누르자마자 예약자 통계 부분의 테이블의 껍데기를 변수에 담음(페이징할때 사용)
 			if($("input[name='chk']:checked").val() == null){
 				alert("장소를 선택 해 주세요");
+			}else if($("#date1").val()=="" || $("#date2").val() == ""){
+				alert("날짜를 선택 해 주세요");
 			}else{
 				tableTh = $("#table2").children().html();
 				obj.url="./totalDetail";
