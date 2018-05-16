@@ -96,7 +96,7 @@
 				<th>제목</th>
 				<td id="subject"><input type="text" name="board_title"
 					id="board_title" onKeyup="len_chk()" /> <input type="hidden"
-					name="quest" id="quest" value="문의사항" /></td>
+					name="quest" id="Catequest" value="문의사항" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">내용</th>
@@ -146,14 +146,15 @@
 				obj.data={					
 						"board_title":$("#board_title").val(),
 						"board_content":$("#board_content").val(),
-						"board_category":$("#quest").val()
+						"board_category":$("#Catequest").val()
 				};
 				obj.success=function(data){
 					console.log(data);
 					//성공/실패 : 상세보기 페이지
 					
 					if(data.result >0){
-						location.href="./boardDetailView?board_no="+data.result;
+						console.log(data.result);
+						 location.href="./boardDetailView?board_no="+data.result; 
 					}else{
 						alert("글쓰기 실패");
 					}

@@ -37,7 +37,7 @@
 	</body>
 	<script>
 		$("#cancel").click(function() {
-			location.href="index.jsp";
+			location.href="updateChk.jsp";
 		});
 		
 		$("#del").click(function () {

@@ -17,7 +17,6 @@
             #area{ position: relative; width: 1125px; top: 70px; margin-left: 37.5px; }
             
             .sub_div { position: relative; width: 300px; margin-left: 460px; }
-<<<<<<< HEAD
 	        .sub{ position: relative; width: 50px;height: 50px; margin-top: 10px; margin-right: 5px; }
 	        .info{ position: relative; float: left; text-align: center; top: 30px; left: 37.5px; width: 375px; height: 30px; line-height: 30px; border: 1px solid #7E7E7E; }
 	        
@@ -51,18 +50,20 @@
 		// 하단의 img 태그를 클릭하면 메인 img 태그에 클릭한 사진이 삽입됨
 		$(".sub").click(function(){
 		    $("#main").attr("src",this.src);
+		    console.log("사진 클릭");
 		});	
 		
 		// 장소정보에서 상세정보는 기본으로 켜져있음
 		$(document).ready(function() {
 			var p_no=${place_no};
-			$("#area").load("placeDetail.jsp",{place_no:p_no},function(res, stat) { $("#area").html(res)});
+			 $("#area").load("placeDetail.jsp",{place_no:p_no},function(res, stat) { /* $("#area").html(res) */}); 
 		});
 	
 		// div(상세정보, QA, 이용후기)를 클릭하면,
 		// 1. 클릭한 div의 색상을 핑크로 변경하고, 나머지 div의 색상을 흰색으로 설정
 		// 2. 클릭한 div에 따라, 다른 페이지(placeDetail.jsp OR qa.jsp OR reply.jsp)를 가져옴
 		$(".info").click(function(e) {
+			console.log("상세정보");
 			var p_no=${place_no};
 			var page = "";
 			$(this).css("background-color","#FF376C");
@@ -81,7 +82,7 @@
 		    	$("#qa").css("background-color","white");
 			}			
 			$("#area").load(page,{place_no:p_no},function(res, stat) {
-				$("#area").html(res)});
+				/* $("#area").html(res) */});
 		});
 
 
@@ -95,7 +96,7 @@
                   place_no:p_no
                },
                success : function(data){
-                  console.log(data);
+                  //console.log(data);
                   $("#main").attr("src",'./upload/'+data.list[0].place_photo);
                   for(var i=0;i<data.list.length;i++){
                   $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);

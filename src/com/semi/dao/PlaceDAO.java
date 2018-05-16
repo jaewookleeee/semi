@@ -176,8 +176,6 @@ public class PlaceDAO {
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
-				}finally {
-					//resClose();
 				}
 				return success;
 	}
@@ -253,6 +251,8 @@ public class PlaceDAO {
 			success = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			resClose();
 		}
 		return success;
 	}
@@ -292,5 +292,56 @@ public class PlaceDAO {
 			resClose();
 		}
 		return dto;
+	}
+
+	public int like(int place_no, String id) {
+		int success =0;
+		String sql = "INSERT INTO likeTb(like_no,place_no,info_id) VALUES(like_seq.NEXTVAL,?,?)";
+		try {
+			ps =conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			ps.setString(2, id);
+			success=ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}		
+		return success;
+	}
+
+	public int detaillikedel(int place_no, String id) {
+		int success =0;
+		String sql = "DELETE FROM likeTb WHERE place_no=? AND info_id=?";
+		try {
+			ps =conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			ps.setString(2, id);
+			success=ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}		
+		return success;
+	}
+
+	public boolean detaillike(int place_no, String id) {
+		String sql = "SELECT * FROM likeTb WHERE place_no=? AND info_id=?";
+		boolean success= false;
+		try {
+			ps =conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			ps.setString(2, id);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				success=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
 	}
 }

@@ -8,7 +8,7 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 			div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 310px; height: 540px; left: 40%;
-				top: 200px; text-align: center; }
+				top: 100px; text-align: center; }
 	        span#usertxt{ position: absolute; left: 75px;
 	            top: 10px; font-size: 20px; }
 	        b#id{ position: absolute; left: 15px; top: 50px; font-size: 13px; }
@@ -28,8 +28,8 @@
 	            width: 200px; height: 25px; font-size: 10px;  }
 	        input#userName{ position: absolute; left: 15px; top: 255px;
  				width: 200px; height: 25px; font-size: 10px;     } 
+ 				
 	        span#gender{ position: absolute; left: 15px; top: 315px; }
-			
 			label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
 			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
 			input#man{ display: none; }
@@ -38,6 +38,7 @@
 	        select#userBirthYear{ position: absolute; left: 15px; top:375px;}
 	        select#userBirthMonth{ position: absolute; left: 70px; top: 375px; }
 	        select#userBirthDay{ position: absolute; left: 110px; top: 375px; }
+	        
 	        input#userEmail{ position: absolute; left: 15px; top: 435px;
 	            width: 200px; height: 25px; font-size: 10px;             }
 	        button#cancel{ position: absolute; left: 180px; top: 495px; width: 50px; height: 25px;    
@@ -52,7 +53,7 @@
 		<div id="main">
             <span id="userTxt"><b>사용자 회원가입</b></span>
             <b id="id">아이디</b>
-            <input id="userId" name="userId" type="text" placeholder=" 아이디를 입력하세요."/>
+            <input id="userId" name="userId" type="text" placeholder=" 아이디를 입력하세요." maxlength="16"/>
             <!--<input id="idChk" type="button" value="중복 확인"/>-->
             <button id="idChk" name="idChk">중복 확인</button>
             <b id="pw">비밀번호</b>
@@ -114,16 +115,17 @@
 		});
 	
 		$("#cancel").click(function() {
-			location.href="index.jsp";
+			location.href="login.jsp";
 		});
 	
 		var chk = false;//아이디 중복값 체크
-		
+
 		//회원가입
 		$("#join").click(function() {
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
 			
+<<<<<<< HEAD
 /* 			var idReg = /^[A-za-z0-9]{5,16}/g;
 
 			if(!idReg.test( $("#userId").val())){
@@ -131,11 +133,13 @@
 				return;
 			} */
 			
+=======
+>>>>>>> 539918034e475a39c17a715a28b21788ff16eb6d
 			if($("#userId").val()==""){
 				alert("아이디를 입력하세요.");
 				$("#userId").focus();
 			}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
-				alert("아이디는 8~16자리 입력");
+				alert("아이디는 5~16자리 입력");
 				$("#userId").focus();
 			}else if($("#userPw").val()==""){
 				alert("비밀번호 입력하세요.");				
@@ -198,13 +202,11 @@
 					}
 				});
 			}
-
 		});
 		
 		//중복체크
 		$("#idChk").click(function() {
 			var userIdTxt = $("#userId").val();
-			
 			$.ajax({
 				type : "post",
 				url : "./overlay",
@@ -212,12 +214,11 @@
 				dataType : "json",
 				success : function(data) {
 					console.log(data);
-					
 					if(userIdTxt==""){
 						alert("아이디 입력를 입력하세요.");
 						$("#userId").focus();
 					}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
-						alert("아이디는 8~16자리 입력");
+						alert("아이디는 5~16자리 입력");
 						$("#userId").focus();
 					}else if(data.result == true){
 						alert("중복된 아이디 입니다.");
@@ -227,7 +228,6 @@
 						$("#userPw").focus();
 						chk = true;
 					}
-					
 				},
 				error : function(error) {
 					console.log(error);
