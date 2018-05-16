@@ -59,6 +59,7 @@ public class BoardService {
 		System.out.println(result);
 		request.getSession().setAttribute("result", Integer.toString(result));
 		map.put("result", result);
+		
 		String obj = json.toJson(map);
 		
 		//4.response로 반환

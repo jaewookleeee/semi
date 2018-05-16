@@ -65,6 +65,7 @@ public class BoardDAO {
 				dto.setBoard_content(rs.getString("board_content"));
 				dto.setBoard_date(rs.getDate("board_date"));
 				dto.setBoard_category(rs.getString("board_category"));
+				System.out.println(dto.getBoard_no()+"/"+dto.getBoard_date());
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -140,8 +141,8 @@ public class BoardDAO {
 
 	//문의사항 글쓰기
 	public int write(DTO dto, String title, String content, String category) {
-		String sql = "INSERT INTO board(board_no, info_id, board_title, board_content,board_category) "
-				+ "VALUES(seq_boardno.NEXTVAL, ?, ? ,?,?)";
+		String sql = "INSERT INTO board(board_no, info_id, board_title, board_content,board_date,board_category) "
+				+ "VALUES(seq_boardno.NEXTVAL, ?, ? ,?,SYSDATE,?)";
 		int result = 0;
 		try {
 			ps = conn.prepareStatement(sql, new String[] {"board_no"});
