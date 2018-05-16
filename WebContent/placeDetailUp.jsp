@@ -17,7 +17,6 @@
             #area{ position: relative; width: 1125px; top: 70px; margin-left: 37.5px; }
             
             .sub_div { position: relative; width: 300px; margin-left: 460px; }
-<<<<<<< HEAD
 	        .sub{ position: relative; width: 50px;height: 50px; margin-top: 10px; margin-right: 5px; }
 	        .info{ position: relative; float: left; text-align: center; top: 30px; left: 37.5px; width: 375px; height: 30px; line-height: 30px; border: 1px solid #7E7E7E; }
 	        
