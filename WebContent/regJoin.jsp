@@ -180,7 +180,7 @@
 		});
 	
 		$("#cancel").click(function() {
-			location.href="index.jsp";
+			location.href="login.jsp";
 		});
 		
 		var chk = false;//아이디 중복값 체크
@@ -189,8 +189,7 @@
 			console.log($("#regPw").val().length);
 			var regPw = $("#regPw").val();
 			var regPwChk = $("#regPwChk").val();
-			
-			
+				
 			if($("#regId").val()==""){
 				alert("아이디를 입력하세요.");
 				$("#regId").focus();
