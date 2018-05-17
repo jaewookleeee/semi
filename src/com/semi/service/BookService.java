@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.semi.dao.BookDAO;
+import com.semi.dao.InfoDAO;
 import com.semi.dto.DTO;
 
 public class BookService {
@@ -75,6 +77,31 @@ public class BookService {
 		String obj = json.toJson(map);
 		System.out.println(obj);
 		response.getWriter().println(obj);
+	}
+
+	//예약 정보
+	public void bookInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String loginId = (String) request.getSession().getAttribute("loginId");
+		System.out.println(loginId);
+		
+		Gson json = new GsonBuilder().setDateFormat("yy-MM-dd").create();
+		HashMap<String, Object> map = new HashMap<>();
+		
+		if(loginId != null) {
+			map.put("login", true);
+		}else {
+			map.put("login", false);
+		}
+		
+		BookDAO dao = new BookDAO();
+		DTO dto = dao.bookInfo(loginId);
+		map.put("bookInfo", dto);
+		
+		String obj = json.toJson(map);
+		System.out.println(obj);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().println(obj);
+		
 	}
 	
 }

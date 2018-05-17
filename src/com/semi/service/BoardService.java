@@ -170,4 +170,19 @@ public class BoardService {
 		
 	}
 
+	//공지사항 삭제
+	public void noticeDel(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		String board_no = request.getParameter("board_no");
+		BoardDAO dao = new BoardDAO();
+		String msg ="삭제 실패";
+		if(dao.delete(board_no)>0) {			
+			msg="삭제 완료";
+			request.setAttribute("msg", msg);
+		}
+		RequestDispatcher dis = request.getRequestDispatcher("noticeDetail.jsp");
+		dis.forward(request, response);
+		
+	}
+
 }

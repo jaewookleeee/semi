@@ -119,22 +119,19 @@
 		});
 	
 		var chk = false;//아이디 중복값 체크
-		
-		
-		
+
 		//회원가입
 		$("#join").click(function() {
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
-
+			
 			if($("#userId").val()==""){
 				alert("아이디를 입력하세요.");
 				$("#userId").focus();
 			}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
 				alert("아이디는 5~16자리 입력");
 				$("#userId").focus();
-			}
-			else if($("#userPw").val()==""){
+			}else if($("#userPw").val()==""){
 				alert("비밀번호 입력하세요.");				
 				$("#userPw").focus();
 			}else if($("#userPw").val().length < 8 || $("#userPw").val().length >12){
@@ -195,13 +192,11 @@
 					}
 				});
 			}
-
 		});
 		
 		//중복체크
 		$("#idChk").click(function() {
 			var userIdTxt = $("#userId").val();
-			
 			$.ajax({
 				type : "post",
 				url : "./overlay",
@@ -209,7 +204,6 @@
 				dataType : "json",
 				success : function(data) {
 					console.log(data);
-					
 					if(userIdTxt==""){
 						alert("아이디 입력를 입력하세요.");
 						$("#userId").focus();
@@ -224,7 +218,6 @@
 						$("#userPw").focus();
 						chk = true;
 					}
-					
 				},
 				error : function(error) {
 					console.log(error);

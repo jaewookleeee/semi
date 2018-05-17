@@ -67,7 +67,7 @@
             	
                 <a href="login.jsp"><li class="log" id="login_btn">로그인</li></a>
                 <a href="./logout"><li class="log" id="logout">로그아웃</li></a>
-                <span id="login_id"></span><a id="login_idaTag" href="#"></a>
+                <span id="login_id"></span><a id="login_idaTag" href="#" onclick="location.href='updateChk.jsp'"></a>
                 
             </ul>
         </span>
