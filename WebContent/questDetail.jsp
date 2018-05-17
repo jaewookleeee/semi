@@ -309,7 +309,7 @@
 		$("#delete").click(function(){			
 			if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
-				location.href="./boardDel?board_no="+$("#board_no").val();;				
+				location.href="./boardDel?board_no="+$("#board_no").val();				
 			}else if(loginId == ""){					
 				console.log(loginId);
 				alert("로그인이 필요한 서비스 입니다.");

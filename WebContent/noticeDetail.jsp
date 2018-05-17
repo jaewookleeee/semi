@@ -148,6 +148,7 @@
 			if(loginId != "ADMIN"){
 				$("#update").css("display","none");
 				$("#delete").css("display","none");
+				$("#list").css("left","1080px");
 			}
 			tableTh = $("#answerDiv").children().html();
 			obj.url="./boardDetail?board_no=${board.board_no}";
