@@ -26,26 +26,35 @@ public class QaService {
 			String qa_title = request.getParameter("qa_title");
 			String qa_content = request.getParameter("qa_content");
 			String info_id = (String) request.getSession().getAttribute("loginId");
-						
-			QaDAO dao = new QaDAO();
-			DTO dto = new DTO();
-			
-			dto.setPlace_no(place_no);
-			dto.setQa_title(qa_title);
-			dto.setQa_content(qa_content);
-			dto.setInfo_id(info_id);
-			
-			success = dao.write(dto);
-			String msg = "Q&A 작성에 성공했습니다.";
-			if(success == 0) {
-				msg = "Q&A 작성에 실패했습니다.";
+			 
+			// 글자수 제한 - Q&A 내용이 300자 이상일 경우
+			if(qa_content.length() > 300) {
+				request.setAttribute("msg", "Q&A 내용이 300자가 넘습니다.");
+				RequestDispatcher dis = request.getRequestDispatcher("qaWriteForm?place_no="+place_no);
+				dis.forward(request, response);
+			} else if(qa_title.length() > 20) {	// 글자수 제한 - Q&A 제목이 20자 이상일 경우,
+				request.setAttribute("msg", "Q&A 제목이 20자가 넘습니다.");
+				RequestDispatcher dis = request.getRequestDispatcher("qaWriteForm?place_no="+place_no);
+				dis.forward(request, response);
+			} else {
+				QaDAO dao = new QaDAO();
+				DTO dto = new DTO();
+				
+				dto.setPlace_no(place_no);
+				dto.setQa_title(qa_title);
+				dto.setQa_content(qa_content);
+				dto.setInfo_id(info_id);
+				
+				success = dao.write(dto);
+				String msg = "Q&A 작성에 성공했습니다.";
+				if(success == 0) {
+					msg = "Q&A 작성에 실패했습니다.";
+				}
+				
+				request.setAttribute("msg", msg);
+				RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no="+dto.getQa_no());
+				dis.forward(request, response);
 			}
-			
-			request.setAttribute("msg", msg);
-			
-			System.out.println("qa_no: "+dto.getQa_no());
-			RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no="+dto.getQa_no());
-			dis.forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -107,22 +116,33 @@ public class QaService {
 		String qa_title = request.getParameter("qa_title");
 		String qa_content = request.getParameter("qa_content");
 		
-		DTO dto = new DTO();
-		dto.setQa_no(qa_no);
-		dto.setQa_title(qa_title);
-		dto.setQa_content(qa_content);
-		
-		QaDAO dao = new QaDAO();
-		int success = dao.update(dto);
-		
-		String msg = "Q&A 수정에 성공했습니다.";
-		if(success == 0) {
-			msg = "Q&A 수정에 실패했습니다.";
+		// 글자수 제한 - 수정 시 Q&A 내용이 300자 이상일 경우, 
+		if(qa_content.length() > 300) {
+			request.setAttribute("msg", "Q&A 내용이 300자가 넘습니다.");
+			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm?qa_no="+qa_no);
+			dis.forward(request, response);
+		} else if(qa_title.length() > 20) {	// 글자수 제한 - 수정 시 Q&A 제목이 20자 이상일 경우,
+			request.setAttribute("msg", "Q&A 제목이 20자가 넘습니다.");
+			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm?qa_no="+qa_no);
+			dis.forward(request, response);
+		} else {
+			DTO dto = new DTO();
+			dto.setQa_no(qa_no);
+			dto.setQa_title(qa_title);
+			dto.setQa_content(qa_content);
+			
+			QaDAO dao = new QaDAO();
+			int success = dao.update(dto);
+			
+			String msg = "Q&A 수정에 성공했습니다.";
+			if(success == 0) {
+				msg = "Q&A 수정에 실패했습니다.";
+			}
+			
+			request.setAttribute("msg", msg);
+			RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no"+qa_no);
+			dis.forward(request, response);
 		}
-		
-		request.setAttribute("msg", msg);
-		RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no"+qa_no);
-		dis.forward(request, response);
 	}
 	
 	// Q&A 삭제(완)

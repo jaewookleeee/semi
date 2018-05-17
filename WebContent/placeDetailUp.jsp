@@ -46,7 +46,12 @@
 	        <div id="area"></div>
 		</div>
 	</body>
-	<script>				
+	<script>		
+		var msg = "${msg}";
+		if(msg != "") {
+			alert(msg);
+		}
+	
 		// 하단의 img 태그를 클릭하면 메인 img 태그에 클릭한 사진이 삽입됨
 		$(".sub").click(function(){
 		    $("#main").attr("src",this.src);
