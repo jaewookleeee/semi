@@ -15,7 +15,7 @@
                 margin-top: 50px;
                 border-collapse: collapse;
             }
-            
+            	
             th, td {
                 border: 0.1px solid black;
                 float: left;
@@ -27,7 +27,6 @@
                 position: relative;
                 margin-top: 50px;
                 width: 1000px;
-                
             }
             
             #qa_header {
@@ -132,25 +131,33 @@
         </div>
 	</body>
 	<script>
-		var entered = 0;
+		var isreadyed = false;
 		var start_page = 1;
-		var page_max = 0;
+		var page_max = 0;	
 		
 		var obj = {};
 		obj.type = "POST";
 		obj.dataType = "JSON";
 		obj.error = function(error){console.log(error)};
 
-		// 'Q&A' 탭이 눌렸을 때,
+		// 'Q&A' 탭을 눌렀을 때, start_page를 1로 설정(end_page = start_page+4)
 		$(document).ready(function() {
-			if(entered == 0) {
-				start_page = 1;
-				paging(start_page);
-				entered = 1;
+			var loginId = "${sessionScope.loginId}";
+			var loginDiv = "${sessionScope.loginDiv}";
+			
+			if(!isreadyed) {
+				if(loginId == ""){
+					alert("로그인이 필요합니다.");
+					history.back();
+				} else {
+					start_page = 1;
+					paging(start_page);
+				}
+				isreadyed = true;
 			}
 		});    		 
 
-		// '이전 목록' 버튼 클릭 시
+		// '이전 목록' 버튼 클릭 시, start_page = start_page-5
 		$("#beforePage").click(function() {
 			if(start_page > 5) {
 				start_page -= 5;	

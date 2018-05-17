@@ -246,6 +246,7 @@ public class PlaceDAO {
 		int success = 0;
 		String sql = "DELETE FROM place WHERE place_no=?";
 		try {
+			sql = "DELETE FROM place WHERE place_no=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, p_id);
 			success = ps.executeUpdate();
@@ -343,5 +344,118 @@ public class PlaceDAO {
 			resClose();
 		}
 		return success;
+	}
+
+	public DTO updatedetail(int place_no) {
+		System.out.println("DAO-place_no : "+place_no);
+		DTO dto = new DTO();
+		String sql ="SELECT * FROM place WHERE place_no =?";
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			rs = ps.executeQuery();
+			if(rs.next()) {				
+				dto.setPlace_no(rs.getInt("place_no"));
+				dto.setPlace_name(rs.getString("place_name"));
+				dto.setPlace_info(rs.getString("place_intro"));
+				dto.setPlace_home(rs.getString("place_home"));
+				dto.setPlace_loc(rs.getString("place_loc"));
+				dto.setPlace_guide(rs.getString("place_guid"));
+				dto.setPlace_attention(rs.getString("place_attention"));
+				dto.setPlace_category(rs.getString("place_category"));
+				dto.setPlace_phone(rs.getString("place_tel"));
+				sql="SELECT*FROM placeinfo WHERE place_no=?";
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, place_no);
+				rs=ps.executeQuery();
+				if(rs.next()) {
+					dto.setPlace_start(rs.getString("place_start"));
+					dto.setPlace_end(rs.getString("place_end"));
+					dto.setPlace_price(rs.getLong("place_price"));
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	public ArrayList<DTO> updatephoto(int place_no) {
+		ArrayList<DTO> list=new ArrayList<>();
+		String sql="SELECT * FROM photo WHERE place_no = ?";
+		try {
+			ps  = conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				DTO dto = new DTO();
+				dto.setPlace_photo(rs.getString("place_photo"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return list;
+	}
+
+	public long update(DTO dto) {
+		String sql="UPDATE place SET place_name=?,place_intro=?,place_home=?,"+
+				"place_loc=?,place_guid=?,place_attention=?,place_category=?,place_tel=?"+"WHERE place_no=? AND info_id=?";
+					long success=dto.getPlace_no();
+					try {
+						ps=conn.prepareStatement(sql,new String[] {"place_no"});
+						ps.setString(1, dto.getPlace_name());
+						ps.setString(2, dto.getPlace_info());
+						ps.setString(3, dto.getPlace_home());
+						ps.setString(4, dto.getPlace_loc());
+						ps.setString(5, dto.getPlace_guide());
+						ps.setString(6, dto.getPlace_attention());
+						ps.setString(7, dto.getPlace_category());
+						ps.setString(8, dto.getPlace_phone());
+						ps.setInt(9, dto.getPlace_no());
+						ps.setString(10, dto.getInfo_id());
+						int a=ps.executeUpdate();
+						System.out.println(a+"placeupdate 성공여부");
+						sql="UPDATE placeinfo SET place_start=to_date(?,'hh24:mi'),place_end=to_date(?,'hh24:mi'),place_price=?"+"WHERE place_no=?";;
+						ps=conn.prepareStatement(sql);							
+						ps.setString(1, dto.getPlace_start());
+						ps.setString(2, dto.getPlace_end());
+						ps.setLong(3, dto.getPlace_price());
+						ps.setLong(4, dto.getPlace_no());
+						int b=ps.executeUpdate();
+						System.out.println(b+"place_info 성공여부");
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					return success;
+	}
+
+	public ArrayList<DTO> writeupdatephoto(int place_no) {
+		ArrayList<DTO> list=new ArrayList<>();
+		String sql="SELECT * FROM photo WHERE place_no = ?";
+		try {
+			ps  = conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				DTO dto = new DTO();
+				dto.setPlace_photo(rs.getString("place_photo"));
+				list.add(dto);
+			}
+			sql="DELETE FROM photo WHERE place_no=?";
+			ps  = conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			int count=ps.executeUpdate();
+			System.out.println("사진삭제쿼리"+count);
+			if(count<=0) {
+				list=null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

@@ -110,7 +110,7 @@
 			if(data.msg != null){ 
 				msg = data.msg;//그 값을 msg변수에 담고
 				alert(msg); //alert을 띄운다.
-				location.href="./login.jsp" //그리고 login.jsp로 보냄
+				location.href="./index.jsp" //그리고 login.jsp로 보냄
 			}else{ //아니라면 리스트 출력
 				listPrint(data.list);
 				score_in(data.review_score);
@@ -137,7 +137,7 @@
     			if(data.msg != null){
     				msg = data.msg;
     				alert(msg);
-    				location.href="./login.jsp"
+    				location.href="./index.jsp"
     			}else{
     				if(data.list.length == 0){ //list로 넘어온값이 크기가 0이면
     					alert("첫번째 목록입니다.") //alert을 띄우고
@@ -217,11 +217,16 @@
     			content += "<td>"+item.info_id+"</td>";
     			content += "<td>"+item.place_date+"</td>";
     			content += "<td class='review_score'></td>";
-    			content += "<td><button value='"+item.place_no+"'>수정</button></td>";
+    			content += "<td><button onclick='updatepage("+item.place_no+")'>수정</button></td>";
     			content += "<td><button id='del' value='"+item.place_no+"'>삭제</button></td>";
     			content += "</tr>";
     		});
     		$("#listTable").append(content);
+    	}
+    	
+    	function updatepage(place_no) {
+    		console.log(place_no);
+    		location.href="./placeUpdate?place_no="+place_no+""
     	}
     	
     	//별점 평균 넣는 메서드

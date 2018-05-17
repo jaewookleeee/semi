@@ -189,7 +189,7 @@
                 });
                 $("#search_listBox").append(newLine);
                 $("div.place_div").click(function() {
-                    location.href = "./placeDetailUp?place_no=" + $(this).children("input[type='hidden']").val();
+                    location.href = "./placeDetailUp?place_no=" + $(this).children("input[type='hidden']").val() + "&page=placeDetail.jsp";
                 });
             } else {
                 $("#search_listBox").html("<br/><br/><br/><br/><br/><span style='text-align:center;'><h3>해당 검색 결과가 더 이상 존재하지 않습니다.</h3></span>");
