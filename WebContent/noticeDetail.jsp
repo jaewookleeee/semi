@@ -58,25 +58,25 @@
 			}
 			#updateOk{
 				position: absolute;
-				left: 1040px;
+				left: 1080px;
 				display: none; 
 			}
 			#cancel{
 				position: absolute;
-				left: 970px;
+				left: 1010px;
 				 display: none;
 			}
 			#list{
 				position: absolute;
-				left: 1040px;
+				left: 940px;
 			}
 			#update{
 				position: absolute;
-				left: 900px;
+				left: 1010px;
 			}
 			#delete{
 				position: absolute;
-				left: 970px;
+				left: 1080px;
 			}
 			#categoryP{
 				color: white;	
@@ -86,32 +86,18 @@
 				font-size: 15pt;
 				font-weight: 900;
 			}
-			#catetoryDiv{
-				position: absolute;
-				left: 400px;
-				width: 120px;
-				height: 50px;
-				background-color: gray;
-				display: table;
-			}
+			
 			#include{
 				height: 60px;
 			}
-			#noticePage{
-				border: 1px solid black;
-				width: 800px;
-			}
+			
 		</style>
 	</head>
 	<body>
 	<div id="include">
 	<jsp:include page="/menuBar.jsp" flush="false"/>
 	</div>
-	<div id="noticePage"><br/>
-		<div id="catetoryDiv">
-			<p id="categoryP">공지사항</p>
-		</div>
-		<br/><br/><br/>
+	<h1>공지사항</h1><br/>
 		<table>
 			<tr>
 				<th>제목</th>
@@ -141,7 +127,7 @@
 		<button id="list">목록</button>
 		<button id="update">수정</button>
 		<button id="delete">삭제</button><br/><br/>
-		</div>
+
 	</body>
 	<script>
 		/*java script area*/
@@ -255,7 +241,7 @@
 		$("#delete").click(function(){			
 			if($("#info_id").text() == "${loginId}"){
 				console.log("OK");
-				location.href="./boardDel?board_no="+$("#board_no").val();;				
+				location.href="./noticeDel?board_no="+$("#board_no").val();;				
 			}else if(loginId == ""){					
 				console.log(loginId);
 				alert("로그인이 필요한 서비스 입니다.");

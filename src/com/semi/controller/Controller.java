@@ -20,7 +20,7 @@ import com.semi.service.ReviewService;
 @WebServlet({"/bookInfo", "/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel","/detaillikedel","/detaillike",
-	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
+	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch","/noticeDetailView","/noticeDel",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
@@ -167,6 +167,11 @@ public class Controller extends HttpServlet {
 				System.out.println("boardDel");
 				boardService = new BoardService();
 				boardService.delete(request,response);
+				break;
+			case "/noticeDel":
+				System.out.println("noticeDel");
+				boardService = new BoardService();
+				boardService.noticeDel(request,response);
 				break;
 			case "/boardDetail":
 				System.out.println("boardDetail");
