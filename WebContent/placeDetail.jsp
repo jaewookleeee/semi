@@ -219,7 +219,7 @@ var cash=0;
 				$("#categoly").html(data.dto.place_category);
 				$("#loc_short").html(array_loc[1]);
 				$("#phone").html(data.dto.place_phone);
-				$("#homepage").html(data.dto.home);
+				$("#homepage").html(data.dto.place_home);
 				$("#loc").val(array_loc[0]+array_loc[1]+array_loc[2]);
 				$("#guide").val(data.dto.place_guide);
 				$("#attention").val(data.dto.place_attention);
