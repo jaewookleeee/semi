@@ -1,5 +1,83 @@
 package com.semi.service;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.semi.dao.QaDAO;
+import com.semi.dao.ReviewDAO;
+import com.semi.dto.DTO;
+
 public class ReviewService {
 
+	// 이용 후기 리스트 요청
+	public void list(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+	
+		ReviewDAO dao = new ReviewDAO();
+		ArrayList<DTO> list = dao.list(place_no);
+		
+		Gson gson = new Gson();
+		HashMap<String, ArrayList<DTO>> map = new HashMap<>();
+		map.put("list", list);
+		
+		String obj = gson.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().write(obj);
+	}
+
+	// 이용 후기 작성 요청
+	public void write(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		String info_id = request.getParameter("info_id");
+		String review_content = request.getParameter("review_content");
+		double review_score = Double.parseDouble(request.getParameter("review_score"));
+		
+		DTO dto = new DTO();
+		dto.setPlace_no(place_no);
+		dto.setInfo_id(info_id);
+		dto.setReview_content(review_content);
+		dto.setReview_score(review_score);
+		
+		ReviewDAO dao = new ReviewDAO();
+		int success = dao.write(dto);
+		response.sendRedirect("placeDetailUp?place_no="+place_no+"&page=review.jsp");
+	}
+
+	// 이용 후기 삭제 요청
+	public void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int review_no = Integer.parseInt(request.getParameter("review_no"));
+		
+		ReviewDAO dao = new ReviewDAO();
+		int place_no = dao.delete(review_no);
+		response.sendRedirect("placeDetailUp?place_no="+place_no+"&page=review.jsp");
+	}
+
+	// 이용 후기 수정 요청
+	public void update(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		int review_no = Integer.parseInt(request.getParameter("review_no"));
+		String review_content = request.getParameter("review_content");
+		
+		ReviewDAO dao = new ReviewDAO();
+		int success = dao.update(review_no, review_content);
+	}
 }

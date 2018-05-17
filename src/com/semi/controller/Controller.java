@@ -22,10 +22,9 @@ import com.semi.service.ReviewService;
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel","/detaillikedel","/detaillike",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch","/noticeDetailView","/noticeDel",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
-	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
+	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm", "/qaWriteForm", "/qaListSize",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeUpdatedetail","/placeUpdateWrite"
 })
-
 
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -219,12 +218,13 @@ public class Controller extends HttpServlet {
 				break;	
 			case "/placeDetailUp":
 				System.out.println("검색 후 상세보기 요청");
-				System.out.println(request.getParameter("place_no"));
-				request.setAttribute("place_no", request.getParameter("place_no"));
-	 			String page = "placeDetailUp.jsp";
-	 			RequestDispatcher dis = request.getRequestDispatcher(page);
+	 			String page = request.getParameter("page");
+	 			int place_no = Integer.parseInt(request.getParameter("place_no"));
+	 			request.setAttribute("place_no", place_no);
+	 			request.setAttribute("page", page);
+	 			RequestDispatcher dis = request.getRequestDispatcher("placeDetailUp.jsp");
 	 			dis.forward(request, response);
-				break;		
+				break;	
 			case "/placeList":
 				System.out.println("등록내역확인 요청");
 				infoService = new InfoService();
@@ -264,6 +264,11 @@ public class Controller extends HttpServlet {
 				System.out.println("Q&A 리스트 요청");
 				qaService = new QaService();
 				qaService.list(request, response);
+				break;
+			case "/qaListSize":
+				System.out.println("Q&A 리스트 사이즈 요청");
+				qaService = new QaService();
+				qaService.listSize(request, response);
 				break;
 			case "/qaReplyWrite":
 				System.out.println("Q&A 답변 쓰기 요청");
@@ -324,6 +329,26 @@ public class Controller extends HttpServlet {
 				System.out.println("통계 내역 요청");
 				infoService = new InfoService();
 				infoService.totalDetail(request, response);
+				break;
+			case "/reviewList":
+				System.out.println("이용 후기 리스트 요청");
+				reviewService = new ReviewService();
+				reviewService.list(request, response);
+				break;
+			case "/reviewWrite":
+				System.out.println("이용 후기 작성 요청");
+				reviewService = new ReviewService();
+				reviewService.write(request, response);
+				break;
+			case "/reviewDel":
+				System.out.println("이용 후기 삭제 요청");
+				reviewService = new ReviewService();
+				reviewService.delete(request, response);
+				break;
+			case "/reviewUpdate":
+				System.out.println("이용 후기 수정 요청");
+				reviewService = new ReviewService();
+				reviewService.update(request, response);
 				break;
 			case "/placeUpdate":
 				System.out.println("수정페이지 이동");

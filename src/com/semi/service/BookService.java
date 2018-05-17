@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -80,27 +82,32 @@ public class BookService {
 	}
 
 	//예약 정보
-	public void bookInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void bookInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String loginId = (String) request.getSession().getAttribute("loginId");
+		String book_no = request.getParameter("book_no");
+		System.out.println(book_no);
 		System.out.println(loginId);
 		
-		Gson json = new GsonBuilder().setDateFormat("yy-MM-dd").create();
-		HashMap<String, Object> map = new HashMap<>();
+		/*Gson json = new GsonBuilder().setDateFormat("yy-MM-dd").create();
+		HashMap<String, Object> map = new HashMap<>();*/
 		
-		if(loginId != null) {
+		/*if(loginId != null) {
 			map.put("login", true);
 		}else {
 			map.put("login", false);
-		}
+		}*/
 		
 		BookDAO dao = new BookDAO();
-		DTO dto = dao.bookInfo(loginId);
-		map.put("bookInfo", dto);
+		DTO dto = dao.bookInfo(loginId, book_no);
+		/*map.put("bookInfo", dto);*/
+		request.setAttribute("bookInfo", dto);
+		RequestDispatcher dis = request.getRequestDispatcher("book.jsp");
+		dis.forward(request, response);
 		
-		String obj = json.toJson(map);
+		/*String obj = json.toJson(map);
 		System.out.println(obj);
 		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().println(obj);
+		response.getWriter().println(obj);*/
 		
 	}
 	

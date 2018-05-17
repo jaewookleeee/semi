@@ -85,7 +85,6 @@ public class QaService {
 	// Q&A 수정 폼(완)
 	public void updateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int qa_no = Integer.parseInt(request.getParameter("qa_no"));
-		System.out.println("qa_no: "+qa_no);
 		
 		QaDAO dao = new QaDAO();
 		DTO dto = new DTO();
@@ -132,7 +131,7 @@ public class QaService {
 	
 		QaDAO dao = new QaDAO();
 		int place_no = dao.delete(qa_no);
-		response.sendRedirect("placeDetailUp?place_no="+place_no);
+		response.sendRedirect("placeDetailUp?place_no="+place_no+"&page=qa.jsp");
 	}
 
 	// Q&A 답변 쓰기(완) -수정 완
@@ -216,7 +215,6 @@ public class QaService {
 		
 		QaDAO dao = new QaDAO();
 		int qa_no = dao.qaReplyDelete(qareply_no);
-		System.out.println("qa_no:" +qa_no);
 		
 		String msg = "Q&A 삭제에 실패했습니다.";
 		if(qa_no > 0) {
@@ -239,5 +237,20 @@ public class QaService {
 		request.setAttribute("place_no", place_no);
 		RequestDispatcher dis = request.getRequestDispatcher("qaWrite.jsp");
 		dis.forward(request, response);
+	}
+
+	// Q&A 리스트 사이즈 요청
+	public void listSize(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		
+		QaDAO dao = new QaDAO();
+		int max_size = dao.listSize(place_no);
+		
+		Gson gson = new Gson();
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("max_size", max_size);
+		
+		String obj = gson.toJson(map);
+		response.getWriter().write(obj);
 	}
 }
