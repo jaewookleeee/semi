@@ -24,9 +24,7 @@ import com.semi.service.ReviewService;
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
-
 })
-
 
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -210,12 +208,13 @@ public class Controller extends HttpServlet {
 				break;	
 			case "/placeDetailUp":
 				System.out.println("검색 후 상세보기 요청");
-				System.out.println(request.getParameter("place_no"));
-				request.setAttribute("place_no", request.getParameter("place_no"));
-	 			String page = "placeDetailUp.jsp";
-	 			RequestDispatcher dis = request.getRequestDispatcher(page);
+	 			String page = request.getParameter("page");
+	 			int place_no = Integer.parseInt(request.getParameter("place_no"));
+	 			request.setAttribute("place_no", place_no);
+	 			request.setAttribute("page", page);
+	 			RequestDispatcher dis = request.getRequestDispatcher("placeDetailUp.jsp");
 	 			dis.forward(request, response);
-				break;		
+				break;	
 			case "/placeList":
 				System.out.println("등록내역확인 요청");
 				infoService = new InfoService();
@@ -315,6 +314,26 @@ public class Controller extends HttpServlet {
 				System.out.println("통계 내역 요청");
 				infoService = new InfoService();
 				infoService.totalDetail(request, response);
+				break;
+			case "/reviewList":
+				System.out.println("이용 후기 리스트 요청");
+				reviewService = new ReviewService();
+				reviewService.list(request, response);
+				break;
+			case "/reviewWrite":
+				System.out.println("이용 후기 작성 요청");
+				reviewService = new ReviewService();
+				reviewService.write(request, response);
+				break;
+			case "/reviewDel":
+				System.out.println("이용 후기 삭제 요청");
+				reviewService = new ReviewService();
+				reviewService.delete(request, response);
+				break;
+			case "/reviewUpdate":
+				System.out.println("이용 후기 수정 요청");
+				reviewService = new ReviewService();
+				reviewService.update(request, response);
 				break;
 		}
 	}

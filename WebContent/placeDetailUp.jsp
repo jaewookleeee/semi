@@ -41,7 +41,7 @@
 	        <div id="allinfo">
 	            <div class="info" id="detail">상세정보</div>
 	            <div class="info" id="qa">QA</div>
-	            <div class="info" id="reply">이용후기</div>
+	            <div class="info" id="review">이용후기</div>
 	        </div>  
 	        <div id="area"></div>
 		</div>
@@ -52,12 +52,6 @@
 		    $("#main").attr("src",this.src);
 		    console.log("사진 클릭");
 		});	
-		
-		// 장소정보에서 상세정보는 기본으로 켜져있음
-		$(document).ready(function() {
-			var p_no=${place_no};
-			 $("#area").load("placeDetail.jsp",{place_no:p_no},function(res, stat) { /* $("#area").html(res) */}); 
-		});
 	
 		// div(상세정보, QA, 이용후기)를 클릭하면,
 		// 1. 클릭한 div의 색상을 핑크로 변경하고, 나머지 div의 색상을 흰색으로 설정
@@ -71,13 +65,13 @@
 			if(e.target.id == "detail") {
 				page = "placeDetail.jsp";
 				$("#qa").css("background-color","white");
-		    	$("#reply").css("background-color","white");
+		    	$("#review").css("background-color","white");
 			} else if(e.target.id == "qa") {
 				page = "qa.jsp";
 				$("#detail").css("background-color","white");
-		    	$("#reply").css("background-color","white");
+		    	$("#review").css("background-color","white");
 			} else {
-				page = "reply.jsp";
+				page = "review.jsp";
 				$("#detail").css("background-color","white");
 		    	$("#qa").css("background-color","white");
 			}			
@@ -85,9 +79,9 @@
 				/* $("#area").html(res) */});
 		});
 
-
       $(document).ready(function(){
          var p_no="${place_no}";
+         var page="${page}";
          $.ajax({
                type:"post",
                url:"./placephotoDetail",
@@ -106,6 +100,17 @@
                   console.log(e);
                }
             });
+         $("#area").load(page,{place_no:p_no},function(res, stat) { $("#area").html(res)});
+         
+         if(page == "qa.jsp") {
+             $("#qa").css("background-color","#FF376C");
+             $("#detail").css("background-color","white");
+             $("#review").css("background-color","white");
+      	 } else if(page == "review.jsp") {
+             $("#review").css("background-color","#FF376C");
+             $("#detail").css("background-color","white");
+             $("#qa").css("background-color","white");
+      	 }
       });
    </script>
 </html>
