@@ -7,8 +7,6 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
-			
-	            
 	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 320px; height: 650px; left: 40%;
 				top: 100px; text-align: center; }
 	        span#regTxt{ position: absolute; left: 100px;
