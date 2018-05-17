@@ -217,11 +217,16 @@
     			content += "<td>"+item.info_id+"</td>";
     			content += "<td>"+item.place_date+"</td>";
     			content += "<td class='review_score'></td>";
-    			content += "<td><button value='"+item.place_no+"'>수정</button></td>";
+    			content += "<td><button onclick='updatepage("+item.place_no+")'>수정</button></td>";
     			content += "<td><button id='del' value='"+item.place_no+"'>삭제</button></td>";
     			content += "</tr>";
     		});
     		$("#listTable").append(content);
+    	}
+    	
+    	function updatepage(place_no) {
+    		console.log(place_no);
+    		location.href="./placeUpdate?place_no="+place_no+""
     	}
     	
     	//별점 평균 넣는 메서드

@@ -23,8 +23,7 @@ import com.semi.service.ReviewService;
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
 	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
-	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList"
-
+	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeUpdatedetail","/placeUpdateWrite"
 })
 
 
@@ -308,6 +307,24 @@ public class Controller extends HttpServlet {
 				System.out.println("통계 내역 요청");
 				infoService = new InfoService();
 				infoService.totalDetail(request, response);
+				break;
+			case "/placeUpdate":
+				System.out.println("수정페이지 이동");
+				System.out.println(request.getParameter("place_no"));
+				request.setAttribute("place_no", request.getParameter("place_no"));
+	 			page = "placeUpdate.jsp";
+	 			dis = request.getRequestDispatcher(page);
+	 			dis.forward(request, response);
+				break;
+			case "/placeUpdatedetail":
+				System.out.println("수정페이지에 데이터 뿌리기");
+				placeService = new PlaceService();
+				placeService.updateDetail(request,response);
+				break;
+			case "/placeUpdateWrite":
+				System.out.println("장소등록 수정 요청");
+				placeService = new PlaceService();
+				placeService.updateWrite(request, response);
 				break;
 		}
 	}
