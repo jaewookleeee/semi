@@ -35,6 +35,9 @@
 	        select#userBirthDay{ position: absolute; left: 110px;top: 435px; }
 	        
 	        input#userEmail{ position: absolute; left: 15px; top: 495px; width: 200px; height: 25px; font-size: 10px;    }
+	        
+	        span#msg{position: absolute; left: 15px; top: 555px; font-size: 12px; color: red;}
+	        
 	        button#cancel{ position: absolute; left: 180px; top: 555px; width: 50px; height: 25px;    
 	            color: white; background-color: black; border-style: none; font-size: 10px; }
 	        button#save{ position: absolute; left: 240px; top: 555px; width: 50px; height: 25px;
@@ -94,6 +97,7 @@
             </select>
             <b id="email">이메일</b>
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
+            <span id="msg"></span>
             <button id="cancel">취소</button>
             <button id="save">수정</button>
         </div>
@@ -124,10 +128,12 @@
 			var pw = $("#userPw").val();
 
 			if($("#userPw").val()==""){
-				alert("현재비밀번호 입력");
+				//alert("현재비밀번호 입력");
+				$("#msg").html("현재 비밀번호 입력");
 				$("#userPw").focus();
 			}else if($("#userNewPw").val()==""){
-				alert("새 비밀번호 입력");
+				$("#msg").html("새 비밀번호 입력");
+				//alert("새 비밀번호 입력");
 				$("#userNewPw").focus();
 			}else if($("#userNewPw").val().length < 8 || $("#userNewPw").val().length >12){
 				alert("비밀번호 8~12자리 입력");
@@ -173,11 +179,9 @@
 					},
 					dataType : "json",
 					success : function(data) {
-						console.log(data);
-
 						if(data.success >0){
 							alert("수정 성공");
-							location.href="userDetail.jsp";
+							//location.href="userDetail.jsp";
 						}else{
 							alert("수정 실패");
 						}
