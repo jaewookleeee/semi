@@ -38,6 +38,11 @@
             
             #title_header {
                 width: 100px;
+                color: white;
+            }
+            
+            #content_header {
+            	color: white;
             }
             
             #regist {   
@@ -68,7 +73,7 @@
 	                    <td><textArea id="title" name="qa_title"></textArea></td>
 	                </tr>
 	                <tr>
-	                    <th colspan="2">내용</th>
+	                    <th id="content_header" colspan="2">내용</th>
 	                </tr>
 	                <tr>
 	                    <td colspan="2"><textArea id="content" name="qa_content"></textArea></td>

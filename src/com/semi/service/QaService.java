@@ -238,4 +238,19 @@ public class QaService {
 		RequestDispatcher dis = request.getRequestDispatcher("qaWrite.jsp");
 		dis.forward(request, response);
 	}
+
+	// Q&A 리스트 사이즈 요청
+	public void listSize(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		
+		QaDAO dao = new QaDAO();
+		int max_size = dao.listSize(place_no);
+		
+		Gson gson = new Gson();
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("max_size", max_size);
+		
+		String obj = gson.toJson(map);
+		response.getWriter().write(obj);
+	}
 }
