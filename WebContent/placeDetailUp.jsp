@@ -96,7 +96,6 @@
                   place_no:p_no
                },
                success : function(data){
-                  //console.log(data);
                   $("#main").attr("src",'./upload/'+data.list[0].place_photo);
                   for(var i=0;i<data.list.length;i++){
                   $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);

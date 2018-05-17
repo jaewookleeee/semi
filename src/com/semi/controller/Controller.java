@@ -22,7 +22,7 @@ import com.semi.service.ReviewService;
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel","/detaillikedel","/detaillike",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch","/noticeDetailView","/noticeDel",
 	"/boardReplyWrite", "/boardReplyUdate", "/boardReplyDel", "/boardReplyList", "/bookWrite", "/bookDel",
-	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm",
+	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm", "/qaWriteForm", "/qaListSize",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeUpdatedetail","/placeUpdateWrite"
 })
 
@@ -264,6 +264,11 @@ public class Controller extends HttpServlet {
 				System.out.println("Q&A 리스트 요청");
 				qaService = new QaService();
 				qaService.list(request, response);
+				break;
+			case "/qaListSize":
+				System.out.println("Q&A 리스트 사이즈 요청");
+				qaService = new QaService();
+				qaService.listSize(request, response);
 				break;
 			case "/qaReplyWrite":
 				System.out.println("Q&A 답변 쓰기 요청");
