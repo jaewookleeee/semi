@@ -91,6 +91,7 @@ var cash=0;
 
 	//예약하기
 	$("#book").click(function() {
+/* 		 */
 		var today = new Date();
 		var yyyy = today.getFullYear();
 		var mm = today.getMonth()+1;
@@ -102,10 +103,17 @@ var cash=0;
 		    mm='0'+mm
 		} 
 		today = yyyy+"-"+mm+"-"+dd;
-		console.log(today);
 		
-		console.log("결과 : ",$("#starttime").val() > $("#endtime").val());
+		console.log(today);
+		console.log($("#starttime").val(), $("#endtime").val());
+		console.log("결과 : ",$("#starttime").val() >= $("#endtime").val());
 
+		var sTime = $("#starttime").val().split(":");
+		var eTime = $("#endtime").val().split(":");
+		var ssTime = parseInt(sTime);
+		var eeTime = parseInt(eTime);
+		
+		console.log(ssTime, eeTime);
 		
 		
 		if($("#date").val()==""){
@@ -114,7 +122,7 @@ var cash=0;
 			alert("이전 날짜 선택안됨");
 		}else if($("#people").val()=="인원"){
 			alert("인원 선택");
-		}else if($("#starttime").val() >= $("#endtime").val()){
+		}else if(ssTime >= eeTime){
 			alert("예약시간 다시 설정");
 		}else{
 			$.ajax({
@@ -136,6 +144,9 @@ var cash=0;
 					}else if(data.login == true){
 						if(data.success > 0){
 							alert("예약 완료");
+							console.log(data.success);
+							location.href="./bookInfo?book_no="+data.success;
+							//location.href="book.jsp";
 						}else{
 							alert("예약 실패");
 						}
@@ -146,7 +157,6 @@ var cash=0;
 				}
 	    	});   
 		}
-		
 	});
 
     $("#like").click(function(){
@@ -198,7 +208,8 @@ var cash=0;
         	})
         }
     });
-    $(document).ready(function(){
+    $(document).ready(function(){ 
+    	
     	$.ajax({
 			type:"post",
 			url:"./placeDetail",
