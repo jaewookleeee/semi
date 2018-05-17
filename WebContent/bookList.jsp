@@ -104,7 +104,7 @@
     			if(data.msg != null){ 
     				msg = data.msg;//그 값을 msg변수에 담고
     				alert(msg); //alert을 띄운다.
-    				location.href="./login.jsp" //그리고 login.jsp로 보냄
+    				location.href="./index.jsp" //그리고 login.jsp로 보냄
     			}else{ //아니라면 리스트 출력
     				listPrint(data.list);
     			}
@@ -126,7 +126,7 @@
     			if(data.msg != null){
     				msg = data.msg;
     				alert(msg);
-    				location.href="./login.jsp"
+    				location.href="./index.jsp"
     			}else{
     				if(data.list.length == 0){ //list로 넘어온값이 크기가 0이면
     					alert("첫번째 목록입니다.") //alert을 띄우고
@@ -156,7 +156,7 @@
     			if(data.msg != null){
     				msg = data.msg;
     				alert(msg);
-    				location.href="./login.jsp"
+    				location.href="./index.jsp"
     			}else{
     				if(data.list.length == 0){//list로 넘어온값이 크기가 0이면
     					alert("마지막 목록입니다.")//alert 을 띄우고
