@@ -66,7 +66,7 @@ public class InfoDAO {
 		return success;
 	}
 
-	//로그인
+		//로그인
 		public String login(String id, String pw) {
 			String result = null;
 			String sql = "SELECT info_id, info_div FROM info WHERE info_id=? AND info_pw=?";

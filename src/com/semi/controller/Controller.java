@@ -17,7 +17,7 @@ import com.semi.service.QaService;
 import com.semi.service.ReviewService;
 
 
-@WebServlet({"/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
+@WebServlet({"/bookInfo", "/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel","/detaillikedel","/detaillike",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch",
@@ -49,7 +49,6 @@ public class Controller extends HttpServlet {
 		BookService bookService = null;
 		QaService qaService = null;
 		ReviewService reviewService = null;
-		
 		
 		switch (subAddr) {
 			case "/overlay":
@@ -123,10 +122,23 @@ public class Controller extends HttpServlet {
 				placeService=new PlaceService();
 				placeService.search(request, response);
 				break;
+
 			case "/bookList":
 				System.out.println("예약 리스트 요청");
 				infoService = new InfoService();
 				infoService.bookList(request, response);
+				break;
+				
+			case "/bookInfo":
+				System.out.println("예약 정보 요청");
+				bookService = new BookService();
+				bookService.bookInfo(request, response);
+				
+				break;
+			case "/bookWrite":
+				System.out.println("예약하기 요청");
+				bookService = new BookService();
+				bookService.bookWrite(request, response);
 				break;
 			case "/bookDel":
 				System.out.println("예약 삭제 요청");
@@ -251,22 +263,22 @@ public class Controller extends HttpServlet {
 			case "/qaReplyWrite":
 				System.out.println("Q&A 답변 쓰기 요청");
 				qaService = new QaService();
-				qaService.replyWrite(request, response);
+				qaService.qaReplyWrite(request, response);
 				break;
 			case "/qaReplyUpdate":
 				System.out.println("Q&A 답변 수정 요청");
 				qaService = new QaService();
-				qaService.replyUpdate(request, response);
+				qaService.qaReplyUpdate(request, response);
 				break;
 			case "/qaReplyList":
 				System.out.println("Q&A 답변 리스트 요청");
 				qaService = new QaService();
-				qaService.replyList(request, response);
+				qaService.qaReplyList(request, response);
 				break;
 			case "/qaReplyDel":
 				System.out.println("Q&A 답변 삭제 요청");
 				qaService = new QaService();
-				qaService.replyDelete(request, response);
+				qaService.qaReplyDelete(request, response);
 				break;
 			case "/qaSearch":
 				System.out.println("Q&A 검색 요청");
@@ -328,5 +340,4 @@ public class Controller extends HttpServlet {
 				break;
 		}
 	}
-
 }

@@ -12,5 +12,8 @@
 		location.href="userDetail.jsp";
 	}else if(loginId != null && loginDiv == "등록자"){
 		location.href="regDetail.jsp";
+	}else if(loginId != null && loginDiv =="관리자"){
+		alert("수정 할 수 없는 아이디");
+		history.back();
 	}
 </script>

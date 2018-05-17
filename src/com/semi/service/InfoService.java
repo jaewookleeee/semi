@@ -216,8 +216,7 @@ public class InfoService {
 		DTO dto = new DTO();
 		
 		String chk = dao.pwChk(id);
-		
-		
+
 		int success = 0;
 		if(pw.equals(chk)) {
 			System.out.println("현재 비밀번호 맞음");
@@ -603,6 +602,7 @@ public class InfoService {
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
 		}
+
 
 		
 }

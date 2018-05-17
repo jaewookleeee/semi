@@ -189,7 +189,7 @@
     			if(data.msg != null){
     				msg = data.msg;
     				alert(msg);
-    				location.href="./login.jsp"
+    				location.href="./index.jsp"
     			}else{
     				if(data.list.length == 0){ //list로 넘어온값이 크기가 0이면
     					alert("첫번째 목록입니다.") //alert을 띄우고

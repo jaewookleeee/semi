@@ -88,6 +88,67 @@ var endtime=[];
 var place_no="${param.place_no}";
 var id ="${sessionScope.loginId}";
 var cash=0;	
+
+	//예약하기
+	$("#book").click(function() {
+		var today = new Date();
+		var yyyy = today.getFullYear();
+		var mm = today.getMonth()+1;
+		var dd = today.getDate();
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+		today = yyyy+"-"+mm+"-"+dd;
+		console.log(today);
+		
+		console.log("결과 : ",$("#starttime").val() > $("#endtime").val());
+
+		
+		
+		if($("#date").val()==""){
+			alert("날짜 선택");
+		}else if($("#date").val() < today){
+			alert("이전 날짜 선택안됨");
+		}else if($("#people").val()=="인원"){
+			alert("인원 선택");
+		}else if($("#starttime").val() >= $("#endtime").val()){
+			alert("예약시간 다시 설정");
+		}else{
+			$.ajax({
+	    		type:"post",
+				url:"./bookWrite",
+				dataType:"JSON",
+				data:{
+					place_no : place_no,
+					date : $("#date").val(),
+					startTime : $("#starttime").val(),
+					endTime : $("#endtime").val(),
+					custom : $("#people").val(),
+					price : $("#cash").val()
+				},
+				success : function(data){
+					console.log(data);
+					if(data.login == false){
+						alert("로그인 후 사용");
+					}else if(data.login == true){
+						if(data.success > 0){
+							alert("예약 완료");
+						}else{
+							alert("예약 실패");
+						}
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+	    	});   
+		}
+		
+	});
+
     $("#like").click(function(){
     	
     	//console.log(id);
