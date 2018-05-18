@@ -5,6 +5,14 @@ import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -636,11 +644,44 @@ public class InfoService {
 			InfoDAO dao = new InfoDAO();
 			String result =  dao.pw(id, name, email);
 			
+			//메일 전송 API
+			String host = "smtp.naver.com";
+			final String user = "jaewook-";//보내는사람 메일아이디
+			final String password = "jaewook2@";//보내는사람 메일비밀번호
+			String to = email;//받는사람 메일아이디
+			
+			Properties props = new Properties();
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.auth", "true");
+			
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(user, password);
+				}
+			});
+			
+			try {
+				MimeMessage message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(user));
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+				
+				if(result != null) {
+					//메일제목
+					message.setSubject("WAKE UP PLACE");
+					//메일내용
+					message.setText("비밀번호 : "+result+" 입니다.");
+					Transport.send(message);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			//json
 			Gson json = new Gson();
 			HashMap<String, String> map = new HashMap<>();
 			map.put("result", result);
 			String obj = json.toJson(map);
-			System.out.println(obj);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
 			
