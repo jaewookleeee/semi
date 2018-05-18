@@ -201,7 +201,7 @@
 			var loginId = "${sessionScope.loginId}";
 			var loginDiv = "${sessionScope.loginDiv}";
 			var msg = "${msg}";
-
+			
 			if(!isreadyed) {
 				if(loginId == "") {
 					alert("로그인이 필요합니다.");

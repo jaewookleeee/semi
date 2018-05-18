@@ -30,10 +30,14 @@ public class QaService {
 			// 글자수 제한 - Q&A 내용이 300자 이상일 경우
 			if(qa_content.length() > 300) {
 				request.setAttribute("msg", "Q&A 내용이 300자가 넘습니다.");
+				request.setAttribute("qa_title", qa_title);
+				request.setAttribute("qa_content", qa_content);
 				RequestDispatcher dis = request.getRequestDispatcher("qaWriteForm?place_no="+place_no);
 				dis.forward(request, response);
 			} else if(qa_title.length() > 20) {	// 글자수 제한 - Q&A 제목이 20자 이상일 경우,
 				request.setAttribute("msg", "Q&A 제목이 20자가 넘습니다.");
+				request.setAttribute("qa_title", qa_title);
+				request.setAttribute("qa_content", qa_content);
 				RequestDispatcher dis = request.getRequestDispatcher("qaWriteForm?place_no="+place_no);
 				dis.forward(request, response);
 			} else {
@@ -51,8 +55,9 @@ public class QaService {
 					msg = "Q&A 작성에 실패했습니다.";
 				}
 				
+				request.setAttribute("qa_no", dto.getQa_no());
 				request.setAttribute("msg", msg);
-				RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no="+dto.getQa_no());
+				RequestDispatcher dis = request.getRequestDispatcher("qaWrite.jsp");
 				dis.forward(request, response);
 			}
 		} catch (Exception e) {
@@ -118,11 +123,20 @@ public class QaService {
 		
 		// 글자수 제한 - 수정 시 Q&A 내용이 300자 이상일 경우, 
 		if(qa_content.length() > 300) {
+			request.setAttribute("qa_no", qa_no);
 			request.setAttribute("msg", "Q&A 내용이 300자가 넘습니다.");
+			request.setAttribute("qa_title", qa_title);
+			request.setAttribute("qa_content", qa_content);
+			// RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm.jsp");
 			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm?qa_no="+qa_no);
+			
 			dis.forward(request, response);
 		} else if(qa_title.length() > 20) {	// 글자수 제한 - 수정 시 Q&A 제목이 20자 이상일 경우,
+			request.setAttribute("qa_no", qa_no);
 			request.setAttribute("msg", "Q&A 제목이 20자가 넘습니다.");
+			request.setAttribute("qa_title", qa_title);
+			request.setAttribute("qa_content", qa_content);
+			// RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm.jsp");
 			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm?qa_no="+qa_no);
 			dis.forward(request, response);
 		} else {
@@ -139,8 +153,10 @@ public class QaService {
 				msg = "Q&A 수정에 실패했습니다.";
 			}
 			
+			request.setAttribute("qa_no", qa_no);
 			request.setAttribute("msg", msg);
-			RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no"+qa_no);
+			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm.jsp");
+			// RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no"+qa_no);
 			dis.forward(request, response);
 		}
 	}

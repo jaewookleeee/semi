@@ -125,24 +125,20 @@ public class Controller extends HttpServlet {
 				infoService = new InfoService();
 				infoService.del(request, response);
 				break;
-				
-			case"/placeSearch":
+			case "/placeSearch":
 				System.out.println("장소 검색");
 				placeService=new PlaceService();
 				placeService.search(request, response);
 				break;
-
 			case "/bookList":
 				System.out.println("예약 리스트 요청");
 				infoService = new InfoService();
 				infoService.bookList(request, response);
 				break;
-				
 			case "/bookInfo":
 				System.out.println("예약 정보 요청");
 				bookService = new BookService();
 				bookService.bookInfo(request, response);
-				
 				break;
 			case "/bookWrite":
 				System.out.println("예약하기 요청");
@@ -157,7 +153,6 @@ public class Controller extends HttpServlet {
 			case "/placephotoDetail":
 				System.out.println("포토상세보기 요청");
 				System.out.println(request.getParameter("place_no"));
-
 				placeService=new PlaceService();
 				placeService.detailphoto(request,response);
 				break;

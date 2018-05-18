@@ -82,5 +82,15 @@
 		if(msg != "") {
 			alert(msg);
 		}
+		
+		if(msg == "Q&A 수정에 성공했습니다.") {
+			location.href = "./qaDetail?qa_no=${qa_no}";
+		} else if(msg == "Q&A 제목이 20자가 넘습니다.") {
+			$("#title").text("${qa_title}");
+			$("#content").text("${qa_content}");
+		} else if(msg == "Q&A 내용이 300자가 넘습니다.") {
+			$("#title").text("${qa_title}");
+			$("#content").text("${qa_content}");
+		}
 	</script>
 </html>

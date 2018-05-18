@@ -191,13 +191,18 @@ public class BoardDAO {
 	//답글 리스트
 	public ArrayList<DTO> reDetail(int i) {
 		ArrayList<DTO> list = new ArrayList<DTO>();
-		String sql = "SELECT * FROM reply WHERE board_no=? ORDER BY reply_no";
+		/*String sql = "SELECT * FROM reply WHERE board_no=? ORDER BY reply_no";*/
+		String sql = "SELECT rnum,reply_no,info_id,board_no,reply_date,reply_content "
+				+ "FROM(SELECT ROW_NUMBER() OVER(ORDER BY reply_no DESC) AS rnum, "+ 
+				" reply_no,info_id,board_no,reply_date,reply_content " + 
+				" FROM reply) reply WHERE board_no=? ORDER BY reply_no";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,i);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				DTO dto = new DTO();
+				dto.setRnum(rs.getInt("rnum"));
 				dto.setReply_no(rs.getInt("reply_no"));
 				dto.setInfo_id(rs.getString("info_id"));
 				dto.setBoard_no(rs.getInt("board_no"));
