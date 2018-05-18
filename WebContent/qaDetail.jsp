@@ -139,8 +139,6 @@
             </table><br/>
             <div class="btn_list">
                 <input class="btn" id="list" type="button" value="목록" onclick="qaDetail_list(${dto.place_no})"/>
-                <a href="./qaUpdateForm?qa_no=${dto.qa_no}"><input class="btn" id="chg" type="button" value="수정"/></a> 
-                <a href="./qaDel?qa_no=${dto.qa_no}"><input class="btn" id="del" type="button" value="삭제"/></a> 
             </div>
             
             <div class="qa_reply">
@@ -168,10 +166,21 @@
 		
 		// qaDetail.jsp가 로드되면, 해당 qa에 대한 후기를 전부 가져옴
 		$(document).ready(function() {
+			
+			// 작성자가 아닌 사람의 경우, 수정/삭제 버튼이 안 보이게 함
+			if($("#writer").text() == loginId) {
+				var str = "<a href='./qaUpdateForm?qa_no=${dto.qa_no}'><input class='btn' id='chg' type='button' value='수정'/></a>&nbsp;";
+            	str += "<a href='./qaDel?qa_no=${dto.qa_no}'><input class='btn' id='del' type='button' value='삭제'/></a>";
+				$(".btn_list").append(str);
+			} else {
+				var str = "";
+				$(".btn_list").css("margin-left", "950px");
+			}
+			
 			obj.url = "./qaReplyList";
 			
 			obj.data = {
-				qa_no: ${dto.qa_no}
+				qa_no: "${dto.qa_no}"
 			};
 			
 			obj.success = function(data) {
@@ -197,7 +206,7 @@
 			obj.url = "./qaReplyWrite";		
 			obj.data = {
 				qa_reply_content: $("#repl_content").val(),
-				qa_no: ${dto.qa_no},
+				qa_no: "${dto.qa_no}",
 				info_id: $("#logId").val()
 			};
 			obj.success = function(data) {

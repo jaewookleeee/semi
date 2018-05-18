@@ -234,9 +234,21 @@
 				$("#info_id").text(data.dto.info_id);
 				$("#board_content").val(data.dto.board_content);
 				//$("#answerDiv").append(tableTh);
+				
 				replyPrint(data.list);
-				
-				
+
+				 for(var i=0; i<data.list.length; i++){
+					 console.log($(".replyInfo"+data.list[i].rnum).text());
+					 if($(".replyInfo"+data.list[i].rnum).text() != "${loginId}"){
+						$("td[name='replyBtn"+data.list[i].rnum+"']").css("display","none");
+						$(".replyContent"+data.list[i].rnum).css("width","470px");
+					}
+					if("${loginId}" == "ADMIN"){
+						$("td[name='replyBtn"+data.list[i].rnum+"']").css("display","");
+						$(".replyContent"+data.list[i].rnum).css("width","450px");
+					}
+				}
+								
 			};
 			ajaxCall(obj);
 		});
@@ -398,14 +410,14 @@
 					} 
 					content+="<table>"
 					content+="<tr id='replyTr'>";
-					content+="<th id='replyInfo"+item.reply_no+"' class='replyInfo'><input type='hidden' id='reply_no' value='"+item.reply_no+"'/>"+item.info_id+"</th>";
-					content+="<td id='replyContent'><textarea id='reply' onKeyup='len_chk()' name="+item.reply_no+"  readonly>"+item.reply_content+"</textarea></td>";
-					content+="<td id='replyBtn'><button id='replyUpdate'  value='"+item.reply_no+
+					content+="<th id='replyInfo' class='replyInfo"+item.rnum+"'><input type='hidden' id='rnum' value='"+item.rnum+"'/>"+item.info_id+"</th>";
+					content+="<td id='replyContent' class='replyContent"+item.rnum+"'><textarea id='reply' onKeyup='len_chk()' name="+item.reply_no+"  readonly>"+item.reply_content+"</textarea></td>";
+					content+="<td id='replyBtn' class='replyBtn'"+item.reply_no+" name='replyBtn"+item.rnum+"'><button id='replyUpdate'  value='"+item.reply_no+
 					"' name='"+item.reply_no+"' onclick='replyUp.call(this)'>수정</button><br/><br/><button  name='"+item.reply_no+
 					"' onclick='replyDel.call(this)'  value='"+item.reply_no+"'>삭제</button><button id='replyUpdateOk'  value='"+item.reply_no+
 					"' class='"+item.reply_no+"' onclick='replyUpok.call(this)'>완료</button></td>";
 					content+="</tr>";
-					content+="</table><br/>"
+					content+="</table><br/>"					
 						
 				});
 				$("#answerDiv").append(content);			

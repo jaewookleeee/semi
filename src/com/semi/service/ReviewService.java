@@ -49,6 +49,7 @@ public class ReviewService {
 		// 글자수 제한 - 이용 후기 내용이 300자 이상일 경우,
 		if(review_content.length() > 300) {
 			request.setAttribute("msg", "후기 내용이 300자가 넘습니다.");
+			request.setAttribute("review_content", review_content);
 			RequestDispatcher dis = request.getRequestDispatcher("placeDetailUp?place_no="+place_no+"&page=review.jsp");
 			dis.forward(request, response);
 		} else {
@@ -60,6 +61,7 @@ public class ReviewService {
 			
 			ReviewDAO dao = new ReviewDAO();
 			int success = dao.write(dto);
+			
 			response.sendRedirect("placeDetailUp?place_no="+place_no+"&page=review.jsp");
 		}
 	}
