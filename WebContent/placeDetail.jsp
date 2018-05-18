@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=PmNgQawFPTLSC4A8I3lT&submodules=geocoder"></script>
 		<style>
             .regist { position: relative; width: 1200px; }  
             .sec_content { position: relative; }
@@ -60,7 +61,7 @@
                 <div class="div_locate">
                     <div class="title"><strong>위치</strong></div>
                     <input id="loc" class="address" type="text" readonly/><br/>
-                    <div class="place">위치 api</div><br/><br/><br/><br/>
+                    <div id="map" class="place"></div><br/><br/><br/><br/>
                 </div>
                     
                 <div class="div_guide">
@@ -153,6 +154,10 @@ var cash=0;
 				array_end2=array_end[1].split(":");
 				var endtime=parseInt(array_end2[0]);
 				array_loc=data.dto.place_loc.split("/");
+				
+				showMap();
+				
+				
 				$("#title").text(data.dto.place_name);
 				$("#intro").html(data.dto.place_info);
 				$("#categoly").html(data.dto.place_category);
@@ -203,7 +208,6 @@ var cash=0;
 				console.log(e);
 			}
     	});
-    	 
     });
     $("#starttime").change(function(e){
     	//console.log($("#endtime").val());
@@ -232,4 +236,60 @@ var cash=0;
 		$("#cash").val(cashed);
 		})
 </script>
+
+<script>
+function showMap(){
+	
+	console.log("${param.mainPhoto}","lksndvlknv");
+	/* 맵 추가 부분 */
+	var map = new naver.maps.Map('map', {
+	    center: new naver.maps.LatLng(37.3595704, 127.105399), //지도의 초기 중심 좌표
+	    zoom: 12, //지도의 초기 줌 레벨
+	    minZoom: 8, //지도의 최소 줌 레벨
+	    maxZoom: 14,
+	    zoomControl: true, //줌 컨트롤의 표시 여부
+	    zoomControlOptions: { //줌 컨트롤의 옵션
+	        position: naver.maps.Position.TOP_RIGHT
+	    }
+	});
+
+	var myAddress=array_loc[1]+" "+array_loc[2]+" "+array_loc[0];
+	console.log(myAddress);
+	naver.maps.Service.geocode({address: myAddress}, function(status, response) {
+	    if (status !== naver.maps.Service.Status.OK) {
+	    	console.log(array_loc[1]+" "+array_loc[2]+" "+array_loc[0]);
+	    	console.log(array_loc);
+	    	return $("#map").html("해당 지역이 존재하지 않습니다.");
+	        /* return alert(array_loc[1]+" "+array_loc[2]+" "+array_loc[0] + '의 검색 결과가 없거나 기타 네트워크 에러'); */
+	    }
+	    var result = response.result;
+	    // 검색 결과 갯수: result.total
+	    // 첫번째 결과 결과 주소: result.items[0].address
+	    // 첫번째 검색 결과 좌표: result.items[0].point.y, result.items[0].point.x
+	    var myaddr = new naver.maps.Point(result.items[0].point.x, result.items[0].point.y);
+	    map.setCenter(myaddr); // 검색된 좌표로 지도 이동
+	    // 마커 표시
+	    var marker = new naver.maps.Marker({
+	      position: myaddr,
+	      map: map
+	    });
+	    // 마커 클릭 이벤트 처리
+	    naver.maps.Event.addListener(marker, "click", function(e) {
+	      if (infowindow.getMap()) {
+	          infowindow.close();
+	      } else {
+	          infowindow.open(map, marker);
+	      }
+	    });
+	 // 마크 클릭시 인포윈도우 오픈
+	    var infowindow = new naver.maps.InfoWindow({
+	        content: "<div style='text-align: center;width:300px;'><h4 style='margin: 2px 20px;text-align: left;'>"+$("#title").text()
+	        +"</h4><font size='2' color='gray'>"+array_loc[1]+" "+array_loc[2]+" "+array_loc[0]
+	        +"</font><br/><img width='300px' height='200px' src='${param.mainPhoto}'></div>"
+	    });
+	});
+};
+
+</script>
+
 </html>
