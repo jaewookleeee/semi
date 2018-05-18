@@ -325,12 +325,10 @@ function showMap(){
 	    }
 	});
 
-	var myAddress=array_loc[1]+" "+array_loc[2]+" "+array_loc[0];
+	var myAddress=array_loc[1];
 	console.log(myAddress);
 	naver.maps.Service.geocode({address: myAddress}, function(status, response) {
 	    if (status !== naver.maps.Service.Status.OK) {
-	    	console.log(array_loc[1]+" "+array_loc[2]+" "+array_loc[0]);
-	    	console.log(array_loc);
 	    	return $("#map").html("해당 지역이 존재하지 않습니다.");
 	        /* return alert(array_loc[1]+" "+array_loc[2]+" "+array_loc[0] + '의 검색 결과가 없거나 기타 네트워크 에러'); */
 	    }
@@ -356,7 +354,7 @@ function showMap(){
 	 // 마크 클릭시 인포윈도우 오픈
 	    var infowindow = new naver.maps.InfoWindow({
 	        content: "<div style='text-align: center;width:300px;'><h4 style='margin: 2px 20px;text-align: left;'>"+$("#title").text()
-	        +"</h4><font size='2' color='gray'>"+array_loc[1]+" "+array_loc[2]+" "+array_loc[0]
+	        +"</h4><font size='2' color='gray'>("+array_loc[0]+")"+array_loc[1]+" "+array_loc[2]
 	        +"</font><br/><img width='300px' height='200px' src='${param.mainPhoto}'></div>"
 	    });
 	});

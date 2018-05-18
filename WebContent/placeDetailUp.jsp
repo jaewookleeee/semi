@@ -10,7 +10,7 @@
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=PmNgQawFPTLSC4A8I3lT&submodules=geocoder"></script>
       <style>
-         div{ background-color: white; }
+         /* div{ background-color: white; } */
             
          #all{ position: relative; width: 1200px; height: 1200px; top:50px; left:175px; }
            #main{ position: relative; width: 700px; height: 300px; margin-left: 250px; }
