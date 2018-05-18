@@ -41,7 +41,6 @@
 		});
 		
 		$("#del").click(function () {
-			var pw = $("#pw").val();
 			$.ajax({
 				type : "post",
 				url : "./del",

@@ -190,6 +190,8 @@
     <script>
     	var obj = {};
     	var isreadyed = false;
+    	var place_no = 0;
+    	var review_update_content = "";
 		obj.type = "POST";
 		obj.dataType = "JSON";
 		obj.error = function(error){console.log(error)};
@@ -198,15 +200,18 @@
 		$(document).ready(function() {
 			var loginId = "${sessionScope.loginId}";
 			var loginDiv = "${sessionScope.loginDiv}";
+			var msg = "${msg}";
 			
 			if(!isreadyed) {
 				if(loginId == "") {
 					alert("로그인이 필요합니다.");
 					history.back();
 				} else {
+					place_no = ${param.place_no};
+					
 					obj.url = "./reviewList";
 					obj.data = {
-						place_no: ${param.place_no}
+						place_no: place_no
 					};
 					
 					obj.success = function(data) {
@@ -234,7 +239,6 @@
 		function updateInit(review_no) {
 			$("#review_update"+review_no).parent().prev().prev().prev().children($('.review_textarea')).attr('readonly', false);
 			$("#review_update"+review_no).next().after("<button class='btn' id='completeBtn"+review_no+"' onclick='reviewUpdate("+review_no+")'>완료</button>");
-			// 수정 버튼, 삭제 버튼 삭제(다시 살려야 함)
 			$("#review_update"+review_no).next().hide();
 			$("#review_update"+review_no).hide();
 		}
@@ -244,13 +248,22 @@
 			$("#review_update"+review_no).next().show();
 			$("#review_update"+review_no).show();
 			$("#completeBtn"+review_no).remove();
+			review_update_content = $("#review_update"+review_no).parent().prev().prev().prev().children($('.review_textarea')).val();
 			$("#review_update"+review_no).parent().prev().prev().prev().children($('.review_textarea')).attr('readonly', true);
-		
+			
 			obj.url = "./reviewUpdate";		
 			obj.data = {
+				place_no: place_no,
 				review_no: review_no,	
 				review_content: $("#review_update"+review_no).parent().prev().prev().prev().children($('.review_textarea')).val()
 			};
+			
+			obj.success = function(data) {
+				if(data.msg != "") {
+					alert(data.msg);
+					location.href = "placeDetailUp?place_no="+place_no+"&page=review.jsp";
+				}
+			}
 			ajaxCall(obj);
 		}  
 		
