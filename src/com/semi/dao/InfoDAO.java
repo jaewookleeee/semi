@@ -319,8 +319,8 @@ public class InfoDAO {
 				//반환할 값을 담을 ArrayList 준비
 				ArrayList<DTO> list = new ArrayList<DTO>();
 				//쿼리문 준비
-				String sql = "SELECT rnum, like_no, place_name " + 
-						"FROM (SELECT ROW_NUMBER() OVER(ORDER BY like_no DESC) AS rnum, like_no, place_name " + 
+				String sql = "SELECT rnum, like_no, place_name, place_no " + 
+						"FROM (SELECT ROW_NUMBER() OVER(ORDER BY like_no DESC) AS rnum, like_no, place_name, likeTb.place_no " + 
 						"FROM likeTb, place WHERE likeTb.place_no = place.place_no AND likeTb.info_id=?) " + 
 						"WHERE rnum BETWEEN ? AND ?";
 				
@@ -335,6 +335,7 @@ public class InfoDAO {
 						dto.setRnum(rs.getInt("rnum"));
 						dto.setLike_no(rs.getInt("like_no"));
 						dto.setPlace_name(rs.getString("place_name"));
+						dto.setPlace_no(rs.getInt("place_no"));
 						list.add(dto);
 					}
 				} catch (SQLException e) {
@@ -533,5 +534,48 @@ public class InfoDAO {
 					resClose();
 				}
 				return list;
+			}
+
+			//아이디 찾기
+			public String id(String name, String email) {
+				String result = null;
+				String sql = "SELECT info_id FROM info WHERE info_name=? AND info_email=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, name);
+					ps.setString(2, email);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						result = rs.getString("info_id");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return result;
+			}
+
+			//비밀번호 찾기
+			public String pw(String id, String name, String email) {
+				String result = null;
+				String sql = "SELECT info_pw FROM info WHERE info_id=? AND info_name=? AND info_email=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ps.setString(2, name);
+					ps.setString(3, email);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						result = rs.getString("info_pw");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return result;
 			}
 }

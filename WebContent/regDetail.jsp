@@ -22,25 +22,25 @@
  				width: 200px; height: 25px; font-size: 10px;     } 
 	        
 	        b#Gender{ position: absolute; left: 15px; top: 181px; font-size: 13px; }  
-	        input#regGender{ position: absolute; left: 75px; top: 178px; }
+	        input#regGender{ position: absolute; left: 75px; top: 178px; width: 200px;}
 	        
 	        b#birth{ position: absolute; left: 15px; top: 234px; font-size: 13px; }
-	        input#regBirth{ position: absolute; left: 75px; top:231px;}
+	        input#regBirth{ position: absolute; left: 75px; top:231px; width: 200px;}
 	        
 	        b#email{ position: absolute; left: 15px; top: 287px; font-size: 13px; }
 	        input#regEmail{ position: absolute; left: 75px; top: 284px;
 	            width: 200px; height: 25px; font-size: 10px;             }
 	            
 	        b#num{ position: absolute; left: 15px; top: 340px; font-size: 13px; }
-	        span#regNum-{position: absolute; left: 155px; top: 445px;}
+	        /* span#regNum-{position: absolute; left: 155px; top: 445px;} */
 	        input#regNum{ position: absolute; left: 100px; top: 337px;
-	            width: 200px; height: 25px; font-size: 10px;             }    
+	            width: 175px; height: 25px; font-size: 10px;             }    
 	            
 	        b#phone{ position: absolute; left: 15px; top: 393px; font-size: 13px; }
-	        span#regPhone-1{position: absolute; left: 155px; top: 501px;}
-	        span#regPhone-2{position: absolute; left: 220px; top: 501px;}
+/* 	        span#regPhone-1{position: absolute; left: 155px; top: 501px;}
+	        span#regPhone-2{position: absolute; left: 220px; top: 501px;} */
 	        input#regPhone{ position: absolute; left: 100px; top: 390px;
-	            width: 200px; height: 25px; font-size: 10px;             }
+	            width: 175px; height: 25px; font-size: 10px;             }
 
 			button#del{ position: absolute; left: 15px; top: 446px; width: 60px; height: 25px;    
 	            color: white; background-color: black; border-style: none; font-size: 10px; }

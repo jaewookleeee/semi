@@ -88,27 +88,11 @@ public class BookService {
 		System.out.println(book_no);
 		System.out.println(loginId);
 		
-		/*Gson json = new GsonBuilder().setDateFormat("yy-MM-dd").create();
-		HashMap<String, Object> map = new HashMap<>();*/
-		
-		/*if(loginId != null) {
-			map.put("login", true);
-		}else {
-			map.put("login", false);
-		}*/
-		
 		BookDAO dao = new BookDAO();
 		DTO dto = dao.bookInfo(loginId, book_no);
-		/*map.put("bookInfo", dto);*/
 		request.setAttribute("bookInfo", dto);
 		RequestDispatcher dis = request.getRequestDispatcher("book.jsp");
 		dis.forward(request, response);
-		
-		/*String obj = json.toJson(map);
-		System.out.println(obj);
-		response.setContentType("text/html; charset=UTF-8");
-		response.getWriter().println(obj);*/
-		
 	}
 	
 }
