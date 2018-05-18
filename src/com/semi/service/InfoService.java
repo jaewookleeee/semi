@@ -163,11 +163,13 @@ public class InfoService {
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		//String loginDiv = (String) request.getSession().getAttribute("loginDiv");
 		
+		String start = request.getParameter("sNum");
+		String end = request.getParameter("eNum");
 		String idSearch = request.getParameter("idSearch");
 		System.out.println("service : "+idSearch);
 		
 		InfoDAO dao = new InfoDAO();
-		ArrayList<DTO> userList = dao.userList(idSearch, 1, 10);
+		ArrayList<DTO> userList = dao.userList(idSearch, Integer.parseInt(start), Integer.parseInt(end));
 		
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<>();

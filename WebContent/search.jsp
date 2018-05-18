@@ -176,7 +176,10 @@
                     newLine += "<div style='text-align: left;'>";
                     newLine += "<table>";
                     newLine += "<tr><td colspan='2' class='place_name'>" + item.place_name + "</td></tr>"
-                    newLine += "<tr><td class='place_td'>" + item.place_category + "</td><td class='place_td'>" + item.place_loc + "</td></tr>";
+                    
+                    var str=item.place_loc.split("/");
+                    
+                    newLine += "<tr><td class='place_td'>" + item.place_category + "</td><td class='place_td'>" +str[1]+" "+str[2]+ "</td></tr>";
                     newLine += "<tr><td colspan='2'>" + item.place_info + "</td></tr>";
                     newLine += "<tr><td colspan='2' class='place_td'>" + item.place_price + "</td></tr>";
                     newLine += "</table>";

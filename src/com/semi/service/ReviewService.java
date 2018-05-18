@@ -46,15 +46,24 @@ public class ReviewService {
 		String review_content = request.getParameter("review_content");
 		double review_score = Double.parseDouble(request.getParameter("review_score"));
 		
-		DTO dto = new DTO();
-		dto.setPlace_no(place_no);
-		dto.setInfo_id(info_id);
-		dto.setReview_content(review_content);
-		dto.setReview_score(review_score);
-		
-		ReviewDAO dao = new ReviewDAO();
-		int success = dao.write(dto);
-		response.sendRedirect("placeDetailUp?place_no="+place_no+"&page=review.jsp");
+		// 글자수 제한 - 이용 후기 내용이 300자 이상일 경우,
+		if(review_content.length() > 300) {
+			request.setAttribute("msg", "후기 내용이 300자가 넘습니다.");
+			request.setAttribute("review_content", review_content);
+			RequestDispatcher dis = request.getRequestDispatcher("placeDetailUp?place_no="+place_no+"&page=review.jsp");
+			dis.forward(request, response);
+		} else {
+			DTO dto = new DTO();
+			dto.setPlace_no(place_no);
+			dto.setInfo_id(info_id);
+			dto.setReview_content(review_content);
+			dto.setReview_score(review_score);
+			
+			ReviewDAO dao = new ReviewDAO();
+			int success = dao.write(dto);
+			
+			response.sendRedirect("placeDetailUp?place_no="+place_no+"&page=review.jsp");
+		}
 	}
 
 	// 이용 후기 삭제 요청
@@ -67,17 +76,30 @@ public class ReviewService {
 	}
 
 	// 이용 후기 수정 요청
-	public void update(HttpServletRequest request, HttpServletResponse response) {
+	public void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
 		int review_no = Integer.parseInt(request.getParameter("review_no"));
 		String review_content = request.getParameter("review_content");
 		
-		ReviewDAO dao = new ReviewDAO();
-		int success = dao.update(review_no, review_content);
+		// 글자수 제한 - 후기 내용이 300자 이상일 경우,
+		if(review_content.length() > 300) {
+			Gson gson = new Gson();
+			HashMap<String, String> map = new HashMap<>();
+			map.put("msg", "후기 내용이 300자가 넘습니다.");
+			map.put("review_content", review_content);
+			
+			String obj = gson.toJson(map);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().write(obj);
+		} else {
+			ReviewDAO dao = new ReviewDAO();
+			int success = dao.update(review_no, review_content);
+		}
 	}
 }
