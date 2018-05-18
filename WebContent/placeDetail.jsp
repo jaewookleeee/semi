@@ -329,7 +329,9 @@ function showMap(){
 	console.log(myAddress);
 	naver.maps.Service.geocode({address: myAddress}, function(status, response) {
 	    if (status !== naver.maps.Service.Status.OK) {
-	    	return $("#map").html("해당 지역이 존재하지 않습니다.");
+	    	$("#map").css("text-align","center");
+	    	$("#map").html("<br/><br/><br/><br/><br/><h3>해당 지역이 존재하지 않습니다.</h3>");
+	    	return 0;
 	        /* return alert(array_loc[1]+" "+array_loc[2]+" "+array_loc[0] + '의 검색 결과가 없거나 기타 네트워크 에러'); */
 	    }
 	    var result = response.result;

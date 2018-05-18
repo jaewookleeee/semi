@@ -222,7 +222,7 @@
     			content += "<tr>";
     			content += "<td><input type='checkbox' name='delchk' value='"+item.like_no+"'/></td>";
     			content += "<td>"+item.rnum+"</td>";
-    			content += "<td><a href='./placeDetailUp?place_no="+item.place_no+"'>"+item.place_name+"</a></td>";
+    			content += "<td><a href='./placeDetailUp?place_no="+item.place_no+"&page=placeDetail.jsp'>"+item.place_name+"</a></td>";
     			content += "</tr>";
     		});
     		$("#listTable").append(content);

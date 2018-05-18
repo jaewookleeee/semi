@@ -319,8 +319,8 @@ public class InfoDAO {
 				//반환할 값을 담을 ArrayList 준비
 				ArrayList<DTO> list = new ArrayList<DTO>();
 				//쿼리문 준비
-				String sql = "SELECT rnum, like_no, place_name " + 
-						"FROM (SELECT ROW_NUMBER() OVER(ORDER BY like_no DESC) AS rnum, like_no, place_name " + 
+				String sql = "SELECT rnum, like_no, place_name, place_no " + 
+						"FROM (SELECT ROW_NUMBER() OVER(ORDER BY like_no DESC) AS rnum, like_no, place_name, likeTb.place_no " + 
 						"FROM likeTb, place WHERE likeTb.place_no = place.place_no AND likeTb.info_id=?) " + 
 						"WHERE rnum BETWEEN ? AND ?";
 				
@@ -335,6 +335,7 @@ public class InfoDAO {
 						dto.setRnum(rs.getInt("rnum"));
 						dto.setLike_no(rs.getInt("like_no"));
 						dto.setPlace_name(rs.getString("place_name"));
+						dto.setPlace_no(rs.getInt("place_no"));
 						list.add(dto);
 					}
 				} catch (SQLException e) {
