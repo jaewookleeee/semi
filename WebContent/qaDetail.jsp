@@ -171,7 +171,7 @@
 			obj.url = "./qaReplyList";
 			
 			obj.data = {
-				qa_no: ${dto.qa_no}
+				qa_no: "${dto.qa_no}"
 			};
 			
 			obj.success = function(data) {
@@ -197,7 +197,7 @@
 			obj.url = "./qaReplyWrite";		
 			obj.data = {
 				qa_reply_content: $("#repl_content").val(),
-				qa_no: ${dto.qa_no},
+				qa_no: "${dto.qa_no}",
 				info_id: $("#logId").val()
 			};
 			obj.success = function(data) {
