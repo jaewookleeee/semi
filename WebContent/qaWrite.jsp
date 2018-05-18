@@ -101,9 +101,19 @@
 		if(msg == "Q&A 작성에 성공했습니다.") {
 			location.href = "./qaDetail?qa_no=${qa_no}";
 		} else if(msg == "Q&A 제목이 20자가 넘습니다.") {
+			$("#title").focus();
 			$("#title").text("${qa_title}");
 			$("#content").text("${qa_content}");
 		} else if(msg == "Q&A 내용이 300자가 넘습니다.") {
+			$("#content").focus();
+			$("#title").text("${qa_title}");
+			$("#content").text("${qa_content}");
+		} else if(msg == "Q&A 제목을 입력해주세요.") {
+			$("#title").focus();
+			$("#title").text("${qa_title}");
+			$("#content").text("${qa_content}");
+		} else if(msg == "Q&A 내용을 입력해주세요.") {
+			$("#content").focus();
 			$("#title").text("${qa_title}");
 			$("#content").text("${qa_content}");
 		}

@@ -121,8 +121,22 @@ public class QaService {
 		String qa_title = request.getParameter("qa_title");
 		String qa_content = request.getParameter("qa_content");
 		
-		// 글자수 제한 - 수정 시 Q&A 내용이 300자 이상일 경우, 
-		if(qa_content.length() > 300) {
+		// 글자수 제한 - 수정 시 Q&A 제목, 내용이 없거나, 제목, 내용이 300자 이상일 경우
+		if(qa_title.length() == 0) {
+			request.setAttribute("qa_no", qa_no);
+			request.setAttribute("msg", "Q&A 제목을 입력해주세요.");
+			request.setAttribute("qa_title", qa_title);
+			request.setAttribute("qa_content", qa_content);
+			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm?qa_no="+qa_no);
+			dis.forward(request, response);
+		} else if(qa_content.length() == 0) {
+			request.setAttribute("qa_no", qa_no);
+			request.setAttribute("msg", "Q&A 내용을 입력해주세요.");
+			request.setAttribute("qa_title", qa_title);
+			request.setAttribute("qa_content", qa_content);
+			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm?qa_no="+qa_no);
+			dis.forward(request, response);
+		} else if(qa_content.length() > 300) {
 			request.setAttribute("qa_no", qa_no);
 			request.setAttribute("msg", "Q&A 내용이 300자가 넘습니다.");
 			request.setAttribute("qa_title", qa_title);
