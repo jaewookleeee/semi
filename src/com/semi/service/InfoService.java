@@ -1,6 +1,7 @@
 package com.semi.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -603,6 +604,46 @@ public class InfoService {
 			String obj = json.toJson(map);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
+		}
+
+		//아이디 찾기
+		public void id(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			
+			System.out.println(name+", "+email);
+			
+			InfoDAO dao = new InfoDAO();
+			String result =  dao.id(name, email);
+			
+			Gson json = new Gson();
+			HashMap<String, String> map = new HashMap<>();
+			map.put("result", result);
+			String obj = json.toJson(map);
+			System.out.println(obj);
+			response.getWriter().println(obj);
+		}
+
+		//비밀번호 찾기
+		public void pw(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			request.setCharacterEncoding("UTF-8");
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			
+			System.out.println(id+", "+name+", "+email);
+			
+			InfoDAO dao = new InfoDAO();
+			String result =  dao.pw(id, name, email);
+			
+			Gson json = new Gson();
+			HashMap<String, String> map = new HashMap<>();
+			map.put("result", result);
+			String obj = json.toJson(map);
+			System.out.println(obj);
+			response.setContentType("text/html; charset=UTF-8");
+			response.getWriter().println(obj);
+			
 		}
 
 

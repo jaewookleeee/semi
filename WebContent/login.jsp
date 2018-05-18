@@ -89,9 +89,13 @@
 	            border: 0;
 	            background: #E6E6E6;
 	        }
+	        span#a{position: absolute; left: 182px; top: 123px; font-size: 11px;}
+	        
+	        wiondow{width: 300px; height: 300px;}
 		</style>
 	</head>
 	<body>
+	
 		<jsp:include page="menuBar.jsp"/>
 		<div>
             <span id="logSpan1"><b>로그인</b>하고 <b>공간 대여</b> 하세요!</span>
@@ -100,6 +104,7 @@
             <!-- <input id="login" type="submit" value="로그인"/> -->
             <button id="login">로그인</button>
             <span id="logChkTxt"></span>
+            <span id="a"><a href="#" onclick="javascript:a()">아이디</a>/<a href="#" onclick="javascript:b()">비밀번호찾기</a></span>
             <button id="userJoin" onclick="uJoin()">사용자 회원가입</button>
             <button id="regJoin" onclick="rJoin()" >등록자 회원가입</button>
             <hr/>
@@ -107,6 +112,15 @@
         </div>
 	</body>
 	<script>
+		//아이디 찾기 팝업창
+		function a() {
+			window.open("./id.jsp", "id찾기", "left=50, top=50, width=320, height=300, resizeable=no");
+		}
+		//비밀번호 찾기 팝업창
+		function b() {
+			window.open("./pw.jsp", "pw찾기", "left=50, top=50, width=320, height=300, resizeable=no");
+		}
+		
 		function uJoin() {
 			location.href="userJoin.jsp";
 		}
@@ -128,7 +142,7 @@
 						alert("로그인 성공");
 						location.href="index.jsp";
 					}else{
-						$("#logChkTxt").html("아이디 또는 비밀번호를 다시 확인하세요.");
+						$("#logChkTxt").html("아이디 또는 비밀번호를 확인하세요.");
 					}
 				},
 				error : function (error) {
