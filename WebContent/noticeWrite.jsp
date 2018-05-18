@@ -52,11 +52,7 @@
 			#include{
 				height: 60px;
 			}
-			#noticePage{
-				border: 1px solid black;
-				width: 800px;
-				padding: 10px 10px;
-			}
+			
 			#notice{
 				color: white;	
 				display: table-cell;
@@ -66,28 +62,18 @@
 				font-weight: 900;
 				
 			}
-			#catetoryDiv{
+			#write{
 				position: absolute;
-				left: 405px;
-				width: 120px;
-				height: 50px;
-				background-color: gray;
-				display: table;
+				left: 1045px;
 			}
+			
 		</style>
 	</head>
 	<body>
 	<div id="include">
 		<jsp:include page="/menuBar.jsp" flush="false" />
 	</div>
-	<div id="noticePage">
-		<br />
-		<div id="catetoryDiv">
-			<p id="notice">공지사항</p>
-		</div>
-		<br />
-		<br />
-		<br />
+	<h1>공지사항</h1><br/>
 		<table>
 			<tr>
 				<th>제목</th>
@@ -107,7 +93,7 @@
 		<button id="write">등록</button>
 		<br />
 		<br />
-	</div>
+
 	</body>
 	<script>
 		/*java script area*/

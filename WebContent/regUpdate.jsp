@@ -7,193 +7,80 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
-			div#main{
-	            position: absolute;
-	            border: 1.5px solid #A4A4A4;
-	            width: 310px;
-	            height: 720px;
-	            left: 40%;
-	            top: 100px;
-	            text-align: center;
-	        }
-	        span#regTxt{
-	            position: absolute;
-	            left: 89px;
-	            top: 10px;
-	            font-size: 20px;     
-	        }
-	        b#id{
-	            position: absolute;
-	            left: 15px;
-	            top: 50px;
-	            font-size: 13px;
-	        }
-	        b#pw{
-	            position: absolute;
-	            left: 15px;
-	            top: 110px;
-	            font-size: 13px;    
-	        }
-	        b#newPw{
-	            position: absolute;
-	            left: 15px;
-	            top: 170px;
-	            font-size: 13px;                
-	        }
-	        b#newPwChk{
-	            position: absolute;
-	            left: 15px;
-	            top: 230px;
-	            font-size: 13px;   
-	        }
-	        b#name{
-	            position: absolute;
-	            left: 15px;
-	            top: 290px;
-	            font-size: 13px; 
-	        }
-	        b#Gender{
-	            position: absolute;
-	            left: 15px;
-	            top: 350px;
-	            font-size: 13px;    
-	        }   
-	        b#birth{
-	            position: absolute;
-	            left: 15px;
-	            top: 410px;
-	            font-size: 13px;
-	        }
-	        b#email{
-	            position: absolute;
-	            left: 15px;
-	            top: 470px;
-	            font-size: 13px;            
-	        }
-	        b#num{
-	            position: absolute;
-	            left: 15px;
-	            top: 530px;
-	            font-size: 13px;  
-	        }
-	        b#phone{
-	            position: absolute;
-	            left: 15px;
-	            top: 590px;
-	            font-size: 13px;  
-	        }
-	        input#regId{
-	            position: absolute;
-	            left: 15px;
-	            top: 75px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
-	        input#regPw{
-	            position: absolute;
-	            left: 15px;
-	            top: 135px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
+	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 320px; height: 650px; left: 40%;
+				top: 100px; text-align: center; }
+	        span#regTxt{ position: absolute; left: 100px;
+	            top: 10px; font-size: 20px; }
+
+	        b#id{ position: absolute; left: 15px; top: 77px; font-size: 13px; }
+	        input#regId{ position: absolute; left: 75px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
+	        button#idChk{ position: absolute; left: 280px; top: 75px; width: 69px;
+	            height: 25px; color: white; background-color: black; border-style: none; font-size: 10px; }
+	        
+	        
+	        b#pw{ position: absolute; left: 15px; top: 130px; font-size: 13px; }
+	        input#regPw{ position: absolute; left: 105px; top: 127px;
+	            width: 170px; height: 25px; font-size: 10px; }	
+	        
+	        b#newPw{ position: absolute; left: 15px; top: 183px; font-size: 13px; }
 	        input#regNewPw{
-	            position: absolute;
-	            left: 15px;
-	            top: 195px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
-	        input#regNewPwChk{
-	            position: absolute;
-	            left: 15px;
-	            top: 255px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
-	        input#regName{
-	            position: absolute;
-	            left: 15px;
-	            top: 315px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
-	        span#gender{
-	        	position: absolute;
-	        	left: 15px;
-	        	top:375px;
-	        } 
-	        label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
+	            position: absolute; left: 105px; top: 180px;
+	            width: 170px; height: 25px; font-size: 10px;  }
+	            
+	        b#newPwChk{ position: absolute; left: 15px; top: 236px; font-size: 13px; }
+	        input#regNewPwChk{  position: absolute; left: 120px; top: 236px;
+	            width: 155px; height: 25px; font-size: 10px;  }  
+
+	        b#name{ position: absolute; left: 15px; top: 289px; font-size: 13px;  }
+	        input#regName{ position: absolute; left: 75px; top: 286px;
+ 				width: 200px; height: 25px; font-size: 10px;     } 
+	        
+	        b#Gender{ position: absolute; left: 15px; top: 340px; font-size: 13px; }  
+	        span#gender{ position: absolute; left: 75px; top: 339px; }
+			label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
 			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
 			input#man{ display: none; }
 			input#woman{ display: none; }
 	        
-	        select#regBirthYear{
-	        	position: absolute;
-	        	left: 15px;
-	        	top: 435px;
-	        }
-	        select#regBirthMonth{
-	        	position: absolute;
-	        	left: 70px;
-	        	top: 435px;
-	        }
-	        select#regBirthDay{
-	        	position: absolute;
-	        	left: 110px;
-	        	top: 435px;
-	        }
-	        input#regEmail{
-	            position: absolute;
-	            left: 15px;
-	            top: 495px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
+	        b#birth{ position: absolute; left: 15px; top: 395px; font-size: 13px; }
+	        select#regBirthYear{ position: absolute; left: 75px; top:392px;}
+	        select#regBirthMonth{ position: absolute; left: 130px; top: 392px; }
+	        select#regBirthDay{ position: absolute; left: 170px; top: 392px; }
 	        
-	        span#regNum-{position: absolute; left: 107px; top: 555px;}
-	        input#regNum1{ position: absolute; left: 15px; top: 555px;
-	            width: 85px; height: 25px; font-size: 10px;  }
-	        input#regNum2{ position: absolute; left: 120px; top: 555px;   
-	            width: 85px; height: 25px; font-size: 10px;  }
+	        b#email{ position: absolute; left: 15px; top: 448px; font-size: 13px; }
+	        input#regEmail{ position: absolute; left: 75px; top: 445px;
+	            width: 200px; height: 25px; font-size: 10px;             }
 	            
-	        span#regNum-1{position: absolute; left: 60px; top: 615px;}
-	        span#regNum-2{position: absolute; left: 115px; top: 615px;}    
-	        input#regPhone1{ position: absolute; left: 15px; top: 615px;
-	            width: 40px; height: 25px; font-size: 10px; }
-	        input#regPhone2{ position: absolute; left: 70px; top: 615px;
-	            width: 40px; height: 25px; font-size: 10px; }
-			input#regPhone3{ position: absolute; left: 125px; top: 615px;
-	            width: 40px; height: 25px; font-size: 10px; }	
-	        
-	        
-	        button#cancel{
-	            position: absolute;
-	            left: 180px;
-	            top: 675px;
-	            width: 50px;
-	            height: 25px;    
-	            color: white;
-	            background-color: black;
-	            border-style: none;
-	            font-size: 10px;
-	        }
+	        b#num{ position: absolute; left: 15px; top: 501px; font-size: 13px; }
+	        span#regNum-{position: absolute; left: 155px; top: 498px;}
+	        input#regNum1{ position: absolute; left: 100px; top: 498px;
+	            width: 50px; height: 25px; font-size: 10px;             }    
+	        input#regNum2{ position: absolute; left: 165px; top: 498px;
+	            width: 50px; height: 25px; font-size: 10px;             }    
+	            
+	        b#phone{ position: absolute; left: 15px; top: 554px; font-size: 13px; }
+	        span#regPhone-1{position: absolute; left: 155px; top: 551px;}
+	        span#regPhone-2{position: absolute; left: 220px; top: 551px;}
+	        input#regPhone1{ position: absolute; left: 100px; top: 551px;
+	            width: 50px; height: 25px; font-size: 10px;             }
+			input#regPhone2{ position: absolute; left: 165px; top: 551px;
+	            width: 50px; height: 25px; font-size: 10px;             }
+			input#regPhone3{ position: absolute; left: 235px; top: 551px;
+	            width: 50px; height: 25px; font-size: 10px;             }
+
+	        button#cancel{ position: absolute; left: 180px; top: 607px; width: 50px; height: 25px;    
+	            color: white; background-color: black; border-style: none; font-size: 10px; }
 	        button#save{
-	            position: absolute;
-	            left: 240px;
-	            top: 675px;
-	            width: 50px;
-	            height: 25px;
-	            font-size: 10px;
-	            color: white;
-	            background-color: black;
-	            border-style: none;            
-	        }
+	            position: absolute; left: 240px; top: 607px; width: 50px; height: 25px;
+	            font-size: 10px; color: white; background-color: black; border-style: none; }
+	            
+	        span#id_s{position: absolute; left: 75px; top: 105px;}
+	        span#pw_s{position: absolute; left: 75px; top: 157px;}
+	        span#pwC_s{position: absolute; left: 75px; top: 210px;}
+	        span#name_s{position: absolute; left: 75px; top: 264px;}
+	        span#gender_s{position: absolute; left: 75px; top: 316px;}
+	        span#birth_s{position: absolute; left: 75px; top: 368px;}
+	        span#email_s{position: absolute; left: 75px; top: 422px;}
 		</style>
 	</head>
 	<body>
@@ -251,10 +138,19 @@
             <input id="regNum2" type="text" placeholder=""/>
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone1" type="text"/>
-            <span id="regNum-1">-</span>
+            <span id="regPhone-1">-</span>
             <input id="regPhone2" type="text"/>
-            <span id="regNum-2">-</span>
+            <span id="regPhone-2">-</span>
             <input id="regPhone3" type="text"/>
+            
+            
+            <span class="msg" id="id_s"></span>
+            <span class="msg" id="pw_s"></span>
+            <span class="msg" id="pwC_s"></span>
+            <span class="msg" id="name_s"></span>
+            <span class="msg" id="gender_s"></span>
+            <span class="msg" id="birth_s"></span>
+            <span class="msg" id="email_s"></span>
             
             <button id="cancel">취소</button>
             <button id="save">수정</button>

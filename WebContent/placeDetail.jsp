@@ -89,6 +89,77 @@ var endtime=[];
 var place_no="${param.place_no}";
 var id ="${sessionScope.loginId}";
 var cash=0;	
+
+	//예약하기
+	$("#book").click(function() {
+/* 		 */
+		var today = new Date();
+		var yyyy = today.getFullYear();
+		var mm = today.getMonth()+1;
+		var dd = today.getDate();
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+		today = yyyy+"-"+mm+"-"+dd;
+		
+		console.log(today);
+		console.log($("#starttime").val(), $("#endtime").val());
+		console.log("결과 : ",$("#starttime").val() >= $("#endtime").val());
+
+		var sTime = $("#starttime").val().split(":");
+		var eTime = $("#endtime").val().split(":");
+		var ssTime = parseInt(sTime);
+		var eeTime = parseInt(eTime);
+		
+		console.log(ssTime, eeTime);
+		
+		
+		if($("#date").val()==""){
+			alert("날짜 선택");
+		}else if($("#date").val() < today){
+			alert("이전 날짜 선택안됨");
+		}else if($("#people").val()=="인원"){
+			alert("인원 선택");
+		}else if(ssTime >= eeTime){
+			alert("예약시간 다시 설정");
+		}else{
+			$.ajax({
+	    		type:"post",
+				url:"./bookWrite",
+				dataType:"JSON",
+				data:{
+					place_no : place_no,
+					date : $("#date").val(),
+					startTime : $("#starttime").val(),
+					endTime : $("#endtime").val(),
+					custom : $("#people").val(),
+					price : $("#cash").val()
+				},
+				success : function(data){
+					console.log(data);
+					if(data.login == false){
+						alert("로그인 후 사용");
+					}else if(data.login == true){
+						if(data.success > 0){
+							alert("예약 완료");
+							console.log(data.success);
+							location.href="./bookInfo?book_no="+data.success;
+							//location.href="book.jsp";
+						}else{
+							alert("예약 실패");
+						}
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+	    	});   
+		}
+	});
+
     $("#like").click(function(){
     	
     	//console.log(id);
@@ -138,7 +209,8 @@ var cash=0;
         	})
         }
     });
-    $(document).ready(function(){
+    $(document).ready(function(){ 
+    	
     	$.ajax({
 			type:"post",
 			url:"./placeDetail",
@@ -163,7 +235,7 @@ var cash=0;
 				$("#categoly").html(data.dto.place_category);
 				$("#loc_short").html(array_loc[1]);
 				$("#phone").html(data.dto.place_phone);
-				$("#homepage").html(data.dto.home);
+				$("#homepage").html(data.dto.place_home);
 				$("#loc").val(array_loc[0]+array_loc[1]+array_loc[2]);
 				$("#guide").val(data.dto.place_guide);
 				$("#attention").val(data.dto.place_attention);

@@ -5,13 +5,14 @@
 	var loginId = "${sessionScope.loginId}";
 	var loginDiv = "${sessionScope.loginDiv}";
 	
-	if(loginId != null && loginDiv =="사용자"){
+	
+	if(loginId == ""){
+		alert("로그인ㄱ");
+		location.href="login.jsp";
+	}else if(loginId != null && loginDiv =="사용자"){
 		location.href="regChange.jsp";
 	}else if(loginId != null && loginDiv =="등록자" || loginDiv =="관리자"){
 		alert("못가");
 		history.back();
-	}else if(loginId == ""){
-		alert("로그인ㄱ");
-		location.href="login.jsp";
 	}
 </script>

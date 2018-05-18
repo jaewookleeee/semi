@@ -15,7 +15,7 @@
                 margin-top: 50px;
                 border-collapse: collapse;
             }
-            
+            	
             th, td {
                 border: 0.1px solid black;
                 float: left;
@@ -27,7 +27,6 @@
                 position: relative;
                 margin-top: 50px;
                 width: 1000px;
-                
             }
             
             #qa_header {
@@ -118,7 +117,6 @@
                     <th id="write_date" style="background-color: #343434; color: white;">작성일자</th>
                 	<input id="hide" type="hidden"/>
                 </tr>
-                
             </table>
 
             <input id="search_area" type="text" placeholder=" 검색할 제목을 입력해주세요."/>
@@ -132,41 +130,63 @@
         </div>
 	</body>
 	<script>
-		var entered = 0;
+		var isreadyed = false;
 		var start_page = 1;
-		var page_max = 0;
+		var max_size = 0;	
 		
 		var obj = {};
 		obj.type = "POST";
 		obj.dataType = "JSON";
 		obj.error = function(error){console.log(error)};
 
-		// 'Q&A' 탭이 눌렸을 때,
+		// 'Q&A' 탭을 눌렀을 때, start_page를 1로 설정(end_page = start_page+4)
 		$(document).ready(function() {
-			if(entered == 0) {
-				start_page = 1;
-				paging(start_page);
-				entered = 1;
+			var loginId = "${sessionScope.loginId}";
+			var loginDiv = "${sessionScope.loginDiv}";
+			maxSize();
+			
+			if(!isreadyed) {
+				if(loginId == ""){
+					alert("로그인이 필요합니다.");
+					history.back();
+				} else {
+					start_page = 1;
+					paging(start_page);
+				}
+				isreadyed = true;
 			}
 		});    		 
 
-		// '이전 목록' 버튼 클릭 시
+		// '이전 목록' 버튼 클릭 시, start_page = start_page-5
 		$("#beforePage").click(function() {
 			if(start_page > 5) {
 				start_page -= 5;	
 				paging(start_page);
-				console.log(start_page);
 			}
 		}); 
 		
 		// '다음 목록' 버튼 클릭 시
 		$("#nextPage").click(function() {
-			if(start_page+5 < page_max) {
+			if(start_page+5 < max_size) {
 				start_page += 5;
 				paging(start_page);
-				console.log(start_page);
 			}
 		});
+		
+		// max_size 파악
+		function maxSize() {
+			var msg="${param.place_no}";
+			obj.url = "./qaListSize";
+			
+			obj.data = {
+				place_no: msg
+			};
+			
+			obj.success = function(data) {
+				max_size = data.max_size;
+			}
+			ajaxCall(obj);
+		}
 		
 		function paging(start_page) {
 			var msg="${param.place_no}";
@@ -182,11 +202,8 @@
 				$(".qa_row_content").remove();
 				
 				for(var i=data.list.length-1; i>=0; i--) {
-					if(page_max == 0) {
-						page_max = data.list[i].qa_no;
-					}
 					var str = "<tr class='qa_row_content'>";
-					str += "<td id='no'>"+data.list[i].qa_no+"</td>";
+					str += "<td id='no'>"+data.list[i].rnum+"</td>";
 					str += "<td id='title'><a href='./qaDetail?qa_no="+data.list[i].qa_no+"'>"+data.list[i].qa_title+"</a></td>";
 					str += "<td id='writer'>"+data.list[i].info_id+"</td>";
 					str += "<td id='write_date'>"+data.list[i].qa_date+"</td>";
@@ -199,7 +216,7 @@
 		
 		// 작성하기 버튼 클릭 시, qaWrite.jsp로 이동
 		$("#qa_write").click(function() {
-			location.href = "qaWriteForm?place_no="+${param.place_no};
+			location.href = "./qaWriteForm?place_no="+${param.place_no};
 		});
 		
 		function ajaxCall(param) {
@@ -207,22 +224,3 @@
 		}
 	</script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

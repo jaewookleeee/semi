@@ -40,20 +40,24 @@
 		    </div>
 	        <div id="allinfo">
 	            <div class="info" id="detail">상세정보</div>
-	            <div class="info" id="qa">QA</div>
-	            <div class="info" id="reply">이용후기</div>
+	            <div class="info" id="qa">Q&A</div>
+	            <div class="info" id="review">이용후기</div>
 	        </div>  
 	        <div id="area"></div>
 		</div>
 	</body>
 	<script>
-	var mainPhoto;
+	var mainPhoto;		
+		var msg = "${msg}";
+		if(msg != "") {
+			alert(msg);
+		}
 		// 하단의 img 태그를 클릭하면 메인 img 태그에 클릭한 사진이 삽입됨
 		$(".sub").click(function(){
 		    $("#main").attr("src",this.src);
 		    console.log("사진 클릭");
 		});	
-		
+
 		$(document).ready(function(){
 	         var p_no="${place_no}";
 	         $.ajax({
@@ -88,23 +92,74 @@
 			var p_no=${place_no};
 			var page = "";
 			$(this).css("background-color","#FF376C");
+			$(this).css("color","white");
 			
 			if(e.target.id == "detail") {
 				page = "placeDetail.jsp";
 				$("#qa").css("background-color","white");
-		    	$("#reply").css("background-color","white");
+				$("#qa").css("color","black");
+		    	$("#review").css("background-color","white");
+		    	$("#review").css("color","black");
 			} else if(e.target.id == "qa") {
 				page = "qa.jsp";
 				$("#detail").css("background-color","white");
-		    	$("#reply").css("background-color","white");
+				$("#detail").css("color","black");
+		    	$("#review").css("background-color","white");
+		    	$("#review").css("color","black");
 			} else {
-				page = "reply.jsp";
+				page = "review.jsp";
 				$("#detail").css("background-color","white");
+				$("#detail").css("color","black");
 		    	$("#qa").css("background-color","white");
+				$("#qa").css("color","black");
 			}			
-			$("#area").load(page,{place_no:p_no},function(res, stat) {
-				/* $("#area").html(res) */});
+			$("#area").load(page,{place_no:p_no},function(res, stat) { $("#area").html(res) });
 		});
 
+      $(document).ready(function(){
+         var p_no="${place_no}";
+         var page="${page}";
+         $.ajax({
+               type:"post",
+               url:"./placephotoDetail",
+               dataType:"JSON",
+               data:{
+                  place_no:p_no
+               },
+               success : function(data){
+                  $("#main").attr("src",'./upload/'+data.list[0].place_photo);
+                  for(var i=0;i<data.list.length;i++){
+                  $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
+                  }
+               },
+               error:function(e){
+                  console.log(e);
+               }
+         });
+         $("#area").load(page,{place_no:p_no},function(res, stat) { $("#area").html(res) });
+         
+         if(page == "qa.jsp") {
+             $("#qa").css("background-color","#FF376C");
+             $("#qa").css("color","white");
+             $("#detail").css("background-color","white");
+             $("#detail").css("color","black");
+             $("#review").css("background-color","white");
+             $("#review").css("color","black");
+      	 } else if(page == "review.jsp") {
+             $("#review").css("background-color","#FF376C");
+             $("#review").css("color","white");
+             $("#detail").css("background-color","white");
+             $("#detail").css("color","black");
+             $("#qa").css("background-color","white");
+             $("#qa").css("color","black");
+      	 } else {
+             $("#detail").css("background-color","#FF376C");
+             $("#detail").css("color","white");
+             $("#review").css("background-color","white");
+             $("#review").css("color","black");
+             $("#qa").css("background-color","white");
+             $("#qa").css("color","black");
+      	 }
+      });
    </script>
 </html>

@@ -7,169 +7,64 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
-			div#main{
-	            position: absolute;
-	            border: 1.5px solid #A4A4A4;
-	            width: 310px;
-	            height: 600px;
-	            left: 40%;
-	            top: 100px;
-	            text-align: center;
-       		}
-	        span#userTxt{
-	            position: absolute;
-	            left: 89px;
-	            top: 10px;
-	            font-size: 20px;     
-	        }
-	        b#id{
-	            position: absolute;
-	            left: 15px;
-	            top: 50px;
-	            font-size: 13px;
-	        }
-	        b#pw{
-	            position: absolute;
-	            left: 15px;
-	            top: 110px;
-	            font-size: 13px;    
-	        }
-	        b#newPw{
-	            position: absolute;
-	            left: 15px;
-	            top: 170px;
-	            font-size: 13px;                
-	        }
-	        b#newPwChk{
-	            position: absolute;
-	            left: 15px;
-	            top: 230px;
-	            font-size: 13px;   
-	        }
-	        b#name{
-	            position: absolute;
-	            left: 15px;
-	            top: 290px;
-	            font-size: 13px;   
-	        }
-	        b#Gender{
-	            position: absolute;
-	            left: 15px;
-	            top: 350px;
-	            font-size: 13px;    
-	        }   
-	        b#birth{
-	            position: absolute;
-	            left: 15px;
-	            top: 410px;
-	            font-size: 13px;
-	        }
-	        b#email{
-	            position: absolute;
-	            left: 15px;
-	            top: 470px;
-	            font-size: 13px;            
-	        }
-	        input#userId{
-	            position: absolute;
-	            left: 15px;
-	            top: 75px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
-	        input#userPw{
-	            position: absolute;
-	            left: 15px;
-	            top: 135px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
+	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 540px; left: 40%;
+				top: 100px; text-align: center; }
+	        span#usertxt{ position: absolute; left: 100px;
+	            top: 10px; font-size: 20px; }
+
+	        b#id{ position: absolute; left: 15px; top: 77px; font-size: 13px; }
+	        input#userId{ position: absolute; left: 75px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
+	        button#idChk{ position: absolute; left: 280px; top: 75px; width: 69px;
+	            height: 25px; color: white; background-color: black; border-style: none; font-size: 10px; }
+	        
+	        
+	        b#pw{ position: absolute; left: 15px; top: 130px; font-size: 13px; }
+	        input#userPw{ position: absolute; left: 105px; top: 127px;
+	            width: 170px; height: 25px; font-size: 10px; }	
+	        
+	        b#newPw{ position: absolute; left: 15px; top: 183px; font-size: 13px; }
 	        input#userNewPw{
-	            position: absolute;
-	            left: 15px;
-	            top: 195px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
-	        input#userNewPwChk{
-	            position: absolute;
-	            left: 15px;
-	            top: 255px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;            
-	        }
-	        input#userName{
-	            position: absolute;
-	            left: 15px;
-	            top: 315px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;
-	        }
-	        span#gender{
-	        	position: absolute;
-	        	left: 15px;
-	        	top: 375px;
-	        }
-	        label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
+	            position: absolute; left: 105px; top: 180px;
+	            width: 170px; height: 25px; font-size: 10px;  }
+	            
+	        b#newPwChk{ position: absolute; left: 15px; top: 236px; font-size: 13px; }
+	        input#userNewPwChk{  position: absolute; left: 120px; top: 236px;
+	            width: 155px; height: 25px; font-size: 10px;  }  
+	        
+	        b#name{ position: absolute; left: 15px; top: 289px; font-size: 13px;  }
+	        input#userName{ position: absolute; left: 75px; top: 286px;
+ 				width: 200px; height: 25px; font-size: 10px;     } 
+	        
+	        b#Gender{ position: absolute; left: 15px; top: 340px; font-size: 13px; }  
+	        span#gender{ position: absolute; left: 75px; top: 339px; }
+			label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
 			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
 			input#man{ display: none; }
 			input#woman{ display: none; }
 	        
-	        select#userBirthYear{
-	        	position: absolute;
-	        	left: 15px;
-	        	top: 435px;
-	        	z-index: 1;
-	    
-	        }
-	        select#userBirthMonth{
-	        	position: absolute;
-	        	left: 70px;
-	        	top: 435px;
-	        }
-	        select#userBirthDay{
-	        	position: absolute;
-	        	left: 110px;
-	        	top: 435px;
-	        }
-	        input#userEmail{
-	            position: absolute;
-	            left: 15px;
-	            top: 495px;
-	            width: 200px;
-	            height: 25px;
-	            font-size: 10px;    
-	        }
-	        button#cancel{
-	            position: absolute;
-	            left: 180px;
-	            top: 555px;
-	            width: 50px;
-	            height: 25px;    
-	            color: white;
-	            background-color: black;
-	            border-style: none;
-	            font-size: 10px;
-	        }
-	        button#save{
-	            position: absolute;
-	            left: 240px;
-	            top: 555px;
-	            width: 50px;
-	            height: 25px;
-	            font-size: 10px;
-	            color: white;
-	            background-color: black;
-	            border-style: none;            
-	        }
-	        button#del{ position: absolute; left: 15px; top: 555px; width: 60px; height: 25px; font-size: 10px;
-	        	color: white; background-color: black; border-style: none;
-	        }
+	        b#birth{ position: absolute; left: 15px; top: 395px; font-size: 13px; }
+	        select#userBirthYear{ position: absolute; left: 75px; top:392px;}
+	        select#userBirthMonth{ position: absolute; left: 130px; top: 392px; }
+	        select#userBirthDay{ position: absolute; left: 170px; top: 392px; }
+	        
+	        b#email{ position: absolute; left: 15px; top: 448px; font-size: 13px; }
+	        input#userEmail{ position: absolute; left: 75px; top: 445px;
+	            width: 200px; height: 25px; font-size: 10px;             }
+
+	        button#cancel{ position: absolute; left: 165px; top: 495px; width: 50px; height: 25px;    
+	            color: white; background-color: black; border-style: none; font-size: 10px; }
+	        button#save{ position: absolute; left: 225px; top: 495px; width: 50px; height: 25px;
+	            font-size: 10px; color: white; background-color: black; border-style: none; }
+	            
+	        span#id_s{position: absolute; left: 75px; top: 105px;}
+	        span#pw_s{position: absolute; left: 75px; top: 157px;}
+	        span#pwC_s{position: absolute; left: 75px; top: 210px;}
+	        span#name_s{position: absolute; left: 75px; top: 264px;}
+	        span#gender_s{position: absolute; left: 75px; top: 316px;}
+	        span#birth_s{position: absolute; left: 75px; top: 368px;}
+	        span#email_s{position: absolute; left: 75px; top: 422px;}
+	        
+	        span.msg{font-size: 13px; color: red}
 		</style>
 	</head>
 	<body>
@@ -222,6 +117,15 @@
             </select>
             <b id="email">이메일</b>
             <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
+            
+            <span class="msg" id="id_s"></span>
+            <span class="msg" id="pw_s"></span>
+            <span class="msg" id="pwC_s"></span>
+            <span class="msg" id="name_s"></span>
+            <span class="msg" id="gender_s"></span>
+            <span class="msg" id="birth_s"></span>
+            <span class="msg" id="email_s"></span>
+              
             <button id="cancel">취소</button>
             <button id="save">수정</button>
         </div>
@@ -252,10 +156,12 @@
 			var pw = $("#userPw").val();
 
 			if($("#userPw").val()==""){
-				alert("현재비밀번호 입력");
+				//alert("현재비밀번호 입력");
+				$("#msg").html("현재 비밀번호 입력");
 				$("#userPw").focus();
 			}else if($("#userNewPw").val()==""){
-				alert("새 비밀번호 입력");
+				$("#msg").html("새 비밀번호 입력");
+				//alert("새 비밀번호 입력");
 				$("#userNewPw").focus();
 			}else if($("#userNewPw").val().length < 8 || $("#userNewPw").val().length >12){
 				alert("비밀번호 8~12자리 입력");
@@ -301,11 +207,9 @@
 					},
 					dataType : "json",
 					success : function(data) {
-						console.log(data);
-
 						if(data.success >0){
 							alert("수정 성공");
-							location.href="userDetail.jsp";
+							//location.href="userDetail.jsp";
 						}else{
 							alert("수정 실패");
 						}

@@ -31,8 +31,6 @@ public class QaDAO {
 	
 	// Q&A 쓰기(완)
 	public int write(DTO dto) {
-		// qa_no, place_no, info_id, qa_content, qa_date, qa_title
-		// INSERT INTO qa VALUES (qa_seq.NEXTVAL, 1, 'ksw6169', '내용: 궁금합니다.', SYSDATE, 'qa 제목!!'); 
 		String sql = "INSERT INTO qa VALUES (qa_seq.NEXTVAL, ?, ?, ?, SYSDATE, ?)";
 		int success = 0; 
 		
@@ -61,7 +59,6 @@ public class QaDAO {
 	// Q&A 리스트 (완)
 	public ArrayList<DTO> list(int place_no, int start, int end) {
 		ArrayList<DTO> list = new ArrayList<>();
-		
 		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY qa_no DESC) AS rnum," 
 			    			+"qa_no, qa_title, qa_date, info_id FROM qa WHERE place_no = ?)"
 			    				+"WHERE rnum BETWEEN ? AND ?";
@@ -76,11 +73,11 @@ public class QaDAO {
 			
 			while(rs.next()) {
 				DTO dto = new DTO();
+				dto.setRnum(rs.getInt("rnum"));
 				dto.setQa_no(rs.getInt("qa_no"));
 				dto.setQa_title(rs.getString("qa_title"));
 				dto.setQa_date(rs.getDate("qa_date"));
 				dto.setInfo_id(rs.getString("info_id"));
-				
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -90,17 +87,6 @@ public class QaDAO {
 			resClose();
 		}
 		return list;
-	}
-	
-	// 자원 반납
-	public void resClose() {
-		try {
-			if(rs != null) {rs.close();}
-			if(ps != null) {ps.close();}
-			if(conn != null) {conn.close();}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	// Q&A 상세보기 (완)
@@ -177,9 +163,8 @@ public class QaDAO {
 			return place_no;
 	}
 
-	
-	// Q&A 답변 쓰기
-	public int replyWrite(DTO dto) {
+	// Q&A 답변 쓰기(완)
+	public int qaReplyWrite(DTO dto) {
 		String sql = "INSERT INTO qareply(qareply_no, qa_no, info_id, qareply_content, qareply_date) VALUES (qa_reply_seq.NEXTVAL, ?, ?, ?, SYSDATE)";
 		int success = 0;
 		
@@ -205,7 +190,8 @@ public class QaDAO {
 		return success;
 	}
 
-	public ArrayList<DTO> replyList(int qa_no) {
+	// Q&A 답글 리스트(완)
+	public ArrayList<DTO> qaReplyList(int qa_no) {
 		ArrayList<DTO> list = new ArrayList<>();
 		
 		String sql = "SELECT info_id, qareply_no, qareply_content FROM qareply WHERE qa_no = ?";
@@ -230,5 +216,92 @@ public class QaDAO {
 			resClose();
 		}
 		return list;
+	}
+
+	// Q&A 답글 삭제(완)
+	public int qaReplyDelete(int qareply_no) {
+		int qa_no = 0;
+		String sql = "SELECT qa_no FROM qareply WHERE qareply_no = ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, qareply_no);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				qa_no = rs.getInt("qa_no");
+			}
+			
+			sql = "DELETE FROM qareply WHERE qareply_no = ?";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, qareply_no);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			resClose();
+		}
+		return qa_no;
+	}
+
+	// Q&A 답글 수정(완)
+	public int qaReplyUpdate(int qareply_no, String qareply_content) {
+		int qa_no = 0;
+		String sql = "SELECT qa_no FROM qareply WHERE qareply_no = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, qareply_no);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				qa_no = rs.getInt("qa_no");
+			}
+			
+			sql = "UPDATE qareply SET qareply_content = ? WHERE qareply_no = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, qareply_content);
+			ps.setInt(2, qareply_no);
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			resClose();
+		}
+		return qa_no;
+	}
+
+	// 자원 반납
+	public void resClose() {
+		try {
+			if(rs != null) {rs.close();}
+			if(ps != null) {ps.close();}
+			if(conn != null) {conn.close();}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int listSize(int place_no) {
+		int max_size = 0;
+		String sql = "SELECT COUNT(*) FROM qa WHERE place_no = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				max_size = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			resClose();
+		}
+		return max_size;
 	}
 }

@@ -49,24 +49,11 @@
 				border: 0;
 			}
 			#write{
-				float: right;
-				margin-right: 95px;
+				position: absolute;
+				left: 1045px;
 			}
 			#include{
 				height: 60px;
-			}
-			#catetoryDiv{
-				position: absolute;
-				left: 405px;
-				width: 120px;
-				height: 50px;
-				background-color: gray;
-				display: table;
-			}
-			#questPage{
-				border: 1px solid black;
-				width: 800px;
-				padding: 10px 10px;
 			}
 			#quest{
 				color: white;	
@@ -83,14 +70,8 @@
 	<div id="include">
 		<jsp:include page="/menuBar.jsp" flush="false" />
 	</div>
-	<div id="questPage">
-		<br />
-		<div id="catetoryDiv">
-			<p id="quest">문의사항</p>
-		</div>
-		<br />
-		<br />
-		<br />
+		<h1>문의사항</h1>
+		<br/>
 		<table>
 			<tr>
 				<th>제목</th>
@@ -109,8 +90,8 @@
 		<br />
 		<button id="write">등록</button>
 		<br />
-		<br />
-	</div>
+		<br /><br />
+
 </body>
 <script>
 		/*java script area*/

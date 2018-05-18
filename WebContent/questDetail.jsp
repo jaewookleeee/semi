@@ -45,24 +45,24 @@
 			}
 			#list{
 				position: absolute;
-				left: 897px;
+				left: 940px;
 			}
 			#update{
 				position: absolute;
-				left: 967px;
+				left: 1010px;
 			}
 			#delete{
 				position: absolute;
-				left: 1037px;
+				left: 1080px;
 			}
 			#updateOk{
 				position: absolute;
-				left: 1037px;
+				left: 1080px;
 				display: none; 
 			}
 			#cancel{
 				position: absolute;
-				left: 967px;
+				left: 1010px;
 				 display: none;
 			}
 			
@@ -116,18 +116,8 @@
 				display: table;
 			}
 
-			#questPage{
-				border: 1px solid black;
-				width: 800px;
-			}
-			#catetoryDiv{
-				position: absolute;
-				left: 393px;
-				width: 120px;
-				height: 50px;
-				background-color: gray;
-				display: table;
-			}
+			
+			
 			.answerBtn{
 				background-color: lightgray;
 				
@@ -136,6 +126,7 @@
 				background-color: lightgray;
 				color:black;
 				font-size: 12pt;
+				width: 80px;
 			}
 			#answerTxt{
 				width:100%
@@ -154,11 +145,8 @@
 	<div id="include">
 	<jsp:include page="/menuBar.jsp" flush="false"/>
 	</div>
-	<div id="questPage"><br/>
-		<div id="catetoryDiv">
-			<p id="categoryP"> 문의사항</p>
-		</div>
-		<br/><br/><br/>
+		<h1>문의사항</h1>
+		<br/><br/>
 		<table>
 			<tr>
 				<th>제목</th>
@@ -190,12 +178,8 @@
 		<button id="update">수정</button>
 		<button id="delete">삭제</button>
 		
-		<br/><br/>
-		<div id = "answerTitle">
-			<p id="categoryP">답변</p>
-		</div>
-		<br/><br/><br/>
-		
+		<br/><br/><br/><br/>
+		<h1>답변</h1>
 		<div id="answerDiv">
 			
 		</div>
@@ -214,7 +198,7 @@
 				<th class="answerBtn"><button id="answerWrite">등록</button></th>
 			</tr>
 		</table><br/>
-		</div>
+
 	</body>
 	<script>
 		/*java script area*/		
@@ -251,9 +235,8 @@
 				$("#board_content").val(data.dto.board_content);
 				//$("#answerDiv").append(tableTh);
 				replyPrint(data.list);
-				if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
-					console.log("login Id");
-				}
+				
+				
 			};
 			ajaxCall(obj);
 		});
@@ -264,7 +247,7 @@
 		});
 		$("#update").click(function(){
 			console.log("click");
-			  if($("#info_id").text() == "${loginId}"){
+			if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 					console.log("OK");
 					$("#board_title").attr("readonly",false);
 					$("#board_title").focus();
@@ -326,7 +309,7 @@
 		$("#delete").click(function(){			
 			if($("#info_id").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
-				location.href="./boardDel?board_no="+$("#board_no").val();;				
+				location.href="./boardDel?board_no="+$("#board_no").val();				
 			}else if(loginId == ""){					
 				console.log(loginId);
 				alert("로그인이 필요한 서비스 입니다.");
@@ -414,10 +397,10 @@
 						item.info_id = "관리자";
 					} 
 					content+="<table>"
-					content+="<tr>";
+					content+="<tr id='replyTr'>";
 					content+="<th id='replyInfo"+item.reply_no+"' class='replyInfo'><input type='hidden' id='reply_no' value='"+item.reply_no+"'/>"+item.info_id+"</th>";
 					content+="<td id='replyContent'><textarea id='reply' onKeyup='len_chk()' name="+item.reply_no+"  readonly>"+item.reply_content+"</textarea></td>";
-					content+="<td id='replyBtn'><button  value='"+item.reply_no+
+					content+="<td id='replyBtn'><button id='replyUpdate'  value='"+item.reply_no+
 					"' name='"+item.reply_no+"' onclick='replyUp.call(this)'>수정</button><br/><br/><button  name='"+item.reply_no+
 					"' onclick='replyDel.call(this)'  value='"+item.reply_no+"'>삭제</button><button id='replyUpdateOk'  value='"+item.reply_no+
 					"' class='"+item.reply_no+"' onclick='replyUpok.call(this)'>완료</button></td>";
@@ -435,7 +418,7 @@
 				console.log($("#reply").val());
 			}  */
 			console.log($("#replyInfo").text());
-			if($("#replyInfo"+replyUp+"").text() == "${loginId}"){
+			if($("#replyInfo"+replyUp+"").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
 				$("textarea[name='"+replyUp+"']").attr("readonly",false);
 				$("textarea[name='"+replyUp+"']").focus();
@@ -458,7 +441,7 @@
 			var updateOk = $(this).val();
 			console.log(updateOk);
 			
-			 if($("textarea[name='"+updateOk+"']").val() == ""){
+			 if($("textarea[name='"+updateOk+"']").val() == "" ){
 				alert("댓글을 입력해 주세요.");
 				$("textarea[name='"+updateOk+"']").focus();
 			}else{
@@ -485,7 +468,7 @@
 		//답글 삭제
 		function replyDel(){
 			console.log($("#replyInfo"+$(this).val()+"").text());
-			 if($("#replyInfo"+$(this).val()+"").text() == "${loginId}"){
+			 if($("#replyInfo"+$(this).val()+"").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
 				obj.url="./boardReplyDel?reply_no="+$(this).val();	
 				obj.data={

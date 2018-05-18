@@ -163,11 +163,13 @@ public class InfoService {
 		String loginId = (String) request.getSession().getAttribute("loginId");
 		//String loginDiv = (String) request.getSession().getAttribute("loginDiv");
 		
+		String start = request.getParameter("sNum");
+		String end = request.getParameter("eNum");
 		String idSearch = request.getParameter("idSearch");
 		System.out.println("service : "+idSearch);
 		
 		InfoDAO dao = new InfoDAO();
-		ArrayList<DTO> userList = dao.userList(idSearch, 1, 10);
+		ArrayList<DTO> userList = dao.userList(idSearch, Integer.parseInt(start), Integer.parseInt(end));
 		
 		Gson json = new Gson();
 		HashMap<String, Object> map = new HashMap<>();
@@ -216,8 +218,7 @@ public class InfoService {
 		DTO dto = new DTO();
 		
 		String chk = dao.pwChk(id);
-		
-		
+
 		int success = 0;
 		if(pw.equals(chk)) {
 			System.out.println("현재 비밀번호 맞음");
@@ -603,6 +604,7 @@ public class InfoService {
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
 		}
+
 
 		
 }

@@ -34,7 +34,7 @@
 			}
 			#writeBtn{
 				position: absolute;
-				left: 930px;
+				left: 1030px;
 			}
 			button{
 				background-color: #212121;
@@ -53,14 +53,7 @@
 			#include{
 				height: 60px;
 			}
-			#catetoryDiv{
-				float: left;
-				margin-left:100px;
-				width: 120px;
-				height: 50px;
-				background-color: gray;
-				display: table;
-			}
+			
 			#notice{
 				color: white;	
 				display: table-cell;
@@ -70,12 +63,8 @@
 				font-weight: 900;
 			}
 			#searchDiv{
-				float: left;
-    			margin-left: 300px;
-			}
-			#noticePage{
-				border: 1px solid black;
-				width: 800px;
+				position: absolute;
+				left: 680px;
 			}
 		</style>
 	</head>
@@ -83,11 +72,7 @@
 	<div id="include">
 	<jsp:include page="/menuBar.jsp" flush="false"/>
 	</div>
-	<div id="noticePage"><br/>
-		<div id="catetoryDiv">
-			<p id="notice"> 공지사항</p>
-		</div>
-		<br/><br/><br/>
+		<h1>공지사항</h1><br/>
 		<table id="noticeTable">
 			<tr>
 				<th id="num">번호</th>
@@ -103,7 +88,6 @@
 		<button id="writeBtn">작성하기</button><br/><br/>
 		<button id="noticeBefore">이전 목록</button>
 		<button id="noticeAfter">다음 목록</button><br/><br/>
-		</div>
 	</body>
 	<script>
 		/*java script area*/
