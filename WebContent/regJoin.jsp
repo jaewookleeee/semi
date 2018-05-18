@@ -131,11 +131,11 @@
             <span id="regNum-">-</span>
             <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num()"/>
             <b id="phone">휴대폰 번호</b>
-            <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()"/>
+            <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
-            <input id="regPhone2" type="text" onkeyup="onKeyUp_phone()"/>
+            <input id="regPhone2" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             <span id="regPhone-2">-</span>
-            <input id="regPhone3" type="text" onkeyup="onKeyUp_phone()"/>
+            <input id="regPhone3" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             
           	<span class="msg" id="id_s"></span>
             <span class="msg" id="pw_s"></span>
@@ -304,18 +304,19 @@
 			var regNumTxt2 = $("#regNum2");
 			var msg = $("#num_s");
 			
-			
 			if(regNumTxt1.val() == ""){
 				msg.html("주민등록번호 앞자리를 입력해주세요.");
+			}else if(regNumTxt1.val().length < 6){
+				msg.html("주민등록번호 앞자리를 입력해주세요.");
 			}else if(regNumTxt2.val() == ""){
+				msg.html("주민등록번호 뒷자리를 입력해주세요.");
+			}else if(regNumTxt2.val().length < 7){
 				msg.html("주민등록번호 뒷자리를 입력해주세요.");
 			}else if(regNumTxt1.val() != ""){
 				msg.html("");
 			}else if(regNumTxt2.val() != ""){
 				msg.html("");
 			}
-			
-			
 		}
 		
 		//휴대폰번호 onkeyup 이벤트
@@ -325,9 +326,15 @@
 			var regPhoneTxt3 = $("#regPhone3");
 			var msg = $("#phone_s");
 			
-			if(regPhoneTxt1.val() == ""){
+			if(regPhoneTxt1.val().length < 3){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt1.val()==""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt2.val().length < 4){
 				msg.html("휴대폰 번호를 입력하세요.");
 			}else if(regPhoneTxt2.val() == ""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt3.val().length < 4){
 				msg.html("휴대폰 번호를 입력하세요.");
 			}else if(regPhoneTxt3.val() == ""){
 				msg.html("휴대폰 번호를 입력하세요.");

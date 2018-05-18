@@ -54,15 +54,10 @@
 	            position: absolute; left: 240px; top: 448px; width: 50px; height: 25px;
 	            font-size: 10px; color: white; background-color: black; border-style: none; }
 	            
-	        span#id_s{position: absolute; left: 75px; top: 105px;}
-	        span#pw_s{position: absolute; left: 75px; top: 157px;}
-	        span#pwC_s{position: absolute; left: 75px; top: 210px;}
-	        span#name_s{position: absolute; left: 75px; top: 264px;}
-	        span#gender_s{position: absolute; left: 75px; top: 316px;}
-	        span#birth_s{position: absolute; left: 75px; top: 368px;}
-	        span#email_s{position: absolute; left: 75px; top: 422px;}
+	        span#num_s{position: absolute; left: 75px; top: 369px;}
+	        span#phone_s{position: absolute; left: 75px; top: 422px;}
 	            
-	            
+	        span.msg{font-size: 13px; color: red}    
             	
 		</style>
 	</head>
@@ -81,18 +76,21 @@
             <b id="email">이메일</b>
             <input id="regEmail" type="email" readonly/>
             <b id="num">주민등록번호</b>
-            <input id="regNum1" type="text" placeholder=""/>
+            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="6"/>
             <span id="regNum-">-</span>
-            <input id="regNum2" type="text" placeholder=""/>
+            <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="7"/>
             <b id="phone">휴대폰 번호</b>
-            <input id="regPhone1" type="text"/>
+            <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
-            <input id="regPhone2" type="text"/>
+            <input id="regPhone2" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             <span id="regPhone-2">-</span>
-            <input id="regPhone3" type="text"/>
+            <input id="regPhone3" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             
             <button id="cancel">취소</button>
             <button id="change">변경</button>
+            
+            <span class="msg" id="num_s"></span>
+            <span class="msg" id="phone_s"></span>
         </div>
 	</body>
 	<script>
@@ -119,22 +117,72 @@
 			 });
 		});
 	
+		//주민등록번호 onkeyup 이벤트
+		function onKeyUp_num() {
+			var regNumTxt1 = $("#regNum1");
+			var regNumTxt2 = $("#regNum2");
+			var msg = $("#num_s");
+			
+			if(regNumTxt1.val() == ""){
+				msg.html("주민등록번호 앞자리를 입력해주세요.");
+			}else if(regNumTxt1.val().length < 6){
+				msg.html("주민등록번호 앞자리를 입력해주세요.");
+			}else if(regNumTxt2.val() == ""){
+				msg.html("주민등록번호 뒷자리를 입력해주세요.");
+			}else if(regNumTxt2.val().length < 7){
+				msg.html("주민등록번호 뒷자리를 입력해주세요.");
+			}else if(regNumTxt1.val() != ""){
+				msg.html("");
+			}else if(regNumTxt2.val() != ""){
+				msg.html("");
+			}
+		}
+		
+		//휴대폰번호 onkeyup 이벤트
+		function onKeyUp_phone() {
+			var regPhoneTxt1 = $("#regPhone1");
+			var regPhoneTxt2 = $("#regPhone2");
+			var regPhoneTxt3 = $("#regPhone3");
+			var msg = $("#phone_s");
+			
+			if(regPhoneTxt1.val().length < 3){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt1.val()==""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt2.val().length < 4){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt2.val() == ""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt3.val().length < 4){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt3.val() == ""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt1.val() != ""){
+				msg.html("");
+			}else if(regPhoneTxt2.val() != ""){
+				msg.html("");
+			}else if(regPhoneTxt3.val() != ""){
+				msg.html("");
+			}
+		}
+		
+		
 		$("#cancel").click(function() {
 			location.href="index.jsp";
 		});
 		
 		$("#change").click(function() {
 			if($("#regNum1").val()==""){
-				alert("주민등록번호 앞자리 입력");
+				$("#num_s").html("주민등록번호 앞자리 입력");
 				$("#regNum1").focus();
 			}else if($("#regNum1").val().length < 6){
-				alert("주민등록번호 6자리 입력");
+				$("#num_s").html("주민등록번호 앞자리 입력");
 				$("#regNum1").focus();
 			}else if($("#regNum2").val()==""){
-				alert("주민등록번호 뒷자리 입력");
+				$("#num_s").html("주민등록번호 뒷자리 입력");
 				$("#regNum2").focus();
 			}else if($("#regNum2").val().length < 7){
-				alert("주민등록번호 7자리 입력");
+				$("#num_s").html("주민등록번호 뒷자리 입력");
 				$("#regNum2").focus();
 			}else if($("#regPhone1").val()==""){
 				alert("휴대폰 번호 입력");
