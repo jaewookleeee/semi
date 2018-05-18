@@ -25,7 +25,7 @@
 	        b#pwChk{ position: absolute; left: 15px; top: 183px; font-size: 13px; }
 	        input#userPwChk{
 	            position: absolute; left: 105px; top: 180px;
-	            width: 200px; height: 25px; font-size: 10px;  }
+	            width: 170px; height: 25px; font-size: 10px;  }
 	        
 	        b#name{ position: absolute; left: 15px; top: 236px; font-size: 13px;  }
 	        input#userName{ position: absolute; left: 75px; top: 233px;
@@ -151,10 +151,11 @@
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
 			
+			
+			
 			if($("#userId").val()==""){
 				//alert("아이디를 입력하세요.");
 				$("#id_s").html("아이디를 입력하세요.");
-				$("#userId").focus();
 			}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
 				//alert("아이디는 5~16자리 입력");
 				$("#id_s").html("아이디는 5~16자리 입력");
@@ -162,7 +163,6 @@
 			}else if($("#userPw").val()==""){
 				//alert("비밀번호 입력하세요.");
 				$("#pw_s").html("비밀번호를 입력하세요.");
-				$("#userPw").focus();
 			}else if($("#userPw").val().length < 8 || $("#userPw").val().length >12){
 				//alert("비밀번호 8~12자리 입력");
 				$("#pw_s").html("비밀번호 8~12자리 입력");
@@ -203,6 +203,8 @@
 				$("#id_s").html("아이디 중복확인 하세요.");
 				$("#userId").focus();
 			}else{
+				
+				
 				$.ajax({
 					type : "post",
 					url : "./userJoin",

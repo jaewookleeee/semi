@@ -8,7 +8,7 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <title>Insert title here</title>
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      
+      <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=PmNgQawFPTLSC4A8I3lT&submodules=geocoder"></script>
       <style>
          div{ background-color: white; }
             
@@ -46,17 +46,43 @@
 	        <div id="area"></div>
 		</div>
 	</body>
-	<script>		
+	<script>
+	var mainPhoto;		
 		var msg = "${msg}";
 		if(msg != "") {
 			alert(msg);
 		}
-	
 		// 하단의 img 태그를 클릭하면 메인 img 태그에 클릭한 사진이 삽입됨
 		$(".sub").click(function(){
 		    $("#main").attr("src",this.src);
 		    console.log("사진 클릭");
 		});	
+
+		$(document).ready(function(){
+	         var p_no="${place_no}";
+	         $.ajax({
+	               type:"post",
+	               url:"./placephotoDetail",
+	               dataType:"JSON",
+	               data:{
+	                  place_no:p_no
+	               },
+	               success : function(data){
+	                  //console.log(data);
+	                  $("#main").attr("src",'./upload/'+data.list[0].place_photo);
+	                  mainPhoto="./upload/"+data.list[0].place_photo;
+	                  for(var i=0;i<data.list.length;i++){
+	                  $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
+	                  }
+	                  
+	                  $("#area").load("placeDetail.jsp",{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) { /* $("#area").html(res) */});
+	               },
+	               error:function(e){
+	                  console.log(e);
+	               }
+	            });
+	          
+	      });
 	
 		// div(상세정보, QA, 이용후기)를 클릭하면,
 		// 1. 클릭한 div의 색상을 핑크로 변경하고, 나머지 div의 색상을 흰색으로 설정
