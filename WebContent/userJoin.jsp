@@ -177,7 +177,6 @@
 			var userPwTxt1 = $("#userPw");
 			var msg = $("#pw_s");
 
-			
 			if(userPwTxt1.val()==""){
 				msg.html("비밀번호 8~12자리 입력");
 			}else if(userPwTxt1.val().length < 8 || userPwTxt1.val().length >12){
