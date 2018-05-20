@@ -659,7 +659,6 @@ public class InfoService {
 					return new PasswordAuthentication(user, password);
 				}
 			});
-			
 			try {
 				MimeMessage message = new MimeMessage(session);
 				message.setFrom(new InternetAddress(user));

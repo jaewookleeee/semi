@@ -139,19 +139,19 @@
 					if(userIdTxt==""){
 						msg.html("아이디 입력을 해주세요.");
 						msg.css("color", "red");
-						$("#userId").focus();
+						//$("#userId").focus();
 					}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
 						msg.html("아이디는 5~16자리 입력");
 						msg.css("color", "red");
-						$("#userId").focus();
+						//$("#userId").focus();
 					}else if(data.result == true){
 						msg.html("중복된 아이디 입니다.");
 						msg.css("color", "red");
-						$("#userId").focus();
+						//$("#userId").focus();
 					}else{
 						msg.html("사용 가능한 아이디");
 						msg.css("color", "green");
-						$("#userPw").focus();
+						//$("#userPw").focus();
 						chk = true;
 					}
 				},
@@ -169,13 +169,13 @@
 			
 			if(userPwTxt1.val().length < 8 || userPwTxt1.val().length >12){
 				msg.html("비밀번호 8~12자리 입력");
-				userPwTxt1.focus();
+				//userPwTxt1.focus();
 			}else if(userPwTxt1.val() != userPwTxt2.val()){
 				msg.html("비밀번호가 맞지 않습니다.");
-				userPwTxt2.focus();
+				//userPwTxt2.focus();
 			}else{
 				msg.html("");
-				$("#userName").focus();
+				//$("#userName").focus();
 			}
 		}
 		
@@ -221,11 +221,11 @@
 			var msg = $("#birth_s");
 			
 			if(year.val() == "년도"){
-					msg.html("년도를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(month.val() == "월"){
-				msg.html("월를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(day.val() == "일"){
-				msg.html("일를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(year.val() != "년도"){
 				msg.html("");
 			}else if(month.val() != "월"){
@@ -243,7 +243,21 @@
 			var day = $("#userBirthDay");
 			var msg = $("#birth_s");
 			
-			if(year.val() != "년도"){
+			/* if(year.val() != "년도"){
+				msg.html("");
+			}else if(month.val() != "월"){
+				msg.html("");
+			}else if(day.val() != "일"){
+				msg.html("");
+			} */
+			
+			if(year.val() == "년도"){
+					msg.html("년도를 선택해주세요.");
+			}else if(month.val() == "월"){
+				msg.html("월를 선택해주세요.");
+			}else if(day.val() == "일"){
+				msg.html("일를 선택해주세요.");
+			}else if(year.val() != "년도"){
 				msg.html("");
 			}else if(month.val() != "월"){
 				msg.html("");

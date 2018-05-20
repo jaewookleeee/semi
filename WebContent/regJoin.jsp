@@ -249,11 +249,11 @@
 			var msg = $("#birth_s");
 			
 			if(year.val() == "년도"){
-				msg.html("년도를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(month.val() == "월"){
-				msg.html("월를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(day.val() == "일"){
-				msg.html("일를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(year.val() != "년도"){
 				msg.html("");
 			}else if(month.val() != "월"){
