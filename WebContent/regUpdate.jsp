@@ -74,13 +74,17 @@
 	            position: absolute; left: 240px; top: 607px; width: 50px; height: 25px;
 	            font-size: 10px; color: white; background-color: black; border-style: none; }
 	            
-	        span#id_s{position: absolute; left: 75px; top: 105px;}
 	        span#pw_s{position: absolute; left: 75px; top: 157px;}
-	        span#pwC_s{position: absolute; left: 75px; top: 210px;}
-	        span#name_s{position: absolute; left: 75px; top: 264px;}
-	        span#gender_s{position: absolute; left: 75px; top: 316px;}
-	        span#birth_s{position: absolute; left: 75px; top: 368px;}
-	        span#email_s{position: absolute; left: 75px; top: 422px;}
+	        span#pwC1_s{position: absolute; left: 75px; top: 210px;}
+	        span#pwC2_s{position: absolute; left: 75px; top: 264px;}
+	        span#name_s{position: absolute; left: 75px; top: 316px;}
+	        span#gender_s{position: absolute; left: 75px; top: 368px;}
+	        span#birth_s{position: absolute; left: 75px; top: 422px;}
+	        span#email_s{position: absolute; left: 75px; top: 474px;}
+	        span#num_s{position: absolute; left: 75px; top: 526px;}
+	        span#phone_s{position: absolute; left: 75px; top: 578px;}
+	        
+	        span.msg{font-size: 13px; color: red}
 		</style>
 	</head>
 	<body>
@@ -90,40 +94,39 @@
             <b id="id">아이디</b>
             <input id="regId" type="text" readonly value="${sessionScope.loginId }"/>
             <b id="pw">현재 비밀번호</b>
-            <input id="regPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input onkeyup="onKeyUp_pw()" id="regPw" type="password" placeholder="비밀번호를 입력하세요."/>
             
             <b id="newPw">새 비밀번호</b>
-            <input id="regNewPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input onkeyup="onKeyUp_pw1()" id="regNewPw" type="password" placeholder="비밀번호를 입력하세요."/>
             
             <b id="newPwChk">새 비밀번호 확인</b>
-            <input id="regNewPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input onkeyup="onKeyUp_pw2()" id="regNewPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
             
             <b id="name">이름</b>
-            <input id="regName" type="text" placeholder="이름을 입력하세요."/>
+            <input onkeyup="onKeyUp_name()" id="regName" type="text" placeholder="이름을 입력하세요."/>
             <b id="Gender">성별</b>
           	<span id="gender">
-            	<label id="lbM"><input id="man" type="radio" name="regGender" value="남"/>남자</label>
+            	<label id="lbM"><input onclick="onClick_gender()" id="man" type="radio" name="regGender" value="남"/>남자</label>
             	&nbsp;
-            	<label id="lbW"><input id="woman" type="radio" name="regGender" value="여"/>여자</label>
+            	<label id="lbW"><input onclick="onClick_gender()" id="woman" type="radio" name="regGender" value="여"/>여자</label>
             </span>
 
             <b id="birth">생년월일</b>
-            <!-- <input id="regBirth" type="date" value="2018-05-07"/> -->
-            <select name="regBirthYear" id="regBirthYear">
+            <select name="regBirthYear" id="regBirthYear" onclick="onClick_birht()" onkeyup="onKeyUp_birth()">
             	<option value="년도" selected>년도</option>
             	<%for(int i=1950; i<2019; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
             </select>
             
-            <select name="regBirthMonth" id="regBirthMonth">
+            <select name="regBirthMonth" id="regBirthMonth" onclick="onClick_birht()" onkeyup="onKeyUp_birth()">
             	<option value="월" selected>월</option>
             	<%for(int i=1; i<13; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
             </select>
             
-            <select name="regBirthDay" id="regBirthDay">
+            <select name="regBirthDay" id="regBirthDay" onclick="onClick_birht()" onkeyup="onKeyUp_birth()">
             	<option value="일" selected>일</option>
             	<%for(int i=1; i<32; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
@@ -131,50 +134,210 @@
             </select>
             
             <b id="email">이메일</b>
-            <input id="regEmail" type="email" placeholder="이메일을 입력하세요."/>
+            <input onkeyup="onKeyUp_email()" id="regEmail" type="email" placeholder="이메일을 입력하세요."/>
             <b id="num">주민등록번호</b>
-            <input id="regNum1" type="text" placeholder=""/>
+            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="6"/>
             <span id="regNum-">-</span>
-            <input id="regNum2" type="text" placeholder=""/>
+            <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="7"/>
             <b id="phone">휴대폰 번호</b>
-            <input id="regPhone1" type="text"/>
+            <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
-            <input id="regPhone2" type="text"/>
+            <input id="regPhone2" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             <span id="regPhone-2">-</span>
-            <input id="regPhone3" type="text"/>
+            <input id="regPhone3" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             
-            
-            <span class="msg" id="id_s"></span>
             <span class="msg" id="pw_s"></span>
-            <span class="msg" id="pwC_s"></span>
+            <span class="msg" id="pwC1_s"></span>
+            <span class="msg" id="pwC2_s"></span>
             <span class="msg" id="name_s"></span>
             <span class="msg" id="gender_s"></span>
             <span class="msg" id="birth_s"></span>
             <span class="msg" id="email_s"></span>
+            <span class="msg" id="num_s"></span>
+            <span class="msg" id="phone_s"></span>
             
             <button id="cancel">취소</button>
             <button id="save">수정</button>
         </div>
 	</body>
 	<script>
-		$("#man").click(function() {
-			$("#lbM").css("background", "#FA5882");
-			$("#lbW").css("background", "white");
-			
-			$("#lbM").css("color", "white");
-			$("#lbW").css("color", "black");
-		});
-		$("#woman").click(function() {
-			$("#lbW").css("background", "#FA5882");
-			$("#lbM").css("background", "white");
-			
-			$("#lbW").css("color", "white");
-			$("#lbM").css("color", "black");
-		});	
+		//현재 비밀번호 onkeyup 이벤트
+		function onKeyUp_pw(){
+			var regPw = $("#regPw");   
+			var msg = $("#pw_s");
+			if(regPw.val()==""){
+				msg.html("현재 비밀번호를 입력하세요.");
+			}else{
+				msg.html("");
+			}
+		}
 	
+		//비밀번호 onkeyup 이벤트
+		function onKeyUp_pw1(){
+			var regPwTxt1 = $("#regNewPw");
+			var msg = $("#pwC1_s");
+			if(regPwTxt1.val()==""){
+				msg.html("새 비밀번호 입력");
+			}else if(regPwTxt1.val().length < 8 || regPwTxt1.val().length >12){
+				msg.html("비밀번호 8~12자리 입력");
+			}else if(regPwTxt1.val().length >= 8 || regPwTxt1.val().length <=12){
+				msg.html("");
+			}
+		}
+		function onKeyUp_pw2(){
+			var regPwTxt1 = $("#regNewPw");
+			var regPwTxt2 = $("#regNewPwChk");
+			var msg = $("#pwC2_s");
 	
+			if(regPwTxt1.val() != regPwTxt2.val()){
+				msg.html("비밀번호가 맞지 않습니다.");
+			}else if(regPwTxt1.val() == regPwTxt2.val()){
+				msg.html("");
+			}
+		}
+		
+		//이름 onkeyup 이벤트
+		function onKeyUp_name() {
+			var regNameTxt = $("#regName").val();
+			//console.log(userNameTxt);
+			var msg = $("#name_s");
+			if(regNameTxt != ""){
+				msg.html("");
+			}else if(regNameTxt == ""){
+				msg.html("이름을 입력해주세요.");
+			}
+		}
+		
+		//성별 onclick 이벤트
+		function onClick_gender() {
+			var man = $("#man");
+			var woman = $("#woman");
+			var msg = $("#gender_s");
+			if(man.get(0).checked){
+				$("#lbM").css("background", "#FA5882");
+				$("#lbW").css("background", "white");
+				
+				$("#lbM").css("color", "white");
+				$("#lbW").css("color", "black");
+				msg.html("");	
+			}else if(woman.get(0).checked){
+				$("#lbW").css("background", "#FA5882");
+				$("#lbM").css("background", "white");
+				
+				$("#lbW").css("color", "white");
+				$("#lbM").css("color", "black");
+				msg.html("");	
+			}
+		}
+		
+		//생년월일 click 이벤트
+		function onClick_birth() {
+			var year = $("#regBirthYear");
+			var month = $("#regBirthMonth");
+			var day = $("#regBirthDay");
+			var msg = $("#birth_s");
+			
+			if(year.val() == "년도"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(month.val() == "월"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(day.val() == "일"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(year.val() != "년도"){
+				msg.html("");
+			}else if(month.val() != "월"){
+				msg.html("");
+			}else if(day.val() != "일"){
+				msg.html("");
+			}
+			
+		}
+		
+		//생년월일 onkeyup 이벤트
+		function onKeyUp_birth() {
+			var year = $("#regBirthYear");
+			var month = $("#regBirthMonth");
+			var day = $("#regBirthDay");
+			var msg = $("#birth_s");
+			
+			if(year.val() == "년도"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(month.val() == "월"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(day.val() == "일"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(year.val() != "년도"){
+				msg.html("");
+			}else if(month.val() != "월"){
+				msg.html("");
+			}else if(day.val() != "일"){
+				msg.html("");
+			}	
+		}
+		
+		//이메일 onkeyup 이벤트
+		function onKeyUp_email() {
+			var regEmailTxt = $("#regEmail");
+			var msg = $("#email_s");
+			
+			if(regEmailTxt.val() != ""){
+				msg.html("");
+			}else if(regEmailTxt.val() == ""){
+				msg.html("이메일을 입력해주세요.");
+			}
+		}
+		
+		//주민등록번호 onkeyup 이벤트
+		function onKeyUp_num() {
+			var regNumTxt1 = $("#regNum1");
+			var regNumTxt2 = $("#regNum2");
+			var msg = $("#num_s");
+			
+			if(regNumTxt1.val() == ""){
+				msg.html("주민등록번호 앞자리를 입력해주세요.");
+			}else if(regNumTxt1.val().length < 6){
+				msg.html("주민등록번호 앞자리를 입력해주세요.");
+			}else if(regNumTxt2.val() == ""){
+				msg.html("주민등록번호 뒷자리를 입력해주세요.");
+			}else if(regNumTxt2.val().length < 7){
+				msg.html("주민등록번호 뒷자리를 입력해주세요.");
+			}else if(regNumTxt1.val() != ""){
+				msg.html("");
+			}else if(regNumTxt2.val() != ""){
+				msg.html("");
+			}
+		}
+		
+		//휴대폰번호 onkeyup 이벤트
+		function onKeyUp_phone() {
+			var regPhoneTxt1 = $("#regPhone1");
+			var regPhoneTxt2 = $("#regPhone2");
+			var regPhoneTxt3 = $("#regPhone3");
+			var msg = $("#phone_s");
+			
+			if(regPhoneTxt1.val().length < 3){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt1.val()==""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt2.val().length < 4){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt2.val() == ""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt3.val().length < 4){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt3.val() == ""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt1.val() != ""){
+				msg.html("");
+			}else if(regPhoneTxt2.val() != ""){
+				msg.html("");
+			}else if(regPhoneTxt3.val() != ""){
+				msg.html("");
+			}
+		}
+
 		$("#cancel").click(function() {
-			location.href="index.jsp";
+			location.href="regDetail.jsp";
 		});
 		
 		$("#save").click(function() {
@@ -183,51 +346,67 @@
 			var pw = $("#regPw").val();
 			
 			if($("#regPw").val()==""){
-				alert("현재 비밀번호 입력");				
+				//alert("현재 비밀번호 입력");				
+				$("#pw_s").html("현재 비밀번호를 입력하세요.");
 				$("#regPw").focus();//포커스 이동
 			}else if($("#regNewPw").val()==""){
-				alert("새 비밀번호 입력");				
+				//alert("새 비밀번호 입력");		
+				$("#pwC1_s").html("새 비밀번호 입력");
 				$("#regNewPw").focus();//포커스 이동	
 			}else if($("#regNewPw").val().length < 8 || $("#regNewPw").val().length >12){
-				alert("비밀번호 8~12자리 입력");
+				//alert("비밀번호 8~12자리 입력");
+				$("#pwC1_s").html("비밀번호 8~12자리 입력");
 				$("#regNewPw").focus();//포커스 이동	
 			}else if($("#regNewPwChk").val()==""){
-				alert("새 비밀번호 재입력");
+				//alert("새 비밀번호 재입력");
+				$("#pwC2_s").html("새 비밀번호 입력");
 				$("#regNewPwChk").focus();
 			}else if($("#regNewPw").val() != $("#regNewPwChk").val()){
-				alert("비밀번호 재입력");
+				//alert("비밀번호 재입력");
+				$("#pwC2_s").html("새 비밀번호 재입력");
 				$("#regNewPwChk").focus();//포커스 이동	
 			}else if($("#regName").val()==""){
-				alert("이름을 입력");
+				//alert("이름을 입력");
+				$("#name_s").html("이름을 입력하세요.");
 				$("#regName").focus();//포커스 이동	
 			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
-				alert("성별을 선택");	
+				//alert("성별을 선택");	
+				$("#gender_s").html("성별을 선택하세요.");
 			}else if($("#regBirthYear").val()=="년도"){
-				alert("년도를 선택해주세요.");
+				//alert("년도를 선택해주세요.");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#regBirthYear").focus();
 			}else if($("#regBirthMonth").val()=="월"){
-				alert("월을 선택해주세요.");
+				//alert("월을 선택해주세요.");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#regBirthMonth").focus();
 			}else if($("#regBirthDay").val()=="일"){
-				alert("일을 선택해주세요.");
+				//alert("일을 선택해주세요.");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#regBirthDay").focus();
 			}else if($("#regEmail").val()==""){
-				alert("이메일을 입력해주세요.");
+				//alert("이메일을 입력해주세요.");
+				$("#email_s").html("이메일을 입력하세요.");
 				$("#regEmail").focus();
 			}else if($("#regNum1").val()==""){
-				alert("주민등록번호 앞자리를 입력해주세요.");
+				//alert("주민등록번호 앞자리를 입력해주세요.");
+				$("#num_s").html("주민등록번호 앞자리를 입력하세요.");
 				$("#regNum1").focus();
 			}else if($("#regNum2").val()==""){
-				alert("주민등록번호 뒷자리를 입력해주세요.");
+				//alert("주민등록번호 뒷자리를 입력해주세요.");
+				$("#num_s").html("주민등록번호 뒷자리를 입력하세요.");
 				$("#regNum2").focus();
 			}else if($("#regPhone1").val()==""){
-				alert("휴대폰 번호를 입력해주세요.");
+				//alert("휴대폰 번호를 입력해주세요.");
+				$("#phone_s").html("휴대폰 번호를 입력하세요.");
 				$("#regPhone1").focus();
 			}else if($("#regPhone2").val()==""){
-				alert("휴대폰 번호를 입력해주세요.");
+				//alert("휴대폰 번호를 입력해주세요.");
+				$("#phone_s").html("휴대폰 번호를 입력하세요.");
 				$("#regPhone2").focus();
 			}else if($("#regPhone3").val()==""){
-				alert("휴대폰 번호를 입력해주세요.");
+				//alert("휴대폰 번호를 입력해주세요.");
+				$("#phone_s").html("휴대폰 번호를 입력하세요.");
 				$("#regPhone3").focus();
 			}else {
 				$.ajax({

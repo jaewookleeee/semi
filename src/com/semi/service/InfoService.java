@@ -646,9 +646,9 @@ public class InfoService {
 			
 			//메일 전송 API
 			String host = "smtp.naver.com";
-			final String user = "jaewook-";//보내는사람 메일아이디
+			final String user = "jaewook-";//보내는사람 메일
 			final String password = "jaewook2@";//보내는사람 메일비밀번호
-			String to = email;//받는사람 메일아이디
+			String to = email;//받는사람 메일
 			
 			Properties props = new Properties();
 			props.put("mail.smtp.host", host);
@@ -661,17 +661,16 @@ public class InfoService {
 			});
 			try {
 				MimeMessage message = new MimeMessage(session);
-				message.setFrom(new InternetAddress(user));
+				message.setFrom(new InternetAddress(user, "WAKE UP PLACE"));//보내는 사람 ID 변경(ID, 변경 ID)
 				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 				
 				if(result != null) {
 					//메일제목
 					message.setSubject("WAKE UP PLACE");
 					//메일내용
-					message.setText("비밀번호 : "+result+" 입니다.");
+					message.setText(id+" 님의 비밀번호 입니다.\n"+"비밀번호 : "+result);
 					Transport.send(message);
 				}
-				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -683,7 +682,6 @@ public class InfoService {
 			String obj = json.toJson(map);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
-			
 		}
 
 

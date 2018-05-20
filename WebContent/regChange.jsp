@@ -54,7 +54,7 @@
 	            position: absolute; left: 240px; top: 448px; width: 50px; height: 25px;
 	            font-size: 10px; color: white; background-color: black; border-style: none; }
 	            
-	        span#num_s{position: absolute; left: 75px; top: 369px;}
+	        span#num_s{position: absolute; left: 75px; top: 370px;}
 	        span#phone_s{position: absolute; left: 75px; top: 422px;}
 	            
 	        span.msg{font-size: 13px; color: red}    
@@ -91,6 +91,8 @@
             
             <span class="msg" id="num_s"></span>
             <span class="msg" id="phone_s"></span>
+            
+            
         </div>
 	</body>
 	<script>
@@ -185,13 +187,16 @@
 				$("#num_s").html("주민등록번호 뒷자리 입력");
 				$("#regNum2").focus();
 			}else if($("#regPhone1").val()==""){
-				alert("휴대폰 번호 입력");
+				//alert("휴대폰 번호 입력");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone1").focus();
 			}else if($("#regPhone2").val()==""){
-				alert("휴대폰 번호 입력");
+				//alert("휴대폰 번호 입력");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone2").focus();
 			}else if($("#regPhone3").val()==""){
-				alert("휴대폰 번호 입력");
+				//alert("휴대폰 번호 입력");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone3").focus();
 			}else{
 				$.ajax({

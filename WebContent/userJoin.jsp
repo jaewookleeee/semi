@@ -72,9 +72,9 @@
             <!--<input id="idChk" type="button" value="중복 확인"/>-->
             <!-- <button id="idChk" name="idChk">중복 확인</button> -->
             <b id="pw">비밀번호</b>
-            <input id="userPw" name="userPw" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw()"/>
+            <input id="userPw" name="userPw" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw1()"/>
             <b id="pwChk">비밀번호 확인</b>
-            <input id="userPwChk" name="userPwChk" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw()"/>
+            <input id="userPwChk" name="userPwChk" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw2()"/>
             <b id="name">이&nbsp;&nbsp;&nbsp;&nbsp;름</b>
             <input id="userName" name="userName" type="text" placeholder="이름을 입력하세요." onkeyup="onKeyUp_name()"/>
             <b id="Gender">성&nbsp;&nbsp;&nbsp;&nbsp;별</b>
@@ -128,30 +128,26 @@
 		function onKeyUp_idChk() {
 			var userIdTxt = $("#userId").val();
 			var msg = $("#id_s");
-			//console.log($("#id_s").html(userIdTxt));
+			
+			var idReg = /^[A-Za-z0-9+]{5,16}$/;
 			$.ajax({
 				type : "post",
 				url : "./overlay",
 				data : { id : userIdTxt },
 				dataType : "json",
 				success : function(data) {
-					console.log(data);
 					if(userIdTxt==""){
 						msg.html("아이디 입력을 해주세요.");
 						msg.css("color", "red");
-						//$("#userId").focus();
-					}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
-						msg.html("아이디는 5~16자리 입력");
+					}else if(!idReg.test(userIdTxt)){
+						msg.html("5~16자리 영문과 숫자만 가능");
 						msg.css("color", "red");
-						//$("#userId").focus();
 					}else if(data.result == true){
 						msg.html("중복된 아이디 입니다.");
 						msg.css("color", "red");
-						//$("#userId").focus();
 					}else{
 						msg.html("사용 가능한 아이디");
 						msg.css("color", "green");
-						//$("#userPw").focus();
 						chk = true;
 					}
 				},
@@ -162,22 +158,45 @@
 		}
 		
 		//비밀번호 onkeyup 이벤트
-		function onKeyUp_pw(){
+		/* function onKeyUp_pw(){
 			var userPwTxt1 = $("#userPw");
 			var userPwTxt2 = $("#userPwChk");
 			var msg = $("#pw_s");
 			
 			if(userPwTxt1.val().length < 8 || userPwTxt1.val().length >12){
 				msg.html("비밀번호 8~12자리 입력");
-				//userPwTxt1.focus();
 			}else if(userPwTxt1.val() != userPwTxt2.val()){
 				msg.html("비밀번호가 맞지 않습니다.");
-				//userPwTxt2.focus();
 			}else{
 				msg.html("");
-				//$("#userName").focus();
+			}
+		} */
+		
+		//비밀번호 onkeyup 이벤트
+		function onKeyUp_pw1(){
+			var userPwTxt1 = $("#userPw");
+			var msg = $("#pw_s");
+
+			
+			if(userPwTxt1.val()==""){
+				msg.html("비밀번호 8~12자리 입력");
+			}else if(userPwTxt1.val().length < 8 || userPwTxt1.val().length >12){
+				msg.html("비밀번호 8~12자리 입력");
+			}else if(userPwTxt1.val().length >= 8 || userPwTxt1.val().length <=12){
+				msg.html("");
 			}
 		}
+ 		function onKeyUp_pw2(){
+ 			var userPwTxt1 = $("#userPw");
+			var userPwTxt2 = $("#userPwChk");
+			var msg = $("#pwC_s");
+
+			if(userPwTxt1.val() != userPwTxt2.val()){
+				msg.html("비밀번호가 맞지 않습니다.");
+			}else if(userPwTxt1.val() == userPwTxt2.val()){
+				msg.html("");
+			} 
+		} 
 		
 		//이름 onkeyup 이벤트
 		function onKeyUp_name() {
@@ -196,6 +215,8 @@
 			var man = $("#man");
 			var woman = $("#woman");
 			var msg = $("#gender_s");
+			
+			
 			if(man.get(0).checked){
 				$("#lbM").css("background", "#FA5882");
 				$("#lbW").css("background", "white");
@@ -242,21 +263,13 @@
 			var month = $("#userBirthMonth");
 			var day = $("#userBirthDay");
 			var msg = $("#birth_s");
-			
-			/* if(year.val() != "년도"){
-				msg.html("");
-			}else if(month.val() != "월"){
-				msg.html("");
-			}else if(day.val() != "일"){
-				msg.html("");
-			} */
-			
+
 			if(year.val() == "년도"){
-					msg.html("년도를 선택해주세요.");
+					msg.html("생년월일을 선택해주세요.");
 			}else if(month.val() == "월"){
-				msg.html("월를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(day.val() == "일"){
-				msg.html("일를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(year.val() != "년도"){
 				msg.html("");
 			}else if(month.val() != "월"){
@@ -278,44 +291,30 @@
 			}
 		}
 		
-		//성별
-		/* $("#man").click(function() {
-			$("#lbM").css("background", "#FA5882");
-			$("#lbW").css("background", "white");
-			
-			$("#lbM").css("color", "white");
-			$("#lbW").css("color", "black");
-		});
-		$("#woman").click(function() {
-			$("#lbW").css("background", "#FA5882");
-			$("#lbM").css("background", "white");
-			
-			$("#lbW").css("color", "white");
-			$("#lbM").css("color", "black");
-		});
-	
-		$("#cancel").click(function() {
-			location.href="login.jsp";
-		}); */
-	
-		var chk = false;//아이디 중복값 체크
 
+		var chk = false;//아이디 중복값 체크
+		//취소
 		$("#cancel").click(function() {
 			location.href="index.jsp";
 		});
 		
 		//회원가입
 		$("#join").click(function() {
+			var userIdTxt = $("#userId").val();
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
 			
+			var idReg = /^[A-Za-z0-9+]{5,16}$/;
+			
 			if($("#userId").val()==""){
 				$("#id_s").html("아이디를 입력하세요.");
-			}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
-				$("#id_s").html("아이디는 5~16자리 입력");
+				$("#userId").focus();
+			}else if(!idReg.test(userIdTxt)){
+				$("#id_s").html("5~16자리 영문과 숫자만 가능");
 				$("#userId").focus();
 			}else if(userPw==""){
 				$("#pw_s").html("비밀번호를 입력하세요.");
+				$("#userPw").focus();
 			}else if($("#userPw").val().length < 8 || $("#userPw").val().length >12){
 				$("#pw_s").html("비밀번호 8~12자리 입력");
 				$("#userPw").focus();
@@ -326,21 +325,21 @@
 				$("#pwC_s").html("비밀번호를 재입력하세요.");
 				$("#userPwChk").focus();
 			}else if($("#userName").val()==""){
-				$("#name_s").html("이름을 입력해주세요.");
+				$("#name_s").html("이름을 입력하세요.");
 				$("#userName").focus();
 			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
-				$("#gender_s").html("성별을 선택해주세요.");
+				$("#gender_s").html("성별을 선택하세요.");
 			}else if($("#userBirthYear").val()=="년도"){
-				$("#birth_s").html("년도를 선택해주세요");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#userBirthYear").focus();
 			}else if($("#userBirthMonth").val()=="월"){
-				$("#birth_s").html("월을 선택해주세요");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#userBirthMonth").focus();
 			}else if($("#userBirthDay").val()=="일"){
-				$("#birth_s").html("일을 선택해주세요");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#userBirthDay").focus();
 			}else if($("#userEmail").val()==""){
-				$("#email_s").html("이메일을 입력해주세요");
+				$("#email_s").html("이메일을 입력하세요.");
 				$("#userEmail").focus();
 			}else if(chk==false){
 				$("#id_s").html("아이디 중복확인 하세요.");

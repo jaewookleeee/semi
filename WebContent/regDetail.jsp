@@ -7,10 +7,9 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style> 
-	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 410px; height: 600px; left: 40%;
+	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 600px; left: 40%;
 				top: 100px; text-align: center; }
-	        span#regTxt{ position: absolute; left: 130px;
-	            top: 10px; font-size: 20px; }
+	        span#regTxt{ position: absolute; left: 115px;  top: 10px; font-size: 20px; }
 
 	        b#id{ position: absolute; left: 15px; top: 77px; font-size: 13px; }
 	        input#regId{ position: absolute; left: 75px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
@@ -22,10 +21,10 @@
  				width: 200px; height: 25px; font-size: 10px;     } 
 	        
 	        b#Gender{ position: absolute; left: 15px; top: 181px; font-size: 13px; }  
-	        input#regGender{ position: absolute; left: 75px; top: 178px; width: 200px;}
+	        input#regGender{ position: absolute; left: 75px; top: 178px; width: 200px; height: 25px; font-size: 10px;     }
 	        
 	        b#birth{ position: absolute; left: 15px; top: 234px; font-size: 13px; }
-	        input#regBirth{ position: absolute; left: 75px; top:231px; width: 200px;}
+	        input#regBirth{ position: absolute; left: 75px; top:231px; width: 200px; height: 25px; font-size: 10px;     }
 	        
 	        b#email{ position: absolute; left: 15px; top: 287px; font-size: 13px; }
 	        input#regEmail{ position: absolute; left: 75px; top: 284px;
@@ -44,9 +43,9 @@
 
 			button#del{ position: absolute; left: 15px; top: 446px; width: 60px; height: 25px;    
 	            color: white; background-color: black; border-style: none; font-size: 10px; }
-	        button#cancel{ position: absolute; left: 180px; top: 446px; width: 50px; height: 25px;    
+	        button#cancel{ position: absolute; left: 165px; top: 446px; width: 50px; height: 25px;    
 	            color: white; background-color: black; border-style: none; font-size: 10px; }
-	        button#update{ position: absolute; left: 240px; top: 446px; width: 50px; height: 25px;
+	        button#update{ position: absolute; left: 225px; top: 446px; width: 50px; height: 25px;
 	            font-size: 10px; color: white; background-color: black; border-style: none; }
             
 		</style>
