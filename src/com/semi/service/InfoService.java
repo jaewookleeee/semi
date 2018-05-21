@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.MidiDevice.Info;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -71,7 +72,7 @@ public class InfoService {
 		
 		Date date = Date.valueOf(birth);
 		System.out.println(id+", "+pw+", "+name+", "+gender+", "+email+", "+date);
-		
+
 		dto.setInfo_id(id);
 		dto.setInfo_pw(pw);
 		dto.setInfo_name(name);
@@ -79,10 +80,11 @@ public class InfoService {
 		dto.setInfo_birth(date);   
 		dto.setInfo_email(email);
 		dto.setInfo_div("사용자");
+			
 		int success = dao.userJoin(dto);
-		
+
 		Gson json = new Gson();
-		HashMap<String, Integer> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("success", success);
 		
 		String obj = json.toJson(map);
@@ -96,6 +98,7 @@ public class InfoService {
 	public void regJoin(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 		InfoDAO dao = new InfoDAO();
+		InfoDAO dao3 = new InfoDAO();
 		DTO dto = new DTO();
 		
 		String id = request.getParameter("id");
@@ -119,23 +122,26 @@ public class InfoService {
 
 		Date date = Date.valueOf(birth);
 		System.out.println(id+", "+pw+", "+name+", "+gender+", "+email+", "+date+", "+num+", "+phone);
-		
-		dto.setInfo_id(id);
-		dto.setInfo_pw(pw);
-		dto.setInfo_name(name);
-		dto.setInfo_gender(gender);
-		dto.setInfo_birth(date);
-		dto.setInfo_email(email);
-		dto.setInfo_div("등록자");
-		dto.setInfo_num(num);
-		dto.setInfo_phone(phone);
-		
-		int success = dao.regJoin(dto);
+		boolean resultNum = dao3.numOverlay(num);
+		int success = 0;
+		if(resultNum ==false) {
+			dto.setInfo_id(id);
+			dto.setInfo_pw(pw);
+			dto.setInfo_name(name);
+			dto.setInfo_gender(gender);
+			dto.setInfo_birth(date);
+			dto.setInfo_email(email);
+			dto.setInfo_div("등록자");
+			dto.setInfo_num(num);
+			dto.setInfo_phone(phone);
+			
+			success = dao.regJoin(dto);
+		}
 		
 		Gson json = new Gson();
-		HashMap<String, Integer> map = new HashMap<>();
+		HashMap<String, Object> map = new HashMap<>();
 		map.put("success", success);
-		
+		map.put("result2", resultNum);
 		String obj = json.toJson(map);
 		System.out.println(obj);
 		
@@ -166,6 +172,26 @@ public class InfoService {
 		System.out.println(obj);
 		response.getWriter().println(obj);
 	}
+	
+	//주민등록번호 중복체크
+	public void numOverlay(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String num1 = request.getParameter("num1");
+		String num2 = request.getParameter("num2");
+		String num = num1+num2;
+		System.out.println(num);
+		
+		InfoDAO dao = new InfoDAO();
+		boolean result = dao.numOverlay(num);
+		
+		Gson json = new Gson();
+		HashMap<String, Boolean> map = new HashMap<>();
+		map.put("result", result);
+		String obj = json.toJson(map);
+		System.out.println(obj);
+		response.getWriter().println(obj);
+	}
+	
+
 
 	//회원 리스트, 검색 출력
 	public void userList(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -254,12 +280,6 @@ public class InfoService {
 			map.put("login",false);
 		}
 		
-		/*if(loginId != null && loginDiv.equals("등록자")) {
-			map.put("login",true);
-			System.out.println(loginId+", "+loginDiv);
-		}else {
-			map.put("login",false);
-		}*/
 		
 		map.put("success", success);
 		
@@ -403,6 +423,7 @@ public class InfoService {
 			String loginId = (String) request.getSession().getAttribute("loginId");
 			
 			InfoDAO dao = new InfoDAO();
+			InfoDAO dao2 = new InfoDAO();
 			DTO dto = new DTO();
 
 			String num1 = request.getParameter("num1");
@@ -415,13 +436,14 @@ public class InfoService {
 			String phone = phone1+phone2+phone3;
 			
 			System.out.println(num+phone);
-			
-			dto.setInfo_div("등록자");
-			dto.setInfo_num(num);
-			dto.setInfo_phone(phone);
-			
-			int success = dao.regChange(dto, loginId);
-			
+			boolean result = dao2.numOverlay(num);
+			int success = 0;
+			if(result == false) {
+				dto.setInfo_div("등록자");
+				dto.setInfo_num(num);
+				dto.setInfo_phone(phone);
+				success = dao.regChange(dto, loginId);
+			}
 			Gson json = new Gson();
 			HashMap<String, Object> map = new HashMap<>();
 					
@@ -431,6 +453,7 @@ public class InfoService {
 				map.put("loginId", loginId);
 				map.put("loginDiv", dto.getInfo_div());
 				map.put("success", success);
+				map.put("result", result);
 			}
 			
 			String obj = json.toJson(map);
@@ -683,6 +706,10 @@ public class InfoService {
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
 		}
+
+	
+
+		
 
 
 		

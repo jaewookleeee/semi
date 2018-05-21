@@ -108,6 +108,39 @@
 			});
 		});
 		
+		//검색 onkeypress 이벤트
+		$("#search").keydown(function (key) {
+			if(key.keyCode==13){
+				$.ajax({
+					type : "post",
+					url : "./userList",
+					data : {
+						idSearch : $("#search").val(),
+	    				sNum : sNum,
+	    				eNum : eNum
+					},
+					dataType : "json",
+					success : function(data) {
+						$("#userListTable").empty();
+						$("#userListTable").append("<tr><th id='th_sel'>선택</th><th id='th_id'>아이디</th><th id='th_name'>이름</th><th id='th_gender'>성별</th><th id='th_email'>이메일</th><th id='th_div'>구분</th></tr>");
+						for(var i=0; i<data.userList.length; i++){
+							$("#userListTable").append("<tr>"+
+								"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
+								"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
+								"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
+								"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
+								"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
+								"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
+								"</tr>");
+						}
+					},
+					error : function(error) {
+						console.log(error);
+					}
+				});
+			}
+		});
+		
 		//회원 검색
 		$("#searchBtn").click(function() {
 			$.ajax({
@@ -120,8 +153,6 @@
 				},
 				dataType : "json",
 				success : function(data) {
-					console.log(data);
-					
 					$("#userListTable").empty();
 					$("#userListTable").append("<tr><th id='th_sel'>선택</th><th id='th_id'>아이디</th><th id='th_name'>이름</th><th id='th_gender'>성별</th><th id='th_email'>이메일</th><th id='th_div'>구분</th></tr>");
 					
@@ -145,6 +176,7 @@
 		//회원삭제
 		$("#userDel").click(function() {
 			var checked = [];
+			var con = confirm("삭제하시겠습니까?");
 			$("input[type='checkbox']:checked").each(function() {
 				checked.push($(this).val())
 			});
@@ -180,7 +212,6 @@
 				},
 				dataType : "json",
 				success : function(data) {
-					console.log(data);
 					if(data.userList.length == 0){ //list로 넘어온값이 크기가 0이면
     					alert("첫번째 목록입니다.") //alert을 띄우고
     					//초기값으로 되돌린다.
@@ -220,7 +251,6 @@
 				},
 				dataType : "json",
 				success : function(data) {
-					console.log(data);
 					if(data.userList.length == 0){ //list로 넘어온값이 크기가 0이면
     					alert("마지막 목록입니다.") //alert을 띄우고
     					//초기값으로 되돌린다.
