@@ -35,8 +35,7 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dual(request, response);
 	}
-	private void dual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	private void dual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String uri = request.getRequestURI();
 		String context = request.getContextPath();
 		String subAddr = uri.substring(context.length());

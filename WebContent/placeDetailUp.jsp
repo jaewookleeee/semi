@@ -137,7 +137,6 @@
 		    	$("#qa").css("background-color","white");
 				$("#qa").css("color","black");
 			}			
-			console.log("페이지 로드 116 줄!!!!");
 			$("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {/*  $("#area").html(res) */ });
 		});
    </script>
