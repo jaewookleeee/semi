@@ -119,6 +119,9 @@
 			obj.success = function(data){
 				//console.log(data);
 					listPrint(data.list);
+					if(loginId != "ADMIN"){
+						$("#writeBtn").css("display","none");
+					}
 			}
 			ajaxCall(obj);
 		});
