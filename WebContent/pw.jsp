@@ -61,9 +61,9 @@
 				dataType : "json",
 				success : function (data) {
 					if(data.result !=null){
-						$("#result").html("pw : "+data.result);	
+						$("#result").html("이메일 전송 성공");	
 					}else{
-						$("#result").html("찾을 수 없음");
+						$("#result").html("이메일 전송 실패");
 					}
 				},
 				error : function (error) {

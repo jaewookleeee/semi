@@ -101,6 +101,7 @@ public class PlaceService {
 	         String page = "placeWrite.jsp";
 	 		if(success>0) {
 	 			request.setAttribute("place_no", success);
+	 			request.setAttribute("page", "placeDetail.jsp");
 	 			page = "placeDetailUp.jsp";
 	 		}
 	 		RequestDispatcher dis = request.getRequestDispatcher(page);
@@ -175,8 +176,6 @@ public class PlaceService {
 		File dir = new File(savePath);
 
 		//MultipartRequest multi = new MultipartRequest(request, savePath, 1024 * 1024 * 10, "UTF-8");		
-		
-		
 		
 		if(id == null || !(loginDiv.equals("등록자"))) {//loginId의 값이 null 이라면(비로그인 상태라면) 혹은 등록자가 아니라면
 			Gson json = new Gson(); //json을 준비

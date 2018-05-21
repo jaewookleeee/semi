@@ -150,5 +150,31 @@
 				}
 			});
 		});
+		
+		$("#userPw").keydown(function (key) {
+			if(key.keyCode==13){
+				$.ajax({
+					type : "post",
+					url : "./login",
+					data : {
+						id : $("#userId").val(),
+						pw : $("#userPw").val()
+					},
+					dataType : "json",
+					success : function (data) {
+						console.log(data);
+						if(data.result == true){
+							alert("로그인 성공");
+							location.href="index.jsp";
+						}else{
+							$("#logChkTxt").html("아이디 또는 비밀번호를 확인하세요.");
+						}
+					},
+					error : function (error) {
+						console.log(error);
+					}
+				});
+			}
+		})
 	</script>
 </html>

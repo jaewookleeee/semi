@@ -7,15 +7,13 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
-	     	div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 410px; height: 600px; left: 40%;
+	     	div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 600px; left: 40%;
 				top: 100px; text-align: center; }
-	        span#regTxt{ position: absolute; left: 130px;
+	        span#regTxt{ position: absolute; left: 80px;
 	            top: 10px; font-size: 20px; }
 
 	        b#id{ position: absolute; left: 15px; top: 77px; font-size: 13px; }
 	        input#regId{ position: absolute; left: 75px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
-	        button#idChk{ position: absolute; left: 280px; top: 75px; width: 69px;
-	            height: 25px; color: white; background-color: black; border-style: none; font-size: 10px; }
 	        
 	        
 	        b#pw{ position: absolute; left: 15px; top: 130px; font-size: 13px; }
@@ -89,12 +87,10 @@
             <span id="regTxt"><b>등록자 회원가입</b></span>
             <b id="id">아이디</b>
             <input id="regId" type="text" placeholder=" 아이디를 입력하세요." onkeyup="onKeyUp_idChk()"/>
-            <!--<input id="idChk" type="button" value="중복 확인"/>-->
-            <button id="idChk">중복 확인</button>
             <b id="pw">비밀번호</b>
-            <input id="regPw" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw()"/>
+            <input id="regPw" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw1()"/>
             <b id="pwChk">비밀번호 확인</b>
-            <input id="regPwChk" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw()"/>
+            <input id="regPwChk" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw2()"/>
             <b id="name">이름</b>
             <input id="regName" type="text" placeholder="이름을 입력하세요." onkeyup="onKeyUp_name()"/>
             <b id="Gender">성별</b>
@@ -131,11 +127,11 @@
             <span id="regNum-">-</span>
             <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num()"/>
             <b id="phone">휴대폰 번호</b>
-            <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()"/>
+            <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
-            <input id="regPhone2" type="text" onkeyup="onKeyUp_phone()"/>
+            <input id="regPhone2" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             <span id="regPhone-2">-</span>
-            <input id="regPhone3" type="text" onkeyup="onKeyUp_phone()"/>
+            <input id="regPhone3" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             
           	<span class="msg" id="id_s"></span>
             <span class="msg" id="pw_s"></span>
@@ -155,31 +151,33 @@
 	<script>
 		//아이디 중복 확인 onkeyup 이벤트
 		function onKeyUp_idChk() {
-			var regIdTxt = $("#regId");
+			var regIdTxt = $("#regId").val();
 			var msg = $("#id_s");
+			
+			var idReg = /^[A-Za-z0-9+]{5,16}$/;
+			
 			$.ajax({
 				type : "post",
 				url : "./overlay",
-				data : { id : regIdTxt.val() },
+				data : { id : regIdTxt },
 				dataType : "json",
 				success : function(data) {
 					console.log(data);
-					if(regIdTxt.val()==""){
+					if(regIdTxt==""){
 						msg.html("아이디 입력을 해주세요.");
 						msg.css("color", "red");
-						$("#regId").focus();
-					}else if(regIdTxt.val().length < 5 || regIdTxt.val().length > 16){
-						msg.html("아이디는 5~16자리 입력");
+						//$("#regId").focus();
+					}else if(!idReg.test(regIdTxt)){
+						msg.html("5~16자리 영문과 숫자만 가능");
 						msg.css("color", "red");
-						$("#userId").focus();
 					}else if(data.result == true){
 						msg.html("중복된 아이디 입니다.");
 						msg.css("color", "red");
-						$("#regId").focus();
+						//$("#regId").focus();
 					}else{
 						msg.html("사용 가능한 아이디");
 						msg.css("color", "green");
-						$("#regPw").focus();
+						//$("#regPw").focus();
 						chk = true;
 					}
 				},
@@ -189,7 +187,7 @@
 			});
 		}
 		
-		//비밀번호 onkeyup 이벤트
+/* 		//비밀번호 onkeyup 이벤트
 		function onKeyUp_pw(){
 			var regPwTxt1 = $("#regPw");
 			var regPwTxt2 = $("#regPwChk");
@@ -197,13 +195,37 @@
 			
 			if(regPwTxt1.val().length < 8 || regPwTxt1.val().length >12){
 				msg.html("비밀번호 8~12자리 입력");
-				regPwTxt1.focus();
+				//regPwTxt1.focus();
 			}else if(regPwTxt1.val() != regPwTxt2.val()){
 				msg.html("비밀번호가 맞지 않습니다.");
-				regPwTxt2.focus();
+				//regPwTxt2.focus();
 			}else{
 				msg.html("");
-				$("#regName").focus();
+				//$("#regName").focus();
+			}
+		} */
+		
+		//비밀번호 onkeyup 이벤트
+		function onKeyUp_pw1(){
+			var regPwTxt1 = $("#regPw");
+			var msg = $("#pw_s");
+			if(regPwTxt1.val()==""){
+				msg.html("새 비밀번호 입력");
+			}else if(regPwTxt1.val().length < 8 || regPwTxt1.val().length >12){
+				msg.html("비밀번호 8~12자리 입력");
+			}else if(regPwTxt1.val().length >= 8 || regPwTxt1.val().length <=12){
+				msg.html("");
+			}
+		}
+		function onKeyUp_pw2(){
+			var regPwTxt1 = $("#regPw");
+			var regPwTxt2 = $("#regPwChk");
+			var msg = $("#pwC_s");
+	
+			if(regPwTxt1.val() != regPwTxt2.val()){
+				msg.html("비밀번호가 맞지 않습니다.");
+			}else if(regPwTxt1.val() == regPwTxt2.val()){
+				msg.html("");
 			}
 		}
 		
@@ -249,11 +271,11 @@
 			var msg = $("#birth_s");
 			
 			if(year.val() == "년도"){
-				msg.html("년도를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(month.val() == "월"){
-				msg.html("월를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(day.val() == "일"){
-				msg.html("일를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(year.val() != "년도"){
 				msg.html("");
 			}else if(month.val() != "월"){
@@ -272,11 +294,11 @@
 			var msg = $("#birth_s");
 			
 			if(year.val() == "년도"){
-				msg.html("년도를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(month.val() == "월"){
-				msg.html("월를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(day.val() == "일"){
-				msg.html("일를 선택해주세요.");
+				msg.html("생년월일을 선택해주세요.");
 			}else if(year.val() != "년도"){
 				msg.html("");
 			}else if(month.val() != "월"){
@@ -304,18 +326,19 @@
 			var regNumTxt2 = $("#regNum2");
 			var msg = $("#num_s");
 			
-			
 			if(regNumTxt1.val() == ""){
 				msg.html("주민등록번호 앞자리를 입력해주세요.");
+			}else if(regNumTxt1.val().length < 6){
+				msg.html("주민등록번호 앞자리를 입력해주세요.");
 			}else if(regNumTxt2.val() == ""){
+				msg.html("주민등록번호 뒷자리를 입력해주세요.");
+			}else if(regNumTxt2.val().length < 7){
 				msg.html("주민등록번호 뒷자리를 입력해주세요.");
 			}else if(regNumTxt1.val() != ""){
 				msg.html("");
 			}else if(regNumTxt2.val() != ""){
 				msg.html("");
 			}
-			
-			
 		}
 		
 		//휴대폰번호 onkeyup 이벤트
@@ -325,9 +348,15 @@
 			var regPhoneTxt3 = $("#regPhone3");
 			var msg = $("#phone_s");
 			
-			if(regPhoneTxt1.val() == ""){
+			if(regPhoneTxt1.val().length < 3){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt1.val()==""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt2.val().length < 4){
 				msg.html("휴대폰 번호를 입력하세요.");
 			}else if(regPhoneTxt2.val() == ""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt3.val().length < 4){
 				msg.html("휴대폰 번호를 입력하세요.");
 			}else if(regPhoneTxt3.val() == ""){
 				msg.html("휴대폰 번호를 입력하세요.");
@@ -340,22 +369,7 @@
 			}
 		}
 		
-/* 		//성별
-		$("#man").click(function() {
-			$("#lbM").css("background", "#FA5882");
-			$("#lbW").css("background", "white");
-			
-			$("#lbM").css("color", "white");
-			$("#lbW").css("color", "black");
-		});
-		$("#woman").click(function() {
-			$("#lbW").css("background", "#FA5882");
-			$("#lbM").css("background", "white");
-			
-			$("#lbW").css("color", "white");
-			$("#lbM").css("color", "black");
-		}); */
-		
+
 		//취소버튼
 		$("#cancel").click(function() {
 			location.href="login.jsp";
@@ -364,79 +378,64 @@
 		var chk = false;//아이디 중복값 체크
 		//완료버튼(회원가입)
 		$("#join").click(function() {
-			console.log($("#regPw").val().length);
+			var regIdTxt = $("#regId").val();
 			var regPw = $("#regPw").val();
 			var regPwChk = $("#regPwChk").val();
+			
+			var idReg = /^[A-Za-z0-9+]{5,16}$/;
 				
 			if($("#regId").val()==""){
-				//alert("아이디를 입력하세요.");
 				$("#id_s").html("아이디를 입력하세요.");
 				$("#regId").focus();
-			}else if($("#regId").val().length < 5 || $("#regId").val().length > 16){
-				//alert("아이디는 8~16자리 입력");
-				$("#id_s").html("아이디는 5~16자리 입력");
+			}else if(!idReg.test(regIdTxt)){
+				$("#id_s").html("5~16자리 영문과 숫자만 가능");
 				$("#regId").focus();
-			}else if($("#regPw").val()==""){
-				//alert("비밀번호 입력하세요.");				
+			}else if($("#regPw").val()==""){		
 				$("#pw_s").html("비밀번호를 입력하세요.");
 				$("#regPw").focus();//포커스 이동
 			}else if($("#regPw").val().length < 8 || $("#regPw").val().length >12){
-				//alert("비밀번호 8~12자리 입력");
 				$("#pw_s").html("비밀번호 8~12자리 입력");
 				$("#regPw").focus();
-			}else if($("#regPwChk").val()==""){
-				//alert("비밀번호 확인 해주세요");				
+			}else if($("#regPwChk").val()==""){				
 				$("#pwC_s").html("비밀번호를 입력하세요.");
 				$("#regPwChk").focus();//포커스 이동	
 			}else if(regPw != regPwChk){
-				//alert("비밀번호 재입력");
 				$("#pwC_s").html("비밀번호를 재입력하세요.");
 				$("#regPwChk").focus();//포커스 이동	
 			} else if($("#regName").val()==""){
-				//alert("이름을 입력해주세요.");
 				$("#name_s").html("이름을 입력해주세요.");
 				$("#regName").focus();//포커스 이동	
 			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
-				//alert("성별을 선택해주세요.");	
 				$("#gender_s").html("성별을 선택해주세요.");
 			}else if($("#regBirthYear").val()=="년도"){
-				//alert("년도를 선택해주세요.");
 				$("#birth_s").html("년도를 선택해주세요");
 				$("#regBirthYear").focus();
 			}else if($("#regBirthMonth").val()=="월"){
-				//alert("월을 선택해주세요.");
 				$("#birth_s").html("월을 선택해주세요");
 				$("#regBirthMonth").focus();
 			}else if($("#regBirthDay").val()=="일"){
-				//alert("일을 선택해주세요.");
 				$("#birth_s").html("일을 선택해주세요");
 				$("#regBirthDay").focus();
 			}else if($("#regEmail").val()==""){
-				//alert("이메일을 입력해주세요.");
 				$("#email_s").html("이메일을 입력해주세요");
 				$("#regEmail").focus();
 			}else if($("#regNum1").val()==""){
-				//alert("주민등록번호 앞자리를 입력해주세요.");
 				$("#num_s").html("주민등록번호 앞자리를 입력해주세요.");
 				$("#regNum1").focus();
 			}else if($("#regNum2").val()==""){
-				//alert("주민등록번호 뒷자리를 입력해주세요.");
 				$("#num_s").html("주민등록번호 뒷자리를 입력해주세요.");
 				$("#regNum2").focus();
 			}else if($("#regPhone1").val()==""){
-				//alert("휴대폰 번호를 입력해주세요.");
 				$("#phone_s").html("휴대폰 번호를 입력해주세요.");
 				$("#regPhone1").focus();
 			}else if($("#regPhone2").val()==""){
-				//alert("휴대폰 번호를 입력해주세요.");
 				$("#phone_s").html("휴대폰 번호를 입력해주세요.");
 				$("#regPhone2").focus();
 			}else if($("#regPhone3").val()==""){
-				//alert("휴대폰 번호를 입력해주세요.");
 				$("#phone_s").html("휴대폰 번호를 입력해주세요.");
 				$("#regPhone3").focus();
 			}else if(chk==false){
-				//alert("아이디 중복확인 하세요.");
+				$("id_s").html("아이디 중복확인 하세요.");
 				$("#regId").focus();
 			}else{
 				$.ajax({
