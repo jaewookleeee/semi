@@ -176,7 +176,6 @@
 		//회원삭제
 		$("#userDel").click(function() {
 			var checked = [];
-			var con = confirm("삭제하시겠습니까?");
 			$("input[type='checkbox']:checked").each(function() {
 				checked.push($(this).val())
 			});
