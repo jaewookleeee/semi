@@ -58,7 +58,7 @@
 		    console.log("사진 클릭");
 		});	
 
-		$(document).ready(function(){
+		/* $(document).ready(function(){
 	         var p_no="${place_no}";
 	         $.ajax({
 	               type:"post",
@@ -75,14 +75,14 @@
 	                  $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
 	                  }
 	                  
-	                  $("#area").load("placeDetail.jsp",{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) { /* $("#area").html(res) */});
+	                  $("#area").load("placeDetail.jsp",{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {  $("#area").html(res) });
 	               },
 	               error:function(e){
 	                  console.log(e);
 	               }
 	            });
 	          
-	      });
+	      }); */
 	
 		// div(상세정보, QA, 이용후기)를 클릭하면,
 		// 1. 클릭한 div의 색상을 핑크로 변경하고, 나머지 div의 색상을 흰색으로 설정
@@ -113,7 +113,7 @@
 		    	$("#qa").css("background-color","white");
 				$("#qa").css("color","black");
 			}			
-			$("#area").load(page,{place_no:p_no},function(res, stat) { $("#area").html(res) });
+			$("#area").load(page,{place_no:p_no},function(res, stat) { /*$("#area").html(res)*/ });
 		});
 
       $(document).ready(function(){
@@ -136,7 +136,7 @@
                   console.log(e);
                }
          });
-         $("#area").load(page,{place_no:p_no},function(res, stat) { $("#area").html(res) });
+         $("#area").load(page,{place_no:p_no},function(res, stat) { /* $("#area").html(res) */ });
          
          if(page == "qa.jsp") {
              $("#qa").css("background-color","#FF376C");
