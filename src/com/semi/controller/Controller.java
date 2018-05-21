@@ -47,7 +47,6 @@ public class Controller extends HttpServlet {
 		BookService bookService = null;
 		QaService qaService = null;
 		ReviewService reviewService = null;
-		
 		switch (subAddr) {
 			case "/id":
 				System.out.println("아이디 찾기 요청");
