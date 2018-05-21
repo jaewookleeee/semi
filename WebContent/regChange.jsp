@@ -7,44 +7,57 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
-        	div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 310px;
-            	height: 550px; left: 40%; top: 100px; text-align: center; }
-            span#regTxt{ position: absolute; left: 95px; top: 10px; font-size: 20px; }
-	        b#id{ position: absolute; left: 15px; top: 50px; font-size: 13px; }
-	        b#name{ position: absolute; left: 15px; top: 110px; font-size: 13px; }
-	        b#Gender{ position: absolute; left: 15px; top: 170px; font-size: 13px; }   
-	        b#birth{ position: absolute; left: 15px; top: 230px; font-size: 13px; }
-	        b#email{ position: absolute; left: 15px; top: 290px; font-size: 13px; }
-	        b#num{ position: absolute; left: 15px; top: 350px; font-size: 13px; }
-	        b#phone{ position: absolute; left: 15px; top: 410px; font-size: 13px; }
+	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 320px; height: 500px; left: 40%;
+				top: 100px; text-align: center; }
+	        span#regTxt{ position: absolute; left: 100px;
+	            top: 10px; font-size: 20px; }
+
+	        b#id{ position: absolute; left: 15px; top: 77px; font-size: 13px; }
+	        input#regId{ position: absolute; left: 75px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
+	        button#idChk{ position: absolute; left: 280px; top: 75px; width: 69px;
+	            height: 25px; color: white; background-color: black; border-style: none; font-size: 10px; }
+
+	        b#name{ position: absolute; left: 15px; top: 130px; font-size: 13px;  }
+	        input#regName{ position: absolute; left: 75px; top: 127px;
+ 				width: 200px; height: 25px; font-size: 10px;     } 
 	        
-	        input#regId{ position: absolute; left: 15px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
-	        input#regName{ position: absolute; left: 15px; top: 135px; width: 200px; height: 25px; font-size: 10px; }
-	        input#regGender{ position: absolute; left: 15px; top: 195px; width: 200px; height: 25px; font-size: 10px; }
-	      	input#regBirth{ position: absolute; left: 15px; top: 255px; width: 200px; height: 25px; font-size: 10px; }
-	        input#regEmail{ position: absolute; left: 15px; top: 315px; width: 200px; height: 25px; font-size: 10px; }
-	        /* input#regNum{ position: absolute; left: 15px; top: 375px; width: 200px; height: 25px; font-size: 10px;  }
-	        input#regPhone{ position: absolute; left: 15px; top: 435px; width: 200px; height: 25px; font-size: 10px;  } */
+	        b#Gender{ position: absolute; left: 15px; top: 183px; font-size: 13px; }  
+	        input#regGender{ position: absolute; left: 75px; top: 180px; }
 	        
-	        span#regNum-{position: absolute; left: 107px; top: 375px;}
-	        input#regNum1{ position: absolute; left: 15px; top: 375px;
-	            width: 85px; height: 25px; font-size: 10px;  }
-	        input#regNum2{ position: absolute; left: 120px; top: 375px;   
-	            width: 85px; height: 25px; font-size: 10px;  }
+	        b#birth{ position: absolute; left: 15px; top: 236px; font-size: 13px; }
+	        input#regBirth{ position: absolute; left: 75px; top:233px;}
+	        
+	        b#email{ position: absolute; left: 15px; top: 289px; font-size: 13px; }
+	        input#regEmail{ position: absolute; left: 75px; top: 289px;
+	            width: 200px; height: 25px; font-size: 10px;             }
 	            
-	        span#regNum-1{position: absolute; left: 60px; top: 435px;}
-	        span#regNum-2{position: absolute; left: 115px; top: 435px;}    
-	        input#regPhone1{ position: absolute; left: 15px; top: 435px;
-	            width: 40px; height: 25px; font-size: 10px; }
-	        input#regPhone2{ position: absolute; left: 70px; top: 435px;
-	            width: 40px; height: 25px; font-size: 10px; }
-			input#regPhone3{ position: absolute; left: 125px; top: 435px;
-	            width: 40px; height: 25px; font-size: 10px; }	
+	        b#num{ position: absolute; left: 15px; top: 342px; font-size: 13px; }
+	        span#regNum-{position: absolute; left: 155px; top: 339px;}
+	        input#regNum1{ position: absolute; left: 100px; top: 339px;
+	            width: 50px; height: 25px; font-size: 10px;             }    
+	        input#regNum2{ position: absolute; left: 165px; top: 339px;
+	            width: 50px; height: 25px; font-size: 10px;             }    
 	            
-	        button#cancel{ position: absolute; left: 180px; top: 495px; width: 50px; height: 25px;     color: white; 
-	        	background-color: black; nborder-style: none; font-size: 10px; border: none;}
-	        button#change{ position: absolute; left: 240px; top: 495px; width: 50px; height: 25px; font-size: 10px;
-	            color: white; background-color: black; border-style: none; border: none;}	
+	        b#phone{ position: absolute; left: 15px; top: 395px; font-size: 13px; }
+	        span#regPhone-1{position: absolute; left: 155px; top: 392px;}
+	        span#regPhone-2{position: absolute; left: 220px; top: 392px;}
+	        input#regPhone1{ position: absolute; left: 100px; top: 392px;
+	            width: 50px; height: 25px; font-size: 10px;             }
+			input#regPhone2{ position: absolute; left: 165px; top: 392px;
+	            width: 50px; height: 25px; font-size: 10px;             }
+			input#regPhone3{ position: absolute; left: 235px; top: 392px;
+	            width: 50px; height: 25px; font-size: 10px;             }
+
+	        button#cancel{ position: absolute; left: 180px; top: 448px; width: 50px; height: 25px;    
+	            color: white; background-color: black; border-style: none; font-size: 10px; }
+	        button#change{
+	            position: absolute; left: 240px; top: 448px; width: 50px; height: 25px;
+	            font-size: 10px; color: white; background-color: black; border-style: none; }
+	            
+	        span#num_s{position: absolute; left: 75px; top: 370px;}
+	        span#phone_s{position: absolute; left: 75px; top: 422px;}
+	            
+	        span.msg{font-size: 13px; color: red}    
             	
 		</style>
 	</head>
@@ -63,18 +76,23 @@
             <b id="email">이메일</b>
             <input id="regEmail" type="email" readonly/>
             <b id="num">주민등록번호</b>
-            <input id="regNum1" type="text" placeholder=""/>
+            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="6"/>
             <span id="regNum-">-</span>
-            <input id="regNum2" type="text" placeholder=""/>
+            <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="7"/>
             <b id="phone">휴대폰 번호</b>
-            <input id="regPhone1" type="text"/>
-            <span id="regNum-1">-</span>
-            <input id="regPhone2" type="text"/>
-            <span id="regNum-2">-</span>
-            <input id="regPhone3" type="text"/>
+            <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
+            <span id="regPhone-1">-</span>
+            <input id="regPhone2" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
+            <span id="regPhone-2">-</span>
+            <input id="regPhone3" type="text" onkeyup="onKeyUp_phone()" maxlength="4"/>
             
             <button id="cancel">취소</button>
             <button id="change">변경</button>
+            
+            <span class="msg" id="num_s"></span>
+            <span class="msg" id="phone_s"></span>
+            
+            
         </div>
 	</body>
 	<script>
@@ -101,31 +119,84 @@
 			 });
 		});
 	
+		//주민등록번호 onkeyup 이벤트
+		function onKeyUp_num() {
+			var regNumTxt1 = $("#regNum1");
+			var regNumTxt2 = $("#regNum2");
+			var msg = $("#num_s");
+			
+			if(regNumTxt1.val() == ""){
+				msg.html("주민등록번호 앞자리를 입력해주세요.");
+			}else if(regNumTxt1.val().length < 6){
+				msg.html("주민등록번호 앞자리를 입력해주세요.");
+			}else if(regNumTxt2.val() == ""){
+				msg.html("주민등록번호 뒷자리를 입력해주세요.");
+			}else if(regNumTxt2.val().length < 7){
+				msg.html("주민등록번호 뒷자리를 입력해주세요.");
+			}else if(regNumTxt1.val() != ""){
+				msg.html("");
+			}else if(regNumTxt2.val() != ""){
+				msg.html("");
+			}
+		}
+		
+		//휴대폰번호 onkeyup 이벤트
+		function onKeyUp_phone() {
+			var regPhoneTxt1 = $("#regPhone1");
+			var regPhoneTxt2 = $("#regPhone2");
+			var regPhoneTxt3 = $("#regPhone3");
+			var msg = $("#phone_s");
+			
+			if(regPhoneTxt1.val().length < 3){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt1.val()==""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt2.val().length < 4){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt2.val() == ""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt3.val().length < 4){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt3.val() == ""){
+				msg.html("휴대폰 번호를 입력하세요.");
+			}else if(regPhoneTxt1.val() != ""){
+				msg.html("");
+			}else if(regPhoneTxt2.val() != ""){
+				msg.html("");
+			}else if(regPhoneTxt3.val() != ""){
+				msg.html("");
+			}
+		}
+		
+		
 		$("#cancel").click(function() {
 			location.href="index.jsp";
 		});
 		
 		$("#change").click(function() {
 			if($("#regNum1").val()==""){
-				alert("주민등록번호 앞자리 입력");
+				$("#num_s").html("주민등록번호 앞자리 입력");
 				$("#regNum1").focus();
 			}else if($("#regNum1").val().length < 6){
-				alert("주민등록번호 6자리 입력");
+				$("#num_s").html("주민등록번호 앞자리 입력");
 				$("#regNum1").focus();
 			}else if($("#regNum2").val()==""){
-				alert("주민등록번호 뒷자리 입력");
+				$("#num_s").html("주민등록번호 뒷자리 입력");
 				$("#regNum2").focus();
 			}else if($("#regNum2").val().length < 7){
-				alert("주민등록번호 7자리 입력");
+				$("#num_s").html("주민등록번호 뒷자리 입력");
 				$("#regNum2").focus();
 			}else if($("#regPhone1").val()==""){
-				alert("휴대폰 번호 입력");
+				//alert("휴대폰 번호 입력");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone1").focus();
 			}else if($("#regPhone2").val()==""){
-				alert("휴대폰 번호 입력");
+				//alert("휴대폰 번호 입력");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone2").focus();
 			}else if($("#regPhone3").val()==""){
-				alert("휴대폰 번호 입력");
+				//alert("휴대폰 번호 입력");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone3").focus();
 			}else{
 				$.ajax({

@@ -7,45 +7,60 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
-			div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 310px; height: 540px; left: 40%;
+			div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 500px; left: 40%;
 				top: 100px; text-align: center; }
-	        span#usertxt{ position: absolute; left: 75px;
+	        span#usertxt{ position: absolute; left: 80px;
 	            top: 10px; font-size: 20px; }
-	        b#id{ position: absolute; left: 15px; top: 50px; font-size: 13px; }
-	        b#pw{ position: absolute; left: 15px; top: 110px; font-size: 13px; }
-	        b#pwChk{ position: absolute; left: 15px; top: 170px; font-size: 13px; }
-	        b#name{ position: absolute; left: 15px; top: 230px; font-size: 13px;  }
-	        b#Gender{ position: absolute; left: 15px; top: 290px; font-size: 13px; }   
-	        b#birth{ position: absolute; left: 15px; top: 350px; font-size: 13px; }
-	        b#email{ position: absolute; left: 15px; top: 410px; font-size: 13px; }
-	        input#userId{ position: absolute; left: 15px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
-	        button#idChk{ position: absolute; left: 220px; top: 75px; width: 69px;
+
+	        b#id{ position: absolute; left: 15px; top: 77px; font-size: 13px; }
+	        input#userId{ position: absolute; left: 75px; top: 75px; width: 200px; height: 25px; font-size: 10px; }
+	        button#idChk{ position: absolute; left: 280px; top: 75px; width: 69px;
 	            height: 25px; color: white; background-color: black; border-style: none; font-size: 10px; }
-	        input#userPw{ position: absolute; left: 15px; top: 135px;
-	            width: 200px; height: 25px; font-size: 10px; }
+	        
+	        
+	        b#pw{ position: absolute; left: 15px; top: 130px; font-size: 13px; }
+	        input#userPw{ position: absolute; left: 75px; top: 127px;
+	            width: 200px; height: 25px; font-size: 10px; }	
+	        
+	        b#pwChk{ position: absolute; left: 15px; top: 183px; font-size: 13px; }
 	        input#userPwChk{
-	            position: absolute; left: 15px; top: 195px;
-	            width: 200px; height: 25px; font-size: 10px;  }
-	        input#userName{ position: absolute; left: 15px; top: 255px;
+	            position: absolute; left: 105px; top: 180px;
+	            width: 170px; height: 25px; font-size: 10px;  }
+	        
+	        b#name{ position: absolute; left: 15px; top: 236px; font-size: 13px;  }
+	        input#userName{ position: absolute; left: 75px; top: 233px;
  				width: 200px; height: 25px; font-size: 10px;     } 
- 				
-	        span#gender{ position: absolute; left: 15px; top: 315px; }
+	        
+	        b#Gender{ position: absolute; left: 15px; top: 289px; font-size: 13px; }  
+	        span#gender{ position: absolute; left: 75px; top: 286px; }
 			label#lbM{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px;}
 			label#lbW{ display: inline-block; border: 1px solid #A4A4A4; padding: 1px 20px; }
 			input#man{ display: none; }
 			input#woman{ display: none; }
-			
-	        select#userBirthYear{ position: absolute; left: 15px; top:375px;}
-	        select#userBirthMonth{ position: absolute; left: 70px; top: 375px; }
-	        select#userBirthDay{ position: absolute; left: 110px; top: 375px; }
 	        
-	        input#userEmail{ position: absolute; left: 15px; top: 435px;
+	        b#birth{ position: absolute; left: 15px; top: 340px; font-size: 13px; }
+	        select#userBirthYear{ position: absolute; left: 75px; top:339px;}
+	        select#userBirthMonth{ position: absolute; left: 130px; top: 339px; }
+	        select#userBirthDay{ position: absolute; left: 170px; top: 339px; }
+	        
+	        b#email{ position: absolute; left: 15px; top: 395px; font-size: 13px; }
+	        input#userEmail{ position: absolute; left: 75px; top: 392px;
 	            width: 200px; height: 25px; font-size: 10px;             }
-	        button#cancel{ position: absolute; left: 180px; top: 495px; width: 50px; height: 25px;    
-	            color: white; background-color: black; border-style: none; font-size: 10px; }
-	        button#join{
-	            position: absolute; left: 240px; top: 495px; width: 50px; height: 25px;
-	            font-size: 10px; color: white; background-color: black; border-style: none; }
+
+	        button#cancel{ position: absolute; left: 165px; top: 455px; width: 50px; height: 25px;    
+	            color: white; background-color: black; border-style: none; font-size: 10px; cursor: pointer; }
+	        button#join{ position: absolute; left: 225px; top: 455px; width: 50px; height: 25px;
+	            font-size: 10px; color: white; background-color: black; border-style: none; cursor: pointer; }
+	            
+	        span#id_s{position: absolute; left: 75px; top: 105px;}
+	        span#pw_s{position: absolute; left: 75px; top: 157px;}
+	        span#pwC_s{position: absolute; left: 75px; top: 210px;}
+	        span#name_s{position: absolute; left: 75px; top: 264px;}
+	        span#gender_s{position: absolute; left: 75px; top: 316px;}
+	        span#birth_s{position: absolute; left: 75px; top: 368px;}
+	        span#email_s{position: absolute; left: 75px; top: 422px;}
+	        
+	        span.msg{font-size: 13px; color: red}
 		</style>
 	</head>
 	<body>
@@ -53,38 +68,38 @@
 		<div id="main">
             <span id="userTxt"><b>사용자 회원가입</b></span>
             <b id="id">아이디</b>
-            <input id="userId" name="userId" type="text" placeholder=" 아이디를 입력하세요." maxlength="16"/>
+            <input id="userId" name="userId" type="text" placeholder=" 아이디를 입력하세요.(5~16)" maxlength="16" onkeyup="onKeyUp_idChk()"/>
             <!--<input id="idChk" type="button" value="중복 확인"/>-->
-            <button id="idChk" name="idChk">중복 확인</button>
+            <!-- <button id="idChk" name="idChk">중복 확인</button> -->
             <b id="pw">비밀번호</b>
-            <input id="userPw" name="userPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input id="userPw" name="userPw" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw1()"/>
             <b id="pwChk">비밀번호 확인</b>
-            <input id="userPwChk" name="userPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
-            <b id="name">이름</b>
-            <input id="userName" name="userName" type="text" placeholder="이름을 입력하세요."/>
-            <b id="Gender">성별</b>
+            <input id="userPwChk" name="userPwChk" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw2()"/>
+            <b id="name">이&nbsp;&nbsp;&nbsp;&nbsp;름</b>
+            <input id="userName" name="userName" type="text" placeholder="이름을 입력하세요." onkeyup="onKeyUp_name()"/>
+            <b id="Gender">성&nbsp;&nbsp;&nbsp;&nbsp;별</b>
             <span id="gender">
-            	<label id="lbM"><input id="man" type="radio" name="userGender" value="남"/>남자</label>
+            	<label id="lbM"><input onclick="onClick_gender()" id="man" type="radio" name="userGender" value="남"/>남자</label>
             	&nbsp;
-            	<label id="lbW"><input id="woman" type="radio" name="userGender" value="여"/>여자</label>
+            	<label id="lbW"><input onclick="onClick_gender()" id="woman" type="radio" name="userGender" value="여"/>여자</label>
             </span>
                       
             <b id="birth">생년월일</b>
-            <select name="userBirthYear" id="userBirthYear">
+            <select name="userBirthYear" id="userBirthYear" onclick="onClick_birth()" onkeyup="onKeyUp_birth()">
             	<option value="년도" selected>년도</option>
             	<%for(int i=1950; i<2019; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
             </select>
             
-            <select name="userBirthMonth" id="userBirthMonth">
+            <select name="userBirthMonth" id="userBirthMonth" onclick="onClick_birth()" onkeyup="onKeyUp_birth()">
             	<option value="월" selected>월</option>
             	<%for(int i=1; i<13; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
             </select>
             
-            <select name="userBirthDay" id="userBirthDay">
+            <select name="userBirthDay" id="userBirthDay" onclick="onClick_birth()" onkeyup="onKeyUp_birth()">
             	<option value="일" selected>일</option>
             	<%for(int i=1; i<32; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
@@ -92,76 +107,241 @@
             </select>
             
             <b id="email">이메일</b>
-            <input id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
+            <input onkeyup="onKeyUp_email()" id="userEmail" type="email" placeholder="이메일을 입력하세요."/>
+            
+            
+            
+            <span class="msg" id="id_s"></span>
+            <span class="msg" id="pw_s"></span>
+            <span class="msg" id="pwC_s"></span>
+            <span class="msg" id="name_s"></span>
+            <span class="msg" id="gender_s"></span>
+            <span class="msg" id="birth_s"></span>
+            <span class="msg" id="email_s"></span>
             
             <button id="cancel">취소</button>
             <button id="join">완료</button>
         </div>
 	</body>
 	<script>
-		$("#man").click(function() {
-			$("#lbM").css("background", "#FA5882");
-			$("#lbW").css("background", "white");
+		//아이디 중복 확인 onkeyup 이벤트
+		function onKeyUp_idChk() {
+			var userIdTxt = $("#userId").val();
+			var msg = $("#id_s");
 			
-			$("#lbM").css("color", "white");
-			$("#lbW").css("color", "black");
-		});
-		$("#woman").click(function() {
-			$("#lbW").css("background", "#FA5882");
-			$("#lbM").css("background", "white");
+			var idReg = /^[A-Za-z0-9+]{5,16}$/;
+			$.ajax({
+				type : "post",
+				url : "./overlay",
+				data : { id : userIdTxt },
+				dataType : "json",
+				success : function(data) {
+					if(userIdTxt==""){
+						msg.html("아이디 입력을 해주세요.");
+						msg.css("color", "red");
+					}else if(!idReg.test(userIdTxt)){
+						msg.html("5~16자리 영문과 숫자만 가능");
+						msg.css("color", "red");
+					}else if(data.result == true){
+						msg.html("중복된 아이디 입니다.");
+						msg.css("color", "red");
+					}else{
+						msg.html("사용 가능한 아이디");
+						msg.css("color", "green");
+						chk = true;
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		}
+		
+		//비밀번호 onkeyup 이벤트
+		/* function onKeyUp_pw(){
+			var userPwTxt1 = $("#userPw");
+			var userPwTxt2 = $("#userPwChk");
+			var msg = $("#pw_s");
 			
-			$("#lbW").css("color", "white");
-			$("#lbM").css("color", "black");
-		});
-	
-		$("#cancel").click(function() {
-			location.href="login.jsp";
-		});
-	
-		var chk = false;//아이디 중복값 체크
+			if(userPwTxt1.val().length < 8 || userPwTxt1.val().length >12){
+				msg.html("비밀번호 8~12자리 입력");
+			}else if(userPwTxt1.val() != userPwTxt2.val()){
+				msg.html("비밀번호가 맞지 않습니다.");
+			}else{
+				msg.html("");
+			}
+		} */
+		
+		//비밀번호 onkeyup 이벤트
+		function onKeyUp_pw1(){
+			var userPwTxt1 = $("#userPw");
+			var msg = $("#pw_s");
 
+			if(userPwTxt1.val()==""){
+				msg.html("비밀번호 8~12자리 입력");
+			}else if(userPwTxt1.val().length < 8 || userPwTxt1.val().length >12){
+				msg.html("비밀번호 8~12자리 입력");
+			}else if(userPwTxt1.val().length >= 8 || userPwTxt1.val().length <=12){
+				msg.html("");
+			}
+		}
+ 		function onKeyUp_pw2(){
+ 			var userPwTxt1 = $("#userPw");
+			var userPwTxt2 = $("#userPwChk");
+			var msg = $("#pwC_s");
+
+			if(userPwTxt1.val() != userPwTxt2.val()){
+				msg.html("비밀번호가 맞지 않습니다.");
+			}else if(userPwTxt1.val() == userPwTxt2.val()){
+				msg.html("");
+			} 
+		} 
+		
+		//이름 onkeyup 이벤트
+		function onKeyUp_name() {
+			var userNameTxt = $("#userName").val();
+			console.log(userNameTxt);
+			var msg = $("#name_s");
+			if(userNameTxt != ""){
+				msg.html("");
+			}else if(userNameTxt == ""){
+				msg.html("이름을 입력해주세요.");
+			}
+		}
+		
+		//성별 onclick 이벤트
+		function onClick_gender() {
+			var man = $("#man");
+			var woman = $("#woman");
+			var msg = $("#gender_s");
+			
+			
+			if(man.get(0).checked){
+				$("#lbM").css("background", "#FA5882");
+				$("#lbW").css("background", "white");
+				
+				$("#lbM").css("color", "white");
+				$("#lbW").css("color", "black");
+				msg.html("");	
+			}else if(woman.get(0).checked){
+				$("#lbW").css("background", "#FA5882");
+				$("#lbM").css("background", "white");
+				
+				$("#lbW").css("color", "white");
+				$("#lbM").css("color", "black");
+				msg.html("");	
+			}
+		}
+		
+		//생년월일 click 이벤트
+		function onClick_birth() {
+			var year = $("#userBirthYear");
+			var month = $("#userBirthMonth");
+			var day = $("#userBirthDay");
+			var msg = $("#birth_s");
+			
+			if(year.val() == "년도"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(month.val() == "월"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(day.val() == "일"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(year.val() != "년도"){
+				msg.html("");
+			}else if(month.val() != "월"){
+				msg.html("");
+			}else if(day.val() != "일"){
+				msg.html("");
+			}
+		}
+
+		
+		//생년월일 onkeyup 이벤트
+		function onKeyUp_birth() {
+			var year = $("#userBirthYear");
+			var month = $("#userBirthMonth");
+			var day = $("#userBirthDay");
+			var msg = $("#birth_s");
+
+			if(year.val() == "년도"){
+					msg.html("생년월일을 선택해주세요.");
+			}else if(month.val() == "월"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(day.val() == "일"){
+				msg.html("생년월일을 선택해주세요.");
+			}else if(year.val() != "년도"){
+				msg.html("");
+			}else if(month.val() != "월"){
+				msg.html("");
+			}else if(day.val() != "일"){
+				msg.html("");
+			}
+		}
+		
+		//이메일 onkeyup 이벤트
+		function onKeyUp_email() {
+			var userEmailTxt = $("#userEmail");
+			var msg = $("#email_s");
+			
+			if(userEmailTxt.val() != ""){
+				msg.html("");
+			}else if(userEmailTxt.val() == ""){
+				msg.html("이메일을 입력해주세요.");
+			}
+		}
+		
+
+		var chk = false;//아이디 중복값 체크
+		//취소
+		$("#cancel").click(function() {
+			location.href="index.jsp";
+		});
+		
 		//회원가입
 		$("#join").click(function() {
+			var userIdTxt = $("#userId").val();
 			var userPw = $("#userPw").val();
 			var userPwChk = $("#userPwChk").val();
 			
+			var idReg = /^[A-Za-z0-9+]{5,16}$/;
+			
 			if($("#userId").val()==""){
-				alert("아이디를 입력하세요.");
+				$("#id_s").html("아이디를 입력하세요.");
 				$("#userId").focus();
-			}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
-				alert("아이디는 5~16자리 입력");
+			}else if(!idReg.test(userIdTxt)){
+				$("#id_s").html("5~16자리 영문과 숫자만 가능");
 				$("#userId").focus();
-			}else if($("#userPw").val()==""){
-				alert("비밀번호 입력하세요.");				
+			}else if(userPw==""){
+				$("#pw_s").html("비밀번호를 입력하세요.");
 				$("#userPw").focus();
 			}else if($("#userPw").val().length < 8 || $("#userPw").val().length >12){
-				alert("비밀번호 8~12자리 입력");
+				$("#pw_s").html("비밀번호 8~12자리 입력");
 				$("#userPw").focus();
-			}else if($("#userPwChk").val()==""){
-				alert("비밀번호 확인 해주세요");				
+			}else if(userPwChk==""){		
+				$("#pwC_s").html("비밀번호를 입력하세요.");
 				$("#userPwChk").focus();
 			}else if(userPw != userPwChk){
-				alert("비밀번호 재입력");
+				$("#pwC_s").html("비밀번호를 재입력하세요.");
 				$("#userPwChk").focus();
 			}else if($("#userName").val()==""){
-				alert("이름을 입력해주세요.");
+				$("#name_s").html("이름을 입력하세요.");
 				$("#userName").focus();
 			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
-				alert("성별을 선택해주세요.");	
+				$("#gender_s").html("성별을 선택하세요.");
 			}else if($("#userBirthYear").val()=="년도"){
-				alert("년도를 선택해주세요.");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#userBirthYear").focus();
 			}else if($("#userBirthMonth").val()=="월"){
-				alert("월을 선택해주세요.");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#userBirthMonth").focus();
 			}else if($("#userBirthDay").val()=="일"){
-				alert("일을 선택해주세요.");
+				$("#birth_s").html("생년월일을 선택하세요.");
 				$("#userBirthDay").focus();
 			}else if($("#userEmail").val()==""){
-				alert("이메일을 입력해주세요.");
+				$("#email_s").html("이메일을 입력하세요.");
 				$("#userEmail").focus();
 			}else if(chk==false){
-				alert("아이디 중복확인 하세요.");
+				$("#id_s").html("아이디 중복확인 하세요.");
 				$("#userId").focus();
 			}else{
 				$.ajax({
@@ -197,7 +377,7 @@
 		//중복체크
 		$("#idChk").click(function() {
 			var userIdTxt = $("#userId").val();
-			$.ajax({
+			/* $.ajax({
 				type : "post",
 				url : "./overlay",
 				data : { id : $("#userId").val() },
@@ -222,7 +402,7 @@
 				error : function(error) {
 					console.log(error);
 				}
-			});
+			}); */
 		});
 	</script>
 </html>

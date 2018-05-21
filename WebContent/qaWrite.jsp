@@ -38,6 +38,11 @@
             
             #title_header {
                 width: 100px;
+                color: white;
+            }
+            
+            #content_header {
+            	color: white;
             }
             
             #regist {   
@@ -68,7 +73,7 @@
 	                    <td><textArea id="title" name="qa_title"></textArea></td>
 	                </tr>
 	                <tr>
-	                    <th colspan="2">내용</th>
+	                    <th id="content_header" colspan="2">내용</th>
 	                </tr>
 	                <tr>
 	                    <td colspan="2"><textArea id="content" name="qa_content"></textArea></td>
@@ -78,21 +83,39 @@
             </form>
         </div>
 	</body>
+	<script>
+		var obj = {};
+	 	var list = [];
+		var loginId = "${sessionScope.loginId}";
+		
+		obj.type = "POST";
+		obj.dataType = "JSON";
+		obj.error = function(error){console.log(error)};
+		
+		var msg = "${msg}";
+		console.log(msg);
+		if(msg != "") {
+			alert(msg);
+		} 
+		
+		if(msg == "Q&A 작성에 성공했습니다.") {
+			location.href = "./qaDetail?qa_no=${qa_no}";
+		} else if(msg == "Q&A 제목이 20자가 넘습니다.") {
+			$("#title").focus();
+			$("#title").text("${qa_title}");
+			$("#content").text("${qa_content}");
+		} else if(msg == "Q&A 내용이 300자가 넘습니다.") {
+			$("#content").focus();
+			$("#title").text("${qa_title}");
+			$("#content").text("${qa_content}");
+		} else if(msg == "Q&A 제목을 입력해주세요.") {
+			$("#title").focus();
+			$("#title").text("${qa_title}");
+			$("#content").text("${qa_content}");
+		} else if(msg == "Q&A 내용을 입력해주세요.") {
+			$("#content").focus();
+			$("#title").text("${qa_title}");
+			$("#content").text("${qa_content}");
+		}
+	</script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

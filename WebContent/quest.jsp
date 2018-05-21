@@ -36,8 +36,8 @@
                 margin: 0 auto;
 			}
 			#writeBtn{
-				float: right;
-				margin-right: 105px;
+				position: absolute;
+				left: 1030px;
 			}
 			button{
 				background-color: #212121;
@@ -55,19 +55,8 @@
 			}
 			#include{
 				height: 60px;
-			}
-			#questPage{
-				border: 1px solid black;
-				width: 800px;
-			}
-			#catetoryDiv{
-				float: left;
-				margin-left:100px;
-				width: 120px;
-				height: 50px;
-				background-color: gray;
-				display: table;
-			}
+			}		
+			
 			#quest{
 				color: white;	
 				display: table-cell;
@@ -77,8 +66,8 @@
 				font-weight: 900;
 			}
 			#searchDiv{
-				float: left;
-    			margin-left: 300px;
+				position: absolute;
+				left: 680px;
 			}
 		</style>
 	</head>
@@ -86,11 +75,8 @@
 	<div id="include">
 		<jsp:include page="/menuBar.jsp" flush="false" />
 	</div>
-	<div id="questPage"><br/>
-		<div id="catetoryDiv">
-			<p id="quest"> 문의사항</p>
-		</div>
-		<br/><br/><br/>
+		<h1>문의사항</h1>
+		<br/><br/>
 		<table id="listTable">
 			<tr>
 				<th id="num">번호</th>
@@ -100,6 +86,7 @@
 			</tr>
 		</table>
 		<br /> 
+		<br /> 
 		<div id="searchDiv">
 		<input type="text" id="search" placeholder="검색할 제목을 입력해 주세요." />
 		<button id="searchBtn">검색</button>
@@ -107,9 +94,10 @@
 		<button id="writeBtn">작성하기</button>
 		<br />
 		<br />
+		<br />
 		<button id="beforeList">이전 목록</button>
 		<button id="afterList">다음 목록</button><br/><br/>
-	</div>
+
 </body>
 
 <script>

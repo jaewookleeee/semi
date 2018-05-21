@@ -31,8 +31,6 @@ public class QaDAO {
 	
 	// Q&A 쓰기(완)
 	public int write(DTO dto) {
-		// qa_no, place_no, info_id, qa_content, qa_date, qa_title
-		// INSERT INTO qa VALUES (qa_seq.NEXTVAL, 1, 'ksw6169', '내용: 궁금합니다.', SYSDATE, 'qa 제목!!'); 
 		String sql = "INSERT INTO qa VALUES (qa_seq.NEXTVAL, ?, ?, ?, SYSDATE, ?)";
 		int success = 0; 
 		
@@ -61,7 +59,6 @@ public class QaDAO {
 	// Q&A 리스트 (완)
 	public ArrayList<DTO> list(int place_no, int start, int end) {
 		ArrayList<DTO> list = new ArrayList<>();
-		
 		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY qa_no DESC) AS rnum," 
 			    			+"qa_no, qa_title, qa_date, info_id FROM qa WHERE place_no = ?)"
 			    				+"WHERE rnum BETWEEN ? AND ?";
@@ -76,11 +73,11 @@ public class QaDAO {
 			
 			while(rs.next()) {
 				DTO dto = new DTO();
+				dto.setRnum(rs.getInt("rnum"));
 				dto.setQa_no(rs.getInt("qa_no"));
 				dto.setQa_title(rs.getString("qa_title"));
 				dto.setQa_date(rs.getDate("qa_date"));
 				dto.setInfo_id(rs.getString("info_id"));
-				
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -286,5 +283,25 @@ public class QaDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int listSize(int place_no) {
+		int max_size = 0;
+		String sql = "SELECT COUNT(*) FROM qa WHERE place_no = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				max_size = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			resClose();
+		}
+		return max_size;
 	}
 }

@@ -24,12 +24,11 @@
             table {
                 border-collapse: collapse;
                 width: 1000px;
-                border: 0.1px solid #222222;
                 margin-top: 50px;
             }
             
-            tr, td {
-                border: 0.1px solid #222222;
+            tr {
+            	width: 900px;
             }
             
             th {
@@ -105,12 +104,16 @@
             
             .qa_reply_writer {
             	height: 100px;
+            	border: 0.1px solid black;
             }
             
             .reply_content {
             	height: 100px;
             }
             
+            .table_border {
+            	border: 0.1px solid #222222;
+            }
             
             
 		</style>
@@ -120,24 +123,22 @@
         <div class="qa_detail">
             <div id="qa_header" style="text-align: center;"><strong>Q&A</strong></div>
             <table>
-                <tr>
+                <tr class="table_border">
                     <th id="title_header">제목</th>
                     <td colspan="3" id="title">${dto.qa_title}</td>
                 </tr>
-                <tr>
+                <tr class="table_border">
                     <th>작성일자</th>
                     <td id="write_date">${dto.qa_date}</td>
                     <th>작성자 ID</th>
                     <td id="writer">${dto.info_id}</td>
                 </tr>
-                <tr>
+                <tr class="table_border">
                     <td colspan="4" id="content" colspan="2">${dto.qa_content}</td>
                 </tr>
             </table><br/>
             <div class="btn_list">
-                <a href="./placeDetailUp?place_no=${dto.place_no}"><input class="btn" id="list" type="button" value="목록"/></a>
-                <a href="./qaUpdateForm?qa_no=${dto.qa_no}"><input class="btn" id="chg" type="button" value="수정"/></a> 
-                <a href="./qaDel?qa_no=${dto.qa_no}"><input class="btn" id="del" type="button" value="삭제"/></a> 
+                <input class="btn" id="list" type="button" value="목록" onclick="qaDetail_list(${dto.place_no})"/>
             </div>
             
             <div class="qa_reply">
@@ -157,6 +158,8 @@
 	<script>
 	 	var obj = {};
 	 	var list = [];
+		var loginId = "${sessionScope.loginId}";
+		
 		obj.type = "POST";
 		obj.dataType = "JSON";
 		obj.error = function(error){console.log(error)};
@@ -164,18 +167,34 @@
 		// qaDetail.jsp가 로드되면, 해당 qa에 대한 후기를 전부 가져옴
 		$(document).ready(function() {
 			
+			// 작성자가 아닌 사람의 경우, 수정/삭제 버튼이 안 보이게 함
+			if($("#writer").text() == loginId) {
+				var str = "<a href='./qaUpdateForm?qa_no=${dto.qa_no}'><input class='btn' id='chg' type='button' value='수정'/></a>&nbsp;";
+            	str += "<a href='./qaDel?qa_no=${dto.qa_no}'><input class='btn' id='del' type='button' value='삭제'/></a>";
+				$(".btn_list").append(str);
+			} else {
+				var str = "";
+				$(".btn_list").css("margin-left", "950px");
+			}
+			
 			obj.url = "./qaReplyList";
 			
 			obj.data = {
-				qa_no: ${dto.qa_no}
+				qa_no: "${dto.qa_no}"
 			};
 			
 			obj.success = function(data) {
 				list = data.list;
+				
 				for(var i=0; i<list.length; i++) {				
-					var str = "<tr><th class='qa_reply_writer'>"+list[i].info_id+"</th><td><textarea class='reply_content' readonly='readonly'>"+list[i].qareply_content+"</textarea></td>"
-								+"<td><button class='btn' id='updatebtn"+list[i].qareply_no+"' onclick='updateInit("+list[i].qareply_no+")'>수정</button>"
-								+"<a href='qaReplyDel?qareply_no="+list[i].qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
+					var str = "<tr><th class='qa_reply_writer'>"+list[i].info_id+"</th><td style='border: 0.1px solid black;'><textarea class='reply_content' readonly='readonly'>"+list[i].qareply_content+"</textarea></td>";
+					
+					if(list[i].info_id == loginId) {
+						str += "<td><button class='btn' id='updatebtn"+list[i].qareply_no+"' onclick='updateInit("+list[i].qareply_no+")'>수정</button>"
+						str += "<a href='qaReplyDel?qareply_no="+list[i].qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
+					} else {
+						str += "</tr>";
+					}
 					$("#reply_add").append(str);
 				}
 			};
@@ -187,26 +206,30 @@
 			obj.url = "./qaReplyWrite";		
 			obj.data = {
 				qa_reply_content: $("#repl_content").val(),
-				qa_no: ${dto.qa_no},
+				qa_no: "${dto.qa_no}",
 				info_id: $("#logId").val()
 			};
 			obj.success = function(data) {
-				var str = "<tr><th class='qa_reply_writer'>"+data.dto.info_id+"</th><td><textarea class='reply_content' readonly='readonly'>"+data.dto.qareply_content+"</textarea></td>"
-								+"<td><button class='btn' id='updatebtn"+data.dto.qareply_no+"' onclick='updateInit("+data.dto.qareply_no+")'>수정</button>"
-									+"<a href='qaReplyDel?qareply_no="+data.dto.qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
-				
+				var str = "<tr><th class='qa_reply_writer'>"+data.dto.info_id+"</th><td style='border: 0.1px solid black;'><textarea class='reply_content' readonly='readonly'>"+data.dto.qareply_content+"</textarea></td>"
+								
+				if(data.dto.info_id == loginId) {
+					str += "<td><button class='btn' id='updatebtn"+data.dto.qareply_no+"' onclick='updateInit("+data.dto.qareply_no+")'>수정</button>";
+					str += "<a href='qaReplyDel?qareply_no="+data.dto.qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
+				} else {
+					str += "</tr>"
+				}
 				$("#reply_add").append(str);
 			};
 			ajaxCall(obj);
+			$("#repl_content").val("");
 		});
 		
 		// Q&A 답글 수정 버튼을 눌렀을 시, textarea를 수정 가능한 상태로 만들고 완료 버튼 추가
 		function updateInit(qareply_no) {
 			$("#updatebtn"+qareply_no).parent().prev().children($('.reply_content')).attr('readonly', false);
 			$("#updatebtn"+qareply_no).next().after("<button class='btn' id='completeBtn"+qareply_no+"' onclick='replyUpdate("+qareply_no+")'>완료</button>");
-			// 수정 버튼, 삭제 버튼 삭제(다시 살려야 함)
 			$("#updatebtn"+qareply_no).next().hide();
-			$("#updatebtn"+qareply_no).hide();
+			$("#updatebtn"+qareply_no).hide();	
 		}
 		
 		// Q&A 답글 수정 후 '완료' 버튼을 눌렀을 시, 
@@ -224,6 +247,11 @@
 			ajaxCall(obj);
 		}
 		
+		function qaDetail_list(place_no) {
+			console.log(place_no);	
+		
+			location.href="./placeDetailUp?place_no="+place_no+"&page=qa.jsp";
+		}
 		
 		function ajaxCall(param) {
 			$.ajax(param);

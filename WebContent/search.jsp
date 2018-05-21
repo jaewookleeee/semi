@@ -22,8 +22,8 @@
             }
             
 			#search_header{ position: absolute; top: 0px; left: 0px; width: 650px;}
-			#search_listBox{ width: 1110px; height: 355px; display: inline-block; position: absolute; top: 180px; left: 0px; z-index: 1; text-align:left; }
-			#search_footer{ position: absolute; top: 580px; left: 0px; z-index: 2; }
+			#search_listBox{ width: 1110px; height: 480px; display: inline-block; position: absolute; top: 180px; left: 0px; z-index: 1; text-align:left; }
+			#search_footer{ position: absolute; top: 660px; left: 0px; z-index: 2; }
             .button_css { width: 80px; border: 0px solid white; background-color: black; color: white; height: 30px; }
             
             .category_div { background-color: white; width: 100px; margin: 7px 0px; text-align: center; display: inline-block; border: 1px solid black; }
@@ -36,7 +36,7 @@
             #location_text { margin-top: 5px; padding-top: 3px; display: inline-block; }
             .location_div { background-color: white; width: 70px; margin: 2px 2px; border: 1px solid black; padding: 10px 5px; display: inline-block; }
            
-            .place_div { margin: 10px 10px; display: inline-block; width: 350px;/* 100% */ height:333px;/* 95% */ background-color: #FAFAFA; }
+            .place_div { margin: 10px 10px; display: inline-block; width: 350px;/* 100% */ height:460px;/* 95% */ background-color: #FAFAFA; }
             .place_name { border: 0px solid black; font-size: 20; font-weight: 600; }
             .place_td { background-color: #FE2E64; color: white; text-align: center; }
 
@@ -158,8 +158,8 @@
         };
 
         function placeList(list) {
-        	$("#search_listBox").css("height","355px");
-        	$("#search_footer").css("top","580px");
+        	$("#search_listBox").css("height","480px");
+        	$("#search_footer").css("top","660px");
             $("#location_main").css("display", "none");
             $("#location_main").css("height", "0px");
             $("#location_button").text("▼");
@@ -170,26 +170,29 @@
                 list.forEach(function(item, i) {
                     newLine += "<div class='place_div'>";
                     newLine += "<input type='hidden' value='" + item.place_no + "'/>";
-                    newLine += "<div style='width: 100%; height: 60%; padding:2.5%'>"
+                    newLine += "<div style='width: 100%; height: 60%; padding:2.5%;'>"
                     newLine += "<img width='95%' height='95%' src='./upload/" + item.place_photo + "'/>";
                     newLine += "</div>";
                     newLine += "<div style='text-align: left;'>";
                     newLine += "<table>";
                     newLine += "<tr><td colspan='2' class='place_name'>" + item.place_name + "</td></tr>"
-                    newLine += "<tr><td class='place_td'>" + item.place_category + "</td><td class='place_td'>" + item.place_loc + "</td></tr>";
+                    
+                    var str=item.place_loc.split("/");
+                    
+                    newLine += "<tr><td class='place_td'>" + item.place_category + "</td><td class='place_td'>" +str[1]+" "+str[2]+ "</td></tr>";
                     newLine += "<tr><td colspan='2'>" + item.place_info + "</td></tr>";
                     newLine += "<tr><td colspan='2' class='place_td'>" + item.place_price + "</td></tr>";
                     newLine += "</table>";
                     newLine += "</div>";
                     newLine += "</div>";
                     if(i==3){
-                    	$("#search_listBox").css("height","710px");
-                    	$("#search_footer").css("top","915px");
+                    	$("#search_listBox").css("height","960px");
+                    	$("#search_footer").css("top","1140px");
                     }
                 });
                 $("#search_listBox").append(newLine);
                 $("div.place_div").click(function() {
-                    location.href = "./placeDetailUp?place_no=" + $(this).children("input[type='hidden']").val();
+                    location.href = "./placeDetailUp?place_no=" + $(this).children("input[type='hidden']").val() + "&page=placeDetail.jsp";
                 });
             } else {
                 $("#search_listBox").html("<br/><br/><br/><br/><br/><span style='text-align:center;'><h3>해당 검색 결과가 더 이상 존재하지 않습니다.</h3></span>");

@@ -75,7 +75,7 @@
                 <th style="padding: 5px 150px">상호명</th>
                 <th style="padding: 5px 30px">대표자 ID</th>
                 <th style="padding: 5px 50px">등록 일시</th>
-                <th>별점 평균</th>
+                <th>평점 평균</th>
                 <th>수정</th>
                 <th>삭제</th>
             </tr>
