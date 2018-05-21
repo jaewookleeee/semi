@@ -30,6 +30,11 @@
             #categoly{width: 150px; height: 30px; margin-top:10px;}
             #postnumber{background-color: rgba(125,125,125,0.3);}
             #addr{background-color: rgba(125,125,125,0.3); width: 400px;}
+            .place_span{color : green;font-size: 12px }
+            
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none; margin: 0;}
 		</style>
 	</head>
 <body>
@@ -42,7 +47,8 @@
                <div class="div_title"><strong>필수정보</strong></div>
 
                <div class="sub_title">상호명</div>
-               <div class="div_content"><input name ="place_name" id="placename" type="text" placeholder="상호명을 입력해주세요."/></div>
+               <div class="div_content"><input maxlength="10" name ="place_name" id="placename" type="text" placeholder="상호명을 입력해주세요." onkeyup="onKeyUp_placename()"/></div>
+               <span class="place_span" id="place_n"></span>
 			   <div class="sub_title">카테고리</div>
 			   <select name="categoly" id="categoly">
                        <option>카페</option>
@@ -64,9 +70,9 @@
 
                <div class="sub_title">전화번호</div>
                <div class="div_content">
-                   <input name="phone1" id="phone1" class="phone" type="text"/> 
-                   <input name="phone2" id="phone2" class="phone" type="text"/> 
-                   <input name="phone3" id="phone3" class="phone" type="text"/>
+                   <input maxlength="3" name="phone1" id="phone1" class="phone" type="number"/>
+                   <input maxlength="4" name="phone2" id="phone2" class="phone" type="number"/>
+                   <input maxlength="5" name="phone3" id="phone3" class="phone" type="number"/>
                </div>
 
                <div class="sub_title">이용시간 & 이용요금</div>
@@ -77,7 +83,7 @@
                    <select name="end" class="time" id="endtime">
                        <option>종료시간</option>
                    </select>
-                   <input name="cash" id="cash" type="text" placeholder="시간당 요금(입력 예시: 13000)"/>
+                   <input name="cash" id="cash" type="number" placeholder="시간당 요금(입력 예시: 13000)"/>
                </div>
                
                <div class="sub_title">장소위치</div>
@@ -90,23 +96,27 @@
 
                <div class="sub_title">시설 안내</div>
                <div class="div_content">
-                   <input name="fac_info" class="info_content" id="fac_info" type="textarea"/>
+                   <textarea maxlength="2000" name="fac_info" class="info_content" id="fac_info" onkeyup="place_detail()"></textarea><br/>
+                   <span class="place_span" id="place_info"></span>
                </div>
                
                <div class="div_title"><strong>선택정보</strong></div>
                <div class="sub_title">한 줄 소개</div>
                <div class="div_content">
-                   <input name="info" id="info" type="text" maxlength="30"/>
+                   <input maxlength="30" name="info" id="info" type="text" maxlength="30" onkeyup="place_info()"/><br/>
+                   <span class="place_span" id="p_info"></span>
                </div>
                
                <div class="sub_title">홈페이지</div>
                <div class="div_content">
-                   <input name="homepage" id="homepage" type="text"/>
+                   <input maxlength="2000" name="homepage" id="homepage" type="text" onkeyup="place_detail()"/>
                </div>
                
                <div class="sub_title">주의사항</div>
                <div class="div_content">
-                   <input name="sub_content" class="info_content" id="sub_content" type="textarea"/><br/><br/>
+                   <textarea maxlength="2000" name="sub_content" class="info_content" id="sub_content" onkeyup="place_content()"></textarea><br/>
+                   <span class="place_span" id="place_content"></span>
+                   <br/><br/>
                    <input id="save" class="save" type="button" value="저장"/>
                </div>
             </div>
@@ -206,5 +216,45 @@ var formData = new FormData(form);
         
         }).open();
     }
+	//상호명 글자수 제한
+	function onKeyUp_placename(){
+		if($("#placename").val().length>10){
+			$("#place_n").css("color","red");
+			$("#place_n").html("상호명이 10자를 넘었습니다")
+		}else if($("#placename").val().length<=10){
+			$("#place_n").css("color","green");
+			$("#place_n").html("상호명은 10자이내로 작성해주세요")
+		}
+	}
+	//시설안내 글자수 제한
+	function place_detail(){
+		if($("#fac_info").val().length>2000){
+			$("#place_info").css("color","red");
+			$("#place_info").html("시설안내가 2000자를 넘었습니다")
+		}else if($("#fac_info").val().length<=2000){
+			$("#place_info").css("color","green");
+			$("#place_info").html("시설안내는 2000자이내로 작성해주세요")
+		}
+	}
+	//주의사항 글자수 제한
+	function place_content(){
+		if($("#sub_content").val().length>2000){
+			$("#place_content").css("color","red");
+			$("#place_content").html("주의사항이 2000자를 넘었습니다")
+		}else if($("#sub_content").val().length<=2000){
+			$("#place_content").css("color","green");
+			$("#place_content").html("주의사항은 2000자이내로 작성해주세요")
+		}
+	}
+	//한줄소개 글자수 제한
+	function place_info(){
+		if($("#info").val().length>30){
+			$("#p_info").css("color","red");
+			$("#p_info").html("한줄소개가 30자를 넘었습니다")
+		}else if($("#info").val().length<=30){
+			$("#p_info").css("color","green");
+			$("#p_info").html("한줄소개는 30자이내로 작성해주세요")
+		}
+	}
 	</script>
 </html>
