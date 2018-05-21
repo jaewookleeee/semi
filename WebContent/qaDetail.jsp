@@ -9,26 +9,33 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
+            /* 나눔 스퀘어 폰트 */
+            @import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
+            
             .qa_detail {
                 width: 1000px;
                 margin-top: 50px;
                 margin-left: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #qa_header {
                 width: 1000px;
                 margin-top: 50px;
                 font-size: 30px
+                font-family: 'Nanum Square', sans-serif;
             }
             
             table {
                 border-collapse: collapse;
                 width: 1000px;
                 margin-top: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             tr {
             	width: 900px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             th {
@@ -38,41 +45,49 @@
                 border: 1px solid black;
                 background-color: #222222;
                 color: white;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #title {
                 width: 850px;
                 height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #write_date {
                 width: 350px;
                 height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #writer {
                 width: 200px;
                 height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #content {
                 width: 1000px;
                 height: 300px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .btn_list {
                 margin-left: 830px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             
             .qa_reply {
                 margin-top: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .reply_content {
                 width: 800px;
                 float: left;
                 border: 0.1px solid #222222;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #qa_reply_write {
@@ -84,14 +99,17 @@
                 font-size: 18px;
                 color: white;
                 margin-bottom: 100px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .reply {
                 margin-top: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .btn {
             	width: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .reply_regist_content {
@@ -100,19 +118,23 @@
                 float: left;
                 border: 0.1px solid #222222;
                 margin-bottom: 100px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .qa_reply_writer {
             	height: 100px;
             	border: 0.1px solid black;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .reply_content {
             	height: 100px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .table_border {
             	border: 0.1px solid #222222;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             
@@ -166,6 +188,10 @@
 		
 		// qaDetail.jsp가 로드되면, 해당 qa에 대한 후기를 전부 가져옴
 		$(document).ready(function() {
+			if(loginId == ""){
+				alert("로그인이 필요합니다.");
+				history.back();
+			} 
 			
 			// 작성자가 아닌 사람의 경우, 수정/삭제 버튼이 안 보이게 함
 			if($("#writer").text() == loginId) {
@@ -191,7 +217,7 @@
 					
 					if(list[i].info_id == loginId) {
 						str += "<td><button class='btn' id='updatebtn"+list[i].qareply_no+"' onclick='updateInit("+list[i].qareply_no+")'>수정</button>"
-						str += "<a href='qaReplyDel?qareply_no="+list[i].qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
+						str += "<button class='btn' id='replyDel' onclick='replyDelete("+list[i].qareply_no+")'>삭제</button></td></tr>";
 					} else {
 						str += "</tr>";
 					}
@@ -210,15 +236,20 @@
 				info_id: $("#logId").val()
 			};
 			obj.success = function(data) {
-				var str = "<tr><th class='qa_reply_writer'>"+data.dto.info_id+"</th><td style='border: 0.1px solid black;'><textarea class='reply_content' readonly='readonly'>"+data.dto.qareply_content+"</textarea></td>"
-								
-				if(data.dto.info_id == loginId) {
-					str += "<td><button class='btn' id='updatebtn"+data.dto.qareply_no+"' onclick='updateInit("+data.dto.qareply_no+")'>수정</button>";
-					str += "<a href='qaReplyDel?qareply_no="+data.dto.qareply_no+"'><button class='btn' id='replyDel'>삭제</button></a></td></tr>";
-				} else {
-					str += "</tr>"
+				console.log(data.msg);
+				alert(data.msg);
+				
+				if(data.msg == "Q&A 답변 작성에 성공했습니다.") {
+					var str = "<tr><th class='qa_reply_writer'>"+data.dto.info_id+"</th><td style='border: 0.1px solid black;'><textarea class='reply_content' readonly='readonly'>"+data.dto.qareply_content+"</textarea></td>"
+									
+					if(data.dto.info_id == loginId) {
+						str += "<td><button class='btn' id='updatebtn"+data.dto.qareply_no+"' onclick='updateInit("+data.dto.qareply_no+")'>수정</button>";
+						str += "<button class='btn' id='replyDel' onclick='replyDelete("+data.dto.qareply_no+")'>삭제</button></td></tr>";
+					} else {
+						str += "</tr>"
+					}
+					$("#reply_add").append(str);
 				}
-				$("#reply_add").append(str);
 			};
 			ajaxCall(obj);
 			$("#repl_content").val("");
@@ -244,12 +275,27 @@
 				qareply_no: qareply_no,	// 되나 확인
 				qareply_content: $("#updatebtn"+qareply_no).parent().prev().children($('.reply_content')).val(),
 			};
+			
+			obj.success = function(data) {
+				alert(data.msg);
+			};
+			ajaxCall(obj);
+		}
+		
+		function replyDelete(qareply_no) {
+			obj.url = "./qaReplyDel";		
+			obj.data = {
+				qareply_no: qareply_no,	
+			};
+			
+			obj.success = function(data) {
+				alert(data.msg);
+				location.href = "./qaDetail?qa_no="+data.qa_no;
+			};
 			ajaxCall(obj);
 		}
 		
 		function qaDetail_list(place_no) {
-			console.log(place_no);	
-		
 			location.href="./placeDetailUp?place_no="+place_no+"&page=qa.jsp";
 		}
 		
