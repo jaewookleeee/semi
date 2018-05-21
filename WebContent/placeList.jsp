@@ -213,7 +213,7 @@
     			//console.log(item.book_no);
     			content += "<tr>";
     			content += "<td>"+item.rnum+"</td>";
-    			content += "<td><a href='./placeDetailUp?place_no="+item.place_no+"'>"+item.place_name+"</a></td>";
+    			content += "<td><a href='./placeDetailUp?place_no="+item.place_no+"&page=placeDetail.jsp'>"+item.place_name+"</a></td>";
     			content += "<td>"+item.info_id+"</td>";
     			content += "<td>"+item.place_date+"</td>";
     			content += "<td class='review_score'></td>";
