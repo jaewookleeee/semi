@@ -124,6 +124,8 @@
         </div>
 	</body>
 	<script>
+		var chk = false;//아이디 중복값 체크
+		var emailChk = false;//이메일 중복값 체크
 		//아이디 중복 확인 onkeyup 이벤트
 		function onKeyUp_idChk() {
 			var userIdTxt = $("#userId").val();
@@ -214,8 +216,7 @@
 			var man = $("#man");
 			var woman = $("#woman");
 			var msg = $("#gender_s");
-			
-			
+
 			if(man.get(0).checked){
 				$("#lbM").css("background", "#FA5882");
 				$("#lbW").css("background", "white");
@@ -288,10 +289,30 @@
 			}else if(userEmailTxt.val() == ""){
 				msg.html("이메일을 입력해주세요.");
 			}
+/* 			$.ajax({
+				type : "post",
+				url : "./emailOverlay",
+				data : {
+					email : $("#userEmail").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					if(data.result == true){
+						msg.html("등록된 이메일 입니다.");
+						msg.css("color", "red");
+					}else{
+						emailChk = true;
+					}
+				}, 
+				error : function(error) {
+					console.log(error);
+				}
+			}); */
 		}
 		
 
-		var chk = false;//아이디 중복값 체크
+		
 		//취소
 		$("#cancel").click(function() {
 			location.href="index.jsp";

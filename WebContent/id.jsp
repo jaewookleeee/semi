@@ -32,7 +32,7 @@
 			<span id="email_s">이메일</span>
 			<input type="email" id="email"/>
 			<button id="btn" onclick="clickEvt()">ID 찾기</button>
-			<span id="result"></span>
+			<b><span id="result"></span></b>
 		</div>
 	</body>
 	<script>
@@ -50,8 +50,9 @@
 				dataType : "json",
 				success : function (data) {
 					if(data.result != null){
+						var id = data.result;
 						console.log(data.result);
-						$("#result").html("ID : "+data.result);
+						$("#result").html("ID : "+id);
 					}else{
 						$("#result").html("찾을 수 없음");
 					}

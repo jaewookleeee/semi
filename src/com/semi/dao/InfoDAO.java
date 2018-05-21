@@ -133,6 +133,28 @@ public class InfoDAO {
 		}
 		return result;
 	}
+	
+	//주민번호 중복체크
+	public boolean numOverlay(String num) {
+		boolean result = false;
+		String sql = "SELECT info_num FROM info WHERE info_num=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, num);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			resClose();
+		}
+		return result;
+	}
+	
+
 
 	//회원리스트, 검색
 	public ArrayList<DTO> userList(String idSearch, int start, int end) {
@@ -578,4 +600,8 @@ public class InfoDAO {
 				}
 				return result;
 			}
+
+			
+
+			
 }

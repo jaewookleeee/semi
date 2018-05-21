@@ -123,9 +123,9 @@
             <b id="email">이메일</b>
             <input id="regEmail" type="email" placeholder="이메일을 입력하세요." onkeyup="onKeyUp_email()"/>
             <b id="num">주민등록번호</b>
-            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num()"/>
+            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num1()" />
             <span id="regNum-">-</span>
-            <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num()"/>
+            <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num2()"/>
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
@@ -149,6 +149,8 @@
         </div>
 	</body>
 	<script>
+		var chk = false;//아이디 중복값 체크
+		var numChk = false;//주민등록 중복값 체크
 		//아이디 중복 확인 onkeyup 이벤트
 		function onKeyUp_idChk() {
 			var regIdTxt = $("#regId").val();
@@ -186,6 +188,8 @@
 				}
 			});
 		}
+		
+		
 		
 /* 		//비밀번호 onkeyup 이벤트
 		function onKeyUp_pw(){
@@ -318,10 +322,31 @@
 			}else if(regEmailTxt.val() == ""){
 				msg.html("이메일을 입력해주세요.");
 			}
+			/* $.ajax({
+				type : "post",
+				url : "./emailOverlay",
+				data : {
+					email : $("#regEmail").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					if(data.result == true){
+						msg.html("등록된 이메일 입니다.");
+						msg.css("color", "red");
+					}else{
+						emailChk = true;
+					}
+				}, 
+				error : function(error) {
+					console.log(error);
+				}
+			}); */
+			
 		}
 		
 		//주민등록번호 onkeyup 이벤트
-		function onKeyUp_num() {
+		function onKeyUp_num1() {
 			var regNumTxt1 = $("#regNum1");
 			var regNumTxt2 = $("#regNum2");
 			var msg = $("#num_s");
@@ -330,16 +355,64 @@
 				msg.html("주민등록번호 앞자리를 입력해주세요.");
 			}else if(regNumTxt1.val().length < 6){
 				msg.html("주민등록번호 앞자리를 입력해주세요.");
-			}else if(regNumTxt2.val() == ""){
+			}else if(regNumTxt1.val() != ""){
+				msg.html("");
+			}
+			
+			$.ajax({
+				type : "post",
+				url : "./numOverlay",
+				data : { num1 : regNumTxt1.val(), num2 : regNumTxt2.val() },
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					if(data.result == true){
+						msg.html("등록된 주민등록번호 입니다.");
+						msg.css("color", "red");
+					}else{
+						numChk = true;
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
+		}
+		
+		//주민번호 중복 확인 onkeyup 이벤트
+		function onKeyUp_num2() {
+			var regNumTxt1 = $("#regNum1");
+			var regNumTxt2 = $("#regNum2");
+			var msg = $("#num_s");
+			
+			if(regNumTxt2.val() == ""){
 				msg.html("주민등록번호 뒷자리를 입력해주세요.");
 			}else if(regNumTxt2.val().length < 7){
 				msg.html("주민등록번호 뒷자리를 입력해주세요.");
-			}else if(regNumTxt1.val() != ""){
-				msg.html("");
 			}else if(regNumTxt2.val() != ""){
 				msg.html("");
 			}
+			$.ajax({
+				type : "post",
+				url : "./numOverlay",
+				data : { num1 : regNumTxt1.val(), num2 : regNumTxt2.val() },
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					if(data.result == true){
+						msg.html("등록된 주민등록번호 입니다.");
+						msg.css("color", "red");
+					}else{
+						numChk = true;
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			});
 		}
+		
+			
 		
 		//휴대폰번호 onkeyup 이벤트
 		function onKeyUp_phone() {
@@ -375,7 +448,7 @@
 			location.href="login.jsp";
 		});
 		
-		var chk = false;//아이디 중복값 체크
+		
 		//완료버튼(회원가입)
 		$("#join").click(function() {
 			var regIdTxt = $("#regId").val();
@@ -402,7 +475,7 @@
 			}else if(regPw != regPwChk){
 				$("#pwC_s").html("비밀번호를 재입력하세요.");
 				$("#regPwChk").focus();//포커스 이동	
-			} else if($("#regName").val()==""){
+			}else if($("#regName").val()==""){
 				$("#name_s").html("이름을 입력해주세요.");
 				$("#regName").focus();//포커스 이동	
 			}else if($("#man").get(0).checked != true && $("#woman").get(0).checked != true){
@@ -422,21 +495,39 @@
 			}else if($("#regNum1").val()==""){
 				$("#num_s").html("주민등록번호 앞자리를 입력해주세요.");
 				$("#regNum1").focus();
+			}else if($("#regNum1").val().length < 6){
+				$("#num_s").html("주민등록번호 앞자리 입력");
+				$("#regNum1").focus();
 			}else if($("#regNum2").val()==""){
 				$("#num_s").html("주민등록번호 뒷자리를 입력해주세요.");
 				$("#regNum2").focus();
+			}else if($("#regNum2").val().length < 7){
+				$("#num_s").html("주민등록번호 뒷자리 입력");
+				$("#regNum2").focus();
 			}else if($("#regPhone1").val()==""){
-				$("#phone_s").html("휴대폰 번호를 입력해주세요.");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
+				$("#regPhone1").focus();
+			}else if($("#regPhone1").val().length <3){
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone1").focus();
 			}else if($("#regPhone2").val()==""){
-				$("#phone_s").html("휴대폰 번호를 입력해주세요.");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone2").focus();
+			}else if($("#regPhone2").val().length <4){
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
+				$("#regPhone1").focus();
 			}else if($("#regPhone3").val()==""){
-				$("#phone_s").html("휴대폰 번호를 입력해주세요.");
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
+				$("#regPhone2").focus();
+			}else if($("#regPhone3").val().length <4){
+				$("#phone_s").html("휴대폰번호를 입력하세요.");
 				$("#regPhone3").focus();
 			}else if(chk==false){
-				$("id_s").html("아이디 중복확인 하세요.");
+				$("#id_s").html("아이디 중복확인 하세요.");
 				$("#regId").focus();
+			}else if(numChk==false){
+				$("#num_s").html("주민등록번호 확인 하세요.");
+				$("#regNum2").focus();
 			}else{
 				$.ajax({
 					type : "post",
@@ -459,8 +550,10 @@
 					dataType : "json",
 					success : function(data) {
 						console.log(data);
-						alert("회원가입성공");
-						location.href="index.jsp";
+						if(data.success > 0 && data.result2 == false){
+							alert("회원가입성공");
+							location.href="index.jsp";
+						}
 					},
 					error : function(error) {
 						console.log(error);
@@ -469,32 +562,6 @@
 			}
 		});
 		
-		//id 중복확인
-		$("#idChk").click(function() {
-			/* var regIdTxt = $("#regId").val();
-			$.ajax({
-				type : "post",
-				url : "./overlay",
-				data : { id : $("#regId").val() },
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					if(regIdTxt==""){
-						alert("아이디 입력를 입력하세요.");
-						$("#regId").focus();
-					}else if(data.result == true){
-						alert("중복된 아이디 입니다.");
-						$("#regId").focus();
-					}else{
-						alert("사용 가능한 아이디 입니다.");
-						$("#regPw").focus();
-						chk = true;
-					}
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			}); */
-		});
+		
 	</script>
 </html>

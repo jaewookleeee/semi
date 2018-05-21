@@ -2,6 +2,7 @@ package com.semi.service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -141,7 +142,6 @@ public class QaService {
 			request.setAttribute("msg", "Q&A 내용이 300자가 넘습니다.");
 			request.setAttribute("qa_title", qa_title);
 			request.setAttribute("qa_content", qa_content);
-			// RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm.jsp");
 			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm?qa_no="+qa_no);
 			
 			dis.forward(request, response);
@@ -150,7 +150,6 @@ public class QaService {
 			request.setAttribute("msg", "Q&A 제목이 20자가 넘습니다.");
 			request.setAttribute("qa_title", qa_title);
 			request.setAttribute("qa_content", qa_content);
-			// RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm.jsp");
 			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm?qa_no="+qa_no);
 			dis.forward(request, response);
 		} else {
@@ -170,7 +169,6 @@ public class QaService {
 			request.setAttribute("qa_no", qa_no);
 			request.setAttribute("msg", msg);
 			RequestDispatcher dis = request.getRequestDispatcher("qaUpdateForm.jsp");
-			// RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no"+qa_no);
 			dis.forward(request, response);
 		}
 	}
@@ -185,7 +183,7 @@ public class QaService {
 	}
 
 	// Q&A 답변 쓰기(완) -수정 완
-	public void qaReplyWrite(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void qaReplyWrite(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -196,25 +194,33 @@ public class QaService {
 		String info_id = request.getParameter("info_id");
 		int qa_no = Integer.parseInt(request.getParameter("qa_no"));
 		
-		DTO dto = new DTO();
-		dto.setQareply_content(qa_reply_content);
-		dto.setInfo_id(info_id);
-		dto.setQa_no(qa_no);
+		Gson gson = new Gson();
+		HashMap<String, Object> map = new HashMap<>();
 		
-		QaDAO dao = new QaDAO();
-		int success = dao.qaReplyWrite(dto);
-
-		if(success > 0) {
-			Gson gson = new Gson();
-			HashMap<String, DTO> map = new HashMap<>();
-			map.put("dto", dto);
-			
-			String obj = gson.toJson(map);
-			response.setContentType("text/html; charset=UTF-8");
-			response.getWriter().write(obj);
+		// 글자수 제한
+		if(qa_reply_content.length() > 300) {
+			System.out.println("300자 넘어!");
+			map.put("msg", "Q&A 답변이 300자가 넘습니다.");
 		} else {
-			System.out.println("Q&A 답변 작성에 실패했습니다.");
+			System.out.println("300자 안넘어!");
+			DTO dto = new DTO();
+			dto.setQareply_content(qa_reply_content);
+			dto.setInfo_id(info_id);
+			dto.setQa_no(qa_no);
+			
+			QaDAO dao = new QaDAO();
+			int success = dao.qaReplyWrite(dto);
+			
+			if(success > 0) {
+				map.put("dto", dto);
+				map.put("msg", "Q&A 답변 작성에 성공했습니다.");
+			} else {
+				map.put("msg", "Q&A 답변 작성에 실패했습니다.");
+			}
 		}
+		String obj = gson.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().write(obj);
 	}
 
 	// Q&A 답변 수정(완) 
@@ -232,10 +238,16 @@ public class QaService {
 		int qa_no = dao.qaReplyUpdate(qareply_no, qareply_content);
 		
 		Gson gson = new Gson();
-		HashMap<String, Integer> map = new HashMap<>();
-		map.put("qa_no", qa_no);
+		HashMap<String, String> map = new HashMap<>();
+			
+		if(qa_no > 0) {
+			map.put("msg", "답변이 수정되었습니다.");
+		} else {
+			map.put("msg", "답변 수정에 실패했습니다.");
+		}
 		
 		String obj = gson.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
 		response.getWriter().write(obj);
 	}
 
@@ -271,13 +283,37 @@ public class QaService {
 			msg = "Q&A 삭제에 성공했습니다.";
 		}
 		
-		request.setAttribute("msg", msg);
-		RequestDispatcher dis = request.getRequestDispatcher("qaDetail?qa_no="+qa_no);
-		dis.forward(request, response);
+		Gson gson = new Gson();
+		HashMap<String, String> map = new HashMap<>();
+		map.put("qa_no", String.valueOf(qa_no));
+		map.put("msg", msg);
+		
+		String obj = gson.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().write(obj);
 	}
 
-	public void search(HttpServletRequest request, HttpServletResponse response) {
+	// Q&A 검색 요청
+	public void search(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		
+		int place_no = Integer.parseInt(request.getParameter("place_no"));
+		String search_keyword = request.getParameter("search_keyword");
+		
+		QaDAO dao = new QaDAO();
+		ArrayList<DTO> list = dao.search(place_no, search_keyword);
+		
+		Gson gson = new Gson();
+		HashMap<String, ArrayList<DTO>> map = new HashMap<>();
+		map.put("list", list);
+		
+		String obj = gson.toJson(map);
+		response.setContentType("text/html; charset=UTF-8");
+		response.getWriter().write(obj);
 	}
 
 	// Q&A 수정 폼 요청(완)

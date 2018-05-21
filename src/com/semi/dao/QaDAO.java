@@ -288,6 +288,7 @@ public class QaDAO {
 	public int listSize(int place_no) {
 		int max_size = 0;
 		String sql = "SELECT COUNT(*) FROM qa WHERE place_no = ?";
+		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, place_no);
@@ -302,6 +303,39 @@ public class QaDAO {
 		} finally {
 			resClose();
 		}
+		
 		return max_size;
+	}
+
+	// Q&A 검색 요청
+	public ArrayList<DTO> search(int place_no, String search_keyword) {
+		ArrayList<DTO> list = new ArrayList<>();
+		String sql = "SELECT * FROM (SELECT ROW_NUMBER() OVER(ORDER BY qa_no DESC) AS rnum," 
+					+"qa_no, qa_title, qa_date, info_id FROM qa WHERE place_no = ?)"
+						+"WHERE qa_title LIKE ?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, place_no);
+			ps.setString(2, "%"+search_keyword+"%");
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				DTO dto = new DTO();
+				dto.setRnum(rs.getInt("rnum"));
+				dto.setQa_no(rs.getInt("qa_no"));
+				dto.setQa_title(rs.getString("qa_title"));
+				dto.setQa_date(rs.getDate("qa_date"));
+				dto.setInfo_id(rs.getString("info_id"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			resClose();
+		}
+		return list;
 	}
 }
