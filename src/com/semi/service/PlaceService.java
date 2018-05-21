@@ -101,6 +101,7 @@ public class PlaceService {
 	         String page = "placeWrite.jsp";
 	 		if(success>0) {
 	 			request.setAttribute("place_no", success);
+	 			request.setAttribute("page", "placeDetail.jsp");
 	 			page = "placeDetailUp.jsp";
 	 		}
 	 		RequestDispatcher dis = request.getRequestDispatcher(page);

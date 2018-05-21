@@ -161,7 +161,6 @@ var cash=0;
 	});
 
     $("#like").click(function(){
-    	
     	//console.log(id);
         if($("#like").html()=="찜하기"){
 		        $.ajax({
@@ -311,8 +310,6 @@ var cash=0;
 
 <script>
 function showMap(){
-	
-	console.log("${param.mainPhoto}","lksndvlknv");
 	/* 맵 추가 부분 */
 	var map = new naver.maps.Map('map', {
 	    center: new naver.maps.LatLng(37.3595704, 127.105399), //지도의 초기 중심 좌표
