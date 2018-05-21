@@ -9,11 +9,15 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <style>
+            /* 나눔 스퀘어 폰트 */
+            @import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
+        
             table {
                 position: relative;
                 width: 1000px;
                 margin-top: 50px;
                 border-collapse: collapse;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             th {
@@ -23,6 +27,7 @@
                 height: 30px;
                 line-height: 30px;
                	border-collapse: collapse;
+               	font-family: 'Nanum Square', sans-serif;
             }
             
             td {
@@ -32,12 +37,14 @@
                 height: 30px;
                 line-height: 30px;
                	border-collapse: collapse;
+               	font-family: 'Nanum Square', sans-serif;
             }
             
             .review {
                 position: relative;
                 width: 1000px;
                 margin-top: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_header {
@@ -45,10 +52,12 @@
                 height: 30px;
                 font-size: 30px;
                 line-height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_table {
                 width: 1000px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_id {
@@ -58,6 +67,7 @@
                 border: 0.1px solid #222222;
                 text-align: center;
                 float: left;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_textarea {
@@ -67,6 +77,7 @@
                 text-align: center;
                 float: left;
                 margin: 0px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_content {
@@ -76,6 +87,7 @@
                 text-align: center;
                 float: left;
                 margin: 0px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_date {
@@ -85,6 +97,7 @@
                 border: 0.1px solid #222222;
                 text-align: center;
                 float: left;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .btn {
@@ -94,10 +107,12 @@
                 border: 0.1px solid white;
                 color: white;
                 border: 0;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_writeForm {
                 margin-top: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_content_write {
@@ -105,6 +120,7 @@
                 height: 60px;
                 float: left;
                 border: 0.1px solid #222222;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_score_write {
@@ -113,6 +129,7 @@
                 float: left;
                 border: 0.1px solid #222222;
                 text-align: center;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_score_header {
@@ -125,6 +142,7 @@
                 text-align: center;
                 background-color: #222222;
                 color: white;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_score {
@@ -132,6 +150,7 @@
                 height: 30px;
                 line-height: 30px;
                 text-align: center;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .review_regist {
@@ -144,11 +163,13 @@
                 text-align: center;
                 background-color: #222222;
                 color: white;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #review_header {
             	background: #222222;
             	color: white;
+            	font-family: 'Nanum Square', sans-serif;
             }
         </style>
     </head>
@@ -164,26 +185,22 @@
 				</tr>
             </table></div>
             <div class="review_writeForm">
-               	<form action="reviewWrite" method="post">
-               		<input type="hidden" name="place_no" value="${param.place_no}"/>
+               	<!-- <form action="reviewWrite" method="post">  -->
+            		<input type="hidden" name="place_no" value="${param.place_no}"/>
                		<input type="hidden" name="info_id" value="${sessionScope.loginId}"/>
 	                <div class="review_content_write"><textarea class="review_content_write" placeholder=" 후기 내용을 입력해주세요. (최대 300자)" name="review_content"></textarea></div>
 	                <div class="review_score_write">
 	                    <div class="review_score_header">평점</div> 
 	                    <select class="review_score" name="review_score">
 	                        <option value="1.0">1.0</option>
-	                        <option value="1.5">1.5</option>
 	                        <option value="2.0">2.0</option>
-	                        <option value="2.5">2.5</option>
 	                        <option value="3.0">3.0</option>
-	                        <option value="3.5">3.5</option>
 	                        <option value="4.0">4.0</option>
-	                        <option value="4.5">4.5</option>
 	                        <option value="5.0" selected="selected">5.0</option>
 	                    </select>
 	                </div>
-	                <button class="review_regist">등록</button>
-            	</form>
+	                <button class="review_regist" onclick="reviewWrite()">등록</button>
+            	<!-- </form>  -->
             </div>
         </div>
     </body>
@@ -223,7 +240,7 @@
 							
 							if(data.list[i].info_id == loginId) {
 								str += "<td><button class='btn' id='review_update"+data.list[i].review_no+"' onclick='updateInit("+data.list[i].review_no+")'>수정</button>";
-								str += "<a href='reviewDel?review_no="+data.list[i].review_no+"'><button class='btn' id='reviewDel'>삭제</button></a></td></tr>";
+								str += "<button class='btn' onclick='reviewDel("+data.list[i].review_no+")'>삭제</button></td></tr>";
 							} else {
 								str += "</tr>";
 							}
@@ -235,6 +252,23 @@
 				isreadyed = true;
 			}
 		});    		 
+
+		// '후기 등록' 버튼을 눌렀을 시,
+		function reviewWrite() {
+			obj.url = "./reviewWrite";		
+			obj.data = {
+				place_no: "${param.place_no}",
+				info_id:  "${sessionScope.loginId}",
+				review_content: $("textarea[name='review_content']").val(),
+				review_score: $("select[name='review_score']").val()
+			};
+			
+			obj.success = function(data) {
+				alert(data.msg);	
+				location.href = "placeDetailUp?place_no="+place_no+"&page=review.jsp";
+			}
+			ajaxCall(obj);
+      }
 		
 		function updateInit(review_no) {
 			$("#review_update"+review_no).parent().prev().prev().prev().children($('.review_textarea')).attr('readonly', false);
@@ -259,13 +293,24 @@
 			};
 			
 			obj.success = function(data) {
-				if(data.msg != "") {
-					alert(data.msg);
-					location.href = "placeDetailUp?place_no="+place_no+"&page=review.jsp";
-				}
+				alert(data.msg);
+				location.href = "placeDetailUp?place_no="+place_no+"&page=review.jsp";
 			}
 			ajaxCall(obj);
 		}  
+		
+		function reviewDel(review_no) {
+			obj.url = "./reviewDel";		
+			obj.data = {
+				review_no: review_no,	
+			};
+			
+			obj.success = function(data) {
+				alert(data.msg);
+				location.href = "placeDetailUp?place_no="+data.place_no+"&page=review.jsp";
+			}
+			ajaxCall(obj);
+		}
 		
 		function ajaxCall(param) {
 			$.ajax(param);
