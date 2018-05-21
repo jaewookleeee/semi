@@ -31,10 +31,10 @@
 	 			width: 200px; height: 25px; font-size: 10px;     } 
 		        
 		    b#Gender{ position: absolute; left: 15px; top: 183px; font-size: 13px; }  
-		    input#userGender{ position: absolute; left: 75px; top: 180px; }
+		    input#userGender{ position: absolute; left: 75px; top: 180px; width: 200px; height: 25px; font-size: 10px;     }
 		        
 		    b#birth{ position: absolute; left: 15px; top: 236px; font-size: 13px; }
-		    input#userBirth{ position: absolute; left: 75px; top:233px;}
+		    input#userBirth{ position: absolute; left: 75px; top:233px; width: 200px; height: 25px; font-size: 10px;     }
 		        
 		    b#email{ position: absolute; left: 15px; top: 289px; font-size: 13px; }
 		    input#userEmail{ position: absolute; left: 75px; top: 286px;
@@ -43,13 +43,13 @@
 			button#del{ position: absolute; left: 15px; top: 342px; width: 60px; height: 25px;    
 		        color: white; background-color: black; border-style: none; font-size: 10px; }	
 	
-		    button#cancel{ position: absolute; left: 180px; top: 342px; width: 50px; height: 25px;    
+		    button#cancel{ position: absolute; left: 165px; top: 342px; width: 50px; height: 25px;    
 		        color: white; background-color: black; border-style: none; font-size: 10px; }
 		            
-		    button#update{ position: absolute; left: 240px; top: 342px; width: 50px; height: 25px;
+		    button#update{ position: absolute; left: 225px; top: 342px; width: 50px; height: 25px;
 		        font-size: 10px; color: white; background-color: black; border-style: none; }        
 	
-		</style>
+		</style>  
 	</head>
 	<body>
 		<jsp:include page="menuBar.jsp"/>

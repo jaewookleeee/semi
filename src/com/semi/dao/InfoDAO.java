@@ -535,4 +535,47 @@ public class InfoDAO {
 				}
 				return list;
 			}
+
+			//아이디 찾기
+			public String id(String name, String email) {
+				String result = null;
+				String sql = "SELECT info_id FROM info WHERE info_name=? AND info_email=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, name);
+					ps.setString(2, email);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						result = rs.getString("info_id");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return result;
+			}
+
+			//비밀번호 찾기
+			public String pw(String id, String name, String email) {
+				String result = null;
+				String sql = "SELECT info_pw FROM info WHERE info_id=? AND info_name=? AND info_email=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, id);
+					ps.setString(2, name);
+					ps.setString(3, email);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						result = rs.getString("info_pw");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return result;
+			}
 }
