@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
 		<style>
 		   /* 나눔 스퀘어 폰트 */
 		   @import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
@@ -15,11 +15,11 @@
 		   a { color: black; text-decoration: none; }
 		
 		   .content { position: relative; width: 100%; top: 35px; }
-		   .slogan { position: absolute; top: 250px; left: 75px; }
-		   .slogan_text { position: relative; top: 0px; font-family: 'Nanum Square'; font-size: 40px; color: white; }
-		   .slogan_logo { position: relative; top: 0px; font-family: 'odibeeSans', sans-serif; font-size: 22px; color: #FF376C; }
-		   .category { position: absolute; top: 150px; left: 700px; width: 450px;  }
-		   .category_text { position: absolute; top: 150px; left: 700px; width: 450px; text-align: center; }
+		   .slogan { position: absolute; top: 300px; left: 150px; }
+		   .slogan_text { position: relative; top: 0px; font-family: 'Nanum Square'; font-size: 48px; color: white; }
+		   .slogan_logo { position: relative; top: 0px; font-family: 'odibeeSans', sans-serif; font-size: 26px; color: #FF376C; }
+		   .category { position: absolute; top: 200px; left: 900px; width: 450px;  }
+		   .category_text { position: absolute; top: 200px; left: 900px; width: 450px; text-align: center; }
 		   .category_header { font-family: 'Nanum Square', sans-serif; font-size: 22px; color: white; }
 		   .category_option { position: relative; width: 130px; height: 130px; margin-top: 20px; margin-right: 20px; background-color: white; opacity: 0.1; float: left; }
 		   
