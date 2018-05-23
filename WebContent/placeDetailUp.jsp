@@ -135,6 +135,10 @@
 				$("#qa").css("color","black");
 			}			
 			$("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {/*  $("#area").html(res) */ });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 49f5f57c7abe2a8d4ccc4f6222aaa682f77c9d5a
 		});
 
    </script>
