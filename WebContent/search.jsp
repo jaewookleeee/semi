@@ -23,7 +23,7 @@
             
 			#search_header{ position: absolute; top: 0px; left: 0px; width: 650px;}
 			#search_listBox{ width: 1110px; height: 480px; display: inline-block; position: absolute; top: 180px; left: 0px; z-index: 1; text-align:left; }
-			#search_footer{ position: absolute; top: 660px; left: 0px; z-index: 2; }
+			#search_footer{ position: absolute; top: 680px; left: 0px; z-index: 2; }
             .button_css { width: 80px; border: 0px solid white; background-color: black; color: white; height: 30px; }
             
             .category_div { background-color: white; width: 100px; margin: 7px 0px; text-align: center; display: inline-block; border: 1px solid black; }
@@ -100,7 +100,7 @@
             <br />
         </div>
         <div id="search_listBox"></div>
-
+        
         <div id="search_footer">
             <button id="before" class="button_css">이전 목록</button> &nbsp;&nbsp;&nbsp;&nbsp;
             <button id="after" class="button_css">다음 목록</button>
@@ -159,7 +159,7 @@
 
         function placeList(list) {
         	$("#search_listBox").css("height","480px");
-        	$("#search_footer").css("top","660px");
+        	$("#search_footer").css("top","680px");
             $("#location_main").css("display", "none");
             $("#location_main").css("height", "0px");
             $("#location_button").text("▼");
@@ -187,7 +187,7 @@
                     newLine += "</div>";
                     if(i==3){
                     	$("#search_listBox").css("height","960px");
-                    	$("#search_footer").css("top","1140px");
+                    	$("#search_footer").css("top","1180px");
                     }
                 });
                 $("#search_listBox").append(newLine);
