@@ -51,6 +51,9 @@
 				success : function (data) {
 					if(data.result != null){
 						var id = data.result;
+						///.{3}$/
+						id = id.replace(/.{3}$/, "***");
+						
 						console.log(data.result);
 						$("#result").html("ID : "+id);
 					}else{

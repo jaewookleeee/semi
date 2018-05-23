@@ -134,11 +134,7 @@
 		    	$("#qa").css("background-color","white");
 				$("#qa").css("color","black");
 			}			
-<<<<<<< HEAD
 			$("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {/*  $("#area").html(res) */ });
-=======
-			$("#area").load(page,{place_no:p_no},function(res, stat) { /*$("#area").html(res)*/ });
->>>>>>> e663105ee20f696efea188112b1d0e4b23333d22
 		});
 
    </script>

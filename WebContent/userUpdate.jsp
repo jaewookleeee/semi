@@ -139,6 +139,24 @@
 			}else{
 				msg.html("");
 			}
+			
+			$.ajax({
+				type : "post",
+				url : "./pwChk",
+				data : {
+					pw : $("#userPw").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					if(data.result != userPw.val()){
+						msg.html("현재 비밀번호가 틀립니다.");
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			}); 
 		}
 	
 		//비밀번호 onkeyup 이벤트

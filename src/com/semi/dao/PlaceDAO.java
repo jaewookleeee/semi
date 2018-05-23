@@ -268,6 +268,7 @@ public class PlaceDAO {
 			rs = ps.executeQuery();
 			if(rs.next()) {				
 				dto.setPlace_no(rs.getInt("place_no"));
+				dto.setInfo_id(rs.getString("info_id"));
 				dto.setPlace_name(rs.getString("place_name"));
 				dto.setPlace_info(rs.getString("place_intro"));
 				dto.setPlace_home(rs.getString("place_home"));

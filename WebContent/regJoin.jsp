@@ -551,8 +551,10 @@
 					success : function(data) {
 						console.log(data);
 						if(data.success > 0 && data.result2 == false){
-							alert("회원가입성공");
+							alert("회원가입 성공");
 							location.href="index.jsp";
+						}else{
+							alert("회원가입 실패");
 						}
 					},
 					error : function(error) {

@@ -124,6 +124,7 @@ public class InfoService {
 		System.out.println(id+", "+pw+", "+name+", "+gender+", "+email+", "+date+", "+num+", "+phone);
 		boolean resultNum = dao3.numOverlay(num);
 		int success = 0;
+		
 		if(resultNum ==false) {
 			dto.setInfo_id(id);
 			dto.setInfo_pw(pw);
@@ -256,7 +257,7 @@ public class InfoService {
 
 		int success = 0;
 		if(pw.equals(chk)) {
-			System.out.println("현재 비밀번호 맞음");
+			//System.out.println("현재 비밀번호 맞음");
 			dto.setInfo_id(id);
 			dto.setInfo_pw(newPw);
 			dto.setInfo_name(name);
@@ -266,8 +267,8 @@ public class InfoService {
 
 			success = dao.userUpdate(dto);
 		}else {
-			System.out.println("현재 비밀번호 틀림");
-			
+			dao.resClose();
+			//System.out.println("현재 비밀번호 틀림");
 		}
 		
 		Gson json = new Gson();
@@ -380,7 +381,7 @@ public class InfoService {
 			InfoDAO dao = new InfoDAO();
 			DTO dto = new DTO();
 			
-			String chk = dao.pwChk(id);
+			String chk = dao.pwChk(loginId);
 			
 			int success = 0;
 			if(pw.equals(chk)) {
@@ -395,6 +396,7 @@ public class InfoService {
 				dto.setInfo_phone(phone);
 				success = dao.regUpdate(dto);
 			}else {
+				dao.resClose();
 				System.out.println("현재 비밀번호 틀림");
 			}
 			
@@ -410,7 +412,7 @@ public class InfoService {
 			}
 
 			map.put("success", success);
-			
+			map.put("pwChk", chk);
 			String obj = json.toJson(map);
 			System.out.println(obj);
 			response.setContentType("text/html; charset=UTF-8");
@@ -705,6 +707,24 @@ public class InfoService {
 			String obj = json.toJson(map);
 			response.setContentType("text/html; charset=UTF-8");
 			response.getWriter().println(obj);
+		}
+
+		//현재 비밀번호 체크
+		public void pwChk(HttpServletRequest request, HttpServletResponse response) throws IOException {
+			String loginId = (String) request.getSession().getAttribute("loginId");
+			System.out.println(loginId);
+			
+			InfoDAO dao = new InfoDAO();
+			String result = dao.updatePwChk(loginId);
+			
+			Gson json = new Gson();
+			HashMap<String, String> map = new HashMap<>();
+			map.put("result", result);
+			
+			String obj = json.toJson(map);
+			System.out.println(obj);
+			response.getWriter().println(obj);
+			
 		}
 
 	
