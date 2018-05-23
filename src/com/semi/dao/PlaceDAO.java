@@ -144,7 +144,7 @@ public class PlaceDAO {
 		return list;
 	}
 
-	public long write(DTO dto) {
+	public long write(DTO dto) { //resClose 없음
 	String sql="INSERT INTO place(place_no,info_id,place_name,place_intro,place_home,"+
 			"place_loc,place_guid,place_attention,place_date,place_category,place_tel)"+" VALUES(place_seq.NEXTVAL,?,?,?,?,?,?,?,SYSDATE,?,?)";
 				long success=0;
@@ -346,7 +346,7 @@ public class PlaceDAO {
 		return success;
 	}
 
-	public DTO updatedetail(int place_no) {
+	public DTO updatedetail(int place_no) { //resClose 없음
 		System.out.println("DAO-place_no : "+place_no);
 		DTO dto = new DTO();
 		String sql ="SELECT * FROM place WHERE place_no =?";
@@ -375,7 +375,6 @@ public class PlaceDAO {
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return dto;
@@ -401,7 +400,7 @@ public class PlaceDAO {
 		return list;
 	}
 
-	public long update(DTO dto) {
+	public long update(DTO dto) { //resClose 없음
 		String sql="UPDATE place SET place_name=?,place_intro=?,place_home=?,"+
 				"place_loc=?,place_guid=?,place_attention=?,place_category=?,place_tel=?"+"WHERE place_no=? AND info_id=?";
 					long success=dto.getPlace_no();
@@ -433,7 +432,7 @@ public class PlaceDAO {
 					return success;
 	}
 
-	public ArrayList<DTO> writeupdatephoto(int place_no) {
+	public ArrayList<DTO> writeupdatephoto(int place_no) { //resClose 없음
 		ArrayList<DTO> list=new ArrayList<>();
 		String sql="SELECT * FROM photo WHERE place_no = ?";
 		try {
