@@ -5,6 +5,7 @@
 <script>
 	var loginId = "${sessionScope.loginId}";
 	var loginDiv = "${sessionScope.loginDiv}";
+
 	if(loginId == ""){
 		alert("로그인 후 사용가능");	
 		history.back();

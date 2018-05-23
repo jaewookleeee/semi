@@ -78,7 +78,7 @@ public class BoardDAO {
 	
 
 	//상세보기
-	public DTO detail(int i) {
+	public DTO detail(int i) { //resClose 없음
 		DTO dto = null;
 		String sql = "SELECT * FROM board WHERE board_no = ?";
 		try {

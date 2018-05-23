@@ -65,7 +65,7 @@
             <b id="email">이메일</b>
             <input id="regEmail" type="email" readonly="readonly"/>
             <b id="num">주민등록번호</b>
-            <input id="regNum" type="text" readonly="readonly"/>
+            <input id="regNum" type="password" readonly="readonly"/>
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone" type="tel" readonly="readonly"/>
             

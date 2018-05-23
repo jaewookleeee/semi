@@ -70,6 +70,7 @@
 		               },
 		               success : function(data){
 		                  $("#main").attr("src",'./upload/'+data.list[0].place_photo);
+		                  mainPhoto='./upload/'+data.list[0].place_photo;
 		                  for(var i=0;i<data.list.length;i++){
 		                  $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
 		                  }
@@ -135,7 +136,6 @@
 				$("#qa").css("color","black");
 			}			
 			$("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {/*  $("#area").html(res) */ });
-
 		});
 
    </script>

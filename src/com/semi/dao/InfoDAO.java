@@ -218,7 +218,7 @@ public class InfoDAO {
 	}
 
 	//회원수정 현재비밀번호 체크
-	public String pwChk(String loginId) {
+	public String pwChk(String loginId) {//resClose 없음
 		String result = null;
 		String sql = "SELECT info_pw FROM info WHERE info_id=?";
 		try {

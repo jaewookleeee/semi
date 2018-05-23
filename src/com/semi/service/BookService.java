@@ -51,6 +51,7 @@ public class BookService {
 		String startTime = request.getParameter("startTime");
 		String endTime = request.getParameter("endTime");
 		String custom = request.getParameter("custom");
+		if(custom.equals("6명 이상")) {custom="6";}
 		String price = request.getParameter("price");
 		
 		Date date2 = Date.valueOf(date);
