@@ -265,9 +265,9 @@
 			  var title = $("#board_title");
 			  console.log("공지 내용 : "+frm.val().length);
 			  console.log("공지 제목 : "+title.val().length);
-			  if(frm.val().length > 300){  
-			       alert("내용 글자수는 300자로 제한됩니다.!");  
-			       frm.val(frm.val().substring(0,300));  
+			  if(frm.val().length > 1000){  
+			       alert("내용 글자수는 1000자로 제한됩니다.!");  
+			       frm.val(frm.val().substring(0,1000));  
 			       frm.focus();  
 			  }
 		       if(title.val().length > 50){
