@@ -341,11 +341,11 @@
 			  var frm = $("#board_content");
 			  var title = $("#board_title");
 			  var answerTxt = $("#answerTxt");
-			  var reply = $("#reply");
+			 
 			  console.log("문의 내용 : "+frm.val().length);
 			  console.log("문의 제목 : "+title.val().length);
 			  console.log("답글 내용 : "+answerTxt.val().length);
-			  console.log("답글 내용 수정 : "+reply.val().length)
+			 
 			  if(frm.val().length > 1000){  
 			       alert("내용 글자수는 1000자로 제한됩니다.!");  
 			       frm.val(frm.val().substring(0,1000));  
@@ -361,12 +361,17 @@
 		    	   answerTxt.val(answerTxt.val().substring(0,300));  
 		    	   answerTxt.focus(); 			    	   
 		       }
-		       if(reply.val().length > 300){
+		       
+			}
+		function len_chk2(data){  
+			 var reply = $("textarea[name='"+data+"']");
+			 console.log("답글 내용 수정 : "+$("textarea[name='"+data+"']").val().length);
+			 if(reply.val().length > 300){
 		    	   alert("답글 글자수는 300자로 제한됩니다!");
 		    	   reply.val(reply.val().substring(0,300));  
 		    	   reply.focus(); 			    	   
-		       }
-			}
+		       } 
+		}
 		
 		//문의사항 답글쓰기
 		$("#answerWrite").click(function(){
@@ -410,7 +415,7 @@
 					content+="<table id='replyTable'>"
 					content+="<tr id='replyTr'>";
 					content+="<th id='replyInfo' class='replyInfo"+item.rnum+"'  name='replyInfo"+item.reply_no+"'><input type='hidden' id='rnum' value='"+item.rnum+"'/>"+item.info_id+"</th>";
-					content+="<td id='replyContent' class='replyContent"+item.rnum+"'><textarea id='reply' onKeyup='len_chk()' name="+item.reply_no+"  readonly>"+item.reply_content+"</textarea></td>";
+					content+="<td id='replyContent' class='replyContent"+item.rnum+"'><textarea id='reply' onKeyup='len_chk2("+item.reply_no+")' name="+item.reply_no+"  readonly>"+item.reply_content+"</textarea></td>";
 					content+="<td id='replyBtn' class='replyBtn'"+item.reply_no+" name='replyBtn"+item.rnum+"'><button id='replyUpdate'  value='"+item.reply_no+
 					"' name='"+item.reply_no+"' onclick='replyUp.call(this)'>수정</button><br/><br/><button  name='"+item.reply_no+
 					"' onclick='replyDel.call(this)'  value='"+item.reply_no+"'>삭제</button><button id='replyUpdateOk'  value='"+item.reply_no+

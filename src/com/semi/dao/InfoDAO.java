@@ -489,7 +489,6 @@ public class InfoDAO {
 						DTO dto = new DTO();
 						dto.setPlace_no(rs.getInt("place_no"));
 						dto.setPlace_name(rs.getString("place_name"));
-						dto.setPlace_date(Timestamp.valueOf(rs.getString("place_date")));
 						list.add(dto);
 					}
 				} catch (SQLException e) {
