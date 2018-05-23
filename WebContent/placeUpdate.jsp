@@ -46,7 +46,7 @@
                <div class="div_title"><strong>필수정보</strong></div>
 
                <div class="sub_title">상호명</div>
-               <div class="div_content"><input maxlength="10" name ="place_name" id="placename" type="text" placeholder="상호명을 입력해주세요."onkeyup="onKeyUp_placename()"/></div>
+               <div class="div_content"><input maxlength="20" name ="place_name" id="placename" type="text" placeholder="상호명을 입력해주세요."onkeyup="onKeyUp_placename()"/></div>
                <span class="place_span" id="place_n"></span>
 			   <div class="sub_title">카테고리</div>
 			   <select name="categoly" id="categoly">
@@ -130,16 +130,16 @@ console.log(place_no);
 for(var i=0;i<24;i++){
 	$(".time").append('<option>'+i+':00</option>');
 }
-//상호명 글자수 제한
+/* //상호명 글자수 제한
 function onKeyUp_placename(){
-	if($("#placename").val().length>10){
+	if($("#placename").val().length>20){
 		$("#place_n").css("color","red");
-		$("#place_n").html("상호명이 10자를 넘었습니다")
-	}else if($("#placename").val().length<=10){
+		$("#place_n").html("상호명이 20자를 넘었습니다")
+	}else if($("#placename").val().length<=20){
 		$("#place_n").css("color","green");
-		$("#place_n").html("상호명은 10자이내로 작성해주세요")
+		$("#place_n").html("상호명은 20자이내로 작성해주세요")
 	}
-}
+} */
 $(document).ready(function(){
 	console.log($("#photo1"));
 	$.ajax({
@@ -158,7 +158,7 @@ $(document).ready(function(){
 			$("#categoly").val(data.dto.place_category);
 			$("#phone1").val(phone[0]);
 			$("#phone2").val(phone[1]);
-			$("#phone3").val(phone[2]);
+			$("#phone3").val(phone[2].trim());
 			$("#homepage").val(data.dto.place_home);
 			$("#postnumber").val(array_loc[0]);
 			$("#addr").val(array_loc[1]);
@@ -246,12 +246,12 @@ $(document).ready(function(){
     }
 	//상호명 글자수 제한
 	function onKeyUp_placename(){
-		if($("#placename").val().length>10){
+		if($("#placename").val().length>20){
 			$("#place_n").css("color","red");
-			$("#place_n").html("상호명이 10자를 넘었습니다")
-		}else if($("#placename").val().length<=10){
+			$("#place_n").html("상호명이 20자를 넘었습니다")
+		}else if($("#placename").val().length<=20){
 			$("#place_n").css("color","green");
-			$("#place_n").html("상호명은 10자이내로 작성해주세요")
+			$("#place_n").html("상호명은 20자이내로 작성해주세요")
 		}
 	}
 	//시설안내 글자수 제한

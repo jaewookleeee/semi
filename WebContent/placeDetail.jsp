@@ -41,7 +41,7 @@
                     <div id="loc_short" class="cate"></div>
                     <div id="phone" class="cate"></div>
                     <div id="place_id" class="cate"></div>
-                    <input id="homepage" type="text" value="홈페이지 없음"/>
+                    <input id="homepage" type="text" value="홈페이지 없음" readonly/>
                     <input class="sel_btn" id="date" type="date"/>
                     <select class="sel_btn" id="starttime"><option>시작시간</option></select>
                     <select class="sel_btn" id="endtime"><option>끝시간</option></select>
