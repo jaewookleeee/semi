@@ -87,7 +87,7 @@
             <b id="birth">생년월일</b>
             <select name="userBirthYear" id="userBirthYear" onclick="onClick_birth()" onkeyup="onKeyUp_birth()">
             	<option value="년도" selected>년도</option>
-            	<%for(int i=1950; i<2019; i++){ %>
+            	<%for(int i=1920; i<2003; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
             </select>
