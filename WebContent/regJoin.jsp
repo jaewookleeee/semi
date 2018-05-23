@@ -125,7 +125,7 @@
             <b id="num">주민등록번호</b>
             <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num1()" />
             <span id="regNum-">-</span>
-            <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num2()"/>
+            <input id="regNum2" type="password" placeholder="" onkeyup="onKeyUp_num2()"/>
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
