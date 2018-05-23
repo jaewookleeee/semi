@@ -218,12 +218,12 @@ public class InfoDAO {
 	}
 
 	//회원수정 현재비밀번호 체크
-	public String pwChk(String id) {
+	public String pwChk(String loginId) {
 		String result = null;
 		String sql = "SELECT info_pw FROM info WHERE info_id=?";
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, id);
+			ps.setString(1, loginId);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				result = rs.getString("info_pw");
@@ -588,6 +588,26 @@ public class InfoDAO {
 					ps.setString(1, id);
 					ps.setString(2, name);
 					ps.setString(3, email);
+					rs = ps.executeQuery();
+					if(rs.next()) {
+						result = rs.getString("info_pw");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return null;
+				}finally {
+					resClose();
+				}
+				return result;
+			}
+
+			//회원정보수정 현재비밀번호 체크
+			public String updatePwChk(String loginId) {
+				String result = null;
+				String sql = "SELECT info_pw FROM info WHERE info_id=?";
+				try {
+					ps = conn.prepareStatement(sql);
+					ps.setString(1, loginId);
 					rs = ps.executeQuery();
 					if(rs.next()) {
 						result = rs.getString("info_pw");
