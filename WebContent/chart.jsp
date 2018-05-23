@@ -150,6 +150,7 @@
 			console.log($("#date2").val());
 			console.log($("input[name='chk']").val()); */
 			//검색 버튼을 누르자마자 예약자 통계 부분의 테이블의 껍데기를 변수에 담음(페이징할때 사용)
+			tableTh = $("#table2").children().html();
 			if($("input[name='chk']:checked").val() == null){
 				alert("장소를 선택 해 주세요");
 			}else if($("#date1").val()=="" || $("#date2").val() == ""){
@@ -166,6 +167,8 @@
 				};
 				obj.success=function(data){
 					//console.log(data);
+					$("#table2").empty(); //테이블 안에 있는 것을 비우고
+    		    	$("#table2").append(tableTh); //테이블 자식요소를 넣음
 					table2printlist(data.list);
 				};
 				ajaxCall(obj);
