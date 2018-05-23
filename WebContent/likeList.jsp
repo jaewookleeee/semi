@@ -192,7 +192,7 @@
     	});
     	
     	//전체 체크or해제
-    	$("#allckh").click(function(){
+    	$(document).on("click", "#allckh", function(){
     		if($("#allckh").prop("checked")){// th에 있는 체크박스에 체크가 되어있으면
     			$("input[type='checkbox']").prop("checked", true);
     		}else{
