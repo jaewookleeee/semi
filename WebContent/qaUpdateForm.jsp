@@ -66,7 +66,7 @@
             
             #content {
                 width: 1000px;
-                height: 400px;
+                height: 200px;
                 font-family: 'Nanum Square', sans-serif;
             }
 		</style>

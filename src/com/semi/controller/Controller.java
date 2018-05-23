@@ -17,7 +17,9 @@ import com.semi.service.QaService;
 import com.semi.service.ReviewService;
 
 
-@WebServlet({"/emailOverlay", "/numOverlay", "/id", "/pw", "/bookInfo", "/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
+
+
+@WebServlet({"/pwChk", "/emailOverlay", "/numOverlay", "/id", "/pw", "/bookInfo", "/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel","/detaillikedel","/detaillike",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch","/noticeDetailView","/noticeDel",
@@ -48,6 +50,11 @@ public class Controller extends HttpServlet {
 		QaService qaService = null;
 		ReviewService reviewService = null;
 		switch (subAddr) {
+			case "/pwChk":
+				System.out.println("현재 비밀번호 확인 요청");
+				infoService = new InfoService();
+				infoService.pwChk(request, response);
+			break;
 			case "/id":
 				System.out.println("아이디 찾기 요청");
 				infoService = new InfoService();

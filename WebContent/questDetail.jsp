@@ -34,7 +34,7 @@
                  margin: 0 auto;
 			}
 			#content{
-				height: 150px;
+				height: 200px;
 			}
 			button{
 				width: 55px;
@@ -86,13 +86,7 @@
 			textarea{
 				width: 100%;
 				height: 100%;
-				text-align:center;
 				border: 0px;
-				padding-left:5;
-				padding-right:50;
-				padding-bottom:50;
-				padding-top:50;
-				word-break:break-all;
 			}
 			#replyContent{
 				width: 450px;
@@ -114,9 +108,7 @@
 				height: 50px;
 				background-color: gray;
 				display: table;
-			}
-
-			
+			}			
 			
 			.answerBtn{
 				background-color: lightgray;
@@ -138,6 +130,9 @@
 				text-align: center;
 				font-size: 15pt;
 				font-weight: 900;
+			}
+			#replyTable{
+				height: 110px;
 			}
 		</style>
 	</head>
@@ -234,7 +229,11 @@
 				$("#info_id").text(data.dto.info_id);
 				$("#board_content").val(data.dto.board_content);
 				//$("#answerDiv").append(tableTh);
-				
+				if($("#info_id").text() != "${loginId}" && "${loginId}" != "ADMIN"){
+					$("#update").css("display","none");
+					$("#delete").css("display","none");
+					$("#list").css("left","1080px");
+				}
 				replyPrint(data.list);
 
 				 for(var i=0; i<data.list.length; i++){
@@ -347,9 +346,9 @@
 			  console.log("문의 제목 : "+title.val().length);
 			  console.log("답글 내용 : "+answerTxt.val().length);
 			  console.log("답글 내용 수정 : "+reply.val().length)
-			  if(frm.val().length > 300){  
-			       alert("내용 글자수는 300자로 제한됩니다.!");  
-			       frm.val(frm.val().substring(0,300));  
+			  if(frm.val().length > 1000){  
+			       alert("내용 글자수는 1000자로 제한됩니다.!");  
+			       frm.val(frm.val().substring(0,1000));  
 			       frm.focus();  
 			  }
 		       if(title.val().length > 50){
@@ -408,9 +407,9 @@
 					 if(item.info_id == "ADMIN"){
 						item.info_id = "관리자";
 					} 
-					content+="<table>"
+					content+="<table id='replyTable'>"
 					content+="<tr id='replyTr'>";
-					content+="<th id='replyInfo' class='replyInfo"+item.rnum+"'><input type='hidden' id='rnum' value='"+item.rnum+"'/>"+item.info_id+"</th>";
+					content+="<th id='replyInfo' class='replyInfo"+item.rnum+"'  name='replyInfo"+item.reply_no+"'><input type='hidden' id='rnum' value='"+item.rnum+"'/>"+item.info_id+"</th>";
 					content+="<td id='replyContent' class='replyContent"+item.rnum+"'><textarea id='reply' onKeyup='len_chk()' name="+item.reply_no+"  readonly>"+item.reply_content+"</textarea></td>";
 					content+="<td id='replyBtn' class='replyBtn'"+item.reply_no+" name='replyBtn"+item.rnum+"'><button id='replyUpdate'  value='"+item.reply_no+
 					"' name='"+item.reply_no+"' onclick='replyUp.call(this)'>수정</button><br/><br/><button  name='"+item.reply_no+
@@ -426,11 +425,13 @@
 		//답글 수정페이지 요청(수정버튼)
 		function replyUp(){
 			var replyUp = $(this).val();
+			console.log(replyUp);
 		    /* if(replyUp == $("#reply"+replyUp+"")){
 				console.log($("#reply").val());
 			}  */
-			console.log($("#replyInfo").text());
-			if($("#replyInfo"+replyUp+"").text() == "${loginId}" || "${loginId}" == "ADMIN"){
+			console.log($("th[name='replyInfo"+$(this).val()+"']").text());
+			console.log("${loginId}");
+			if($("th[name='replyInfo"+$(this).val()+"']").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
 				$("textarea[name='"+replyUp+"']").attr("readonly",false);
 				$("textarea[name='"+replyUp+"']").focus();
@@ -479,8 +480,8 @@
 		
 		//답글 삭제
 		function replyDel(){
-			console.log($("#replyInfo"+$(this).val()+"").text());
-			 if($("#replyInfo"+$(this).val()+"").text() == "${loginId}" || "${loginId}" == "ADMIN"){
+			console.log($("th[name='replyInfo"+$(this).val()+"']").text());
+			 if($("th[name='replyInfo"+$(this).val()+"']").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
 				obj.url="./boardReplyDel?reply_no="+$(this).val();	
 				obj.data={

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 540px; left: 40%;
@@ -139,6 +139,24 @@
 			}else{
 				msg.html("");
 			}
+			
+			$.ajax({
+				type : "post",
+				url : "./pwChk",
+				data : {
+					pw : $("#userPw").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					console.log(data);
+					if(data.result != userPw.val()){
+						msg.html("현재 비밀번호가 틀립니다.");
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			}); 
 		}
 	
 		//비밀번호 onkeyup 이벤트

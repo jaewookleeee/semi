@@ -7,9 +7,9 @@
 	var loginDiv = "${sessionScope.loginDiv}";
 
 	if(loginId == ""){
-		alert("로그인 후 이용가능");
+		alert("로그인 후 사용가능");	
 		history.back();
-	}else if(loginId != null && loginDiv == "사용자" || loginDiv =="관리자"){
+	}else if(loginId != null && loginDiv == "사용자"){
 		alert("등록자로 전환후 이용가능");
 		history.back();
 	}else if(loginId != null && loginDiv == "등록자"){
