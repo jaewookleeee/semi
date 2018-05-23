@@ -33,10 +33,10 @@
 	        <img id="main"/><br/>
 			<div class="sub_div">
 	        	<img id="sub1" class="sub" />
-	        	<img id="sub2" class="sub" />
-	        	<img id="sub3" class="sub" />
-		        <img id="sub4" class="sub" />
-		        <img id="sub5" class="sub" />
+	        	<img id="sub2" class="sub" src="noimage.jpg"/>
+	        	<img id="sub3" class="sub" src="noimage.jpg"/>
+		        <img id="sub4" class="sub" src="noimage.jpg"/>
+		        <img id="sub5" class="sub" src="noimage.jpg"/>
 		    </div>
 	        <div id="allinfo">
 	            <div class="info" id="detail">상세정보</div>
