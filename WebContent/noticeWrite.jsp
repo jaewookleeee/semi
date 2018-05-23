@@ -146,9 +146,9 @@
 			  var title = document.getElementById("board_title");
 			  console.log(frm.value.length);
 			  console.log(title.value.length);
-			  if(frm.value.length > 300){  
-			       alert("내용 글자수는 300자로 제한됩니다.!");  
-			       frm.value = frm.value.substring(0,300);  
+			  if(frm.value.length > 1000){  
+			       alert("내용 글자수는 1000자로 제한됩니다.!");  
+			       frm.value = frm.value.substring(0,1000);  
 			       frm.focus();  
 			       if(title.value.length > 50){
 			    	   alert("제목 글자수는 50자로 제한됩니다!");
