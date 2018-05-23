@@ -62,7 +62,7 @@ public class BookDAO {
 	public int bookWrite(DTO dto, String loginId) {
 		int success = 0;
 		String sql = "INSERT INTO book(book_no, place_no, info_id, book_date, book_start, book_end, book_price, book_custom) "+
-		"VALUES(book_seq.NEXTVAL, ?, ?, TO_DATE(?,'YYYY-MM-DD'), TO_DATE(?,'hh24:mi'), TO_DATE(?,'hh24:mi'), ?, ?)";
+		"VALUES(book_seq.NEXTVAL, ?, ?, TO_DATE(?,'YY-MM-DD'), TO_DATE(?,'hh24:mi'), TO_DATE(?,'hh24:mi'), ?, ?)";
 		try {
 			ps = conn.prepareStatement(sql, new String[] {"book_no"});
 			ps.setInt(1, dto.getPlace_no());

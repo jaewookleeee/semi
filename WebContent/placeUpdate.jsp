@@ -58,7 +58,7 @@
                        <option>공연장</option>
                </select>
                <div class="sub_title">장소 사진</div>
-               <span class="photo_desc">사진은 최소 1장에서 최대 5장까지 업로드가 가능합니다.새로운 사진을 입력하세요</span>
+               <span class="photo_desc">수정시 기존 사진이 삭제 됩니다 새로운 사진을 넣어주세요</span>
                <div class="div_content">
                    <input name="photo1" id="photo1" type="file"/><br/>
                    <input name="photo2" id="photo2" type="file"/><br/>
@@ -75,6 +75,7 @@
                </div>
 
                <div class="sub_title">이용시간 & 이용요금</div>
+               <span class="photo_desc">시간을 다시 설정해주세요</span>
                <div class="div_content">
                    <select name="start" class="time" id="starttime">
                        <option>시작시간</option>
