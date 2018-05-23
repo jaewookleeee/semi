@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.semi.dao.QaDAO;
 import com.semi.dto.DTO;
 
@@ -76,7 +75,7 @@ public class QaService {
 		QaDAO dao = new QaDAO();
 		ArrayList<DTO> list = dao.list(place_no, start, end);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new Gson();
 		HashMap<String, ArrayList<DTO>> map = new HashMap<>();
 		map.put("list", list);
 		
@@ -195,12 +194,11 @@ public class QaService {
 		String info_id = request.getParameter("info_id");
 		int qa_no = Integer.parseInt(request.getParameter("qa_no"));
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new Gson();
 		HashMap<String, Object> map = new HashMap<>();
 		
 		// 글자수 제한
 		if(qa_reply_content.length() > 300) {
-			System.out.println("300자 넘어!");
 			map.put("msg", "Q&A 답변이 300자가 넘습니다.");
 		} else {
 			System.out.println("300자 안넘어!");
@@ -232,19 +230,23 @@ public class QaService {
 			e.printStackTrace();
 		}
 		
+		Gson gson = new Gson();
+		HashMap<String, String> map = new HashMap<>();
+		
 		int qareply_no = Integer.parseInt(request.getParameter("qareply_no"));
 		String qareply_content = request.getParameter("qareply_content");
 		
-		QaDAO dao = new QaDAO();
-		int qa_no = dao.qaReplyUpdate(qareply_no, qareply_content);
-		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-		HashMap<String, String> map = new HashMap<>();
-			
-		if(qa_no > 0) {
-			map.put("msg", "답변이 수정되었습니다.");
+		if(qareply_content.length() > 300) {
+			map.put("msg", "Q&A 답변이 300자가 넘습니다.");
 		} else {
-			map.put("msg", "답변 수정에 실패했습니다.");
+			QaDAO dao = new QaDAO();
+			int qa_no = dao.qaReplyUpdate(qareply_no, qareply_content);
+			
+			if(qa_no > 0) {
+				map.put("msg", "답변이 수정되었습니다.");
+			} else {
+				map.put("msg", "답변 수정에 실패했습니다.");
+			}
 		}
 		
 		String obj = gson.toJson(map);
@@ -260,7 +262,7 @@ public class QaService {
 		ArrayList<DTO> list = dao.qaReplyList(qa_no);
 	
 		if(list != null) {
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			Gson gson = new Gson();
 			HashMap<String, ArrayList<DTO>> map = new HashMap<>();
 			map.put("list", list);
 		
@@ -284,7 +286,7 @@ public class QaService {
 			msg = "Q&A 삭제에 성공했습니다.";
 		}
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new Gson();
 		HashMap<String, String> map = new HashMap<>();
 		map.put("qa_no", String.valueOf(qa_no));
 		map.put("msg", msg);
@@ -308,7 +310,7 @@ public class QaService {
 		QaDAO dao = new QaDAO();
 		ArrayList<DTO> list = dao.search(place_no, search_keyword);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new Gson();
 		HashMap<String, ArrayList<DTO>> map = new HashMap<>();
 		map.put("list", list);
 		
@@ -333,7 +335,7 @@ public class QaService {
 		QaDAO dao = new QaDAO();
 		int max_size = dao.listSize(place_no);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		Gson gson = new Gson();
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("max_size", max_size);
 		
