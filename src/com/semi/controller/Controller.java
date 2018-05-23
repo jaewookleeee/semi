@@ -17,7 +17,7 @@ import com.semi.service.QaService;
 import com.semi.service.ReviewService;
 
 
-@WebServlet({"/id", "/pw", "/bookInfo", "/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
+@WebServlet({"/emailOverlay", "/numOverlay", "/id", "/pw", "/bookInfo", "/userInfo", "/del","/overlay", "/login", "/logout", "/userJoin", "/regJoin", "/userUpdate", "/regUpdate", "/regChange", "/userDel",
 	"/userList", "/likeList", "/infoPlaceList", "/bookList", "/total", "/totalDetail", "/userSearch",
 	"/placeWrite", "/placeList", "/placeUpdate", "/placeDel","/placephotoDetail", "/placeDetail", "/placeDetailUp", "/like", "/likeDel","/detaillikedel","/detaillike",
 	"/placeSearch", "/boardWrite", "/boardUpdate", "/boardDel", "/boardDetail", "/boardDetailView","/boardList", "/boardSearch","/noticeDetailView","/noticeDel",
@@ -35,8 +35,7 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		dual(request, response);
 	}
-	private void dual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	private void dual(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		String uri = request.getRequestURI();
 		String context = request.getContextPath();
 		String subAddr = uri.substring(context.length());
@@ -48,7 +47,6 @@ public class Controller extends HttpServlet {
 		BookService bookService = null;
 		QaService qaService = null;
 		ReviewService reviewService = null;
-		
 		switch (subAddr) {
 			case "/id":
 				System.out.println("아이디 찾기 요청");
@@ -64,6 +62,11 @@ public class Controller extends HttpServlet {
 				System.out.println("중복체크 요청");
 				infoService = new InfoService();
 				infoService.overlay(request, response);
+				break;
+			case "/numOverlay":
+				System.out.println("주민등록번호 중복체크 요청");
+				infoService = new InfoService();
+				infoService.numOverlay(request, response);
 				break;
 			case "/login":
 				System.out.println("로그인 요청");

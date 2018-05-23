@@ -31,6 +31,10 @@
             #postnumber{background-color: rgba(125,125,125,0.3);}
             #addr{background-color: rgba(125,125,125,0.3); width: 400px;}
             .place_span{color : green;font-size: 12px }
+            
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none; margin: 0;}
 		</style>
 	</head>
 <body>
@@ -66,9 +70,9 @@
 
                <div class="sub_title">전화번호</div>
                <div class="div_content">
-                   <input maxlength="3" name="phone1" id="phone1" class="phone" type="text"/> 
-                   <input maxlength="4" name="phone2" id="phone2" class="phone" type="text"/> 
-                   <input maxlength="5" name="phone3" id="phone3" class="phone" type="text"/>
+                   <input maxlength="3" name="phone1" id="phone1" class="phone" type="number"/>
+                   <input maxlength="4" name="phone2" id="phone2" class="phone" type="number"/>
+                   <input maxlength="5" name="phone3" id="phone3" class="phone" type="number"/>
                </div>
 
                <div class="sub_title">이용시간 & 이용요금</div>
@@ -242,6 +246,7 @@ var formData = new FormData(form);
 			$("#place_content").html("주의사항은 2000자이내로 작성해주세요")
 		}
 	}
+	//한줄소개 글자수 제한
 	function place_info(){
 		if($("#info").val().length>30){
 			$("#p_info").css("color","red");

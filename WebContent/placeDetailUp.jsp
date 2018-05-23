@@ -134,7 +134,8 @@
 		    	$("#qa").css("background-color","white");
 				$("#qa").css("color","black");
 			}			
-			$("#area").load(page,{place_no:p_no},function(res, stat) { /*$("#area").html(res)*/ });
+			$("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {/*  $("#area").html(res) */ });
+
 		});
 
    </script>

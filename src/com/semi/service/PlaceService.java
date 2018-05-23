@@ -389,6 +389,7 @@ public class PlaceService {
 
 	         String page = "placeUpdate.jsp";
 	         request.setAttribute("place_no", success);
+	         request.setAttribute("page", "placeDetail.jsp");
 	 		if(success>0) {	 			
 	 			page = "placeDetailUp.jsp";
 	 		}

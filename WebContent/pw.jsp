@@ -38,7 +38,7 @@
 			<span id="email_s">이메일</span>
 			<input type="email" id="email"/>
 			<button id="btn" onclick="clickEvt()">pw 찾기</button>
-			<span id="result"></span>
+			<b><span id="result"></span></b>
 		</div> 
 		
 		
