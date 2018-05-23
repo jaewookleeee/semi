@@ -250,7 +250,7 @@
     			//console.log(item.book_no);
     			content += "<tr>";
     			content += "<td><input type='radio' name='chk' value='"+item.place_no+"'/></td>"
-    			content += "<td>"+idx+"</td>";
+    			content += "<td>"+(idx+1)+"</td>";
     			content += "<td>"+item.place_name+"</td>";
     			content += "<td class='bookCnt'></td>";
     			content += "</tr>";
