@@ -19,10 +19,10 @@
                 font-family: 'Nanum Square', sans-serif;
             }
             
-            #qa_header {
+            .qa_header {
                 width: 1000px;
                 margin-top: 50px;
-                font-size: 30px
+                font-size: 30px;
                 font-family: 'Nanum Square', sans-serif;
             }
             
@@ -68,7 +68,7 @@
             
             #content {
                 width: 1000px;
-                height: 300px;
+                height: 200px;
                 font-family: 'Nanum Square', sans-serif;
             }
             
@@ -143,7 +143,7 @@
 	<body>
 		<jsp:include page="menuBar.jsp"/>
         <div class="qa_detail">
-            <div id="qa_header" style="text-align: center;"><strong>Q&A</strong></div>
+            <div class="qa_header" style='text-align: center;'><strong>Q&A</strong></div>
             <table>
                 <tr class="table_border">
                     <th id="title_header">제목</th>
@@ -164,7 +164,7 @@
             </div>
             
             <div class="qa_reply">
-                <div id="qa_header"><strong>답변</strong></div>
+                <div class="qa_header"><strong>답변</strong></div>
                 <table>
                 	<tr id="reply_add"></tr>
                 </table><br/><br/><hr/>
