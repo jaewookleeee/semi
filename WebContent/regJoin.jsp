@@ -102,7 +102,7 @@
             <b id="birth">생년월일</b>
             <select name="regBirthYear" id="regBirthYear" onkeyup="onKeyUp_birth()" onclick="onClick_birth()">
             	<option value="년도" selected>년도</option>
-            	<%for(int i=1950; i<2019; i++){ %>
+            	<%for(int i=1920; i<2003; i++){ %>
             		<option value="<%=i %>"><%=i %></option>
             	<%} %>
             </select>
@@ -123,9 +123,9 @@
             <b id="email">이메일</b>
             <input id="regEmail" type="email" placeholder="이메일을 입력하세요." onkeyup="onKeyUp_email()"/>
             <b id="num">주민등록번호</b>
-            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num1()" />
+            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num1()" maxlength="6" />
             <span id="regNum-">-</span>
-            <input id="regNum2" type="password" placeholder="" onkeyup="onKeyUp_num2()"/>
+            <input id="regNum2" type="password" placeholder="" onkeyup="onKeyUp_num2()" maxlength="7"/>
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
