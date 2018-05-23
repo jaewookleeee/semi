@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 	     	div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 600px; left: 40%;
@@ -551,10 +551,8 @@
 					success : function(data) {
 						console.log(data);
 						if(data.success > 0 && data.result2 == false){
-							alert("회원가입 성공");
+							alert("회원가입성공");
 							location.href="index.jsp";
-						}else{
-							alert("회원가입 실패");
 						}
 					},
 					error : function(error) {

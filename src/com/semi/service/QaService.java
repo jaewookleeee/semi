@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.semi.dao.QaDAO;
 import com.semi.dto.DTO;
 
@@ -75,7 +76,7 @@ public class QaService {
 		QaDAO dao = new QaDAO();
 		ArrayList<DTO> list = dao.list(place_no, start, end);
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, ArrayList<DTO>> map = new HashMap<>();
 		map.put("list", list);
 		
@@ -194,7 +195,7 @@ public class QaService {
 		String info_id = request.getParameter("info_id");
 		int qa_no = Integer.parseInt(request.getParameter("qa_no"));
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, Object> map = new HashMap<>();
 		
 		// 글자수 제한
@@ -237,7 +238,7 @@ public class QaService {
 		QaDAO dao = new QaDAO();
 		int qa_no = dao.qaReplyUpdate(qareply_no, qareply_content);
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, String> map = new HashMap<>();
 			
 		if(qa_no > 0) {
@@ -259,7 +260,7 @@ public class QaService {
 		ArrayList<DTO> list = dao.qaReplyList(qa_no);
 	
 		if(list != null) {
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			HashMap<String, ArrayList<DTO>> map = new HashMap<>();
 			map.put("list", list);
 		
@@ -283,7 +284,7 @@ public class QaService {
 			msg = "Q&A 삭제에 성공했습니다.";
 		}
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, String> map = new HashMap<>();
 		map.put("qa_no", String.valueOf(qa_no));
 		map.put("msg", msg);
@@ -307,7 +308,7 @@ public class QaService {
 		QaDAO dao = new QaDAO();
 		ArrayList<DTO> list = dao.search(place_no, search_keyword);
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, ArrayList<DTO>> map = new HashMap<>();
 		map.put("list", list);
 		
@@ -332,7 +333,7 @@ public class QaService {
 		QaDAO dao = new QaDAO();
 		int max_size = dao.listSize(place_no);
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("max_size", max_size);
 		

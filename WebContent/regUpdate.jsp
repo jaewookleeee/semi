@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 320px; height: 650px; left: 40%;
@@ -136,9 +136,9 @@
             <b id="email">이메일</b>
             <input onkeyup="onKeyUp_email()" id="regEmail" type="email" placeholder="이메일을 입력하세요."/>
             <b id="num">주민등록번호</b>
-            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="6" readonly="readonly"/>
+            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="6"/>
             <span id="regNum-">-</span>
-            <input id="regNum2" type="password" placeholder="" onkeyup="onKeyUp_num()" maxlength="7" readonly="readonly"/>
+            <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="7"/>
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
@@ -161,22 +161,6 @@
         </div>
 	</body>
 	<script>
- 		$(document).ready(function () {
-			$.ajax({
-				type : "post",
-				url : "./userInfo",
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					$("#regNum1").val(data.userInfo.info_num.substring(0,6));
-					$("#regNum2").val(data.userInfo.info_num.substring(6,13));
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			});
-		});
-	
 		//현재 비밀번호 onkeyup 이벤트
 		function onKeyUp_pw(){
 			var regPw = $("#regPw");   
@@ -186,24 +170,6 @@
 			}else{
 				msg.html("");
 			}
-			 $.ajax({
-				type : "post",
-				url : "./pwChk",
-				data : {
-					pw : $("#regPw").val()
-				},
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					if(data.result != regPw.val()){
-						msg.html("현재 비밀번호가 틀립니다.");
-					}
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			}); 
-			
 		}
 	
 		//비밀번호 onkeyup 이벤트

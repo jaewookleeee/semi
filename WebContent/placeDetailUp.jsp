@@ -6,7 +6,7 @@
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Insert title here</title>
+      <title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=PmNgQawFPTLSC4A8I3lT&submodules=geocoder"></script>
       <style>

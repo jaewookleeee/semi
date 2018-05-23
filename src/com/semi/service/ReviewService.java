@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.semi.dao.QaDAO;
 import com.semi.dao.ReviewDAO;
 import com.semi.dto.DTO;
@@ -24,7 +25,7 @@ public class ReviewService {
 		ReviewDAO dao = new ReviewDAO();
 		ArrayList<DTO> list = dao.list(place_no);
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, ArrayList<DTO>> map = new HashMap<>();
 		map.put("list", list);
 		
@@ -46,7 +47,7 @@ public class ReviewService {
 		String review_content = request.getParameter("review_content");
 		double review_score = Double.parseDouble(request.getParameter("review_score"));
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, Object> map = new HashMap<>();
 		
 		// 글자수 제한 - 이용 후기 내용이 300자 이상일 경우,
@@ -81,7 +82,7 @@ public class ReviewService {
 		ReviewDAO dao = new ReviewDAO();
 		int place_no = dao.delete(review_no);
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("place_no", place_no);
 		
@@ -108,7 +109,7 @@ public class ReviewService {
 		int review_no = Integer.parseInt(request.getParameter("review_no"));
 		String review_content = request.getParameter("review_content");
 		
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		HashMap<String, String> map = new HashMap<>();
 		
 		// 글자수 제한 - 후기 내용이 300자 이상일 경우,

@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 			div{position:absolute; width:300px; height: 200px; 
@@ -51,9 +51,6 @@
 				success : function (data) {
 					if(data.result != null){
 						var id = data.result;
-						///.{3}$/
-						id = id.replace(/.{3}$/, "***");
-						
 						console.log(data.result);
 						$("#result").html("ID : "+id);
 					}else{
