@@ -6,7 +6,7 @@
 <html>
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Insert title here</title>
+      <title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=PmNgQawFPTLSC4A8I3lT&submodules=geocoder"></script>
       <style>
@@ -135,10 +135,7 @@
 				$("#qa").css("color","black");
 			}			
 			$("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {/*  $("#area").html(res) */ });
-<<<<<<< HEAD
-=======
 
->>>>>>> 49f5f57c7abe2a8d4ccc4f6222aaa682f77c9d5a
 		});
 
    </script>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>Insert title here</title>
+		<title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=PmNgQawFPTLSC4A8I3lT&submodules=geocoder"></script>
 		<style>
@@ -26,7 +26,6 @@
             .div_guide {position: relative; margin-top: 50px; width: 1100px; }
             .div_attention { position: relative; margin-top: 50px; width: 1100px; }
             .content { position: relative; margin-top: 50px; width: 1100px; height: 200px; border: 1px solid #7E7E7E; }
-            #homepage{width:1090px; margin-top:15px;}
 		</style>
 </head>
 <body>
@@ -40,8 +39,8 @@
                     <div id="categoly" class="cate"></div>
                     <div id="loc_short" class="cate"></div>
                     <div id="phone" class="cate"></div>
-                    <div id="place_id" class="cate"></div><br/>
-                    <input id="homepage" type="text" value="홈페이지 없음" readonly/>
+                    <div id="homepage" class="cate">홈페이지 없음</div>
+                    
                     <input class="sel_btn" id="date" type="date"/>
                     <select class="sel_btn" id="starttime"><option>시작시간</option></select>
                     <select class="sel_btn" id="endtime"><option>끝시간</option></select>
@@ -58,7 +57,7 @@
                     <button class="btn" id="book">예약하기</button>
                     <button class="btn" id="like">찜하기</button><br/>
                 </div>
-                <br/>
+                
                 <div class="div_locate">
                     <div class="title"><strong>위치</strong></div>
                     <input id="loc" class="address" type="text" readonly/><br/>
@@ -231,12 +230,11 @@ var cash=0;
 				
 				
 				$("#title").text(data.dto.place_name);
-				$("#place_id").html("등록자 아이디 : "+data.dto.info_id);
 				$("#intro").html(data.dto.place_info);
 				$("#categoly").html(data.dto.place_category);
 				$("#loc_short").html(array_loc[1]);
 				$("#phone").html(data.dto.place_phone);
-				$("#homepage").val(data.dto.place_home);
+				$("#homepage").html(data.dto.place_home);
 				$("#loc").val(array_loc[0]+array_loc[1]+array_loc[2]);
 				$("#guide").val(data.dto.place_guide);
 				$("#attention").val(data.dto.place_attention);
