@@ -26,6 +26,7 @@
             .div_guide {position: relative; margin-top: 50px; width: 1100px; }
             .div_attention { position: relative; margin-top: 50px; width: 1100px; }
             .content { position: relative; margin-top: 50px; width: 1100px; height: 200px; border: 1px solid #7E7E7E; }
+            #homepage{margin-top : 10px; width:1090px;}
 		</style>
 </head>
 <body>
@@ -39,8 +40,8 @@
                     <div id="categoly" class="cate"></div>
                     <div id="loc_short" class="cate"></div>
                     <div id="phone" class="cate"></div>
-                    <div id="homepage" class="cate">홈페이지 없음</div>
-                    
+                    <div id="place_id" class="cate"></div>
+                    <input id="homepage" type="text" value="홈페이지 없음"/>
                     <input class="sel_btn" id="date" type="date"/>
                     <select class="sel_btn" id="starttime"><option>시작시간</option></select>
                     <select class="sel_btn" id="endtime"><option>끝시간</option></select>
@@ -230,11 +231,12 @@ var cash=0;
 				
 				
 				$("#title").text(data.dto.place_name);
+				$("#place_id").html("등록자 : "+data.dto.info_id);
 				$("#intro").html(data.dto.place_info);
 				$("#categoly").html(data.dto.place_category);
 				$("#loc_short").html(array_loc[1]);
 				$("#phone").html(data.dto.place_phone);
-				$("#homepage").html(data.dto.place_home);
+				$("#homepage").val(data.dto.place_home);
 				$("#loc").val(array_loc[0]+array_loc[1]+array_loc[2]);
 				$("#guide").val(data.dto.place_guide);
 				$("#attention").val(data.dto.place_attention);

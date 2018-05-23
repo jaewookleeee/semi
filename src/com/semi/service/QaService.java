@@ -47,7 +47,7 @@ public class QaService {
 				
 				dto.setPlace_no(place_no);
 				dto.setQa_title(qa_title);
-				dto.setQa_content(qa_content);
+				dto.setQa_content((qa_content).replaceAll("\r\n", "<br/>"));
 				dto.setInfo_id(info_id);
 				
 				success = dao.write(dto);
