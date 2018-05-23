@@ -234,7 +234,11 @@
 				$("#info_id").text(data.dto.info_id);
 				$("#board_content").val(data.dto.board_content);
 				//$("#answerDiv").append(tableTh);
-				
+				if($("#info_id").text() != "${loginId}" && "${loginId}" != "ADMIN"){
+					$("#update").css("display","none");
+					$("#delete").css("display","none");
+					$("#list").css("left","1080px");
+				}
 				replyPrint(data.list);
 
 				 for(var i=0; i<data.list.length; i++){
@@ -430,7 +434,8 @@
 				console.log($("#reply").val());
 			}  */
 			console.log($("#replyInfo").text());
-			if($("#replyInfo"+replyUp+"").text() == "${loginId}" || "${loginId}" == "ADMIN"){
+			console.log("${loginId}");
+			if($("#replyInfo").text() == "${loginId}" || "${loginId}" == "ADMIN"){
 				console.log("OK");
 				$("textarea[name='"+replyUp+"']").attr("readonly",false);
 				$("textarea[name='"+replyUp+"']").focus();
