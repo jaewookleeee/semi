@@ -9,11 +9,15 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
+			/* 나눔 스퀘어 폰트 */
+            @import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
+            
             table {
                 position: relative;
                 width: 1000px;
                 margin-top: 50px;
                 border-collapse: collapse;
+                font-family: 'Nanum Square', sans-serif;
             }
             	
             th, td {
@@ -21,12 +25,14 @@
                 float: left;
                 text-align: center;
                 line-height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .qa {
                 position: relative;
                 margin-top: 50px;
                 width: 1000px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #qa_header {
@@ -34,40 +40,47 @@
                 height: 30px;
                 font-size: 30px;
                 line-height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .qa_row_header {
                 width: 1000px;
                 height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .qa_row_content {
                 width: 1000px;
                 height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #no {
                 width: 100px;
                 height: 30px;
                 line-height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #title {
                 width: 400px;
                 height: 30px;
                 line-height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #writer {
                 width: 200px;
                 height: 30px;
                 line-height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #write_date {
                 width: 200px;
                 height: 30px;
                 line-height: 30px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #search_area {
@@ -75,6 +88,7 @@
                 height: 30px;
                 margin-top: 30px;
                 margin-left: 350px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #search {
@@ -83,6 +97,7 @@
                 background-color: #343434;
                 color: white;
                 border: 0;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .btn {
@@ -91,17 +106,20 @@
                 background-color: #343434;
                 color: white;
                 border: 0;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             #qa_write {
                 margin-top: -50px;
                 margin-left: 250px;
                 margin-bottom: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
             
             .page {
                 margin-left: 350px;
                 margin-bottom: 50px;
+                font-family: 'Nanum Square', sans-serif;
             }
 		</style>
 	</head>
@@ -217,6 +235,35 @@
 		// 작성하기 버튼 클릭 시, qaWrite.jsp로 이동
 		$("#qa_write").click(function() {
 			location.href = "./qaWriteForm?place_no="+${param.place_no};
+		});
+		
+		// Q&A 제목 검색
+		$("#search").click(function() {
+			obj.url = "./qaSearch";
+			
+			obj.data = {
+				place_no: "${param.place_no}",
+				search_keyword: $("#search_area").val()
+			};
+			
+			obj.success = function(data) {
+				$(".qa_row_content").remove();
+				
+				if(data.list.length == 0) {
+					alert("키워드와 일치하는 Q&A가 없습니다.");
+				} else {
+					for(var i=data.list.length-1; i>=0; i--) {
+						var str = "<tr class='qa_row_content'>";
+						str += "<td id='no'>"+data.list[i].rnum+"</td>";
+						str += "<td id='title'><a href='./qaDetail?qa_no="+data.list[i].qa_no+"'>"+data.list[i].qa_title+"</a></td>";
+						str += "<td id='writer'>"+data.list[i].info_id+"</td>";
+						str += "<td id='write_date'>"+data.list[i].qa_date+"</td>";
+						str += "</tr>";	
+						$("#hide").after(str);
+					}
+				} 
+			}
+			ajaxCall(obj);
 		});
 		
 		function ajaxCall(param) {

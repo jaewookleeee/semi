@@ -32,8 +32,9 @@
             .logo { position: relative; top: 2px; margin-right: 50px; font-family: 'odibeeSans', sans-serif; font-size: 22px; color: #FF376C; }   
             .menu_item { position: relative; padding: 0px; line-height: 10px; left: 0px; margin-right: 40px; font-family: 'Nanum Square', sans-serif; font-size: 14px; }
 			.log { position: absolute; padding: 0px; width: 60px; height: 20px; line-height: 20px; margin-top: -5px; margin-left: 94%; font-family: 'Nanum Square', sans-serif; font-size: 14px; background-color: #FA5882; color: white; text-align: center; } 
-            span#login_id{position: absolute; font-size: 15px; left: 1200px; top: 10px;}
-            #login_idaTag{position: absolute; font-size: 15px; left: 1250px; top: 10px;}
+            span#login_id{position: absolute; font-size: 15px; left: 1200px; top: 12px;}
+            #login_idaTag{position: absolute; font-size: 15px; left: 1285px; top: 10px;}     
+            
             
             .submenu { position: absolute; display: none; width: 700px; height: 50px; top: 20px; left: -50px; background-color: white; }
             .submenu_item { position: relative; display: inline; width: 80px; height: 20px; left: 5px; margin: 3px 30px 10px 0px; line-height: 50px; font-family: 'Nanum Square', sans-serif; font-size: 14px; float:left; }
@@ -79,8 +80,9 @@
 	    	if(loginId != "") {
 	        	$("#login_btn").css("visibility", "hidden");
 	        	$("#logout").css("visibility", "visible");
-	        	$("#login_id").text("ㅎㅇ");
-	        	$("#login_idaTag").text(loginId+" 님"); 	
+	        	$("#login_id").text("안녕하세요. ");
+	        	$("#login_idaTag").text(loginId+" 님");
+	        	
 	    	}else {
 	        	$("#logout").css("visibility", "hidden");
 	        	$("#login_btn").css("visibility", "visible");

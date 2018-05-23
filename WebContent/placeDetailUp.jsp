@@ -57,56 +57,53 @@
 		    $("#main").attr("src",this.src);
 		    console.log("사진 클릭");
 		});	
-		
-		$(document).ready(function(){
-	         var p_no="${place_no}";
-	         var page="${page}";
-	         $.ajax({
-	               type:"post",
-	               url:"./placephotoDetail",
-	               dataType:"JSON",
-	               data:{
-	                  place_no:p_no
-	               },
-	               success : function(data){
-	                  $("#main").attr("src",'./upload/'+data.list[0].place_photo);
-	                  mainPhoto="./upload/"+data.list[0].place_photo;
-	                  console.log("아작스 안 : "+mainPhoto);
-	                  for(var i=0;i<data.list.length;i++){
-	                  $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
-	                  }
-	                  $("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) { $("#area").html(res) });
-	               },
-	               error:function(e){
-	                  console.log(e);
-	               }
-	         });        
-	         
-	         if(page == "qa.jsp") {
-	             $("#qa").css("background-color","#FF376C");
-	             $("#qa").css("color","white");
-	             $("#detail").css("background-color","white");
-	             $("#detail").css("color","black");
-	             $("#review").css("background-color","white");
-	             $("#review").css("color","black");
-	      	 } else if(page == "review.jsp") {
-	             $("#review").css("background-color","#FF376C");
-	             $("#review").css("color","white");
-	             $("#detail").css("background-color","white");
-	             $("#detail").css("color","black");
-	             $("#qa").css("background-color","white");
-	             $("#qa").css("color","black");
-	      	 } else {
-	             $("#detail").css("background-color","#FF376C");
-	             $("#detail").css("color","white");
-	             $("#review").css("background-color","white");
-	             $("#review").css("color","black");
-	             $("#qa").css("background-color","white");
-	             $("#qa").css("color","black");
-	      	 }
-	      });
 
-		
+		  $(document).ready(function(){
+		         var p_no="${place_no}";
+		         var page="${page}";
+		         $.ajax({
+		               type:"post",
+		               url:"./placephotoDetail",
+		               dataType:"JSON",
+		               data:{
+		                  place_no:p_no
+		               },
+		               success : function(data){
+		                  $("#main").attr("src",'./upload/'+data.list[0].place_photo);
+		                  for(var i=0;i<data.list.length;i++){
+		                  $("#sub"+(i+1)).attr("src",'./upload/'+data.list[i].place_photo);
+		                  }
+		                  $("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {/*  $("#area").html(res) */ });
+		               },
+		               error:function(e){
+		                  console.log(e);
+		               }
+		         });
+		         $("#area").load(page,{place_no:p_no},function(res, stat) { /* $("#area").html(res) */ });
+		         
+		         if(page == "qa.jsp") {
+		             $("#qa").css("background-color","#FF376C");
+		             $("#qa").css("color","white");
+		             $("#detail").css("background-color","white");
+		             $("#detail").css("color","black");
+		             $("#review").css("background-color","white");
+		             $("#review").css("color","black");
+		      	 } else if(page == "review.jsp") {
+		             $("#review").css("background-color","#FF376C");
+		             $("#review").css("color","white");
+		             $("#detail").css("background-color","white");
+		             $("#detail").css("color","black");
+		             $("#qa").css("background-color","white");
+		             $("#qa").css("color","black");
+		      	 } else {
+		             $("#detail").css("background-color","#FF376C");
+		             $("#detail").css("color","white");
+		             $("#review").css("background-color","white");
+		             $("#review").css("color","black");
+		             $("#qa").css("background-color","white");
+		             $("#qa").css("color","black");
+		      	 }
+		      });
 	
 		// div(상세정보, QA, 이용후기)를 클릭하면,
 		// 1. 클릭한 div의 색상을 핑크로 변경하고, 나머지 div의 색상을 흰색으로 설정
@@ -137,7 +134,12 @@
 		    	$("#qa").css("background-color","white");
 				$("#qa").css("color","black");
 			}			
+<<<<<<< HEAD
 			$("#area").load(page,{place_no:p_no,mainPhoto:mainPhoto},function(res, stat) {/*  $("#area").html(res) */ });
+=======
+			$("#area").load(page,{place_no:p_no},function(res, stat) { /*$("#area").html(res)*/ });
+>>>>>>> e663105ee20f696efea188112b1d0e4b23333d22
 		});
+
    </script>
 </html>
