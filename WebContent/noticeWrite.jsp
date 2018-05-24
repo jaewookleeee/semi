@@ -20,7 +20,6 @@
 				color: white;
 			}
 			body{
-				text-align: center;
 				width: 1000px; 				
                 max-width: none !important;
                 margin: 0 auto;
@@ -66,7 +65,9 @@
 				position: absolute;
 				left: 1045px;
 			}
-			
+			h1{
+				text-align: center;
+			}
 		</style>
 	</head>
 	<body>

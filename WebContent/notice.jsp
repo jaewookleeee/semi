@@ -27,7 +27,7 @@
 				width: 40px;
 			}
 			body{
-				text-align: center;
+				
 				width: 1000px; 				
                 max-width: none !important;
                 margin: 0 auto;
@@ -65,6 +65,17 @@
 			#searchDiv{
 				position: absolute;
 				left: 680px;
+			}
+			h1{
+				text-align: center;
+			}
+			#noticeBefore{
+				position: absolute;
+				left: 750px;
+			}
+			#noticeAfter{
+				position: absolute;
+				left: 850px;
 			}
 		</style>
 	</head>

@@ -10,7 +10,7 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
 			/*style area*/
-			table,th,td{
+			 table,th,td{
 				border: 1px solid black;
 				border-collapse: collapse;
 				text-align: center;
@@ -30,7 +30,7 @@
 				width: 40px;
 			}
 			body{
-				text-align: center;
+				/* text-align: center; */
 				width: 1000px; 				
                 max-width: none !important;
                 margin: 0 auto;
@@ -52,12 +52,14 @@
 				border-bottom: 1px solid #212121;
 				width: 220px;
 				text-align: center;
-			}
+			} 
 			#include{
 				height: 60px;
 			}		
-			
-			#quest{
+			h1{
+				text-align: center;
+			}
+			 #quest{
 				color: white;	
 				display: table-cell;
 				vertical-align: middle;
@@ -68,6 +70,14 @@
 			#searchDiv{
 				position: absolute;
 				left: 680px;
+			} 
+			#beforeList{
+				position: absolute;
+				left: 750px;
+			}
+			#afterList{
+				position: absolute;
+				left: 850px;
 			}
 		</style>
 	</head>

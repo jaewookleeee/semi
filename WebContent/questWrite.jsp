@@ -20,7 +20,7 @@
 				color: white;
 			}
 			body{
-				text-align: center;
+				
 				width: 1000px; 				
                 max-width: none !important;
                 margin: 0 auto;
@@ -63,6 +63,9 @@
 				font-size: 15pt;
 				font-weight: 900;
 				
+			}
+			h1{
+				text-align: center;
 			}
 		</style>
 	</head>

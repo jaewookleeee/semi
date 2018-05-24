@@ -28,7 +28,7 @@
 				width: 200px;
 			}
 			body{
-				 text-align: center; 
+				 
 				 width: 900px; 
                  max-width: none !important; 
                  margin: 0 auto;
@@ -133,6 +133,9 @@
 			}
 			#replyTable{
 				height: 110px;
+			}
+			h1{
+				text-align: center;
 			}
 		</style>
 	</head>

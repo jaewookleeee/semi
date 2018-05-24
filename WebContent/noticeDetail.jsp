@@ -27,7 +27,7 @@
 				width: 200px;
 			}
 			body{
-				text-align: center;
+				
 				width: 900px; 
                 max-width: none !important;
                 margin: 0 auto;
@@ -90,7 +90,9 @@
 			#include{
 				height: 60px;
 			}
-			
+			h1{
+				text-align: center;
+			}
 		</style>
 	</head>
 	<body>
