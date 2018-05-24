@@ -90,14 +90,16 @@
 						if(data.userList != null){//BoardService 에서 받은 list 값이 true 면은
 							//방법1
 	 						for(var i=0; i<data.userList.length; i++){
-								$("#userListTable").append("<tr>"+
-									"<td id='td_sel'><input  type='checkbox' value='"+data.userList[i].info_id+"'></td>"+	
-									"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
-									"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
-									"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
-									"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
-									"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
-									"</tr>");
+								if(data.userList[i].info_div != "관리자") {
+		 							$("#userListTable").append("<tr>"+
+										"<td id='td_sel'><input  type='checkbox' value='"+data.userList[i].info_id+"'></td>"+	
+										"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
+										"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
+										"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
+										"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
+										"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
+										"</tr>");
+								}
 							}
 						}
 					}
@@ -124,14 +126,16 @@
 						$("#userListTable").empty();
 						$("#userListTable").append("<tr><th id='th_sel'>선택</th><th id='th_id'>아이디</th><th id='th_name'>이름</th><th id='th_gender'>성별</th><th id='th_email'>이메일</th><th id='th_div'>구분</th></tr>");
 						for(var i=0; i<data.userList.length; i++){
-							$("#userListTable").append("<tr>"+
-								"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
-								"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
-								"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
-								"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
-								"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
-								"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
-								"</tr>");
+							if(data.userList[i].info_div != "관리자") {
+								$("#userListTable").append("<tr>"+
+									"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
+									"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
+									"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
+									"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
+									"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
+									"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
+									"</tr>");
+							}
 						}
 					},
 					error : function(error) {
@@ -157,14 +161,16 @@
 					$("#userListTable").append("<tr><th id='th_sel'>선택</th><th id='th_id'>아이디</th><th id='th_name'>이름</th><th id='th_gender'>성별</th><th id='th_email'>이메일</th><th id='th_div'>구분</th></tr>");
 					
 					for(var i=0; i<data.userList.length; i++){
-						$("#userListTable").append("<tr>"+
-							"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
-							"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
-							"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
-							"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
-							"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
-							"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
-							"</tr>");
+						if(data.userList[i].info_div != "관리자") {
+							$("#userListTable").append("<tr>"+
+								"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
+								"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
+								"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
+								"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
+								"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
+								"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
+								"</tr>");
+						}
 					}
 				},
 				error : function(error) {
@@ -221,14 +227,16 @@
     					$("#userListTable").append("<tr><th id='th_sel'>선택</th><th id='th_id'>아이디</th><th id='th_name'>이름</th><th id='th_gender'>성별</th><th id='th_email'>이메일</th><th id='th_div'>구분</th></tr>");
     					
     					for(var i=0; i<data.userList.length; i++){
-    						$("#userListTable").append("<tr>"+
-    							"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
-    							"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
-    							"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
-    							"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
-    							"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
-    							"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
-    							"</tr>");
+							if(data.userList[i].info_div != "관리자") {
+	    						$("#userListTable").append("<tr>"+
+	    							"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
+	    							"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
+	    							"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
+	    							"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
+	    							"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
+	    							"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
+	    							"</tr>");
+							}
     					}
     				}
 				},
@@ -260,14 +268,16 @@
     					$("#userListTable").append("<tr><th id='th_sel'>선택</th><th id='th_id'>아이디</th><th id='th_name'>이름</th><th id='th_gender'>성별</th><th id='th_email'>이메일</th><th id='th_div'>구분</th></tr>");
     					
     					for(var i=0; i<data.userList.length; i++){
-    						$("#userListTable").append("<tr>"+
-    							"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
-    							"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
-    							"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
-    							"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
-    							"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
-    							"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
-    							"</tr>");
+							if(data.userList[i].info_div != "관리자") {
+	    						$("#userListTable").append("<tr>"+
+	    							"<td id='td_sel'><input type='checkbox' value='"+data.userList[i].info_id+"'></td>"+
+	    							"<td id='td_id'>"+data.userList[i].info_id+"</td>"+
+	    							"<td id='td_name'>"+data.userList[i].info_name+"</td>"+
+	    							"<td id='td_gender'>"+data.userList[i].info_gender+"</td>"+
+	    							"<td id='td_email'>"+data.userList[i].info_email+"</td>"+
+	    							"<td id='td_div'>"+data.userList[i].info_div+"</td>"+
+	    							"</tr>");
+							}
     					}
     				}
 				},
