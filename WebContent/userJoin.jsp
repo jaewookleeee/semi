@@ -72,9 +72,9 @@
             <!--<input id="idChk" type="button" value="중복 확인"/>-->
             <!-- <button id="idChk" name="idChk">중복 확인</button> -->
             <b id="pw">비밀번호</b>
-            <input id="userPw" name="userPw" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw1()"/>
+            <input id="userPw" name="userPw" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw1()" maxlength="12"/>
             <b id="pwChk">비밀번호 확인</b>
-            <input id="userPwChk" name="userPwChk" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw2()"/>
+            <input id="userPwChk" name="userPwChk" type="password" placeholder="비밀번호를 입력하세요.(8~12)" onkeyup="onKeyUp_pw2()" maxlength="12"/>
             <b id="name">이&nbsp;&nbsp;&nbsp;&nbsp;름</b>
             <input id="userName" name="userName" type="text" placeholder="이름을 입력하세요." onkeyup="onKeyUp_name()"/>
             <b id="Gender">성&nbsp;&nbsp;&nbsp;&nbsp;별</b>
@@ -158,21 +158,6 @@
 				}
 			});
 		}
-		
-		//비밀번호 onkeyup 이벤트
-		/* function onKeyUp_pw(){
-			var userPwTxt1 = $("#userPw");
-			var userPwTxt2 = $("#userPwChk");
-			var msg = $("#pw_s");
-			
-			if(userPwTxt1.val().length < 8 || userPwTxt1.val().length >12){
-				msg.html("비밀번호 8~12자리 입력");
-			}else if(userPwTxt1.val() != userPwTxt2.val()){
-				msg.html("비밀번호가 맞지 않습니다.");
-			}else{
-				msg.html("");
-			}
-		} */
 		
 		//비밀번호 onkeyup 이벤트
 		function onKeyUp_pw1(){
@@ -382,8 +367,8 @@
 					success : function(data) {
 						console.log(data);
 						if(data.success > 0){
-							alert("회원 가입 성공");
-							location.href="index.jsp";
+							alert("회원가입 성공");
+							location.href="login.jsp";
 						}else{
 							alert("회원가입 실패");
 						}
@@ -394,36 +379,6 @@
 				});
 			}
 		});
-		
-		//중복체크
-		$("#idChk").click(function() {
-			var userIdTxt = $("#userId").val();
-			/* $.ajax({
-				type : "post",
-				url : "./overlay",
-				data : { id : $("#userId").val() },
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					if(userIdTxt==""){
-						alert("아이디 입력를 입력하세요.");
-						$("#userId").focus();
-					}else if($("#userId").val().length < 5 || $("#userId").val().length > 16){
-						alert("아이디는 5~16자리 입력");
-						$("#userId").focus();
-					}else if(data.result == true){
-						alert("중복된 아이디 입니다.");
-						$("#userId").focus();
-					}else{
-						alert("사용 가능한 아이디 입니다.");
-						$("#userPw").focus();
-						chk = true;
-					}
-				},
-				error : function(error) {
-					console.log(error);
-				}
-			}); */
-		});
+
 	</script>
 </html>

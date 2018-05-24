@@ -94,13 +94,13 @@
             <b id="id">아이디</b>
             <input id="regId" type="text" readonly value="${sessionScope.loginId }"/>
             <b id="pw">현재 비밀번호</b>
-            <input onkeyup="onKeyUp_pw()" id="regPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input onkeyup="onKeyUp_pw()" id="regPw" type="password" placeholder="비밀번호를 입력하세요." maxlength="12"/>
             
             <b id="newPw">새 비밀번호</b>
-            <input onkeyup="onKeyUp_pw1()" id="regNewPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input onkeyup="onKeyUp_pw1()" id="regNewPw" type="password" placeholder="비밀번호를 입력하세요." maxlength="12"/>
             
             <b id="newPwChk">새 비밀번호 확인</b>
-            <input onkeyup="onKeyUp_pw2()" id="regNewPwChk" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input onkeyup="onKeyUp_pw2()" id="regNewPwChk" type="password" placeholder="비밀번호를 입력하세요." maxlength="12" />
             
             <b id="name">이름</b>
             <input onkeyup="onKeyUp_name()" id="regName" type="text" placeholder="이름을 입력하세요."/>
@@ -136,9 +136,9 @@
             <b id="email">이메일</b>
             <input onkeyup="onKeyUp_email()" id="regEmail" type="email" placeholder="이메일을 입력하세요."/>
             <b id="num">주민등록번호</b>
-            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="6"/>
+            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="6" readonly="readonly"/>
             <span id="regNum-">-</span>
-            <input id="regNum2" type="text" placeholder="" onkeyup="onKeyUp_num()" maxlength="7"/>
+            <input id="regNum2" type="password" placeholder="" onkeyup="onKeyUp_num()" maxlength="7" readonly="readonly"/>
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone1" type="text" onkeyup="onKeyUp_phone()" maxlength="3"/>
             <span id="regPhone-1">-</span>
@@ -161,6 +161,23 @@
         </div>
 	</body>
 	<script>
+		$(document).ready(function () {
+			$.ajax({
+				type:"post",
+				url:"./userInfo",
+				dataType:"json",
+				success : function(data){
+					$("#regNum1").val(data.userInfo.info_num.substring(0,6));
+					$("#regNum2").val(data.userInfo.info_num.substring(6,13));
+				},
+				error : function (error) {
+					console.log(error);
+				}
+			});
+		});
+	
+		
+		
 		//현재 비밀번호 onkeyup 이벤트
 		function onKeyUp_pw(){
 			var regPw = $("#regPw");   
@@ -170,6 +187,22 @@
 			}else{
 				msg.html("");
 			}
+			$.ajax({
+				type : "post",
+				url : "./pwChk",
+				data : {
+					pw : $("#regPw").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					if(data.result != regPw.val()){
+						msg.html("현재 비밀번호가 틀립니다.");
+					}
+				},
+				error : function(error) {
+					console.log(error);
+				}
+			}); 
 		}
 	
 		//비밀번호 onkeyup 이벤트
@@ -231,7 +264,7 @@
 		}
 		
 		//생년월일 click 이벤트
-		function onClick_birth() {
+		function onClick_birht() {
 			var year = $("#regBirthYear");
 			var month = $("#regBirthMonth");
 			var day = $("#regBirthDay");
@@ -363,7 +396,7 @@
 				$("#regNewPwChk").focus();
 			}else if($("#regNewPw").val() != $("#regNewPwChk").val()){
 				//alert("비밀번호 재입력");
-				$("#pwC2_s").html("새 비밀번호 재입력");
+				$("#pwC2_s").html("비밀번호가 맞지 않습니다.");
 				$("#regNewPwChk").focus();//포커스 이동	
 			}else if($("#regName").val()==""){
 				//alert("이름을 입력");
@@ -392,9 +425,15 @@
 				//alert("주민등록번호 앞자리를 입력해주세요.");
 				$("#num_s").html("주민등록번호 앞자리를 입력하세요.");
 				$("#regNum1").focus();
+			}else if($("#regNum1").val().length < 6){
+				$("#num_s").html("주민등록번호 앞 6자리 입력");
+				$("#regNum1").focus();
 			}else if($("#regNum2").val()==""){
 				//alert("주민등록번호 뒷자리를 입력해주세요.");
 				$("#num_s").html("주민등록번호 뒷자리를 입력하세요.");
+				$("#regNum2").focus();
+			}else if($("#regNum2").val().length < 7){
+				$("#num_s").html("주민등록번호 뒤 7자리 입력");
 				$("#regNum2").focus();
 			}else if($("#regPhone1").val()==""){
 				//alert("휴대폰 번호를 입력해주세요.");
