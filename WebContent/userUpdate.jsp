@@ -75,13 +75,13 @@
             <input id="userId" type="text" value="${sessionScope.loginId }" readonly/>
             
             <b id="pw">현재 비밀번호</b>
-            <input onkeyup="onKeyUp_pw()" id="userPw" type="password" placeholder="비밀번호를 입력하세요."/>
+            <input onkeyup="onKeyUp_pw()" id="userPw" type="password" placeholder="비밀번호를 입력하세요." maxlength="12"/>
             
             <b id="newPw">새 비밀번호</b>
-            <input id="userNewPw" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw1()"/>
+            <input id="userNewPw" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw1()" maxlength="12"/>
             
             <b id="newPwChk">새 비밀번호 확인</b>
-            <input id="userNewPwChk" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw2()"/> 
+            <input id="userNewPwChk" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw2()" maxlength="12"/> 
             <b id="name">이름</b>
             <input onkeyup="onKeyUp_name()" id="userName" type="text" placeholder="이름을 입력하세요."/>
             <b id="Gender">성별</b>
@@ -148,7 +148,6 @@
 				},
 				dataType : "json",
 				success : function(data) {
-					console.log(data);
 					if(data.result != userPw.val()){
 						msg.html("현재 비밀번호가 틀립니다.");
 					}

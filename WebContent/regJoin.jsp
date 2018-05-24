@@ -86,11 +86,11 @@
 		<div id="main">
             <span id="regTxt"><b>등록자 회원가입</b></span>
             <b id="id">아이디</b>
-            <input id="regId" type="text" placeholder=" 아이디를 입력하세요." onkeyup="onKeyUp_idChk()"/>
+            <input id="regId" type="text" placeholder=" 아이디를 입력하세요." onkeyup="onKeyUp_idChk()" maxlength="16"/>
             <b id="pw">비밀번호</b>
-            <input id="regPw" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw1()"/>
+            <input id="regPw" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw1()" maxlength="12"/>
             <b id="pwChk">비밀번호 확인</b>
-            <input id="regPwChk" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw2()"/>
+            <input id="regPwChk" type="password" placeholder="비밀번호를 입력하세요." onkeyup="onKeyUp_pw2()" maxlength="12"/>
             <b id="name">이름</b>
             <input id="regName" type="text" placeholder="이름을 입력하세요." onkeyup="onKeyUp_name()"/>
             <b id="Gender">성별</b>
@@ -188,26 +188,6 @@
 				}
 			});
 		}
-		
-		
-		
-/* 		//비밀번호 onkeyup 이벤트
-		function onKeyUp_pw(){
-			var regPwTxt1 = $("#regPw");
-			var regPwTxt2 = $("#regPwChk");
-			var msg = $("#pw_s");
-			
-			if(regPwTxt1.val().length < 8 || regPwTxt1.val().length >12){
-				msg.html("비밀번호 8~12자리 입력");
-				//regPwTxt1.focus();
-			}else if(regPwTxt1.val() != regPwTxt2.val()){
-				msg.html("비밀번호가 맞지 않습니다.");
-				//regPwTxt2.focus();
-			}else{
-				msg.html("");
-				//$("#regName").focus();
-			}
-		} */
 		
 		//비밀번호 onkeyup 이벤트
 		function onKeyUp_pw1(){
@@ -551,8 +531,10 @@
 					success : function(data) {
 						console.log(data);
 						if(data.success > 0 && data.result2 == false){
-							alert("회원가입성공");
-							location.href="index.jsp";
+							alert("회원가입 성공");
+							location.href="login.jsp";
+						}else{
+							alert("회원가입 실패");
 						}
 					},
 					error : function(error) {

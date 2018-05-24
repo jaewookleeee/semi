@@ -66,15 +66,15 @@
 		<div id="main">
             <span id="regTxt"><b>등록자 전환</b></span>
             <b id="id">아이디</b>
-            <input id="regId" type="text" value="${sessionScope.loginId }" readonly>
+            <input id="regId" type="text" value="${sessionScope.loginId }" readonly="readonly">
             <b id="name">이름</b>
-            <input id="regName" type="text" value="" readonly/>
+            <input id="regName" type="text" value="" readonly="readonly"/>
             <b id="Gender">성별</b>
-            <input id="regGender" type="text" readonly/>
+            <input id="regGender" type="text" readonly="readonly"/>
             <b id="birth">생년월일</b>
             <input id="regBirth" type="text" readonly="readonly"/>
             <b id="email">이메일</b>
-            <input id="regEmail" type="email" readonly/>
+            <input id="regEmail" type="email" readonly="readonly"/>
             <b id="num">주민등록번호</b>
             <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num1()" maxlength="6"/>
             <span id="regNum-">-</span>
@@ -103,8 +103,8 @@
 				 dataType : "json",
 				 success : function (data) {
 					if(data.login==false){
-						alert("로그인ㄱ");
-						location.href="login.jsp";
+						alert("로그인 후 사용가능");
+						location.href="regDetail.jsp";
 					}else if(data.login==true && data.userInfo != null){
 						console.log(data.userInfo);
 						$("#regName").val(data.userInfo.info_name);
