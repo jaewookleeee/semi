@@ -9,6 +9,7 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=PmNgQawFPTLSC4A8I3lT&submodules=geocoder"></script>
 		<style>
+			#area div{cursor: default; }
             .regist { position: relative; width: 1200px; }  
             .sec_content { position: relative; }
             
@@ -16,17 +17,17 @@
             .title { position: relative; float: left; width: 550px; height: 30px; font-size: 30px; }          
             .intro { position: relative; float: left; margin-top: 50px; width: 1080px; height: 30px; line-height: 30px; border: 1px solid #7E7E7E; }
             .cate{ position: relative; float: left; margin-top: 10px; width: 270px; height: 30px; line-height: 30px; text-align: center; border: 1px solid #7E7E7E; }
-            .sel_btn { position: relative; float: left; margin-top: 10px; margin-right: 5px; width: 162px; height: 30px; background-color: #262626; color: white; border: 0; }
-            .btn { position: relative; float: left; margin-top: 10px; margin-right: 5px; width: 120px; height: 30px; background-color: #F04768; color: white; border: 0; }
+            .sel_btn { position: relative; float: left; margin-top: 10px; margin-right: 5px; width: 162px; height: 30px; background-color: #262626; color: white; border: 0; cursor: default;}
+            .btn { position: relative; float: left; margin-top: 10px; margin-right: 5px; width: 120px; height: 30px; background-color: #F04768; color: white; border: 0; cursor: pointer;}
             
             .div_locate { position: relative; margin-top: 50px; width: 1100px; height: 420px; }
-            .address { position: relative; margin-top: 50px; width: 1100px; height: 30px; border: 1px solid #7E7E7E; }
+            .address { position: relative; margin-top: 50px; width: 1100px; height: 30px; border: 1px solid #7E7E7E; cursor: default;}
             .place { position: relative; margin-top: 10px; width: 400px; height: 300px; border: 1px solid #7E7E7E; }
             
             .div_guide {position: relative; margin-top: 50px; width: 1100px; }
             .div_attention { position: relative; margin-top: 50px; width: 1100px; }
-            .content { position: relative; margin-top: 50px; width: 1100px; height: 200px; border: 1px solid #7E7E7E; }
-            #homepage{margin-top : 10px; width:1090px;}
+            .content { position: relative; margin-top: 50px; width: 1100px; height: 200px; border: 1px solid #7E7E7E; resize: none;cursor: default;}
+            #homepage{margin-top : 10px; width:1090px;cursor: default;}
 		</style>
 </head>
 <body>
@@ -229,7 +230,7 @@ var cash=0;
 				$("#loc_short").html(array_loc[1]);
 				$("#phone").html(data.dto.place_phone);
 				$("#homepage").val(data.dto.place_home);
-				$("#loc").val(array_loc[0]+array_loc[1]+array_loc[2]);
+				$("#loc").val("("+array_loc[0]+")"+array_loc[1]+" "+array_loc[2]);
 				$("#guide").val(data.dto.place_guide);
 				$("#attention").val(data.dto.place_attention);
 				$("#cash").val(data.dto.place_price);

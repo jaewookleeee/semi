@@ -14,5 +14,8 @@
 		history.back();
 	}else if(loginId != null && loginDiv == "등록자"){
 		location.href="placeWrite.jsp";
+	}else if(loginId != null && loginDiv == "관리자"){
+		alert("관리자는 등록 할 수 없습니다.");
+		history.back();
 	}
 </script>

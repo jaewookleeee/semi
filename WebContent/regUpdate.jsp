@@ -69,10 +69,10 @@
 	            width: 50px; height: 25px; font-size: 10px;             }
 
 	        button#cancel{ position: absolute; left: 180px; top: 607px; width: 50px; height: 25px;    
-	            color: white; background-color: black; border-style: none; font-size: 10px; }
+	            color: white; background-color: black; border-style: none; font-size: 10px;cursor: pointer; }
 	        button#save{
 	            position: absolute; left: 240px; top: 607px; width: 50px; height: 25px;
-	            font-size: 10px; color: white; background-color: black; border-style: none; }
+	            font-size: 10px; color: white; background-color: black; border-style: none;cursor: pointer; }
 	            
 	        span#pw_s{position: absolute; left: 75px; top: 157px;}
 	        span#pwC1_s{position: absolute; left: 75px; top: 210px;}

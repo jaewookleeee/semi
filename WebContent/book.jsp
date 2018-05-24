@@ -7,24 +7,26 @@
 		<title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style>
- 			div#bookInfo{ border: 1px solid black; position: absolute; left: 40%; top: 100px; 
+			/* 나눔 스퀘어 폰트 */
+			@import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
+			
+ 			div#bookInfo{ border: 1px solid black;  position: absolute; left: 40%; top: 100px; 
  				width: 300px; height: 280px; text-align: center; }
- 			b#a{position: absolute; left: 15px;}
- 			b#b{position: absolute; left: 15px; top: 90px;}
- 			b#c{position: absolute; left: 15px; top: 120px;}
- 			b#d{position: absolute; left: 15px; top: 150px;}
- 			b#e{position: absolute; left: 15px; top: 180px;}
+ 			b#a{position: absolute;  left: 15px;}
+ 			b#b{position: absolute;  left: 15px; top: 90px;}
+ 			b#c{position: absolute;  left: 15px; top: 120px;}
+ 			b#d{position: absolute;  left: 15px; top: 150px;}
+ 			b#e{position: absolute;  left: 15px; top: 180px;}
  			
- 			span#placeName{position: absolute; left: 100px;}
- 			span#bookDate{position: absolute; left: 100px; top: 90px;}
- 			span#bookTime{position: absolute; left: 100px; top: 120px;}
- 			span#bookCustom{position: absolute; left: 100px; top: 150px;}
- 			span#bookPrice{position: absolute; left: 70px; top: 180px;}
+ 			span#placeName{position: absolute;  left: 100px;}
+ 			span#bookDate{position: absolute;  left: 100px; top: 90px;}
+ 			span#bookTime{position: absolute;  left: 100px; top: 120px;}
+ 			span#bookCustom{position: absolute;  left: 100px; top: 150px;}
+ 			span#bookPrice{position: absolute;  left: 70px; top: 180px;}
  			
- 			
- 			button{border: none; background-color: black; color: white;}
- 			button#mainPage{position: absolute; left: 60px; top: 220px}
- 			button#book{position: absolute; left: 150px; top: 220px}
+ 			button{border: none;  background-color: black; color: white;}
+ 			button#mainPage{position: absolute;  left: 60px; top: 220px}
+ 			button#book{position: absolute;  left: 150px; top: 220px}
 		</style>
 	</head>
 	<body>

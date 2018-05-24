@@ -54,19 +54,21 @@
             select{
                 width: 150px;
                 height: 25px;
-            
             }
             #search{
                 position: absolute;
                 left: 950px;
+                
             }
             #date1{
                 position: absolute;
             	left: 630px;
+                
             }
             #date2{
                 position: absolute;
                 left: 810px;
+                
             }
             #date3{
                 position: absolute;
@@ -75,6 +77,7 @@
                 border: 1px solid gray;
                 padding: 0 10px;
                 font-weight: 600;
+                
             }
             #menuBar{
             	height: 20px;
@@ -99,7 +102,7 @@
             <tr>
                 <th>선택</th>
                 <th>번호</th>
-                <th style="padding: 5px 150px">상호명</th>
+                <th style="padding: 5px 150px;">상호명</th>
                 <th>총 예약자 수</th>
             </tr>
         </table>
@@ -107,9 +110,9 @@
         <table id="table2">
             <tr>
                 <th>번호</th>
-                <th style="padding: 5px 50px">예약일</th>
-                <th style="padding: 5px 150px">상호명</th>
-                <th style="padding: 5px 30px">예약자 ID</th>
+                <th style="padding: 5px 50px;">예약일</th>
+                <th style="padding: 5px 150px;">상호명</th>
+                <th style="padding: 5px 30px;">예약자 ID</th>
                 <th>예약인원</th>
             </tr>
         </table>

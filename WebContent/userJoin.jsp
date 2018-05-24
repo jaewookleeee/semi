@@ -300,7 +300,7 @@
 		
 		//취소
 		$("#cancel").click(function() {
-			location.href="index.jsp";
+			location.href="login.jsp";
 		});
 		
 		//회원가입

@@ -14,11 +14,11 @@
             
          #all{ position: relative; width: 1200px; height: 1200px; top:50px; left:175px; }
            #main{ position: relative; width: 700px; height: 300px; margin-left: 250px; }
-            #area{ position: relative; width: 1125px; top: 70px; margin-left: 37.5px; }
+            #area{ position: relative; width: 1125px; top: 70px; margin-left: 37.5px;}
             
             .sub_div { position: relative; width: 300px; margin-left: 460px; }
-	        .sub{ position: relative; width: 50px;height: 50px; margin-top: 10px; margin-right: 5px; }
-	        .info{ position: relative; float: left; text-align: center; top: 30px; left: 37.5px; width: 375px; height: 30px; line-height: 30px; border: 1px solid #7E7E7E; }
+	        .sub{ position: relative; width: 50px;height: 50px; margin-top: 10px; margin-right: 5px; cursor: pointer; }
+	        .info{ position: relative; float: left; text-align: center; top: 30px; left: 37.5px; width: 375px; height: 30px; line-height: 30px; border: 1px solid #7E7E7E;cursor: pointer; }
 	        
 	        #detail{background-color : #FF376C;}
 		</style>

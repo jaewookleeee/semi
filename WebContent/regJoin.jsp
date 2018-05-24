@@ -64,9 +64,9 @@
 
 	            
 	        button#cancel{ position: absolute; left: 170px; top: 554px; width: 50px; height: 25px;    
-	            color: white; background-color: black; border-style: none; font-size: 10px; }
+	            color: white; background-color: black; border-style: none; font-size: 10px;cursor: pointer; }
 	        button#join{position: absolute; left: 230px; top: 554px; width: 50px; height: 25px;
-	            font-size: 10px; color: white; background-color: black; border-style: none; }
+	            font-size: 10px; color: white; background-color: black; border-style: none; cursor: pointer;}
 	            
 	        span#id_s{position: absolute; left: 75px; top: 105px;}
 	        span#pw_s{position: absolute; left: 75px; top: 157px;}

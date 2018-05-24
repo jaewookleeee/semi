@@ -49,10 +49,10 @@
 	            width: 50px; height: 25px; font-size: 10px;             }
 
 	        button#cancel{ position: absolute; left: 180px; top: 448px; width: 50px; height: 25px;    
-	            color: white; background-color: black; border-style: none; font-size: 10px; }
+	            color: white; background-color: black; border-style: none; font-size: 10px;cursor: pointer; }
 	        button#change{
 	            position: absolute; left: 240px; top: 448px; width: 50px; height: 25px;
-	            font-size: 10px; color: white; background-color: black; border-style: none; }
+	            font-size: 10px; color: white; background-color: black; border-style: none;cursor: pointer; }
 	            
 	        span#num_s{position: absolute; left: 75px; top: 370px;}
 	        span#phone_s{position: absolute; left: 75px; top: 422px;}

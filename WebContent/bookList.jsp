@@ -7,6 +7,10 @@
         <title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <style>
+        	/* 나눔 스퀘어 폰트 */
+			@import url(//cdn.rawgit.com/hiun/NanumSquare/master/nanumsquare.css);
+			@font-face { font-family: 'odibeeSans'; font-style: normal; src: url('OdibeeSans-Regular.eot'); src: url('OdibeeSans-Regular.woff'); }
+        
             body{
                 max-width: none !important;
             }
@@ -67,7 +71,7 @@
                 <th>번호</th>
                 <th style="padding: 5px 150px">상호명</th>
                 <th style="padding: 5px 30px">대표자 ID</th>
-                <th >예약일</th>
+                <th>예약일</th>
                 <th>예약 시작 시간</th>
                 <th>예약 종료 시간</th>
                 <th>예약 인원</th>

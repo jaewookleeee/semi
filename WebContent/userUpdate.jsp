@@ -52,9 +52,9 @@
 	            width: 200px; height: 25px; font-size: 10px;             }
 
 	        button#cancel{ position: absolute; left: 165px; top: 495px; width: 50px; height: 25px;    
-	            color: white; background-color: black; border-style: none; font-size: 10px; }
+	            color: white; background-color: black; border-style: none; font-size: 10px; cursor: pointer;}
 	        button#save{ position: absolute; left: 225px; top: 495px; width: 50px; height: 25px;
-	            font-size: 10px; color: white; background-color: black; border-style: none; }
+	            font-size: 10px; color: white; background-color: black; border-style: none; cursor: pointer;}
 	            
 	        span#pw_s{position: absolute; left: 75px; top: 157px;}
 	        span#pwC1_s{position: absolute; left: 75px; top: 210px;}

@@ -54,6 +54,7 @@
                 border: 0;
                 width: 100%;
                 height: 100%;
+                cursor: pointer;
             }
              #menuBar{
             	height: 20px;
@@ -217,7 +218,7 @@
     			content += "<td>"+item.info_id+"</td>";
     			content += "<td>"+item.place_date+"</td>";
     			content += "<td class='review_score'></td>";
-    			content += "<td><button onclick='updatepage("+item.place_no+")'>수정</button></td>";
+    			content += "<td><button id='update' onclick='updatepage("+item.place_no+")'>수정</button></td>";
     			content += "<td><button id='del' value='"+item.place_no+"'>삭제</button></td>";
     			content += "</tr>";
     		});

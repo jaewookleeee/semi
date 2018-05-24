@@ -11,8 +11,11 @@
 		location.href="login.jsp";
 	}else if(loginId != null && loginDiv =="사용자"){
 		location.href="regChange.jsp";
-	}else if(loginId != null && loginDiv =="등록자" || loginDiv =="관리자"){
+	}else if(loginId != null && loginDiv =="등록자"){
 		alert("등록 가능한 아이디 입니다.");
+		history.back();
+	}else if(loginId != null &&loginDiv =="관리자"){
+		alert("등록이 불가능한 아이디 입니다.");
 		history.back();
 	}
 </script>

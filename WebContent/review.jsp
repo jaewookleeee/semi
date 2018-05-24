@@ -266,7 +266,7 @@
 			
 			if(loginId == "") {
 				alert("로그인이 필요합니다.");
-				history.back();
+				location.href="./placeDetailUp?place_no=${param.place_no}&page=placeDetail.jsp";
 			} else {
 				place_no = ${param.place_no};
 				

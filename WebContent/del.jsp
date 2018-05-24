@@ -9,8 +9,8 @@
 		<style>
 			div{position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 250px;
 				left: 40%; top: 200px; text-align: center;}
-			span#delTxt{position: absolute; font-size: 20px; left: 35%; top: 10px;}
-			span#idTxt{position: absolute; left: 15px; top: 50px;}
+			span#delTxt{position: absolute;  font-size: 20px; left: 35%; top: 10px;}
+			span#idTxt{position: absolute;  left: 15px; top: 50px;}
 			span#pwTxt{position: absolute; left: 15px; top: 87px;}
 			input#id{position: absolute; left: 83px; top: 50px; width: 200px; height: 30px;} 
 			input#pw{position: absolute; left: 83px; top: 87px; width: 200px; height: 30px;}
@@ -25,7 +25,7 @@
 	<body>
 		<jsp:include page="menuBar.jsp"/>
 		<div>
-			<span id="delTxt">탈퇴하기</span>
+			<span id="delTxt"><strong>탈퇴하기</strong></span>
 			<span id="idTxt">아이디</span>
 			<input id="id" type="text" value="${sessionScope.loginId }" readonly="readonly"/>
 			<span id="pwTxt">비밀번호</span>
