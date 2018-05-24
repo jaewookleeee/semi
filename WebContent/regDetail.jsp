@@ -7,7 +7,7 @@
 		<title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<style> 
-	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 600px; left: 40%;
+	        div#main{ position: absolute; border: 1.5px solid #A4A4A4; width: 300px; height: 500px; left: 40%; 
 				top: 100px; text-align: center; }
 	        span#regTxt{ position: absolute; left: 115px;  top: 10px; font-size: 20px; }
 
@@ -31,9 +31,11 @@
 	            width: 200px; height: 25px; font-size: 10px;             }
 	            
 	        b#num{ position: absolute; left: 15px; top: 340px; font-size: 13px; }
-	        /* span#regNum-{position: absolute; left: 155px; top: 445px;} */
-	        input#regNum{ position: absolute; left: 100px; top: 337px;
-	            width: 175px; height: 25px; font-size: 10px;             }    
+	        span#regNum-{position: absolute; left: 155px; top: 339px;}
+	        input#regNum1{ position: absolute; left: 100px; top: 339px;
+	            width: 50px; height: 25px; font-size: 10px;             }    
+	        input#regNum2{ position: absolute; left: 165px; top: 339px;
+	            width: 50px; height: 25px; font-size: 10px;             }    
 	            
 	        b#phone{ position: absolute; left: 15px; top: 393px; font-size: 13px; }
 /* 	        span#regPhone-1{position: absolute; left: 155px; top: 501px;}
@@ -65,7 +67,9 @@
             <b id="email">이메일</b>
             <input id="regEmail" type="email" readonly="readonly"/>
             <b id="num">주민등록번호</b>
-            <input id="regNum" type="password" readonly="readonly"/>
+            <input id="regNum1" type="text" placeholder="" onkeyup="onKeyUp_num1()" maxlength="6"/ readonly="readonly">
+            <span id="regNum-">-</span>
+            <input id="regNum2" type="password" placeholder="" onkeyup="onKeyUp_num2()" maxlength="7" readonly="readonly"/>
             <b id="phone">휴대폰 번호</b>
             <input id="regPhone" type="tel" readonly="readonly"/>
             
@@ -86,7 +90,8 @@
 					$("#regGender").val(data.userInfo.info_gender);
 					$("#regBirth").val(data.userInfo.info_birth);
 					$("#regEmail").val(data.userInfo.info_email);
-					$("#regNum").val(data.userInfo.info_num);
+					$("#regNum1").val(data.userInfo.info_num.substring(0,6));
+					$("#regNum2").val(data.userInfo.info_num.substring(6,13));
 					$("#regPhone").val(data.userInfo.info_phone);
 				},
 				error : function (error) {

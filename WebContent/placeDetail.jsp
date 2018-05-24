@@ -93,7 +93,6 @@ var cash=0;
 
 	//예약하기
 	$("#book").click(function() {
-/* 		 */
 		var today = new Date();
 		var yyyy = today.getFullYear();
 		var mm = today.getMonth()+1;
@@ -106,26 +105,19 @@ var cash=0;
 		} 
 		today = yyyy+"-"+mm+"-"+dd;
 		
-		console.log(today);
-		console.log($("#starttime").val(), $("#endtime").val());
-		console.log("결과 : ",$("#starttime").val() >= $("#endtime").val());
-
 		var sTime = $("#starttime").val().split(":");
 		var eTime = $("#endtime").val().split(":");
 		var ssTime = parseInt(sTime);
 		var eeTime = parseInt(eTime);
 		
-		console.log(ssTime, eeTime);
-		
-		
 		if($("#date").val()==""){
 			alert("날짜 선택");
 		}else if($("#date").val() < today){
-			alert("이전 날짜 선택안됨");
+			alert("날짜를 다시 선택해주세요.");
 		}else if($("#people").val()=="인원"){
-			alert("인원 선택");
+			alert("인원을 선택해주세요.");
 		}else if(ssTime >= eeTime){
-			alert("예약시간 다시 설정");
+			alert("예약시간을 다시 선택해주세요.");
 		}else{
 			$.ajax({
 	    		type:"post",
