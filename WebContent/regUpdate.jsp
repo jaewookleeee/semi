@@ -175,9 +175,6 @@
 				}
 			});
 		});
-	
-		
-		
 		//현재 비밀번호 onkeyup 이벤트
 		function onKeyUp_pw(){
 			var regPw = $("#regPw");   

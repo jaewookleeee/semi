@@ -6,7 +6,7 @@
         <title>세상의 잠든 공간을 깨우다. - WAKE UP PLACE</title>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <style>
-            body {text-align: center;}
+            /* body {text-align: center;} */
             table { margin: 10px; width: 95%; }
             td { border: 1px solid black; font-size: 13; }
 
@@ -21,7 +21,7 @@
                 text-align: center;
             }
             
-			#search_header{ position: absolute; top: 0px; left: 0px; width: 650px;}
+			#search_header{ position: absolute; top: 0px; left: 0px; width: 650px; text-align: center;}
 			#search_listBox{ width: 1110px; height: 480px; display: inline-block; position: absolute; top: 180px; left: 0px; z-index: 1; text-align:left; }
 			#search_footer{ position: absolute; top: 680px; left: 0px; z-index: 2; }
             .button_css { width: 80px; border: 0px solid white; background-color: black; color: white; height: 30px; }
