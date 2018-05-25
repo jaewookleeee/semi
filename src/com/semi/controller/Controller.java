@@ -27,7 +27,7 @@ import com.semi.service.ReviewService;
 	"/qaWrite", "/qaDel", "/qaUpdate", "/qaList", "/qaReplyWrite", "/qaReplyUpdate", "/qaReplyList", "/qaReplyDel", "/qaSearch", "/qaDetail", "/qaUpdateForm", "/qaWriteForm", "/qaListSize",
 	"/reviewWrite", "/reviewDel", "/reviewUpdate", "/reviewList","/placeUpdatedetail","/placeUpdateWrite"
 })
-
+//
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
