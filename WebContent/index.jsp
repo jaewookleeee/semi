@@ -15,11 +15,11 @@
 		   a { color: black; text-decoration: none; }
 		
 		   .content { position: relative; width: 100%; top: 35px; }
-		   .slogan { position: absolute; top: 300px; left: 150px; }
+		   .slogan { position: absolute; top: 250px; left: 100px; }
 		   .slogan_text { position: relative; top: 0px; font-family: 'Nanum Square'; font-size: 48px; color: white; }
 		   .slogan_logo { position: relative; top: 0px; font-family: 'odibeeSans', sans-serif; font-size: 26px; color: #FF376C; }
-		   .category { position: absolute; top: 200px; left: 900px; width: 450px;  }
-		   .category_text { position: absolute; top: 200px; left: 900px; width: 450px; text-align: center; }
+		   .category { position: absolute; top: 150px; left: 730px; width: 450px;  }
+		   .category_text { position: absolute; top: 150px; left: 730px; width: 450px; text-align: center; }
 		   .category_header { font-family: 'Nanum Square', sans-serif; font-size: 22px; color: white; }
 		   .category_option { position: relative; width: 130px; height: 130px; margin-top: 20px; margin-right: 20px; background-color: white; opacity: 0.1; float: left; }
 		   

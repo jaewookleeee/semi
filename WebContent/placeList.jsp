@@ -28,19 +28,19 @@
             #pre{
                 position: absolute;
                 top: 480px;
-                left: 700px;
+                left: 500px;
                 background-color: #212121;
             }
             #next{
                 position: absolute;
                 top: 480px;
-                left: 805px;
+                left: 605px;
                 background-color: #212121;
             }
             #chart{
                 position: absolute;
                 top: 480px;
-                left: 1230px;
+                left: 1030px;
                 background-color: #212121;
             }
             button{

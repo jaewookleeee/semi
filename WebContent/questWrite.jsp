@@ -50,7 +50,7 @@
 			}
 			#write{
 				position: absolute;
-				left: 1045px;
+				left: 845px;
 			}
 			#include{
 				height: 60px;

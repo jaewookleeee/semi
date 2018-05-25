@@ -45,24 +45,24 @@
 			}
 			#list{
 				position: absolute;
-				left: 940px;
+				left: 775px;
 			}
 			#update{
 				position: absolute;
-				left: 1010px;
+				left: 835px;
 			}
 			#delete{
 				position: absolute;
-				left: 1080px;
+				left: 895px;
 			}
 			#updateOk{
 				position: absolute;
-				left: 1080px;
+				left: 895px;
 				display: none; 
 			}
 			#cancel{
 				position: absolute;
-				left: 1010px;
+				left: 835px;
 				 display: none;
 			}
 			

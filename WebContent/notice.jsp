@@ -34,7 +34,7 @@
 			}
 			#writeBtn{
 				position: absolute;
-				left: 1030px;
+				left: 780px;
 			}
 			button{
 				background-color: #212121;
@@ -64,18 +64,18 @@
 			}
 			#searchDiv{
 				position: absolute;
-				left: 680px;
+				left: 480px;
 			}
 			h1{
 				text-align: center;
 			}
 			#noticeBefore{
 				position: absolute;
-				left: 750px;
+				left: 550px;
 			}
 			#noticeAfter{
 				position: absolute;
-				left: 850px;
+				left: 650px;
 			}
 		</style>
 	</head>

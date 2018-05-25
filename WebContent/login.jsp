@@ -52,6 +52,7 @@
 	            background-color: #FA5882;
 	            color: white;
 	            border-style: none;
+	            cursor: pointer;
 	        }
 	        span#logChktxt{
 	            position: absolute;
@@ -69,6 +70,7 @@
 	            background-color: #FA5882;
 	            color: white;
 	            border-style: none;
+	            cursor: pointer;
 	        }
 	        button#regJoin{
 	            position: absolute;
@@ -79,6 +81,7 @@
 	            background-color: #F5A9BC;
 	            color: white;
 	            border-style: none;
+	            cursor: pointer;
 	        }
 	        hr{
 	            position: absolute;

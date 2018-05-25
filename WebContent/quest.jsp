@@ -37,7 +37,7 @@
 			}
 			#writeBtn{
 				position: absolute;
-				left: 1030px;
+				left: 830px;
 			}
 			button{
 				background-color: #212121;
@@ -69,15 +69,15 @@
 			}
 			#searchDiv{
 				position: absolute;
-				left: 680px;
+				left: 500px;
 			} 
 			#beforeList{
 				position: absolute;
-				left: 750px;
+				left: 550px;
 			}
 			#afterList{
 				position: absolute;
-				left: 850px;
+				left: 650px;
 			}
 		</style>
 	</head>

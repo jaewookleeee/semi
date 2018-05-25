@@ -63,7 +63,7 @@
 			}
 			#write{
 				position: absolute;
-				left: 1045px;
+				left: 845px;
 			}
 			h1{
 				text-align: center;

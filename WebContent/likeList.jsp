@@ -28,17 +28,17 @@
             #pre{
                 position: absolute;
                 top: 535px;
-                left: 690px;
+                left: 540px;
             }
             #next{
                 position: absolute;
                 top: 535px;
-                left: 790px;
+                left: 640px;
             }
             #cancle{
                 position: absolute;
                 top: 535px;
-                left: 960px;
+                left: 810px;
             }
             button{
                 background-color: #212121;

@@ -28,17 +28,12 @@
             #pre{
                 position: relative;
                 top: 10px;
-                left: 700px;
+                left: 550px;
             }
             #next{
                 position: relative;
                 top: 10px;
-                left: 705px;
-            }
-            #cancle{
-                position: relative;
-                top: 10px;
-                left: 870px;
+                left: 555px;
             }
             button{
                 background-color: #212121;
@@ -57,22 +52,22 @@
             }
             #search{
                 position: absolute;
-                left: 950px;
+                left: 790px;
                 
             }
             #date1{
                 position: absolute;
-            	left: 630px;
+            	left: 450px;
                 
             }
             #date2{
                 position: absolute;
-                left: 810px;
+                left: 650px;
                 
             }
             #date3{
                 position: absolute;
-                left: 771px;
+                left: 601px;
                 font-size: 14pt;
                 border: 1px solid gray;
                 padding: 0 10px;

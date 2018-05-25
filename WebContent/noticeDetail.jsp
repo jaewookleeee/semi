@@ -58,25 +58,25 @@
 			}
 			#updateOk{
 				position: absolute;
-				left: 1080px;
+				left: 870px;
 				display: none; 
 			}
 			#cancel{
 				position: absolute;
-				left: 1010px;
+				left: 930px;
 				 display: none;
 			}
 			#list{
 				position: absolute;
-				left: 940px;
+				left: 810px;
 			}
 			#update{
-				position: absolute;
-				left: 1010px;
+				position: absolute;				
+				left: 870px;
 			}
 			#delete{
 				position: absolute;
-				left: 1080px;
+				left: 930px;
 			}
 			#categoryP{
 				color: white;	
